@@ -1,1 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吉的堡同安莊敬美語安親補習班 - 家長讚賞生成器</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#4a90e2;--primary-dark:#357abd;--secondary:#f5a623;
+  --success:#5cb85c;--bg:#f0f2f5;--card:#fff;--text:#333;
+  --text-light:#666;--border:#e1e4e8;
+  --shadow:0 4px 20px rgba(0,0,0,.08);--shadow-h:0 8px 30px rgba(0,0,0,.12);
+}
+body{font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:30px 20px;text-align:center}
+.header h1{font-size:1.8rem;margin-bottom:8px;font-weight:600}
+.header p{font-size:.95rem;opacity:.95}
+.campus-selector{display:flex;justify-content:center;gap:20px;margin:15px 0 10px;flex-wrap:wrap}
+.campus-option{cursor:pointer;display:flex;align-items:center;gap:8px}
+.campus-option input[type=radio]{width:18px;height:18px;cursor:pointer;accent-color:#fff}
+.campus-label{font-size:1rem;font-weight:500;padding:6px 16px;background:rgba(255,255,255,.2);border-radius:20px;transition:all .3s}
+.campus-option:has(input:checked) .campus-label{background:rgba(255,255,255,.95);color:var(--primary);font-weight:600}
+.progress-bar{background:#fff;height:8px;margin:20px auto 0;max-width:600px;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#f5a623,#ffd700);width:0%;transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.container{max-width:900px;margin:-20px auto 0;padding:0 20px 40px;position:relative;z-index:1}
+.stats-bar{background:var(--card);border-radius:12px;padding:20px;margin-bottom:25px;display:flex;justify-content:space-around;gap:15px;box-shadow:var(--shadow);flex-wrap:wrap}
+.stat-item{text-align:center;flex:1;min-width:100px}
+.stat-value{font-size:1.8rem;font-weight:bold;color:var(--primary);display:block}
+.stat-label{font-size:.85rem;color:var(--text-light);margin-top:4px}
+.student-info-card{background:var(--card);border-radius:12px;padding:25px;margin-bottom:25px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
+.student-info-card h3{color:var(--primary);margin-bottom:20px;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.info-row{margin-bottom:18px}
+.info-row:last-child{margin-bottom:0}
+.info-field label{display:block;font-weight:600;margin-bottom:8px;color:var(--text);font-size:.95rem}
+.required{color:#e74c3c;font-weight:bold}
+.info-field input[type=text]{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:1rem;transition:all .3s;font-family:inherit}
+.info-field input[type=text]:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.1)}
+.info-field input[type=text]::placeholder{color:#aaa}
+.checkbox-field{padding:12px 0}
+.checkbox-field label{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:normal}
+.checkbox-field input[type=checkbox]{width:18px;height:18px;cursor:pointer}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.checkbox-label{display:flex;align-items:center;gap:6px;padding:8px 14px;background:#f8f9fa;border:2px solid var(--border);border-radius:20px;cursor:pointer;transition:all .3s;font-weight:normal}
+.checkbox-label:hover{background:#e9ecef;border-color:var(--primary)}
+.checkbox-label input[type=checkbox]{width:16px;height:16px;cursor:pointer}
+.checkbox-label:has(input:checked){background:#e3f2fd;border-color:var(--primary)}
+.dimension{background:var(--card);margin-bottom:20px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all .3s}
+.dimension:hover{box-shadow:var(--shadow-h);transform:translateY(-2px)}
+.dimension-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:18px 25px;font-size:1.1rem;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.dimension-badge{background:rgba(255,255,255,.25);padding:4px 12px;border-radius:20px;font-size:.85rem}
+.dimension-body{padding:25px}
+.aspect{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.aspect:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.aspect-label{font-weight:600;display:block;margin-bottom:8px;font-size:1rem}
+.aspect-desc{font-size:.88rem;color:var(--text-light);margin-bottom:12px;display:block}
+select{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:.95rem;cursor:pointer;background:#fff;transition:all .3s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:40px}
+select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.1)}
+select.selected{border-color:var(--success);background-color:#f0fff4}
+.other-input-container{margin-top:10px;display:none}
+.other-input-container.show{display:block}
+.other-input-container input[type=text]{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:6px;font-size:.95rem;transition:all .3s;font-family:inherit}
+.other-input-container input[type=text]:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.1)}
+.summary-box{background:linear-gradient(135deg,#fff9f0,#fffbf7);border:2px solid var(--secondary);padding:25px;border-radius:12px;margin-top:30px;box-shadow:var(--shadow)}
+.summary-title{font-weight:bold;color:var(--secondary);margin-bottom:15px;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.summary-title::before{content:"✨";font-size:1.3rem}
+.tone-selector{margin-bottom:18px}
+.tone-selector label{display:block;font-weight:600;margin-bottom:10px;color:var(--text);font-size:.95rem}
+.tone-options{display:flex;flex-wrap:wrap;gap:8px}
+.tone-btn{padding:8px 18px;border:2px solid var(--border);border-radius:20px;background:#f8f9fa;cursor:pointer;font-size:.9rem;transition:all .3s;font-family:inherit;font-weight:500}
+.tone-btn:hover{border-color:var(--primary);background:#e3f2fd}
+.tone-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+#summaryText{white-space:pre-line;color:#444;line-height:1.9;font-size:.97rem;min-height:120px;padding:18px;background:#fff;border-radius:8px;border:1px solid #eee}
+.placeholder{color:#aaa;font-style:italic}
+.footer-action{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+button.action-btn{padding:14px 28px;font-size:1rem;border-radius:8px;border:none;cursor:pointer;transition:all .3s;font-weight:600;flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.btn-copy{background:var(--primary);color:#fff}
+.btn-copy:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,144,226,.3)}
+.btn-share{background:#06c755;color:#fff}
+.btn-share:hover{background:#05b34c;transform:translateY(-2px)}
+.btn-reset{background:#f5f5f5;color:#666;flex:0 0 auto;min-width:100px}
+.btn-reset:hover{background:#e0e0e0}
+.btn-refresh{background:var(--secondary);color:#fff;flex:0 0 auto;min-width:140px}
+.btn-refresh:hover{background:#e69419;transform:translateY(-2px)}
+.toast{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:16px 24px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:bottom .3s;z-index:1000;max-width:90%;text-align:center}
+.toast.show{bottom:30px}
+.fade-in{animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){
+  .header h1{font-size:1.4rem}.campus-selector{gap:12px}.campus-label{font-size:.9rem;padding:5px 12px}
+  .student-info-card{padding:20px}.checkbox-group{gap:8px}.checkbox-label{padding:6px 12px;font-size:.9rem}
+  .stats-bar{padding:15px}.stat-value{font-size:1.4rem}.dimension-header{padding:15px 20px;font-size:1rem}
+  .dimension-body{padding:20px}.summary-box{position:static;margin-top:25px}
+  .footer-action{flex-direction:column}button.action-btn,.btn-refresh,.btn-reset{min-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>✨ 吉的堡同安莊敬美語安親補習班</h1>
+  <div class="campus-selector">
+    <label class="campus-option"><input type="radio" name="campus" value="同安校" checked /><span class="campus-label">🏫 同安校</span></label>
+    <label class="campus-option"><input type="radio" name="campus" value="莊敬校" /><span class="campus-label">🏫 莊敬校</span></label>
+  </div>
+  <p>家長細節讚賞生成器 —— 用心觀察，溫暖表達</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
 
+<div class="container">
+  <div class="student-info-card fade-in">
+    <h3>👨‍👩‍👧 基本資訊</h3>
+    <div class="info-row">
+      <div class="info-field">
+        <label for="studentName">學生姓名（可以填入名字、暱稱、小名、乳名⋯⋯）<span class="required">*</span></label>
+        <input type="text" id="studentName" placeholder="請輸入學生姓名（例：王小明）" />
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-field checkbox-field">
+        <label><input type="checkbox" id="hideMiddleName" /><span>隱藏中間名字（例：王小明 → 王○明）</span></label>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-field">
+        <label>我的身分</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="爸爸" /><span>爸爸</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="媽媽" /><span>媽媽</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="阿公" /><span>阿公</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="阿嬤" /><span>阿嬤</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="外公" /><span>外公</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="外婆" /><span>外婆</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="大伯" /><span>大伯</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="大伯母" /><span>大伯母</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="叔叔" /><span>叔叔</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="嬸嬸" /><span>嬸嬸</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="姑姑" /><span>姑姑</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="姑丈" /><span>姑丈</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="舅舅" /><span>舅舅</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="舅媽" /><span>舅媽</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="阿姨" /><span>阿姨</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="姨丈" /><span>姨丈</span></label>
+          <label class="checkbox-label"><input type="checkbox" name="relation" value="其他家人" /><span>其他家人</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar fade-in">
+    <div class="stat-item"><span class="stat-value" id="completedCount">0</span><span class="stat-label">已完成</span></div>
+    <div class="stat-item"><span class="stat-value" id="totalCount">3</span><span class="stat-label">總題數</span></div>
+    <div class="stat-item"><span class="stat-value" id="progressPercent">0%</span><span class="stat-label">完成度</span></div>
+  </div>
+
+  <div id="form-content"></div>
+
+  <div class="summary-box fade-in">
+    <div class="summary-title">您的專屬讚美摘要預覽</div>
+    <div class="tone-selector">
+      <label>文字風格 <span id="toneRandomBadge" style="font-size:.8rem;font-weight:normal;color:#888;margin-left:6px">🎲 隨機選出，可手動切換</span></label>
+      <div class="tone-options">
+        <button class="tone-btn" data-tone="溫暖">🤗 溫暖感謝</button>
+        <button class="tone-btn" data-tone="幽默">😄 幽默輕鬆</button>
+        <button class="tone-btn" data-tone="感動">💝 真摯感動</button>
+        <button class="tone-btn" data-tone="正經">📋 正式專業</button>
+        <button class="tone-btn" data-tone="活潑">🎉 活潑生動</button>
+      </div>
+    </div>
+    <div id="summaryText"><span class="placeholder">請完成上方細節選擇，系統將自動為您生成溫暖的文字...</span></div>
+    <div class="footer-action">
+      <button id="copyBtn" class="action-btn btn-copy"><span>📋</span><span>複製</span></button>
+      <button id="shareBtn" class="action-btn btn-share"><span>📤</span><span>分享到 LINE</span></button>
+      <button id="refreshBtn" class="action-btn btn-refresh"><span>🔄</span><span>換三題</span></button>
+      <button id="resetBtn" class="action-btn btn-reset"><span>🗑️</span><span>清空</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const allAspects = [
+  {id:"1a",name:"英文口說",desc:"孩子的英文表達進步了嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"natural",text:"現在會自然說英文了",tone:"溫暖"},
+    {val:"confident",text:"不再害怕開口講英文",tone:"感動"},
+    {val:"fluent",text:"講英文變流利了",tone:"正經"},
+    {val:"fun",text:"居然開始用英文跟我聊天",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"1b",name:"學習態度",desc:"孩子主動學英文嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"active",text:"會主動看英文書了",tone:"溫暖"},
+    {val:"homework",text:"作業變認真了",tone:"感動"},
+    {val:"self",text:"會自己查單字",tone:"正經"},
+    {val:"passion",text:"每天都吵著要學英文",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"1c",name:"思考能力",desc:"有沒有變得更會思考？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"logic",text:"邏輯思考變好了",tone:"溫暖"},
+    {val:"culture",text:"開始了解外國文化",tone:"感動"},
+    {val:"critical",text:"會獨立思考問題",tone:"正經"},
+    {val:"everything",text:"連做數學都要用英文想",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"1d",name:"老師教學",desc:"覺得老師教得如何？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"fun",text:"孩子說上課很有趣",tone:"溫暖"},
+    {val:"love",text:"很喜歡老師",tone:"感動"},
+    {val:"professional",text:"教學很專業",tone:"正經"},
+    {val:"fan",text:"把老師當偶像了",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"2a",name:"情緒照顧",desc:"老師有注意孩子的情緒嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"care",text:"老師很細心觀察",tone:"溫暖"},
+    {val:"comfort",text:"會安慰孩子",tone:"感動"},
+    {val:"eq",text:"情緒管理做得好",tone:"正經"},
+    {val:"mind",text:"比我還了解孩子",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"2b",name:"生活習慣",desc:"孩子的生活習慣有改善嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"tidy",text:"會自己整理書包了",tone:"溫暖"},
+    {val:"self",text:"變得很自律",tone:"感動"},
+    {val:"time",text:"時間管理變好了",tone:"正經"},
+    {val:"change",text:"整個人都變了",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"2c",name:"親師溝通",desc:"跟老師溝通順利嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"warm",text:"老師很親切",tone:"溫暖"},
+    {val:"trust",text:"很信任老師",tone:"感動"},
+    {val:"clear",text:"溝通很清楚",tone:"正經"},
+    {val:"detail",text:"老師記得所有細節",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"2d",name:"歸屬感",desc:"孩子喜歡來這裡嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"love",text:"每天都期待來",tone:"溫暖"},
+    {val:"home",text:"把這裡當第二個家",tone:"感動"},
+    {val:"belong",text:"很有歸屬感",tone:"正經"},
+    {val:"weekend",text:"週末還想來",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"3a",name:"環境安全",desc:"覺得環境安全嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"safe",text:"很安全放心",tone:"溫暖"},
+    {val:"detail",text:"細節都顧到了",tone:"感動"},
+    {val:"standard",text:"符合安全標準",tone:"正經"},
+    {val:"fortress",text:"像堡壘一樣安全",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"3b",name:"學習環境",desc:"環境佈置得如何？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"nice",text:"佈置很用心",tone:"溫暖"},
+    {val:"immersive",text:"很有外國感覺",tone:"感動"},
+    {val:"professional",text:"很專業",tone:"正經"},
+    {val:"abroad",text:"像在國外一樣",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"3c",name:"同學互動",desc:"同學之間相處如何？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"positive",text:"同學都很友善",tone:"溫暖"},
+    {val:"support",text:"互相幫助",tone:"感動"},
+    {val:"cooperative",text:"合作學習",tone:"正經"},
+    {val:"team",text:"像個小團隊",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+  {id:"3d",name:"教材資源",desc:"教材實用嗎？",options:[
+    {val:"",text:"-- 請選擇 --"},
+    {val:"useful",text:"很實用",tone:"溫暖"},
+    {val:"home",text:"在家也能用",tone:"感動"},
+    {val:"complete",text:"內容很完整",tone:"正經"},
+    {val:"learn",text:"連我都在學",tone:"幽默"},
+    {val:"improve",text:"還可以再進步",tone:"建議"},
+    {val:"other",text:"其他想法",tone:"自訂"}
+  ]},
+];
+
+// 每種風格的模板句庫
+const templates = {
+  溫暖: {
+    openings: [
+      n => `看著${n}在吉的堡的成長，心裡真的很感動。`,
+      n => `自從${n}來吉的堡之後，每天回到家都有說不完的話。`,
+      n => `身為${n}的家長，很慶幸選擇了吉的堡。`,
+    ],
+    connectors: ['讓我印象最深的是，','特別感謝老師，','最讓我開心的是，'],
+    closings: [
+      c => `謝謝${c}的老師們，讓孩子在這裡快樂學習、健康成長。`,
+      c => `很推薦吉的堡${c}，真心覺得這是個很用心的地方。`,
+      c => `感謝${c}所有老師的用心付出，孩子有你們真好！`,
+    ]
+  },
+  幽默: {
+    openings: [
+      n => `說真的，${n}來吉的堡之後變化蠻大的，有時候讓我不敢相信。`,
+      n => `${n}現在英文好到有時候我得靠他翻譯，這真的沒想到。`,
+      n => `把${n}送來吉的堡，大概是我今年做的最對的決定之一。`,
+    ],
+    connectors: ['最誇張的是，','說出來你可能不信，','更神奇的是，'],
+    closings: [
+      c => `總之吉的堡${c}蠻推的，至少我家孩子很買單！`,
+      c => `如果你家孩子也需要「進化」，吉的堡${c}可以考慮看看。`,
+      c => `反正孩子喜歡、家長放心，這樣就夠了，推薦吉的堡${c}！`,
+    ]
+  },
+  感動: {
+    openings: [
+      n => `陪伴${n}的成長是一段珍貴的旅程，吉的堡讓這段路走得更美。`,
+      n => `看著${n}一點一滴的改變，身為家長真的很感動。`,
+      n => `${n}在吉的堡的每一天，都讓我更加確信當初的選擇是對的。`,
+    ],
+    connectors: ['最讓我動容的是，','印象最深刻的一幕是，','每次想到這點都覺得，'],
+    closings: [
+      c => `由衷感謝吉的堡${c}的每一位老師，是你們讓孩子的童年更加豐富。`,
+      c => `這份感謝很難用言語表達，只希望吉的堡${c}繼續這份用心。`,
+      c => `真心推薦吉的堡${c}，讓孩子在愛與用心中成長。`,
+    ]
+  },
+  正經: {
+    openings: [
+      n => `觀察${n}在吉的堡就讀以來的表現，整體有明顯的進步。`,
+      n => `就學習成效而言，${n}在吉的堡的表現令人滿意。`,
+      n => `評估${n}加入吉的堡後的各方面發展，可以看到具體的成長。`,
+    ],
+    connectors: ['就具體表現來說，','在學習面向上，','值得一提的是，'],
+    closings: [
+      c => `整體而言，吉的堡${c}的教學品質與師資值得肯定，推薦給有需要的家長參考。`,
+      c => `綜合評估，吉的堡${c}在英語教育與生活照顧上均有一定水準。`,
+      c => `期待吉的堡${c}持續保持這樣的教學品質，也樂意向其他家長推薦。`,
+    ]
+  },
+  活潑: {
+    openings: [
+      n => `${n}來吉的堡真的太對了！整個人都活起來了！`,
+      n => `超推吉的堡！${n}每天都好期待去上課！`,
+      n => `吉的堡讚讚讚！${n}的改變讓全家都超驚喜！`,
+    ],
+    connectors: ['超棒的是！','還有更厲害的！','讓人眼睛一亮的是！'],
+    closings: [
+      c => `吉的堡${c}真的很棒！強力推薦給所有爸媽！`,
+      c => `有這麼好的地方讓孩子學習，真的太幸運了！推吉的堡${c}！`,
+      c => `一句話：吉的堡${c}，選對了！大家快來！`,
+    ]
+  }
+};
+
+// 各選項對應的模板文字（依風格）
+const itemPhrases = {
+  "1a": {
+    natural:    { 溫暖:"孩子現在說英文變得很自然，不再需要特別去想，聽了很欣慰", 幽默:"孩子開始自動自發用英文跟我說話，我偶爾還得叫他說中文", 感動:"看著孩子自然流露的英文口說能力，心裡真的很感動", 正經:"英文口說能力明顯提升，表達趨於自然流暢", 活潑:"英文說得超自然的啦！聽到耳朵都軟了！" },
+    confident:  { 溫暖:"以前不敢開口，現在英文越說越有自信，改變好大", 幽默:"以前叫他說英文像要他的命，現在主動說個不停", 感動:"那份從害怕到勇敢開口的轉變，是孩子送給我最好的禮物", 正經:"已克服英文口說的心理障礙，能主動開口表達", 活潑:"從不敢說到勇敢開口，進步超有感！" },
+    fluent:     { 溫暖:"英文說話流暢多了，聽起來很舒服", 幽默:"說英文的速度有時候比說中文還快，我有點羨慕", 感動:"流暢的英文背後是孩子努力的成果，真的很棒", 正經:"英文口說流利度有顯著提升", 活潑:"英文說得流利流利的，超厲害！" },
+    fun:        { 溫暖:"會用英文跟我聊天，每次都很驚喜", 幽默:"現在連聊天都用英文，我的英文也被迫升級了", 感動:"孩子用英文跟我分享心情，那一刻覺得一切都值了", 正經:"已能自然地將英文運用於日常生活對話", 活潑:"跟我說英文！哈哈超可愛超厲害！" },
+    improve:    { 溫暖:"英文口說還有一些進步空間，期待繼續加油", 幽默:"英文口說嘛⋯還有努力的空間，加油加油", 感動:"相信只要持續努力，英文口說一定會越來越好", 正經:"英文口說仍有提升空間，建議持續加強練習", 活潑:"口說再加把勁！我相信你可以的！" },
+  },
+  "1b": {
+    active:     { 溫暖:"現在會主動拿起英文書來看，這個習慣很珍貴", 幽默:"自己拿書來讀，我一度以為認錯孩子了", 感動:"主動學習的那一刻，我知道孩子真的喜歡上英文了", 正經:"已養成主動閱讀英文書籍的學習習慣", 活潑:"自己拿書來讀！！主動學習超加分！" },
+    homework:   { 溫暖:"寫作業變認真很多，不再需要一直催", 幽默:"作業不用催了，這比學英文更讓我驚訝", 感動:"認真對待每一份作業，這份用心讓我很感動", 正經:"學習態度明顯轉變，作業完成度與品質均有提升", 活潑:"作業超認真！不催也自己寫！太棒了！" },
+    self:       { 溫暖:"會自己查單字，學習越來越獨立了", 幽默:"不認識的字自己查，不問我了，省了我很多事", 感動:"那份自主學習的精神，是我最希望看到的", 正經:"具備自主學習能力，能獨立查閱生字", 活潑:"自己查單字！自學力MAX！超厲害！" },
+    passion:    { 溫暖:"每天主動要學英文，這份熱情很感人", 幽默:"每天吵著要學英文，反過來催我，我都不知道說什麼好", 感動:"對英文的熱情是最好的學習動力，真的很開心看到這樣的孩子", 正經:"對英文學習展現高度熱忱，學習動機強烈", 活潑:"每天吵著要學！熱情滿點！這才是學習的樣子！" },
+    improve:    { 溫暖:"學習態度還有進步的空間，繼續加油", 幽默:"學習態度嘛⋯希望再更主動一點點", 感動:"相信只要找到對的方式，孩子的學習熱情一定會被點燃", 正經:"學習主動性尚待加強，建議多給予正向激勵", 活潑:"態度再積極一點！加油加油！" },
+  },
+  "1c": {
+    logic:      { 溫暖:"邏輯思考進步很多，回答問題越來越有條理", 幽默:"現在講話有條有理的，比我有邏輯", 感動:"看著孩子有條理地分析問題，覺得這就是教育的意義", 正經:"邏輯推理能力明顯提升，思維更有系統性", 活潑:"邏輯超強！思考有條有理！進步有感！" },
+    culture:    { 溫暖:"開始對外國文化感興趣，眼界寬了很多", 幽默:"現在跟我講一堆外國的事，好像去過一樣", 感動:"透過語言去認識世界，這是我希望給孩子的", 正經:"已建立跨文化理解的基礎，視野有所拓展", 活潑:"世界觀打開了！文化超感興趣！太棒！" },
+    critical:   { 溫暖:"遇到問題會獨立思考，不輕易就放棄", 幽默:"問題丟給他，他真的自己想，我省了不少腦力", 感動:"那份面對問題不輕言放棄的精神，讓我非常欣慰", 正經:"批判性思考能力有所提升，能獨立分析問題", 活潑:"獨立思考！自己解決問題！超有能力！" },
+    everything: { 溫暖:"連日常生活都開始用英文思考，進步很深入", 幽默:"連算數學都用英文想，我完全跟不上他了", 感動:"英文已融入孩子的思考方式，這是真正的學以致用", 正經:"英語思維已逐步內化，能運用於各科學習", 活潑:"用英文思考！整個內化了！厲害到不行！" },
+    improve:    { 溫暖:"思考能力還有成長空間，慢慢來沒關係", 幽默:"思考嘛⋯還可以更靈活一點，繼續努力", 感動:"思考力的培養需要時間，相信孩子會越來越好", 正經:"獨立思考能力仍有待加強，建議多提供開放式問題練習", 活潑:"思考力繼續加強！你可以的！" },
+  },
+  "1d": {
+    fun:        { 溫暖:"孩子說上課很有趣，每次都很期待去", 幽默:"孩子說課很好玩，讓我也想去旁聽一下", 感動:"讓孩子覺得學習是一件快樂的事，這是老師最大的成就", 正經:"學生對課程內容評價正面，課堂氣氛活絡", 活潑:"說課超有趣！每次都超期待！老師讚！" },
+    love:       { 溫暖:"孩子很喜歡老師，回家常常提到老師說的話", 幽默:"老師說的話比我說的管用多了，完全服了", 感動:"老師不只教英文，更用心陪伴每個孩子，真的很感謝", 正經:"師生關係良好，學生對老師有高度信任感", 活潑:"超愛老師！老師說的都記起來！師生感情超好！" },
+    professional: { 溫暖:"老師教學很專業，讓家長很放心", 幽默:"老師很專業，感覺交給他就對了，我也輕鬆不少", 感動:"專業的老師加上真心的付出，是孩子最大的幸運", 正經:"師資專業度高，教學方式系統化，具一定水準", 活潑:"老師超專業！教學有系統！讚！" },
+    fan:        { 溫暖:"把老師當偶像，學習動力因此變很強", 幽默:"老師儼然成了孩子的偶像，我的地位大受威脅", 感動:"能讓孩子這麼崇拜，代表老師真的做到了什麼特別的事", 正經:"師生互動良好，老師已成為學生重要的學習榜樣", 活潑:"老師是偶像！追星式學習！超有動力！" },
+    improve:    { 溫暖:"老師教學方面還有一些可以更好的地方，期待持續進步", 幽默:"老師嘛⋯希望課程可以再豐富一點點", 感動:"期待老師繼續調整教學方式，讓孩子學得更好", 正經:"建議教學方式可持續優化，以提升學習成效", 活潑:"老師繼續加油！期待更多驚喜！" },
+  },
+  "2a": {
+    care:       { 溫暖:"老師很細心觀察孩子的狀態，讓家長很安心", 幽默:"老師比我還注意孩子的情緒，讓我有點慚愧", 感動:"能被如此細心對待，孩子真的很幸福", 正經:"老師能敏銳觀察學生情緒狀態，適時給予關注", 活潑:"老師超細心！什麼都觀察到！超有安全感！" },
+    comfort:    { 溫暖:"孩子情緒不好的時候，老師會安慰他，很溫暖", 幽默:"孩子難過老師去安慰，老師的功效比我好太多了", 感動:"老師的一句安慰，對孩子的影響遠比我們想像的大", 正經:"老師具備良好的情緒支持能力，能適當安撫學生", 活潑:"老師安慰好有愛！孩子超有依靠感！讚！" },
+    eq:         { 溫暖:"孩子的情緒管理進步很多，衝動少了，耐心多了", 幽默:"現在孩子比我還能控制情緒，有點不知道說什麼好", 感動:"情緒管理是很重要的能力，很高興孩子在這裡學到了", 正經:"學生情緒調節能力有所提升，表現趨於穩定", 活潑:"情緒管理超進步！EQ變高了！厲害！" },
+    mind:       { 溫暖:"老師很了解孩子，有時候比我這個家長還清楚", 幽默:"老師比我更了解我的孩子，我決定虛心受教", 感動:"老師對孩子的了解和關心，讓我深深感謝", 正經:"老師對學生個別特質有深入了解，能提供個別化關注", 活潑:"老師超懂孩子！比爸媽還懂！太厲害了！" },
+    improve:    { 溫暖:"情緒照顧方面期待可以更加細心", 幽默:"希望老師能多注意一下孩子的情緒，謝謝", 感動:"期待老師在情緒關照上能更多一些陪伴", 正經:"建議加強學生情緒狀態的觀察與回應", 活潑:"情緒照顧可以再多一點！加油！" },
+  },
+  "2b": {
+    tidy:       { 溫暖:"現在會自己整理書包，獨立多了", 幽默:"書包自己整理，書桌也自己收，我懷疑換了一個孩子", 感動:"生活自理能力的養成，是比英文更重要的收穫", 正經:"學生自我管理能力提升，能獨立整理個人物品", 活潑:"自己整理書包！自理能力超棒！大進步！" },
+    self:       { 溫暖:"變得很自律，作息規律，讓家長省心很多", 幽默:"現在比我還自律，開始反省我自己", 感動:"自律是最好的禮物，很感謝吉的堡幫孩子建立這個習慣", 正經:"自律性顯著提升，能有效管理個人時間與行為", 活潑:"超自律！規律生活！這才是好習慣！讚！" },
+    time:       { 溫暖:"時間管理進步很多，做事不再拖拖拉拉", 幽默:"孩子現在比我還守時，我需要向他學習", 感動:"學會管理時間，這個能力受用一生", 正經:"時間管理能力有明顯改善，學習效率提升", 活潑:"時間管理超厲害！守時準時！超有條理！" },
+    change:     { 溫暖:"整個人變得更成熟懂事了，讓我很欣慰", 幽默:"孩子整個人都不一樣了，進步到讓我認不出來", 感動:"看著孩子脫胎換骨，是家長最大的喜悅", 正經:"學生整體生活習慣及行為表現均有大幅改善", 活潑:"整個人都進化了！脫胎換骨！太驚喜了！" },
+    improve:    { 溫暖:"生活習慣方面還有一些地方可以繼續加強", 幽默:"生活習慣嘛⋯還有點需要努力，繼續加油", 感動:"相信只要持續引導，好習慣一定能慢慢建立", 正經:"生活習慣仍有改善空間，建議家校共同持續引導", 活潑:"習慣繼續養成！一起加油！" },
+  },
+  "2c": {
+    warm:       { 溫暖:"老師很親切，每次溝通都很舒服", 幽默:"老師超親切，跟老師聊天比跟朋友聊天還輕鬆", 感動:"老師的親切讓家長感受到被尊重，很感謝", 正經:"師師溝通態度良好，家長感受到充分的尊重與善意", 活潑:"老師超親切！溝通零壓力！讚！" },
+    trust:      { 溫暖:"很信任老師，孩子交給他很放心", 幽默:"現在完全信任老師，孩子的事交給他比我管還放心", 感動:"能夠信任老師，是家長最大的安慰", 正經:"家長對師資具有高度信任感，親師關係良好", 活潑:"超信任老師！放心交給他！安心！" },
+    clear:      { 溫暖:"每次溝通都很清楚，資訊透明讓人安心", 幽默:"老師溝通超清楚，比我自己說的還清楚", 感動:"清楚的溝通讓家長能真正了解孩子的狀況，很感謝", 正經:"親師溝通管道暢通，資訊傳遞清晰明確", 活潑:"溝通超清楚！資訊透明！超放心！" },
+    detail:     { 溫暖:"老師記得孩子很多細節，讓人感到被重視", 幽默:"老師記住每個孩子的細節，記性比我好太多了", 感動:"那些被記住的小細節，讓孩子感受到被在乎的溫暖", 正經:"老師對學生個別狀況掌握詳盡，顯示高度的專業投入", 活潑:"老師什麼都記得！細心滿點！超感動！" },
+    improve:    { 溫暖:"親師溝通方面期待可以更頻繁一點", 幽默:"溝通方面希望能更主動一些，謝謝", 感動:"期待未來在親師溝通上能建立更緊密的連結", 正經:"建議增加親師溝通頻率，以利家校資訊同步", 活潑:"溝通繼續加強！期待更多互動！" },
+  },
+  "2d": {
+    love:       { 溫暖:"每天都很期待來，這是最好的評價", 幽默:"每天吵著要來，我都在想這裡到底有什麼魔力", 感動:"孩子對這裡的期待，是老師用心經營的最好證明", 正經:"學生對學習環境認同度高，出席意願強烈", 活潑:"每天超期待來！喜歡到不行！這就是好環境！" },
+    home:       { 溫暖:"把這裡當第二個家，很喜歡這裡的氛圍", 幽默:"孩子說這裡是第二個家，有時候感覺比我家受歡迎", 感動:"能讓孩子感受到家的溫暖，這是很了不起的事", 正經:"學生對學習環境具有高度歸屬感與認同感", 活潑:"這裡是第二個家！超有歸屬感！愛這裡！" },
+    belong:     { 溫暖:"在這裡很有歸屬感，孩子說很喜歡來", 幽默:"孩子說很有歸屬感，比在家還自在，我需要好好反省", 感動:"歸屬感是學習最重要的基礎，很感謝老師建立了這個環境", 正經:"學習環境能有效建立學生歸屬感，有助學習穩定性", 活潑:"歸屬感超強！在這裡好自在！超愛！" },
+    weekend:    { 溫暖:"週末還想來，可以看出孩子有多喜歡這裡", 幽默:"週末也想來，我已經在懷疑他是不是在家待不住", 感動:"週末還捨不得離開，孩子對這裡的情感讓我很感動", 正經:"學生課外時間仍有意願到訪，顯示高度喜愛程度", 活潑:"週末還想來！愛到不想回家！超棒的環境！" },
+    improve:    { 溫暖:"希望孩子能更融入這裡的氛圍，繼續加油", 幽默:"歸屬感嘛⋯希望孩子能更喜歡來，需要繼續努力", 感動:"期待孩子能漸漸在這裡找到歸屬感與自信", 正經:"學生歸屬感仍有提升空間，建議加強師生互動", 活潑:"再更喜歡這裡一點！繼續努力！" },
+  },
+  "3a": {
+    safe:       { 溫暖:"環境很安全，把孩子放在這裡很放心", 幽默:"感覺孩子在這比在家還安全，這話不誇張", 感動:"讓家長放心把孩子交出去，是最重要的承諾", 正經:"整體環境安全措施完善，家長安心程度高", 活潑:"超安全！超放心！把孩子交給你們完全沒問題！" },
+    detail:     { 溫暖:"安全細節都顧到了，很細心", 幽默:"安全細節做得比我預期還好，說實話有點感動", 感動:"每一個安全細節的背後，都是對孩子的愛與責任", 正經:"安全管理細緻，各項防護措施落實到位", 活潑:"細節都顧到！安全滿分！超仔細！" },
+    standard:   { 溫暖:"符合安全標準，讓人很放心", 幽默:"安全符合標準，該有的都有，挑不到毛病", 感動:"符合標準是基本，但在細節上的用心才讓我真正感動", 正經:"環境安全管理符合相關規範，具備基本安全保障", 活潑:"符合安全標準！正規到位！放心！" },
+    fortress:   { 溫暖:"整個環境讓人感覺很安全，像堡壘一樣", 幽默:"安全到像個堡壘，孩子在裡面比在家裡還安全", 感動:"那份安全感，是給家長最好的禮物", 正經:"環境安全防護完善，整體安全評估優良", 活潑:"像堡壘一樣安全！無懈可擊！超放心！" },
+    improve:    { 溫暖:"安全方面希望可以再更注意一些細節", 幽默:"安全嘛⋯還有一些地方可以加強，請繼續努力", 感動:"期待在安全環境的建立上能持續改善", 正經:"建議持續優化環境安全管理，確保學生安全無虞", 活潑:"安全再加強！繼續努力！" },
+  },
+  "3b": {
+    nice:       { 溫暖:"環境佈置得很用心，一進去就感覺很舒服", 幽默:"佈置得這麼用心，孩子不想回家都可以理解了", 感動:"用心的環境讓孩子感受到被重視，這很重要", 正經:"學習環境佈置細心，有助於提升學習氛圍", 活潑:"佈置超用心！進去就愛上！環境超棒！" },
+    immersive:  { 溫暖:"很有外國感，置身其中英文好像學得更自然", 幽默:"在裡面待一下，感覺英文自動就會進步了", 感動:"沉浸式的環境是讓語言學習事半功倍的關鍵", 正經:"學習環境具備良好的沉浸式語言學習氛圍", 活潑:"超有外國感！沉浸式體驗！英文自動up！" },
+    professional: { 溫暖:"環境很專業，感覺是認真在做教育", 幽默:"看起來非常專業，連我這個外行都看得出來", 感動:"專業的環境讓孩子知道學習是一件嚴肅而美好的事", 正經:"教學環境設備完善，整體呈現專業水準", 活潑:"超專業！設備齊全！正規有料！讚！" },
+    abroad:     { 溫暖:"走進去有種出國的感覺，很有學習氣氛", 幽默:"在裡面覺得自己在國外，省了一筆出國費", 感動:"營造出國外的學習氛圍，讓孩子的視野更加開闊", 正經:"環境設計成功模擬國際化學習情境，效果良好", 活潑:"像在國外！國際氛圍滿點！超有感！" },
+    improve:    { 溫暖:"學習環境方面期待可以更豐富一些", 幽默:"環境嘛⋯可以再更豐富有趣一點", 感動:"期待學習環境能持續優化，讓孩子更願意投入", 正經:"建議持續優化學習環境，以提升整體學習體驗", 活潑:"環境繼續進化！期待更棒的空間！" },
+  },
+  "3c": {
+    positive:   { 溫暖:"同學都很友善，孩子交到了好朋友", 幽默:"同學友善到孩子說比同班同學還好相處，有點感慨", 感動:"良好的同儕關係讓孩子更加開朗，這很珍貴", 正經:"班級同儕關係良好，有助於學習環境的正向發展", 活潑:"同學超友善！好朋友一堆！開心學習！" },
+    support:    { 溫暖:"同學之間會互相幫助，看了很感動", 幽默:"同學互相幫忙，有時候比我幫的還有用", 感動:"互助的精神在孩子小小的心裡種下了善良的種子", 正經:"同儕間具備良好的互助合作精神，學習氛圍積極", 活潑:"互相幫助！團結力量大！超有愛的班級！" },
+    cooperative: { 溫暖:"合作學習的方式讓孩子學到了很多", 幽默:"合作學習，孩子學會跟人相處，這比英文更難得", 感動:"在合作中學習，在學習中成長，這是最美的教育", 正經:"合作學習模式有效，能促進學生互動與共同成長", 活潑:"合作學習超棒！一起進步！團隊精神滿分！" },
+    team:       { 溫暖:"班上像個小團隊，凝聚力很強", 幽默:"這個班就像個小團隊，孩子說比公司還有向心力", 感動:"有歸屬感的班級，讓每個孩子都願意付出更多", 正經:"班級凝聚力高，學生具備良好的團隊意識", 活潑:"像個小團隊！向心力超強！這班太可愛了！" },
+    improve:    { 溫暖:"同學互動方面希望能更多一些積極的交流", 幽默:"同學相處嘛⋯希望可以更融洽一點", 感動:"期待孩子能在這裡建立更多真心的友誼", 正經:"建議加強同儕正向互動，以提升班級學習氛圍", 活潑:"同學互動繼續加強！一起更好！" },
+  },
+  "3d": {
+    useful:     { 溫暖:"教材很實用，孩子學了真的有在用", 幽默:"教材實用到孩子拿去日常用，我覺得蠻值得的", 感動:"實用的教材讓學習不再只是考試，而是真正的能力", 正經:"教材設計貼近實用需求，學習轉化效果良好", 活潑:"教材超實用！學了就用！效果有感！" },
+    home:       { 溫暖:"在家也能繼續用，延伸學習效果很好", 幽默:"教材可以帶回家用，孩子在家也學個不停，我稍微累了", 感動:"把學習延伸到家裡，讓每一天都是成長的機會", 正經:"教材適合家庭延伸學習，有效提升學習時數", 活潑:"在家也能用！學習不中斷！效果加倍！" },
+    complete:   { 溫暖:"教材內容很完整，孩子學得很紮實", 幽默:"教材超完整，孩子學的我都不一定懂了", 感動:"完整的教材是孩子打好基礎的保證，很感謝", 正經:"教材內容完整，架構系統化，學習銜接良好", 活潑:"內容超完整！系統化學習！紮實有料！" },
+    learn:      { 溫暖:"教材連我都想學，品質真的不錯", 幽默:"教材連我都看得津津有味，孩子笑我也是學生", 感動:"看到教材的用心，更感謝老師把這麼好的內容帶給孩子", 正經:"教材品質優良，具備吸引不同年齡層學習者的能力", 活潑:"連大人都想學！教材太有趣了！高品質！" },
+    improve:    { 溫暖:"教材方面期待可以更豐富多元", 幽默:"教材嘛⋯希望可以再豐富一點，謝謝", 感動:"期待教材能持續更新，讓孩子永遠有新的驚喜", 正經:"建議持續更新及豐富教材內容，以維持學習新鮮感", 活潑:"教材繼續豐富！期待更多內容！" },
+  },
+};
+
+const tones = ['溫暖','幽默','感動','正經','活潑'];
+let selectedTone = tones[Math.floor(Math.random() * tones.length)];
+let currentAspects = [];
+const formContent = document.getElementById('form-content');
+
+function applyActiveTone() {
+  document.querySelectorAll('.tone-btn').forEach(b => b.classList.toggle('active', b.dataset.tone === selectedTone));
+}
+applyActiveTone();
+
+document.querySelectorAll('.tone-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedTone = btn.dataset.tone;
+    document.getElementById('toneRandomBadge').textContent = '✏️ 已手動選擇';
+    applyActiveTone();
+    updateSummary();
+  });
+});
+
+function getRandomAspects() {
+  return [...allAspects].sort(() => Math.random() - .5).slice(0, 3);
+}
+
+function initForm() {
+  formContent.innerHTML = '';
+  currentAspects = getRandomAspects();
+  document.getElementById('summaryText').innerHTML = '<span class="placeholder">請完成上方細節選擇，系統將自動為您生成溫暖的文字...</span>';
+
+  currentAspects.forEach((asp, i) => {
+    const div = document.createElement('div');
+    div.className = 'dimension fade-in';
+    div.style.animationDelay = `${i*.1}s`;
+    div.innerHTML = `
+      <div class="dimension-header">
+        <span>題目 ${i+1}：${asp.name}</span>
+        <span class="dimension-badge">未填寫</span>
+      </div>
+      <div class="dimension-body">
+        <div class="aspect">
+          <label class="aspect-label">${asp.name}</label>
+          <span class="aspect-desc">${asp.desc}</span>
+        </div>
+      </div>`;
+
+    const body = div.querySelector('.dimension-body .aspect');
+    const sel = document.createElement('select');
+    sel.id = asp.id; sel.dataset.name = asp.name;
+
+    asp.options.forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt.val; o.textContent = opt.text;
+      sel.appendChild(o);
+    });
+
+    sel.addEventListener('change', function() {
+      const badge = div.querySelector('.dimension-badge');
+      if (this.value) { this.classList.add('selected'); badge.textContent = '已填寫'; }
+      else { this.classList.remove('selected'); badge.textContent = '未填寫'; }
+
+      let otherC = this.parentElement.querySelector('.other-input-container');
+      if (this.value === 'other') {
+        if (!otherC) {
+          otherC = document.createElement('div');
+          otherC.className = 'other-input-container show';
+          const inp = document.createElement('input');
+          inp.type = 'text'; inp.placeholder = '請說明您的觀察...';
+          inp.dataset.aspectId = asp.id;
+          inp.addEventListener('input', updateSummary);
+          otherC.appendChild(inp);
+          this.parentElement.appendChild(otherC);
+        } else otherC.classList.add('show');
+      } else { if (otherC) otherC.classList.remove('show'); }
+
+      updateStats();
+      updateSummary();
+    });
+
+    body.appendChild(sel);
+    formContent.appendChild(div);
+  });
+  updateStats();
+}
+
+// 基本資訊監聽
+document.getElementById('studentName').addEventListener('input', updateSummary);
+document.getElementById('hideMiddleName').addEventListener('change', updateSummary);
+document.querySelectorAll('input[name="relation"]').forEach(cb => cb.addEventListener('change', updateSummary));
+document.querySelectorAll('input[name="campus"]').forEach(r => r.addEventListener('change', updateSummary));
+
+function updateStats() {
+  const sels = document.querySelectorAll('select');
+  const done = Array.from(sels).filter(s => s.value !== '').length;
+  const total = sels.length;
+  const pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('completedCount').textContent = done;
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('progressPercent').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function collectData() {
+  const studentName = document.getElementById('studentName').value.trim();
+  const hide = document.getElementById('hideMiddleName').checked;
+  const relations = Array.from(document.querySelectorAll('input[name="relation"]:checked')).map(c => c.value);
+  const campus = document.querySelector('input[name="campus"]:checked').value;
+
+  let displayName = '孩子';
+  if (studentName) {
+    displayName = (hide && studentName.length >= 3)
+      ? studentName[0] + '○' + studentName.slice(2)
+      : studentName;
+  }
+
+  const role = relations.length === 0 ? '家長'
+    : relations.length === 1 ? relations[0]
+    : relations.length === 2 ? relations.join('和')
+    : relations.slice(0,-1).join('、') + '和' + relations[relations.length-1];
+
+  const selections = [];
+  document.querySelectorAll('select').forEach(sel => {
+    if (!sel.value) return;
+    const otherInp = document.querySelector(`input[data-aspect-id="${sel.id}"]`);
+    const customText = (sel.value === 'other' && otherInp && otherInp.value.trim()) ? otherInp.value.trim() : null;
+    selections.push({ id: sel.id, val: sel.value, name: sel.dataset.name, customText });
+  });
+
+  return { displayName, role, campus, selections };
+}
+
+function updateSummary() {
+  const { displayName, role, campus, selections } = collectData();
+  const tone = selectedTone;
+  const tmpl = templates[tone];
+
+  if (selections.length === 0) {
+    document.getElementById('summaryText').innerHTML = '<span class="placeholder">請完成上方細節選擇，系統將自動為您生成溫暖的文字...</span>';
+    return;
+  }
+
+  // 開場白
+  const opening = tmpl.openings[Math.floor(Math.random() * tmpl.openings.length)](displayName);
+
+  // 內容句子
+  const bodyParts = selections.map((s, idx) => {
+    let phrase = '';
+    if (s.val === 'other' && s.customText) {
+      phrase = s.customText;
+    } else {
+      const phraseMap = itemPhrases[s.id];
+      if (phraseMap && phraseMap[s.val] && phraseMap[s.val][tone]) {
+        phrase = phraseMap[s.val][tone];
+      } else {
+        phrase = sel => `${s.name}方面有不錯的表現`;
+      }
+    }
+    const connector = idx === 0 ? '' : tmpl.connectors[Math.floor(Math.random() * tmpl.connectors.length)];
+    return (connector ? connector : '') + phrase;
+  });
+
+  // 結尾
+  const closing = tmpl.closings[Math.floor(Math.random() * tmpl.closings.length)](campus);
+
+  // 組合
+  const text = `${opening}${bodyParts.join('，')}。${closing}`;
+  document.getElementById('summaryText').textContent = text;
+}
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = document.getElementById('summaryText').innerText;
+  if (!text || text.includes('請完成')) { showToast('⚠️ 尚無可複製的內容'); return; }
+  try { await navigator.clipboard.writeText(text); showToast('✅ 已複製到剪貼簿！'); }
+  catch { showToast('❌ 複製失敗，請手動複製'); }
+});
+
+document.getElementById('shareBtn').addEventListener('click', () => {
+  const text = document.getElementById('summaryText').innerText;
+  if (!text || text.includes('請完成')) { showToast('⚠️ 尚無可分享的內容'); return; }
+  window.open('https://line.me/R/msg/text/?' + encodeURIComponent(text), '_blank');
+});
+
+document.getElementById('refreshBtn').addEventListener('click', () => {
+  if (confirm('確定要換三題嗎？目前的選擇會清空。')) {
+    selectedTone = tones[Math.floor(Math.random() * tones.length)];
+    document.getElementById('toneRandomBadge').textContent = '🎲 隨機選出，可手動切換';
+    applyActiveTone();
+    initForm();
+    showToast('🔄 已更換題目！');
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('確定要清空所有內容嗎？')) {
+    document.querySelectorAll('select').forEach(s => { s.value = ''; s.classList.remove('selected'); });
+    document.querySelectorAll('.other-input-container').forEach(c => c.classList.remove('show'));
+    document.querySelectorAll('.dimension-badge').forEach(b => b.textContent = '未填寫');
+    document.getElementById('summaryText').innerHTML = '<span class="placeholder">請完成上方細節選擇，系統將自動為您生成溫暖的文字...</span>';
+    updateStats();
+    showToast('🗑️ 已清空！');
+  }
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+initForm();
+</script>
+</body>
+</html>
