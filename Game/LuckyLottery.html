@@ -1,1 +1,364 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>吉的堡莊敬同安校抽獎</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7c3aed;--pink:#e91e8c;--green:#059669;--orange:#d97706;
+  --bg1:#1a0533;--bg2:#2d0a5e;--gold:#ffd700;--gold2:#ffb300;
+}
+body{
+  background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,#1a0533 100%);
+  font-family:'Segoe UI',sans-serif;
+  display:flex;flex-direction:column;height:100vh;overflow:hidden;
+  position:relative;
+}
+
+/* Animated stars background */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,.15) 0%,transparent 50%),
+             radial-gradient(ellipse at 80% 80%,rgba(233,30,140,.1) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{
+  position:absolute;background:#fff;border-radius:50%;
+  animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+  opacity:0;
+}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(1)}50%{opacity:var(--op,.8);transform:scale(1.2)}}
+
+/* Nav */
+nav{
+  position:relative;z-index:10;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,215,0,.2);
+  padding:14px 24px;flex-shrink:0;
+  display:flex;align-items:center;gap:12px;
+}
+.nav-title{
+  font-size:16px;font-weight:800;
+  background:linear-gradient(90deg,var(--gold),#fff,var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-shadow:none;
+  letter-spacing:.5px;
+}
+.nav-sparkle{font-size:20px;animation:spin2 4s linear infinite}
+@keyframes spin2{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+/* Tabs */
+.tabs{
+  position:relative;z-index:10;
+  display:flex;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,215,0,.15);
+  flex-shrink:0;
+}
+.tab{
+  flex:1;padding:13px 4px;text-align:center;cursor:pointer;
+  font-size:14px;font-weight:700;color:rgba(255,255,255,.45);
+  border-bottom:3px solid transparent;
+  transition:all .25s;user-select:none;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  position:relative;overflow:hidden;
+}
+.tab::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,transparent 100%);
+  opacity:0;transition:opacity .25s;
+}
+.tab:hover::before{opacity:1}
+.tab:hover{color:rgba(255,255,255,.75)}
+.tab.active{color:#fff;border-bottom-color:var(--c,var(--purple))}
+.tab.active::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--c,var(--purple)),transparent);
+  animation:glowline 2s ease-in-out infinite;
+}
+@keyframes glowline{0%,100%{opacity:.7}50%{opacity:1}}
+.tab.active{background:linear-gradient(180deg,rgba(255,255,255,.07) 0%,transparent 100%)}
+#tab0{--c:var(--purple)} #tab1{--c:var(--pink)} #tab2{--c:var(--green)} #tab3{--c:var(--orange)}
+.tab-icon{font-size:16px}
+.tab-label{font-size:13px}
+@media(max-width:480px){.tab-label{font-size:11px}.tab{padding:11px 2px;gap:3px}}
+
+/* Panels */
+.panels{flex:1;overflow:hidden;position:relative;z-index:5}
+.panel{position:absolute;inset:0;display:none;flex-direction:column;animation:panelIn .3s ease}
+.panel.active{display:flex}
+@keyframes panelIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Toolbar */
+.toolbar{
+  background:rgba(0,0,0,.4);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:8px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.fs-label{
+  display:flex;align-items:center;gap:7px;cursor:pointer;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,.7);user-select:none;
+}
+.fs-label input{width:18px;height:18px;cursor:pointer;accent-color:var(--ac,var(--purple))}
+#cb0{accent-color:var(--purple)}#cb1{accent-color:var(--pink)}
+#cb2{accent-color:var(--green)}#cb3{accent-color:var(--orange)}
+.toolbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.open-link-btn{
+  display:inline-flex;align-items:center;gap:5px;padding:5px 13px;
+  border-radius:999px;border:1.5px solid var(--bc,var(--green));
+  background:rgba(255,255,255,.05);color:var(--bc,var(--green));
+  font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;
+  transition:all .2s;
+}
+.open-link-btn:hover{background:var(--bc,var(--green));color:#fff;box-shadow:0 0 12px rgba(255,255,255,.2)}
+.open-link-btn.orange{--bc:var(--orange)}
+
+/* Loading shimmer */
+.frame-wrap{flex:1;position:relative;overflow:hidden}
+.loading{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(20,5,40,.95);z-index:5;transition:opacity .5s;
+}
+.loading.done{opacity:0;pointer-events:none}
+.shimmer-box{
+  width:220px;height:6px;border-radius:999px;
+  background:rgba(255,255,255,.08);overflow:hidden;margin-top:16px;
+}
+.shimmer-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,transparent,var(--sc,#7c3aed),transparent);
+  animation:shimmer 1.5s ease-in-out infinite;
+  width:60%;
+}
+@keyframes shimmer{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
+.load-text{font-size:13px;font-weight:600;color:rgba(255,255,255,.5);margin-top:10px}
+.spinner{
+  width:36px;height:36px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.1);
+  border-top-color:var(--sc,var(--purple));
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#l0 .spinner,#l0 .shimmer-fill{--sc:var(--purple)}
+#l1 .spinner,#l1 .shimmer-fill{--sc:var(--pink)}
+#l2 .spinner,#l2 .shimmer-fill{--sc:var(--green)}
+#l3 .spinner,#l3 .shimmer-fill{--sc:var(--orange)}
+
+iframe{width:100%;height:100%;border:none;display:block}
+
+/* Fullscreen */
+body.fs0 nav,body.fs0 .tabs,body.fs0 #panel0 .toolbar{display:none}
+body.fs1 nav,body.fs1 .tabs,body.fs1 #panel1 .toolbar{display:none}
+body.fs2 nav,body.fs2 .tabs,body.fs2 #panel2 .toolbar{display:none}
+body.fs3 nav,body.fs3 .tabs,body.fs3 #panel3 .toolbar{display:none}
+body.fs0 #panel0,body.fs1 #panel1,body.fs2 #panel2,body.fs3 #panel3{display:flex}
+
+.fs-exit{
+  display:none;position:fixed;bottom:24px;right:24px;z-index:999;
+  border:none;border-radius:999px;padding:10px 22px;
+  font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.5px;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);color:#fff;
+  transition:transform .15s,box-shadow .15s;
+}
+.fs-exit:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(0,0,0,.5)}
+body.fs0 #exit0{display:block;background:linear-gradient(135deg,#7c3aed,#9f67f5)}
+body.fs1 #exit1{display:block;background:linear-gradient(135deg,#e91e8c,#f472b6)}
+body.fs2 #exit2{display:block;background:linear-gradient(135deg,#059669,#34d399)}
+body.fs3 #exit3{display:block;background:linear-gradient(135deg,#d97706,#fbbf24)}
+
+/* Result badge */
+.result-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  border-radius:999px;padding:4px 13px;
+  font-size:12px;font-weight:700;
+}
+.result-badge.green{background:rgba(5,150,105,.2);border:1.5px solid rgba(52,211,153,.4);color:#34d399}
+.result-badge.orange{background:rgba(217,119,6,.2);border:1.5px solid rgba(251,191,36,.4);color:#fbbf24}
+
+/* Confetti particles */
+.confetti{position:fixed;pointer-events:none;z-index:1;top:-10px}
+@keyframes fall{
+  0%{transform:translateY(-10px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<nav>
+  <span class="nav-sparkle">✨</span>
+  <span class="nav-title">🎉 吉的堡莊敬同安校抽獎</span>
+</nav>
+
+<div class="tabs">
+  <div class="tab active" id="tab0" onclick="switchTab(0)">
+    <span class="tab-icon">🎉</span><span class="tab-label">莊敬校</span>
+  </div>
+  <div class="tab" id="tab1" onclick="switchTab(1)">
+    <span class="tab-icon">🎊</span><span class="tab-label">同安校</span>
+  </div>
+  <div class="tab" id="tab2" onclick="switchTab(2)">
+    <span class="tab-icon">🏆</span><span class="tab-label">同安抽獎結果</span>
+  </div>
+  <div class="tab" id="tab3" onclick="switchTab(3)">
+    <span class="tab-icon">🥇</span><span class="tab-label">莊敬抽獎結果</span>
+  </div>
+</div>
+
+<div class="panels">
+  <div class="panel active" id="panel0">
+    <div class="toolbar">
+      <label class="fs-label"><input type="checkbox" id="cb0" onchange="toggleFS(0,this.checked)">全螢幕顯示</label>
+    </div>
+    <div class="frame-wrap">
+      <div class="loading" id="l0">
+        <div class="spinner"></div>
+        <div class="shimmer-box"><div class="shimmer-fill"></div></div>
+        <div class="load-text">載入中…</div>
+      </div>
+      <iframe src="https://script.google.com/macros/s/AKfycbyonFylacfnHvXijHAVQ_vd3fFjZV_TwMmUxeDP7VbISkIMBIK9w80R5NS6qgADZgT2/exec" onload="hideLoading(0)"></iframe>
+    </div>
+  </div>
+
+  <div class="panel" id="panel1">
+    <div class="toolbar">
+      <label class="fs-label"><input type="checkbox" id="cb1" onchange="toggleFS(1,this.checked)">全螢幕顯示</label>
+    </div>
+    <div class="frame-wrap">
+      <div class="loading" id="l1">
+        <div class="spinner"></div>
+        <div class="shimmer-box"><div class="shimmer-fill"></div></div>
+        <div class="load-text">載入中…</div>
+      </div>
+      <iframe src="https://script.google.com/macros/s/AKfycbysxu_4-Ec9LayJIeP2PUsMEINXbOJ0SIBa7PoebkN1H5SoS9kzD-BywobHkUpxNZHAXA/exec" onload="hideLoading(1)"></iframe>
+    </div>
+  </div>
+
+  <div class="panel" id="panel2">
+    <div class="toolbar">
+      <label class="fs-label"><input type="checkbox" id="cb2" onchange="toggleFS(2,this.checked)">全螢幕顯示</label>
+      <span class="result-badge green">🏆 同安校抽獎結果</span>
+      <div class="toolbar-right">
+        <a class="open-link-btn" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRscrnb89SD2jQbFUIPjiDAb4QEVeE2Ik6zj-0PTPPc21EUnSC3_-fDy5vuG3Tg6oejG1tCQM2yoHfS/pubhtml?gid=1214011914&single=true" target="_blank">↗ 在新分頁開啟</a>
+      </div>
+    </div>
+    <div class="frame-wrap">
+      <div class="loading" id="l2">
+        <div class="spinner"></div>
+        <div class="shimmer-box"><div class="shimmer-fill"></div></div>
+        <div class="load-text">載入中…</div>
+      </div>
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRscrnb89SD2jQbFUIPjiDAb4QEVeE2Ik6zj-0PTPPc21EUnSC3_-fDy5vuG3Tg6oejG1tCQM2yoHfS/pubhtml?gid=1214011914&single=true" onload="hideLoading(2)"></iframe>
+    </div>
+  </div>
+
+  <div class="panel" id="panel3">
+    <div class="toolbar">
+      <label class="fs-label"><input type="checkbox" id="cb3" onchange="toggleFS(3,this.checked)">全螢幕顯示</label>
+      <span class="result-badge orange">🥇 莊敬校抽獎結果</span>
+      <div class="toolbar-right">
+        <a class="open-link-btn orange" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbChVTAgX6GVUobwyk66aZBd1poXU4FlWTyp7p7TtAhdQDZNeyS_tdzyYL-xOYfrS0TvTJCIvYpfIf/pubhtml?gid=1214011914&single=true" target="_blank">↗ 在新分頁開啟</a>
+      </div>
+    </div>
+    <div class="frame-wrap">
+      <div class="loading" id="l3">
+        <div class="spinner"></div>
+        <div class="shimmer-box"><div class="shimmer-fill"></div></div>
+        <div class="load-text">載入中…</div>
+      </div>
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbChVTAgX6GVUobwyk66aZBd1poXU4FlWTyp7p7TtAhdQDZNeyS_tdzyYL-xOYfrS0TvTJCIvYpfIf/pubhtml?gid=1214011914&single=true" onload="hideLoading(3)"></iframe>
+    </div>
+  </div>
+</div>
+
+<button class="fs-exit" id="exit0" onclick="toggleFS(0,false)">✕ 退出全螢幕</button>
+<button class="fs-exit" id="exit1" onclick="toggleFS(1,false)">✕ 退出全螢幕</button>
+<button class="fs-exit" id="exit2" onclick="toggleFS(2,false)">✕ 退出全螢幕</button>
+<button class="fs-exit" id="exit3" onclick="toggleFS(3,false)">✕ 退出全螢幕</button>
+
+<script>
+var PANEL_N=4,cur=0;
+
+// Generate stars
+(function(){
+  var s=document.getElementById('stars');
+  for(var i=0;i<80;i++){
+    var el=document.createElement('div');
+    el.className='star';
+    var sz=Math.random()*2.5+1;
+    el.style.cssText=[
+      'width:'+sz+'px','height:'+sz+'px',
+      'left:'+Math.random()*100+'%','top:'+Math.random()*100+'%',
+      '--d:'+(2+Math.random()*4)+'s',
+      '--delay:'+(Math.random()*4)+'s',
+      '--op:'+(0.3+Math.random()*0.7)
+    ].join(';');
+    s.appendChild(el);
+  }
+})();
+
+// Confetti burst on tab switch
+var COLORS=['#ffd700','#ff69b4','#7c3aed','#00e5ff','#ff4081','#69f0ae','#ffb300','#fff'];
+function burst(){
+  var n=28;
+  for(var i=0;i<n;i++){
+    (function(){
+      var el=document.createElement('div');
+      el.className='confetti';
+      var sz=Math.random()*8+4;
+      var left=Math.random()*100;
+      var color=COLORS[Math.floor(Math.random()*COLORS.length)];
+      var dur=(1.2+Math.random()*1.5).toFixed(2);
+      var delay=(Math.random()*.4).toFixed(2);
+      el.style.cssText=[
+        'left:'+left+'%','width:'+sz+'px','height:'+sz+'px',
+        'background:'+color,'border-radius:'+(Math.random()>0.5?'50%':'2px'),
+        'animation:fall '+dur+'s ease-in '+delay+'s forwards'
+      ].join(';');
+      document.body.appendChild(el);
+      setTimeout(function(){el.remove()},((+dur)+(+delay)+0.2)*1000);
+    })();
+  }
+}
+
+function hideLoading(idx){
+  var el=document.getElementById('l'+idx);
+  if(el) el.classList.add('done');
+}
+
+function switchTab(i){
+  cur=i;
+  var tabs=document.querySelectorAll('.tab');
+  var panels=document.querySelectorAll('.panel');
+  for(var j=0;j<tabs.length;j++){
+    tabs[j].classList.toggle('active',j===i);
+    panels[j].classList.toggle('active',j===i);
+  }
+  for(var k=0;k<PANEL_N;k++){if(k!==i)toggleFS(k,false);}
+  burst();
+}
+
+function toggleFS(i,on){
+  for(var j=0;j<PANEL_N;j++) document.body.classList.remove('fs'+j);
+  if(on) document.body.classList.add('fs'+i);
+  for(var k=0;k<PANEL_N;k++){
+    var cb=document.getElementById('cb'+k);
+    if(cb) cb.checked=(on&&k===i);
+  }
+}
+
+// Initial confetti on load
+window.addEventListener('load',function(){setTimeout(burst,400);setTimeout(burst,900);});
+</script>
+</body>
+</html>
