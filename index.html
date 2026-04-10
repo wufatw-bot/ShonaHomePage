@@ -119,11 +119,9 @@
             padding-left: 5px;
         }
 
-        /* 強調 ESL 連結 */
-        .sidebar-menu a.highlight-link {
-            color: var(--accent-red);
-            font-weight: bold;
-        }
+        /* 強調連結樣式 */
+        .sidebar-menu a.highlight-red { color: var(--accent-red); font-weight: bold; }
+        .sidebar-menu a.highlight-blue { color: var(--accent-blue); font-weight: bold; }
 
         /* Grid & Components */
         .grid {
@@ -227,6 +225,17 @@
             </div>
         </section>
 
+        <section id="elite-scholar">
+            <h2>🎓 私中專班招生訊息</h2>
+            <div style="background: #f0f7ff; border: 1px solid #d1e9ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h4 style="margin: 0; color: var(--accent-blue);">Elite Scholar 卓越菁英計畫</h4>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">關鍵學力養成，助孩子邁向理想私立中學目標。</p>
+                </div>
+                <a href="EliteScholar/EliteScholarGlobalView.html" class="cta-button" style="background: var(--accent-blue);">查看招生簡章</a>
+            </div>
+        </section>
+
         <section id="health-edu">
             <h2>🥦 衛教與教養專區</h2>
             <p>我們結合專業醫療知識與吉的堡雙語教育經驗，提供家長最信賴的成長指引。</p>
@@ -312,7 +321,8 @@
         <div class="sidebar-menu">
             <h3>快速瀏覽目錄</h3>
             <ul>
-                <li><a href="2026ESL/2026ESLGlobalView.html" class="highlight-link">📅 2026年 ESL 活動專區</a></li>
+                <li><a href="2026ESL/2026ESLGlobalView.html" class="highlight-red">📅 2026年 ESL 活動專區</a></li>
+                <li><a href="EliteScholar/EliteScholarGlobalView.html" class="highlight-blue">🎓 私中班招生訊息</a></li>
                 <hr style="border: 0; border-top: 1px solid #eee;">
                 <li><a href="#health-edu">● 健康衛教 & 兒童教養</a></li>
                 <li><a href="#highlights">● 吉的堡活動集錦</a></li>
