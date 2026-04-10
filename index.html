@@ -1,359 +1,201 @@
 <!DOCTYPE html>
-<aside class="sidebar">
-    <div class="sidebar-menu">
-        <h3>快速瀏覽目錄</h3>
-        <hr>
-        <div style="font-size: 0.85rem; color: #666;">
-            <p><b>最新活動：</b><br>4/15 線上教養講座預約中！</p>
-            <a href="#" class="cta-button" style="width: 100%; text-align: center; box-sizing: border-box;">立即預約</a>
-        </div>
-    </div>
-</aside>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>芝芝愛健康 | 守護家庭與教育的成長夥伴</title>
-    <style>
-        :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #FF9800;
-            --accent-purple: #9c27b0;
-            --accent-blue: #2196f3;
-            --accent-red: #e91e63;
-            --text-dark: #333;
-            --bg-light: #f4f7f4;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: "Microsoft JhengHei", Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-        }
-
-        /* Header */
-        header {
-            background-color: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* Main Layout */
-        .main-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            display: flex;
-            gap: 30px;
-            padding: 0 20px;
-        }
-
-        /* Left Content Area */
-        .content-area {
-            flex: 3;
-        }
-
-        /* Right Sidebar */
-        .sidebar {
-            flex: 1;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-
-        section {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
-            margin-top: 0;
-            color: var(--primary-color);
-            font-size: 1.4rem;
-        }
-
-        /* Sidebar Menu Styles */
-        .sidebar-menu {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        }
-
-        .sidebar-menu h3 {
-            margin-top: 0;
-            color: var(--text-dark);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .sidebar-menu ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 12px;
-        }
-
-        .sidebar-menu a {
-            text-decoration: none;
-            color: #555;
-            transition: 0.3s;
-            display: block;
-            padding: 5px 0;
-        }
-
-        .sidebar-menu a:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
-        }
-
-        /* 強調連結樣式 */
-        .sidebar-menu a.highlight-red { color: var(--accent-red); font-weight: bold; }
-        .sidebar-menu a.highlight-blue { color: var(--accent-blue); font-weight: bold; }
-
-        /* Grid & Components */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .card {
-            background: #fdfdfd;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            text-align: center;
-        }
-
-        .activity-gallery {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding: 10px 0;
-        }
-
-        .gallery-item {
-            min-width: 200px;
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        .gallery-img {
-            background: #eef2ee;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #eee;
-            text-align: left;
-        }
-
-        th { background: var(--primary-color); color: white; }
-
-        .cta-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-block;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: #fff;
-            margin-top: 2rem;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .main-container { flex-direction: column-reverse; }
-            .sidebar { position: static; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>芝芝愛健康 | 守護家庭與教育的成長夥伴</title>
+  <style>
+    :root {
+      --c-green: #4CAF50;
+      --c-orange: #FF9800;
+      --c-purple: #9c27b0;
+      --c-blue: #2196f3;
+      --c-red: #e91e63;
+      --bg: #f4f7f4;
+      --white: #fff;
+      --text: #333;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Microsoft JhengHei", Arial, sans-serif; font-size: 15px; color: var(--text); background: var(--bg); }
+    .zh-header { background: var(--white); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 10; }
+    .zh-logo { font-size: 1.2rem; font-weight: 500; color: var(--c-green); }
+    .zh-partner { font-size: 0.82rem; color: #777; }
+    .zh-body { display: flex; gap: 24px; padding: 20px; max-width: 1100px; margin: 0 auto; }
+    .zh-main { flex: 3; min-width: 0; }
+    .zh-sidebar { flex: 1; min-width: 180px; position: sticky; top: 60px; height: fit-content; }
+    .zh-section { background: var(--white); padding: 20px; border-radius: 10px; margin-bottom: 18px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+    .zh-h2 { border-left: 4px solid var(--c-green); padding-left: 12px; margin: 0 0 14px; color: var(--c-green); font-size: 1.1rem; font-weight: 500; }
+    .zh-banner { padding: 14px 16px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .zh-banner-red { background: #fff5f8; border: 1px solid #ffe3ed; }
+    .zh-banner-blue { background: #f0f7ff; border: 1px solid #d1e9ff; }
+    .zh-banner h4 { margin: 0 0 4px; font-size: 0.95rem; font-weight: 500; }
+    .zh-banner p { margin: 0; font-size: 0.82rem; color: #666; }
+    .zh-btn { color: #fff; padding: 8px 16px; border-radius: 6px; font-size: 0.82rem; text-decoration: none; white-space: nowrap; display: inline-block; }
+    .zh-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .zh-card { background: #fdfdfd; padding: 14px 12px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
+    .zh-card h3 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 500; }
+    .zh-card p { margin: 0; font-size: 0.8rem; color: #666; }
+    .zh-gallery { display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; }
+    .zh-gitem { min-width: 160px; background: var(--white); border: 1px solid #eee; border-radius: 8px; text-align: center; font-size: 0.8rem; overflow: hidden; }
+    .zh-gimg { background: #eef2ee; height: 90px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.82rem; }
+    .zh-gitem p { margin: 6px 4px 8px; }
+    .zh-game-card { text-align: center; border-top: 3px solid; }
+    .zh-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .zh-game-card h4 { margin: 6px 0 4px; font-size: 0.9rem; font-weight: 500; }
+    .zh-game-card p { font-size: 0.78rem; color: #666; margin: 0 0 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { padding: 9px 10px; border: 1px solid #eee; text-align: left; }
+    th { background: var(--c-green); color: white; font-weight: 500; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    .sb-box { background: var(--white); padding: 16px; border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+    .sb-box h3 { margin: 0 0 10px; font-size: 1rem; font-weight: 500; border-bottom: 2px solid var(--c-green); padding-bottom: 8px; color: var(--text); }
+    .sb-box ul { list-style: none; padding: 0; margin: 0 0 12px; }
+    .sb-box li { margin-bottom: 10px; }
+    .sb-box a { text-decoration: none; color: #555; font-size: 0.85rem; display: block; padding: 3px 0; transition: padding-left 0.2s; }
+    .sb-box a:hover { color: var(--c-green); padding-left: 4px; }
+    .sb-box a.hl-red { color: var(--c-red); font-weight: 500; }
+    .sb-box a.hl-blue { color: var(--c-blue); font-weight: 500; }
+    .sb-divider { border: 0; border-top: 1px solid #eee; margin: 10px 0; }
+    .sb-notice { font-size: 0.8rem; color: #666; }
+    .sb-notice b { color: var(--text); }
+    .sb-cta { display: block; background: var(--c-orange); color: white; text-align: center; padding: 8px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; margin-top: 8px; }
+    .zh-footer { text-align: center; padding: 16px; background: var(--white); margin-top: 8px; font-size: 0.82rem; color: #888; border-top: 1px solid #eee; }
+    @media (max-width: 720px) {
+      .zh-body { flex-direction: column; }
+      .zh-sidebar { position: static; order: -1; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">🌿 芝芝愛健康</div>
-    <div>吉的堡教育機構 合作夥伴</div>
+<header class="zh-header">
+  <div class="zh-logo">🌿 芝芝愛健康</div>
+  <div class="zh-partner">吉的堡教育機構 合作夥伴</div>
 </header>
 
-<div class="main-container">
-    
-    <main class="content-area">
-        
-        <section id="esl-summer">
-            <h2>📅 2026 ESL 暑期活動特輯</h2>
-            <div style="background: #fff5f8; border: 1px solid #ffe3ed; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-                <div>
-                    <h4 style="margin: 0; color: var(--accent-red);">外師帶隊！探索冒險即將開始</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">查看最新行程、收費詳情與精彩參加禮。</p>
-                </div>
-                <a href="2026ESL/2026ESLGlobalView.html" class="cta-button" style="background: var(--accent-red);">進入活動首頁</a>
-            </div>
-        </section>
+<div class="zh-body">
+  <main class="zh-main">
 
-        <section id="elite-scholar">
-            <h2>🎓 私中專班招生訊息</h2>
-            <div style="background: #f0f7ff; border: 1px solid #d1e9ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-                <div>
-                    <h4 style="margin: 0; color: var(--accent-blue);">Elite Scholar 卓越菁英計畫</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">關鍵學力養成，助孩子邁向理想私立中學目標。</p>
-                </div>
-                <a href="EliteScholar/EliteScholarGlobalView.html" class="cta-button" style="background: var(--accent-blue);">查看招生簡章</a>
-            </div>
-        </section>
-
-        <section id="health-edu">
-            <h2>🥦 衛教與教養專區</h2>
-            <p>我們結合專業醫療知識與吉的堡雙語教育經驗，提供家長最信賴的成長指引。</p>
-            <div class="grid">
-                <div class="card">
-                    <h3>專業衛教</h3>
-                    <p>由專家把關，破解健康謠言，掌握換季體質調整策略。</p>
-                </div>
-                <div class="card">
-                    <h3>兒童教養</h3>
-                    <p>從心理學角度出發，探討孩子的情緒發展與學習動機。</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="highlights">
-            <h2>📸 吉的堡活動集錦</h2>
-            <div class="activity-gallery">
-                <div class="gallery-item">
-                    <div class="gallery-img">小小醫生營</div>
-                    <p>職人體驗活動紀錄</p>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img">英語競技賽</div>
-                    <p>雙語動能教學現場</p>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img">食育手作坊</div>
-                    <p>親子健康點心時光</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="games">
-            <h2>🎮 互動樂園：小遊戲集合</h2>
-            <div class="grid">
-                <div class="card" style="border-top: 4px solid var(--secondary-color);">
-                    <span style="font-size: 2rem;">🎁</span>
-                    <h4>驚喜大抽獎</h4>
-                    <p>解鎖任務抽體驗組</p>
-                    <a href="Game/LuckyLottery.html" class="cta-button">立即參加</a>
-                </div>
-                <div class="card" style="border-top: 4px solid var(--accent-purple);">
-                    <span style="font-size: 2rem;">✍️</span>
-                    <h4>幫你寫出心裡話</h4>
-                    <p>牌卡引導親子對話</p>
-                    <a href="Tool/AppraiseGenerator.html" class="cta-button" style="background: var(--accent-purple);">開始測驗</a>
-                </div>
-                <div class="card" style="border-top: 4px solid var(--accent-blue);">
-                    <span style="font-size: 2rem;">🚀</span>
-                    <h4>其他挑戰</h4>
-                    <p>每日健康打卡計畫</p>
-                    <a href="#" class="cta-button" style="background: var(--accent-blue);">查看全部</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="articles">
-            <h2>📚 推薦文章</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>標題</th>
-                        <th>重點</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>《吉的堡教育心法》</td>
-                        <td>提升學習動機</td>
-                    </tr>
-                    <tr>
-                        <td>《益生菌挑選指南》</td>
-                        <td>成分與迷思破解</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-    </main>
-
-    <aside class="sidebar">
-        <div class="sidebar-menu">
-            <h3>快速瀏覽目錄</h3>
-            <ul>
-                <li><a href="2026ESL/2026ESLGlobalView.html" class="highlight-red">📅 2026年 ESL 活動專區</a></li>
-                <li><a href="EliteScholar/EliteScholarGlobalView.html" class="highlight-blue">🎓 私中班招生訊息</a></li>
-                <hr style="border: 0; border-top: 1px solid #eee;">
-                <li><a href="#health-edu">● 健康衛教 & 兒童教養</a></li>
-                <li><a href="#highlights">● 吉的堡活動集錦</a></li>
-                <li><a href="#games">● 互動遊戲與抽獎</a></li>
-                <li><a href="#articles">● 專業文章目錄</a></li>
-                <li><a href="#">● 保健食品商城 🛒</a></li>
-                <li><a href="#">● 關於吉的堡機構</a></li>
-            </ul>
-            <hr>
-            <div style="font-size: 0.85rem; color: #666;">
-                <p><b>最新活動：</b><br>4/15 線上教養講座預約中！</p>
-                <a href="#" class="cta-button" style="width: 100%; text-align: center; box-sizing: border-box;">立即預約</a>
-            </div>
+    <div class="zh-section" id="esl-summer">
+      <h2 class="zh-h2">📅 2026 ESL 暑期活動特輯</h2>
+      <div class="zh-banner zh-banner-red">
+        <div>
+          <h4 style="color: var(--c-red);">外師帶隊！探索冒險即將開始</h4>
+          <p>查看最新行程、收費詳情與精彩參加禮。</p>
         </div>
-    </aside>
+        <a href="2026ESL/2026ESLGlobalView.html" class="zh-btn" style="background: var(--c-red);">進入活動首頁</a>
+      </div>
+    </div>
 
+    <div class="zh-section" id="elite-scholar">
+      <h2 class="zh-h2">🎓 私中專班招生訊息</h2>
+      <div class="zh-banner zh-banner-blue">
+        <div>
+          <h4 style="color: var(--c-blue);">Elite Scholar 卓越菁英計畫</h4>
+          <p>關鍵學力養成，助孩子邁向理想私立中學目標。</p>
+        </div>
+        <a href="EliteScholar/EliteScholarGlobalView.html" class="zh-btn" style="background: var(--c-blue);">查看招生簡章</a>
+      </div>
+    </div>
+
+    <div class="zh-section" id="health-edu">
+      <h2 class="zh-h2">🥦 衛教與教養專區</h2>
+      <p style="margin: 0 0 14px; font-size: 0.88rem; color: #555;">結合專業醫療知識與吉的堡雙語教育經驗，提供家長最信賴的成長指引。</p>
+      <div class="zh-grid">
+        <div class="zh-card">
+          <h3>專業衛教</h3>
+          <p>由專家把關，破解健康謠言，掌握換季體質調整策略。</p>
+        </div>
+        <div class="zh-card">
+          <h3>兒童教養</h3>
+          <p>從心理學角度出發，探討孩子的情緒發展與學習動機。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="zh-section" id="highlights">
+      <h2 class="zh-h2">📸 吉的堡活動集錦</h2>
+      <div class="zh-gallery">
+        <div class="zh-gitem">
+          <div class="zh-gimg">小小醫生營</div>
+          <p>職人體驗活動紀錄</p>
+        </div>
+        <div class="zh-gitem">
+          <div class="zh-gimg">英語競技賽</div>
+          <p>雙語動能教學現場</p>
+        </div>
+        <div class="zh-gitem">
+          <div class="zh-gimg">食育手作坊</div>
+          <p>親子健康點心時光</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="zh-section" id="games">
+      <h2 class="zh-h2">🎮 互動樂園：小遊戲集合</h2>
+      <div class="zh-grid">
+        <div class="zh-card zh-game-card" style="border-top-color: var(--c-orange);">
+          <span class="zh-icon">🎁</span>
+          <h4>驚喜大抽獎</h4>
+          <p>解鎖任務抽體驗組</p>
+          <a href="Game/LuckyLottery.html" class="zh-btn" style="background: var(--c-orange);">立即參加</a>
+        </div>
+        <div class="zh-card zh-game-card" style="border-top-color: var(--c-purple);">
+          <span class="zh-icon">✍️</span>
+          <h4>幫你寫出心裡話</h4>
+          <p>牌卡引導親子對話</p>
+          <a href="Tool/AppraiseGenerator.html" class="zh-btn" style="background: var(--c-purple);">開始測驗</a>
+        </div>
+        <div class="zh-card zh-game-card" style="border-top-color: var(--c-blue);">
+          <span class="zh-icon">🚀</span>
+          <h4>其他挑戰</h4>
+          <p>每日健康打卡計畫</p>
+          <a href="#" class="zh-btn" style="background: var(--c-blue);">查看全部</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="zh-section" id="articles">
+      <h2 class="zh-h2">📚 推薦文章</h2>
+      <table>
+        <thead>
+          <tr><th>標題</th><th>重點</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>《吉的堡教育心法》</td><td>提升學習動機</td></tr>
+          <tr><td>《益生菌挑選指南》</td><td>成分與迷思破解</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <aside class="zh-sidebar">
+    <div class="sb-box">
+      <h3>快速瀏覽目錄</h3>
+      <ul>
+        <li><a href="2026ESL/2026ESLGlobalView.html" class="hl-red">📅 2026年 ESL 活動專區</a></li>
+        <li><a href="EliteScholar/EliteScholarGlobalView.html" class="hl-blue">🎓 私中班招生訊息</a></li>
+      </ul>
+      <hr class="sb-divider">
+      <ul>
+        <li><a href="#health-edu">● 健康衛教 &amp; 兒童教養</a></li>
+        <li><a href="#highlights">● 吉的堡活動集錦</a></li>
+        <li><a href="#games">● 互動遊戲與抽獎</a></li>
+        <li><a href="#articles">● 專業文章目錄</a></li>
+        <li><a href="#">● 保健食品商城 🛒</a></li>
+        <li><a href="#">● 關於吉的堡機構</a></li>
+      </ul>
+      <hr class="sb-divider">
+      <div class="sb-notice">
+        <p style="margin: 0 0 8px;"><b>最新活動：</b><br>4/15 線上教養講座預約中！</p>
+        <a href="#" class="sb-cta">立即預約</a>
+      </div>
+    </div>
+  </aside>
 </div>
 
-<footer>
-    <p>© 2026 芝芝愛健康 | 客服信箱：service@zhizhihealth.com</p>
-</footer>
+<footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
 
 </body>
 </html>
