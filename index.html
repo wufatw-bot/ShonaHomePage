@@ -10,6 +10,7 @@
             --secondary-color: #FF9800;
             --accent-purple: #9c27b0;
             --accent-blue: #2196f3;
+            --accent-red: #e91e63;
             --text-dark: #333;
             --bg-light: #f4f7f4;
             --white: #ffffff;
@@ -53,12 +54,12 @@
 
         /* Left Content Area */
         .content-area {
-            flex: 3; /* 佔據較大空間 */
+            flex: 3;
         }
 
-        /* Right Sidebar Sidebar */
+        /* Right Sidebar */
         .sidebar {
-            flex: 1; /* 佔據較小空間 */
+            flex: 1;
             position: sticky;
             top: 100px;
             height: fit-content;
@@ -116,6 +117,12 @@
         .sidebar-menu a:hover {
             color: var(--primary-color);
             padding-left: 5px;
+        }
+
+        /* 強調 ESL 連結 */
+        .sidebar-menu a.highlight-link {
+            color: var(--accent-red);
+            font-weight: bold;
         }
 
         /* Grid & Components */
@@ -184,6 +191,14 @@
             display: inline-block;
         }
 
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #fff;
+            margin-top: 2rem;
+            color: #666;
+        }
+
         @media (max-width: 768px) {
             .main-container { flex-direction: column-reverse; }
             .sidebar { position: static; }
@@ -201,6 +216,17 @@
     
     <main class="content-area">
         
+        <section id="esl-summer">
+            <h2>📅 2026 ESL 暑期活動特輯</h2>
+            <div style="background: #fff5f8; border: 1px solid #ffe3ed; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h4 style="margin: 0; color: var(--accent-red);">外師帶隊！探索冒險即將開始</h4>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">查看最新行程、收費詳情與精彩參加禮。</p>
+                </div>
+                <a href="2026ESL/2026ESLGlobalView.html" class="cta-button" style="background: var(--accent-red);">進入活動首頁</a>
+            </div>
+        </section>
+
         <section id="health-edu">
             <h2>🥦 衛教與教養專區</h2>
             <p>我們結合專業醫療知識與吉的堡雙語教育經驗，提供家長最信賴的成長指引。</p>
@@ -240,17 +266,14 @@
                 <div class="card" style="border-top: 4px solid var(--secondary-color);">
                     <span style="font-size: 2rem;">🎁</span>
                     <h4>驚喜大抽獎</h4>
-                    <a href="Game/LuckyLottery.html">
                     <p>解鎖任務抽體驗組</p>
-                    <a href="#" class="cta-button">立即參加</a>
-                 
+                    <a href="Game/LuckyLottery.html" class="cta-button">立即參加</a>
                 </div>
                 <div class="card" style="border-top: 4px solid var(--accent-purple);">
                     <span style="font-size: 2rem;">✍️</span>
                     <h4>幫你寫出心裡話</h4>
-                    <a href="Tool/AppraiseGenerator.html">
                     <p>牌卡引導親子對話</p>
-                    <a href="#" class="cta-button" style="background: var(--accent-purple);">開始測驗</a>
+                    <a href="Tool/AppraiseGenerator.html" class="cta-button" style="background: var(--accent-purple);">開始測驗</a>
                 </div>
                 <div class="card" style="border-top: 4px solid var(--accent-blue);">
                     <span style="font-size: 2rem;">🚀</span>
@@ -289,6 +312,8 @@
         <div class="sidebar-menu">
             <h3>快速瀏覽目錄</h3>
             <ul>
+                <li><a href="2026ESL/2026ESLGlobalView.html" class="highlight-link">📅 2026年 ESL 活動專區</a></li>
+                <hr style="border: 0; border-top: 1px solid #eee;">
                 <li><a href="#health-edu">● 健康衛教 & 兒童教養</a></li>
                 <li><a href="#highlights">● 吉的堡活動集錦</a></li>
                 <li><a href="#games">● 互動遊戲與抽獎</a></li>
