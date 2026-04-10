@@ -17,12 +17,17 @@
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: "Microsoft JhengHei", Arial, sans-serif; font-size: 15px; color: var(--text); background: var(--bg); }
-    .zh-header { background: var(--white); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 10; }
+    .zh-header { background: var(--white); padding: 10px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 10; }
     .zh-logo { font-size: 1.2rem; font-weight: 500; color: var(--c-green); }
+    .zh-header-right { display: flex; align-items: center; gap: 16px; }
     .zh-partner { font-size: 0.82rem; color: #777; }
+    .visitor-badge { display: flex; flex-direction: column; align-items: center; background: #f0faf0; border: 1px solid #c8e6c9; border-radius: 8px; padding: 5px 14px; line-height: 1.4; }
+    .vb-label { font-size: 0.68rem; color: #777; }
+    .vb-count { font-size: 1.05rem; font-weight: 500; color: var(--c-green); letter-spacing: 0.04em; }
+    .vb-sub { font-size: 0.65rem; color: #aaa; }
     .zh-body { display: flex; gap: 24px; padding: 20px; max-width: 1100px; margin: 0 auto; }
     .zh-main { flex: 3; min-width: 0; }
-    .zh-sidebar { flex: 1; min-width: 180px; position: sticky; top: 60px; height: fit-content; }
+    .zh-sidebar { flex: 1; min-width: 180px; position: sticky; top: 62px; height: fit-content; }
     .zh-section { background: var(--white); padding: 20px; border-radius: 10px; margin-bottom: 18px; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
     .zh-h2 { border-left: 4px solid var(--c-green); padding-left: 12px; margin: 0 0 14px; color: var(--c-green); font-size: 1.1rem; font-weight: 500; }
     .zh-banner { padding: 14px 16px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -35,14 +40,14 @@
     .zh-card { background: #fdfdfd; padding: 14px 12px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
     .zh-card h3 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 500; }
     .zh-card p { margin: 0; font-size: 0.8rem; color: #666; }
+    .zh-game-card { border-top: 3px solid; }
+    .zh-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .zh-game-card h4 { margin: 6px 0 4px; font-size: 0.9rem; font-weight: 500; }
+    .zh-game-card p { font-size: 0.78rem; color: #666; margin: 0 0 10px; }
     .zh-gallery { display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; }
     .zh-gitem { min-width: 160px; background: var(--white); border: 1px solid #eee; border-radius: 8px; text-align: center; font-size: 0.8rem; overflow: hidden; }
     .zh-gimg { background: #eef2ee; height: 90px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.82rem; }
     .zh-gitem p { margin: 6px 4px 8px; }
-    .zh-game-card { text-align: center; border-top: 3px solid; }
-    .zh-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
-    .zh-game-card h4 { margin: 6px 0 4px; font-size: 0.9rem; font-weight: 500; }
-    .zh-game-card p { font-size: 0.78rem; color: #666; margin: 0 0 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th, td { padding: 9px 10px; border: 1px solid #eee; text-align: left; }
     th { background: var(--c-green); color: white; font-weight: 500; }
@@ -63,6 +68,7 @@
     @media (max-width: 720px) {
       .zh-body { flex-direction: column; }
       .zh-sidebar { position: static; order: -1; }
+      .zh-partner { display: none; }
     }
   </style>
 </head>
@@ -70,7 +76,14 @@
 
 <header class="zh-header">
   <div class="zh-logo">🌿 芝芝愛健康</div>
-  <div class="zh-partner">吉的堡教育機構 合作夥伴</div>
+  <div class="zh-header-right">
+    <div class="zh-partner">吉的堡教育機構 合作夥伴</div>
+    <div class="visitor-badge">
+      <span class="vb-label">👥 今日到訪</span>
+      <span class="vb-count" id="today-count">—</span>
+      <span class="vb-sub">累計 <span id="total-count">—</span> 人次</span>
+    </div>
+  </div>
 </header>
 
 <div class="zh-body">
@@ -196,6 +209,24 @@
 </div>
 
 <footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
+
+<script>
+  (function () {
+    var today = new Date().toISOString().slice(0, 10);
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem('zhizhi_visits') || '{}'); } catch (e) {}
+    if (!sessionStorage.getItem('zhizhi_visited')) {
+      sessionStorage.setItem('zhizhi_visited', '1');
+      data[today] = (data[today] || 0) + 1;
+      data['__total__'] = (data['__total__'] || 0) + 1;
+      try { localStorage.setItem('zhizhi_visits', JSON.stringify(data)); } catch (e) {}
+    }
+    var todayCount = data[today] || 1;
+    var totalCount = data['__total__'] || 1;
+    document.getElementById('today-count').textContent = todayCount.toLocaleString() + ' 人';
+    document.getElementById('total-count').textContent = totalCount.toLocaleString();
+  })();
+</script>
 
 </body>
 </html>
