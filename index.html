@@ -11,6 +11,7 @@
       --c-purple: #9c27b0;
       --c-blue: #2196f3;
       --c-red: #e91e63;
+      --c-teal: #00897b;
       --bg: #f4f7f4;
       --white: #fff;
       --text: #333;
@@ -64,11 +65,83 @@
     .sb-notice { font-size: 0.8rem; color: #666; }
     .sb-notice b { color: var(--text); }
     .sb-cta { display: block; background: var(--c-orange); color: white; text-align: center; padding: 8px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; margin-top: 8px; }
-    .zh-footer { text-align: center; padding: 16px; background: var(--white); margin-top: 8px; font-size: 0.82rem; color: #888; border-top: 1px solid #eee; }
+
+    /* ── 健康保健常識目錄 ── */
+    .health-dir-section {
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f7fa 100%);
+      border-top: 3px solid var(--c-teal);
+      padding: 36px 0 28px;
+      margin-top: 8px;
+    }
+    .health-dir-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .health-dir-title {
+      text-align: center;
+      margin: 0 0 6px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--c-teal);
+      letter-spacing: 0.04em;
+    }
+    .health-dir-subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin: 0 0 24px;
+    }
+    .health-dir-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .health-dir-card {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid #b2dfdb;
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      display: block;
+    }
+    .health-dir-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,137,123,0.15);
+      background: #fff;
+    }
+    .health-dir-card .hd-icon { font-size: 1.6rem; display: block; margin-bottom: 7px; }
+    .health-dir-card .hd-label { font-size: 0.88rem; font-weight: 500; color: var(--c-teal); display: block; margin-bottom: 4px; }
+    .health-dir-card .hd-desc { font-size: 0.76rem; color: #777; }
+    .health-dir-cta-wrap { text-align: center; }
+    .health-dir-cta {
+      display: inline-block;
+      background: var(--c-teal);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 24px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 8px rgba(0,137,123,0.25);
+    }
+    .health-dir-cta:hover {
+      background: #00695c;
+      box-shadow: 0 4px 14px rgba(0,137,123,0.35);
+    }
+
+    .zh-footer { text-align: center; padding: 16px; background: var(--white); font-size: 0.82rem; color: #888; border-top: 1px solid #eee; }
     @media (max-width: 720px) {
       .zh-body { flex-direction: column; }
       .zh-sidebar { position: static; order: -1; }
       .zh-partner { display: none; }
+      .health-dir-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -196,6 +269,7 @@
         <li><a href="#highlights">● 吉的堡活動集錦</a></li>
         <li><a href="#games">● 互動遊戲與抽獎</a></li>
         <li><a href="#articles">● 專業文章目錄</a></li>
+        <li><a href="#health-knowledge">● 健康保健常識目錄</a></li>
         <li><a href="#">● 保健食品商城 🛒</a></li>
         <li><a href="#">● 關於吉的堡機構</a></li>
       </ul>
@@ -207,6 +281,53 @@
     </div>
   </aside>
 </div>
+
+<!-- ══════════ 健康保健常識目錄 ══════════ -->
+<section class="health-dir-section" id="health-knowledge">
+  <div class="health-dir-inner">
+    <h2 class="health-dir-title">🌱 健康保健常識目錄</h2>
+    <p class="health-dir-subtitle">精選實用保健知識，陪伴家庭守護每一天的健康</p>
+
+    <div class="health-dir-grid">
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">🍎</span>
+        <span class="hd-label">飲食與營養</span>
+        <span class="hd-desc">均衡飲食、營養素解析與日常飲食建議</span>
+      </a>
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">🏃</span>
+        <span class="hd-label">運動與體能</span>
+        <span class="hd-desc">適齡運動指南、親子活動與體適能訓練</span>
+      </a>
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">😴</span>
+        <span class="hd-label">睡眠與休息</span>
+        <span class="hd-desc">兒童睡眠需求、睡眠品質改善與作息建立</span>
+      </a>
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">🧠</span>
+        <span class="hd-label">心理與情緒</span>
+        <span class="hd-desc">壓力管理、情緒調節與正向心理學應用</span>
+      </a>
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">🦷</span>
+        <span class="hd-label">口腔與衛生</span>
+        <span class="hd-desc">兒童口腔保健、正確刷牙方式與定期檢查</span>
+      </a>
+      <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        <span class="hd-icon">💊</span>
+        <span class="hd-label">常見疾病預防</span>
+        <span class="hd-desc">季節性疾病防護、疫苗接種與免疫力提升</span>
+      </a>
+    </div>
+
+    <div class="health-dir-cta-wrap">
+      <a class="health-dir-cta" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
+        📖 進入完整健康保健常識專區 →
+      </a>
+    </div>
+  </div>
+</section>
 
 <footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
 
