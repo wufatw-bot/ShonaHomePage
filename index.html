@@ -65,7 +65,6 @@
     .sb-notice { font-size: 0.8rem; color: #666; }
     .sb-notice b { color: var(--text); }
     .sb-cta { display: block; background: var(--c-orange); color: white; text-align: center; padding: 8px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; margin-top: 8px; }
-
     /* ── 健康保健常識目錄 ── */
     .health-dir-section {
       background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f7fa 100%);
@@ -135,7 +134,31 @@
       background: #00695c;
       box-shadow: 0 4px 14px rgba(0,137,123,0.35);
     }
-
+    /* ── 英文學習綱連結區 ── */
+    .english-learn-bar {
+      background: var(--white);
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px solid #e8f5e9;
+    }
+    .english-learn-link {
+      display: inline-block;
+      border: 2px solid var(--c-green);
+      border-radius: 10px;
+      padding: 13px 36px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--c-green);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      box-shadow: 0 1px 6px rgba(76,175,80,0.10);
+    }
+    .english-learn-link:hover {
+      background: var(--c-green);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(76,175,80,0.25);
+    }
     .zh-footer { text-align: center; padding: 16px; background: var(--white); font-size: 0.82rem; color: #888; border-top: 1px solid #eee; }
     @media (max-width: 720px) {
       .zh-body { flex-direction: column; }
@@ -146,7 +169,6 @@
   </style>
 </head>
 <body>
-
 <header class="zh-header">
   <div class="zh-logo">🌿 芝芝愛健康</div>
   <div class="zh-header-right">
@@ -158,10 +180,8 @@
     </div>
   </div>
 </header>
-
 <div class="zh-body">
   <main class="zh-main">
-
     <div class="zh-section" id="esl-summer">
       <h2 class="zh-h2">📅 2026 ESL 暑期活動特輯</h2>
       <div class="zh-banner zh-banner-red">
@@ -172,7 +192,6 @@
         <a href="2026ESL/2026ESLGlobalView.html" class="zh-btn" style="background: var(--c-red);">進入活動首頁</a>
       </div>
     </div>
-
     <div class="zh-section" id="elite-scholar">
       <h2 class="zh-h2">🎓 私中專班招生訊息</h2>
       <div class="zh-banner zh-banner-blue">
@@ -183,7 +202,6 @@
         <a href="EliteScholar/EliteScholarGlobalView.html" class="zh-btn" style="background: var(--c-blue);">查看招生簡章</a>
       </div>
     </div>
-
     <div class="zh-section" id="health-edu">
       <h2 class="zh-h2">🥦 衛教與教養專區</h2>
       <p style="margin: 0 0 14px; font-size: 0.88rem; color: #555;">結合專業醫療知識與吉的堡雙語教育經驗，提供家長最信賴的成長指引。</p>
@@ -198,7 +216,6 @@
         </div>
       </div>
     </div>
-
     <div class="zh-section" id="highlights">
       <h2 class="zh-h2">📸 吉的堡活動集錦</h2>
       <div class="zh-gallery">
@@ -216,7 +233,6 @@
         </div>
       </div>
     </div>
-
     <div class="zh-section" id="games">
       <h2 class="zh-h2">🎮 互動樂園：小遊戲集合</h2>
       <div class="zh-grid">
@@ -240,7 +256,6 @@
         </div>
       </div>
     </div>
-
     <div class="zh-section" id="articles">
       <h2 class="zh-h2">📚 推薦文章</h2>
       <table>
@@ -253,9 +268,7 @@
         </tbody>
       </table>
     </div>
-
   </main>
-
   <aside class="zh-sidebar">
     <div class="sb-box">
       <h3>快速瀏覽目錄</h3>
@@ -281,13 +294,11 @@
     </div>
   </aside>
 </div>
-
 <!-- ══════════ 健康保健常識目錄 ══════════ -->
 <section class="health-dir-section" id="health-knowledge">
   <div class="health-dir-inner">
     <h2 class="health-dir-title">🌱 健康保健常識目錄</h2>
     <p class="health-dir-subtitle">精選實用保健知識，陪伴家庭守護每一天的健康</p>
-
     <div class="health-dir-grid">
       <a class="health-dir-card" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
         <span class="hd-icon">🍎</span>
@@ -320,7 +331,6 @@
         <span class="hd-desc">季節性疾病防護、疫苗接種與免疫力提升</span>
       </a>
     </div>
-
     <div class="health-dir-cta-wrap">
       <a class="health-dir-cta" href="https://wufatw-bot.github.io/ShonaHealthEducationHomePage/" target="_blank" rel="noopener">
         📖 進入完整健康保健常識專區 →
@@ -328,9 +338,13 @@
     </div>
   </div>
 </section>
-
+<!-- ══════════ 英文學習綱連結 ══════════ -->
+<div class="english-learn-bar">
+  <a class="english-learn-link" href="https://d8600010-crypto.github.io/ShonaEnglishLearn/" target="_blank" rel="noopener">
+    📘 大立昇吉的堡英文學習綱
+  </a>
+</div>
 <footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
-
 <script>
   (function () {
     var today = new Date().toISOString().slice(0, 10);
@@ -348,6 +362,5 @@
     document.getElementById('total-count').textContent = totalCount.toLocaleString();
   })();
 </script>
-
 </body>
 </html>
