@@ -159,12 +159,110 @@
       color: #fff;
       box-shadow: 0 4px 14px rgba(76,175,80,0.25);
     }
+
+    /* ── 公共事務頁入口 ── */
+    .public-affairs-bar {
+      background: #1a237e;
+      padding: 28px 24px;
+      text-align: center;
+      border-top: 3px solid #3949ab;
+    }
+    .public-affairs-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .public-affairs-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e8eaf6;
+      margin: 0 0 16px;
+      letter-spacing: 0.05em;
+    }
+    .public-affairs-title span {
+      display: inline-block;
+      background: #3949ab;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      color: #c5cae9;
+      font-weight: 400;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .pa-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .pa-field {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .pa-field label {
+      font-size: 0.72rem;
+      color: #9fa8da;
+      letter-spacing: 0.04em;
+    }
+    .pa-field input {
+      background: #283593;
+      border: 1px solid #5c6bc0;
+      border-radius: 6px;
+      color: #e8eaf6;
+      font-size: 0.88rem;
+      padding: 7px 12px;
+      width: 130px;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s;
+      font-family: inherit;
+    }
+    .pa-field input:focus {
+      border-color: #7986cb;
+      background: #1e2a78;
+    }
+    .pa-enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #3949ab;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 22px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+      box-shadow: 0 2px 8px rgba(57,73,171,0.4);
+      margin-top: 18px;
+      font-family: inherit;
+      letter-spacing: 0.03em;
+    }
+    .pa-enter-btn:hover {
+      background: #5c6bc0;
+      box-shadow: 0 4px 14px rgba(57,73,171,0.5);
+      transform: translateY(-1px);
+    }
+    .pa-enter-btn:active { transform: translateY(0); }
+    .pa-error {
+      display: none;
+      color: #ef9a9a;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+
     .zh-footer { text-align: center; padding: 16px; background: var(--white); font-size: 0.82rem; color: #888; border-top: 1px solid #eee; }
     @media (max-width: 720px) {
       .zh-body { flex-direction: column; }
       .zh-sidebar { position: static; order: -1; }
       .zh-partner { display: none; }
       .health-dir-grid { grid-template-columns: repeat(2, 1fr); }
+      .pa-form { flex-direction: column; align-items: center; }
+      .pa-field input { width: 200px; }
     }
   </style>
 </head>
@@ -344,6 +442,31 @@
     📘 大立昇吉的堡英文學習綱
   </a>
 </div>
+
+<!-- ══════════ 大立昇吉的堡公共事務頁 ══════════ -->
+<div class="public-affairs-bar" id="public-affairs">
+  <div class="public-affairs-inner">
+    <p class="public-affairs-title">
+      🏛️ 大立昇吉的堡公共事務頁
+      <span>內部入口</span>
+    </p>
+    <div class="pa-form">
+      <div class="pa-field">
+        <label>使用者名稱</label>
+        <input type="text" id="pa-username" value="Shona" autocomplete="username" />
+      </div>
+      <div class="pa-field">
+        <label>密碼</label>
+        <input type="password" id="pa-password" value="Shona" autocomplete="current-password" />
+      </div>
+    </div>
+    <p class="pa-error" id="pa-error">⚠️ 使用者名稱或密碼錯誤，請重新輸入。</p>
+    <button class="pa-enter-btn" id="pa-btn" onclick="paLogin()">
+      🔐 進入公共事務頁
+    </button>
+  </div>
+</div>
+
 <footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
 <script>
   (function () {
@@ -361,6 +484,28 @@
     document.getElementById('today-count').textContent = todayCount.toLocaleString() + ' 人';
     document.getElementById('total-count').textContent = totalCount.toLocaleString();
   })();
+
+  function paLogin() {
+    var user = document.getElementById('pa-username').value.trim();
+    var pass = document.getElementById('pa-password').value.trim();
+    var errEl = document.getElementById('pa-error');
+    if (user === 'Shona' && pass === 'Shona') {
+      errEl.style.display = 'none';
+      window.open('https://d8600010-crypto.github.io/ShonaEventRecord/', '_blank', 'noopener');
+    } else {
+      errEl.style.display = 'block';
+    }
+  }
+
+  // Allow Enter key to submit
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      var active = document.activeElement;
+      if (active && (active.id === 'pa-username' || active.id === 'pa-password')) {
+        paLogin();
+      }
+    }
+  });
 </script>
 </body>
 </html>
