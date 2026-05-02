@@ -7,354 +7,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: #0a0a0f;
-    color: #e8e6f0;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .grain {
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .glow-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(99,50,180,0.18) 0%, transparent 70%);
-    top: -200px; left: -150px;
-  }
-  .orb-2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(30,120,200,0.14) 0%, transparent 70%);
-    bottom: -100px; right: -100px;
-  }
-
-  .page {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 32px 80px;
-  }
-
-  header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 56px;
-  }
-
-  .logo-mark {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: #0a0a0f; color: #e8e6f0; min-height: 100vh; overflow-x: hidden; }
+  .grain { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+  .glow-orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+  .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(99,50,180,0.18) 0%, transparent 70%); top: -200px; left: -150px; }
+  .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(30,120,200,0.14) 0%, transparent 70%); bottom: -100px; right: -100px; }
+  .page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 56px; }
+  .logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .logo-mark svg { width: 18px; height: 18px; }
+  .site-name { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 0.02em; color: #f0eeff; }
+  .badge { margin-left: auto; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8b5cf6; border: 1px solid rgba(139,92,246,0.35); padding: 4px 12px; border-radius: 20px; background: rgba(139,92,246,0.08); }
 
-  .site-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    letter-spacing: 0.02em;
-    color: #f0eeff;
-  }
+  .hero { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
+  @media (max-width: 768px) { .hero { grid-template-columns: 1fr; } .sidebar { order: 2; } }
 
-  .badge {
-    margin-left: auto;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #8b5cf6;
-    border: 1px solid rgba(139,92,246,0.35);
-    padding: 4px 12px;
-    border-radius: 20px;
-    background: rgba(139,92,246,0.08);
-  }
+  .video-label { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7c6fcd; margin-bottom: 20px; font-weight: 500; }
+  .video-label::before { content: ''; display: block; width: 24px; height: 1px; background: #7c6fcd; }
 
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 48px;
-    align-items: start;
-  }
+  .video-wrapper { position: relative; border-radius: 16px; overflow: hidden; background: #12101e; border: 1px solid rgba(139,92,246,0.2); box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset, 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,50,180,0.12); }
+  .video-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent); z-index: 2; }
+  .video-wrapper iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
 
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; }
-    .sidebar { order: 2; }
-  }
+  .video-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 32px); line-height: 1.3; color: #f5f3ff; margin-top: 28px; margin-bottom: 12px; }
+  .video-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6b6494; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: #3d3660; }
 
-  .video-section {}
-
-  .video-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #7c6fcd;
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-  .video-label::before {
-    content: '';
-    display: block;
-    width: 24px; height: 1px;
-    background: #7c6fcd;
-  }
-
-  .video-wrapper {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #12101e;
-    border: 1px solid rgba(139,92,246,0.2);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.04) inset,
-      0 32px 80px rgba(0,0,0,0.6),
-      0 0 60px rgba(99,50,180,0.12);
-  }
-
-  .video-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent);
-    z-index: 2;
-  }
-
-  .video-wrapper iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-  }
-
-  .video-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 3vw, 32px);
-    line-height: 1.3;
-    color: #f5f3ff;
-    margin-top: 28px;
-    margin-bottom: 12px;
-  }
-
-  .video-meta {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: #6b6494;
-  }
-  .meta-dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: #3d3660;
-  }
-
-  .action-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-    font-family: 'Noto Sans TC', sans-serif;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, #7c3aed, #3b82f6);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(124,58,237,0.35);
-  }
+  .action-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .btn { display: flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; font-family: 'Noto Sans TC', sans-serif; }
+  .btn-primary { background: linear-gradient(135deg, #7c3aed, #3b82f6); color: #fff; box-shadow: 0 4px 20px rgba(124,58,237,0.35); }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(124,58,237,0.5); }
-  .btn-ghost {
-    background: rgba(255,255,255,0.05);
-    color: #a09acd;
-    border: 1px solid rgba(255,255,255,0.09);
-  }
+  .btn-ghost { background: rgba(255,255,255,0.05); color: #a09acd; border: 1px solid rgba(255,255,255,0.09); }
   .btn-ghost:hover { background: rgba(255,255,255,0.09); color: #d0cbf0; }
 
-  .sidebar {}
+  .side-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; margin-bottom: 20px; }
+  .side-heading { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #564e8a; font-weight: 500; margin-bottom: 18px; }
+  .desc-text { font-size: 14px; line-height: 1.8; color: #7e78a8; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: rgba(139,92,246,0.1); color: #9d85ef; border: 1px solid rgba(139,92,246,0.2); }
 
-  .side-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 20px;
-  }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 14px 16px; text-align: center; }
+  .stat-num { font-size: 20px; font-weight: 700; color: #c4b8ff; display: block; margin-bottom: 4px; }
+  .stat-lbl { font-size: 11px; color: #564e8a; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  .side-heading {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #564e8a;
-    font-weight: 500;
-    margin-bottom: 18px;
-  }
+  .playlist-section { margin-top: 20px; }
+  .playlist-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #564e8a; font-weight: 500; margin-bottom: 14px; }
+  .playlist-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; margin-bottom: 8px; }
+  .playlist-item:hover { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.2); }
+  .playlist-item.active { background: rgba(139,92,246,0.14); border-color: rgba(139,92,246,0.35); }
+  .playlist-num { font-size: 11px; color: #564e8a; min-width: 16px; text-align: center; font-weight: 500; }
+  .playlist-item.active .playlist-num { color: #8b5cf6; }
+  .playlist-thumb { width: 54px; height: 32px; border-radius: 6px; background: linear-gradient(135deg, #1a1630, #0d1a2e); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+  .playlist-thumb svg { width: 14px; height: 14px; }
+  .playlist-item.active .playlist-thumb { background: linear-gradient(135deg, #2d1a5e, #1a2e4a); }
+  .playlist-info { flex: 1; min-width: 0; }
+  .playlist-label { font-size: 12px; color: #a09acd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+  .playlist-item.active .playlist-label { color: #c4b8ff; }
+  .playlist-sub { font-size: 11px; color: #4e4677; margin-top: 2px; }
 
-  .desc-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #7e78a8;
-  }
-
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-  }
-  .tag {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    background: rgba(139,92,246,0.1);
-    color: #9d85ef;
-    border: 1px solid rgba(139,92,246,0.2);
-  }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .stat-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 10px;
-    padding: 14px 16px;
-    text-align: center;
-  }
-  .stat-num {
-    font-size: 20px;
-    font-weight: 700;
-    color: #c4b8ff;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .stat-lbl {
-    font-size: 11px;
-    color: #564e8a;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.25), transparent);
-    margin: 48px 0;
-  }
-
-  .related-heading {
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #564e8a;
-    font-weight: 500;
-    margin-bottom: 24px;
-  }
-
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-  }
-
-  .related-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .related-card:hover {
-    border-color: rgba(139,92,246,0.3);
-    background: rgba(139,92,246,0.06);
-    transform: translateY(-2px);
-  }
-  .related-thumb {
-    aspect-ratio: 16/9;
-    background: linear-gradient(135deg, #1a1630 0%, #0d1a2e 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-  }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(139,92,246,0.25), transparent); margin: 48px 0; }
+  .related-heading { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #564e8a; font-weight: 500; margin-bottom: 24px; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .related-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.2s; }
+  .related-card:hover { border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.06); transform: translateY(-2px); }
+  .related-thumb { aspect-ratio: 16/9; background: linear-gradient(135deg, #1a1630 0%, #0d1a2e 100%); display: flex; align-items: center; justify-content: center; font-size: 28px; }
   .related-info { padding: 12px 14px; }
-  .related-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: #c4b8ff;
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-  .related-sub {
-    font-size: 11px;
-    color: #564e8a;
-  }
+  .related-title { font-size: 13px; font-weight: 500; color: #c4b8ff; line-height: 1.4; margin-bottom: 6px; }
+  .related-sub { font-size: 11px; color: #564e8a; }
 
-  footer {
-    margin-top: 64px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .footer-text {
-    font-size: 12px;
-    color: #3d3660;
-    letter-spacing: 0.05em;
-  }
-  .footer-links {
-    display: flex;
-    gap: 24px;
-  }
-  .footer-links a {
-    font-size: 12px;
-    color: #4e4677;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-text { font-size: 12px; color: #3d3660; letter-spacing: 0.05em; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 12px; color: #4e4677; text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: #8b7fcc; }
 </style>
 </head>
@@ -366,9 +92,7 @@
 <div class="page">
   <header>
     <div class="logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
-        <polygon points="5,3 19,12 5,21"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><polygon points="5,3 19,12 5,21"/></svg>
     </div>
     <span class="site-name">Lumière Play</span>
     <span class="badge">影音平台</span>
@@ -377,18 +101,15 @@
   <div class="hero">
     <div class="video-section">
       <div class="video-label">精選影片</div>
-
       <div class="video-wrapper">
-        <iframe
+        <iframe id="mainPlayer"
           src="https://www.youtube.com/embed/zQODhApCW14?rel=0&modestbranding=1&color=white"
           title="YouTube 影片播放"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
       </div>
-
-      <h1 class="video-title">精選影片播放</h1>
-
+      <h1 class="video-title" id="videoTitle">影片 1</h1>
       <div class="video-meta">
         <span class="meta-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
@@ -399,13 +120,12 @@
         <span class="meta-dot"></span>
         <span class="meta-item">HD 畫質</span>
       </div>
-
       <div class="action-row">
-        <button class="btn btn-primary" onclick="document.querySelector('iframe').src='https://www.youtube.com/embed/zQODhApCW14?autoplay=1&rel=0&modestbranding=1&color=white'">
+        <button class="btn btn-primary" id="btnPlay" onclick="playCurrentAutoplay()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
           立即播放
         </button>
-        <button class="btn btn-ghost" onclick="window.open('https://youtu.be/zQODhApCW14','_blank')">
+        <button class="btn btn-ghost" id="btnYT" onclick="window.open('https://youtu.be/zQODhApCW14','_blank')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           在 YouTube 觀看
         </button>
@@ -430,23 +150,16 @@
       <div class="side-card">
         <div class="side-heading">播放資訊</div>
         <div class="stat-grid">
-          <div class="stat-box">
-            <span class="stat-num">HD</span>
-            <span class="stat-lbl">畫質</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-num">16:9</span>
-            <span class="stat-lbl">比例</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-num">CC</span>
-            <span class="stat-lbl">字幕</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-num">∞</span>
-            <span class="stat-lbl">重播</span>
-          </div>
+          <div class="stat-box"><span class="stat-num">HD</span><span class="stat-lbl">畫質</span></div>
+          <div class="stat-box"><span class="stat-num">16:9</span><span class="stat-lbl">比例</span></div>
+          <div class="stat-box"><span class="stat-num">CC</span><span class="stat-lbl">字幕</span></div>
+          <div class="stat-box"><span class="stat-num">∞</span><span class="stat-lbl">重播</span></div>
         </div>
+      </div>
+
+      <div class="side-card">
+        <div class="playlist-title">播放清單</div>
+        <div class="playlist-section" id="playlist"></div>
       </div>
     </div>
   </div>
@@ -455,27 +168,9 @@
 
   <div class="related-heading">更多推薦</div>
   <div class="related-grid">
-    <div class="related-card">
-      <div class="related-thumb">🎬</div>
-      <div class="related-info">
-        <div class="related-title">精彩內容 Vol.1</div>
-        <div class="related-sub">推薦觀看</div>
-      </div>
-    </div>
-    <div class="related-card">
-      <div class="related-thumb">🎵</div>
-      <div class="related-info">
-        <div class="related-title">精彩內容 Vol.2</div>
-        <div class="related-sub">推薦觀看</div>
-      </div>
-    </div>
-    <div class="related-card">
-      <div class="related-thumb">🌟</div>
-      <div class="related-info">
-        <div class="related-title">精彩內容 Vol.3</div>
-        <div class="related-sub">推薦觀看</div>
-      </div>
-    </div>
+    <div class="related-card"><div class="related-thumb">🎬</div><div class="related-info"><div class="related-title">精彩內容 Vol.1</div><div class="related-sub">推薦觀看</div></div></div>
+    <div class="related-card"><div class="related-thumb">🎵</div><div class="related-info"><div class="related-title">精彩內容 Vol.2</div><div class="related-sub">推薦觀看</div></div></div>
+    <div class="related-card"><div class="related-thumb">🌟</div><div class="related-info"><div class="related-title">精彩內容 Vol.3</div><div class="related-sub">推薦觀看</div></div></div>
   </div>
 
   <footer>
@@ -487,5 +182,54 @@
     </div>
   </footer>
 </div>
+
+<script>
+const videos = [
+  { id: 'zQODhApCW14', title: '影片 1' },
+  { id: 'uK0Deb6yYQ4', title: '影片 2' },
+  { id: 'FmUlmyQ7ElY', title: '影片 3' },
+  { id: 'ZlXc4blD5vg', title: '影片 4' },
+];
+
+let current = 0;
+
+function playVideo(idx, autoplay) {
+  current = idx;
+  const v = videos[idx];
+  const src = `https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&color=white${autoplay ? '&autoplay=1' : ''}`;
+  document.getElementById('mainPlayer').src = src;
+  document.getElementById('videoTitle').textContent = v.title;
+  document.getElementById('btnYT').onclick = () => window.open(`https://youtu.be/${v.id}`, '_blank');
+  document.querySelectorAll('.playlist-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+}
+
+function playCurrentAutoplay() {
+  playVideo(current, true);
+}
+
+function buildPlaylist() {
+  const container = document.getElementById('playlist');
+  videos.forEach((v, i) => {
+    const item = document.createElement('div');
+    item.className = 'playlist-item' + (i === 0 ? ' active' : '');
+    item.innerHTML = `
+      <span class="playlist-num">${i + 1}</span>
+      <div class="playlist-thumb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(139,92,246,0.6)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="playlist-info">
+        <div class="playlist-label">${v.title}</div>
+        <div class="playlist-sub">YouTube · HD</div>
+      </div>
+    `;
+    item.onclick = () => playVideo(i, false);
+    container.appendChild(item);
+  });
+}
+
+buildPlaylist();
+</script>
 </body>
 </html>
