@@ -14,6 +14,7 @@
       --c-blue: #1976d2;
       --c-red: #d63060;
       --c-teal: #00897b;
+      --c-xmas: #c0392b;
       --bg: #f2f6f2;
       --white: #ffffff;
       --text: #2c2c2c;
@@ -115,6 +116,10 @@
     }
     .zh-banner-red { background: #fff5f8; border: 1px solid #ffd6e3; }
     .zh-banner-blue { background: #f0f6ff; border: 1px solid #cce0ff; }
+    .zh-banner-xmas {
+      background: linear-gradient(135deg, #fff8f8 0%, #fff3e0 100%);
+      border: 1px solid #f5c6b0;
+    }
     .zh-banner h4 { margin: 0 0 5px; font-size: 0.97rem; font-weight: 600; }
     .zh-banner p { margin: 0; font-size: 0.83rem; color: var(--text-muted); }
     .zh-btn {
@@ -218,6 +223,7 @@
     .sb-box a:hover { color: var(--c-green); padding-left: 4px; }
     .sb-box a.hl-red { color: var(--c-red); font-weight: 600; }
     .sb-box a.hl-blue { color: var(--c-blue); font-weight: 600; }
+    .sb-box a.hl-xmas { color: var(--c-xmas); font-weight: 600; }
     .sb-divider { border: 0; border-top: 1px solid var(--border); margin: 10px 0; }
     .sb-notice { font-size: 0.8rem; color: var(--text-muted); }
     .sb-notice b { color: var(--text); }
@@ -750,6 +756,18 @@
       </div>
     </div>
 
+    <!-- 2024 Christmas Party (NEW) -->
+    <div class="zh-section" id="christmas-party-2024">
+      <h2 class="zh-h2" style="border-left-color:var(--c-xmas);color:var(--c-xmas);">🎄 2024 年聖誕節晚會</h2>
+      <div class="zh-banner zh-banner-xmas">
+        <div>
+          <h4 style="color:var(--c-xmas);">溫馨歡聚，共慶佳節！</h4>
+          <p>回顧 2024 年聖誕節晚會的精彩時刻，歡笑與感動盡在其中。</p>
+        </div>
+        <a href="2024ChristmasParty.html" class="zh-btn" style="background:var(--c-xmas);">查看晚會專頁</a>
+      </div>
+    </div>
+
     <!-- Health Education -->
     <div class="zh-section" id="health-edu">
       <h2 class="zh-h2">🥦 衛教與教養專區</h2>
@@ -838,6 +856,7 @@
       <ul>
         <li><a href="2026ESL/2026ESLGlobalView.html" class="hl-red">📅 2026年 ESL 活動專區</a></li>
         <li><a href="EliteScholar/EliteScholarGlobalView.html" class="hl-blue">🎓 私中班招生訊息</a></li>
+        <li><a href="2024ChristmasParty.html" class="hl-xmas">🎄 2024 年聖誕節晚會</a></li>
       </ul>
       <hr class="sb-divider">
       <ul>
@@ -1074,7 +1093,6 @@
   function closeYtModal() {
     document.getElementById('yt-modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
-    // pause iframes
     document.querySelectorAll('#yt-canvas iframe').forEach(f => { f.src = f.src; });
   }
   function overlayClose(e) {
@@ -1204,7 +1222,6 @@
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   ytGo(ytCurrent - 1);
     if (e.key === 'Escape') closeYtModal();
   });
-
 
   (function () {
     var today = new Date().toISOString().slice(0, 10);
