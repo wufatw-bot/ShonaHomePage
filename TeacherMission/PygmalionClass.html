@@ -1,1 +1,158 @@
 
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .wrap { max-width: 680px; padding: 2rem 0; }
+  .hero { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.5rem 1.75rem; margin-bottom: 2rem; border-left: 3px solid #7F77DD; }
+  .hero-quote { font-size: 20px; font-weight: 500; color: var(--color-text-primary); line-height: 1.5; }
+  .hero-sub { font-size: 14px; color: var(--color-text-secondary); margin-top: 0.5rem; line-height: 1.6; }
+  .section-title { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 0.75rem; }
+  .myth-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+  .myth-row { display: flex; gap: 1.5rem; margin-top: 0.75rem; }
+  .myth-col { flex: 1; }
+  .myth-label { font-size: 12px; font-weight: 500; margin-bottom: 0.4rem; }
+  .myth-label.bad { color: #D85A30; }
+  .myth-label.good { color: #1D9E75; }
+  .myth-item { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; padding: 0.2rem 0; }
+  .four-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+  .beh-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; }
+  .beh-num { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: var(--color-text-secondary); margin-bottom: 0.35rem; }
+  .beh-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.6rem; }
+  .beh-q { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 0.75rem; }
+  .beh-tip { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.6rem 0.8rem; font-size: 13px; color: var(--color-text-primary); line-height: 1.55; }
+  .tip-dot { color: #7F77DD; font-weight: 500; }
+  .core-box { background: #EEEDFE; border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+  .core-q { font-size: 15px; font-weight: 500; color: #3C3489; line-height: 1.55; }
+  .core-q span { color: #7F77DD; }
+  .strat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+  .strat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.1rem 1.25rem; }
+  .strat-num { display: inline-block; background: #EEEDFE; color: #534AB7; font-size: 11px; font-weight: 500; border-radius: 4px; padding: 2px 8px; margin-bottom: 0.5rem; }
+  .strat-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.4rem; }
+  .strat-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .swap-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+  .swap-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 0.6rem; }
+  .swap-row:last-child { margin-bottom: 0; }
+  .swap-bad { flex: 1; font-size: 13px; color: #D85A30; line-height: 1.55; background: #FAECE7; border-radius: var(--border-radius-md); padding: 0.5rem 0.75rem; }
+  .swap-good { flex: 1; font-size: 13px; color: #0F6E56; line-height: 1.55; background: #E1F5EE; border-radius: var(--border-radius-md); padding: 0.5rem 0.75rem; }
+  .swap-arrow { font-size: 16px; color: var(--color-text-secondary); padding-top: 6px; flex-shrink: 0; }
+  .finale { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.5rem 1.75rem; border-left: 3px solid #1D9E75; }
+  .finale-quote { font-size: 17px; font-weight: 500; color: var(--color-text-primary); line-height: 1.55; }
+  .divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.75rem 0; }
+  @media (max-width: 480px) {
+    .four-grid, .strat-grid { grid-template-columns: 1fr; }
+    .myth-row { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-quote">你怎麼看孩子，會慢慢變成孩子怎麼看自己。</div>
+    <div class="hero-sub">「畢馬龍效應」一句話版 — 補教現場應用指南</div>
+  </div>
+
+  <div class="section-title">一、先破一個常見迷思</div>
+  <div class="myth-box">
+    <div class="myth-row">
+      <div class="myth-col">
+        <div class="myth-label bad">常見說法</div>
+        <div class="myth-item">我對每個學生都一樣公平</div>
+        <div class="myth-item">「看似公平」並不等於真正平等</div>
+      </div>
+      <div class="myth-col">
+        <div class="myth-label good">真實發生的事</div>
+        <div class="myth-item">多看幾眼你覺得有潛力的學生</div>
+        <div class="myth-item">多解釋幾句你喜歡的學生</div>
+        <div class="myth-item">更快放棄「教不起來」的學生</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">二、四個「你每天都在做，但沒發現」的關鍵行為</div>
+  <div class="four-grid">
+    <div class="beh-card">
+      <div class="beh-num">01 · 氛圍</div>
+      <div class="beh-title">你給誰比較溫暖？</div>
+      <div class="beh-q">某些學生你會微笑，某些只是「嗯、坐下」。孩子感覺得到。</div>
+      <div class="beh-tip"><span class="tip-dot">▸</span> 每節課刻意掃描全班，對平常冷淡的學生多一個眼神或點頭</div>
+    </div>
+    <div class="beh-card">
+      <div class="beh-num">02 · 投入</div>
+      <div class="beh-title">你願意多教誰一點？</div>
+      <div class="beh-q">A 聽不懂：再解釋一次。B 聽不懂：「回去再看」。</div>
+      <div class="beh-tip"><span class="tip-dot">▸</span> 設定規則：每個學生「至少被多解釋一次」</div>
+    </div>
+    <div class="beh-card">
+      <div class="beh-num">03 · 回饋</div>
+      <div class="beh-title">你怎麼回應錯誤？</div>
+      <div class="beh-q">喜歡的學生犯錯 →「你快對了」；不看好的 →「這很基本耶」。</div>
+      <div class="beh-tip"><span class="tip-dot">▸</span> 換成兩段式：你哪裡是對的 ＋ 下一步怎麼改</div>
+    </div>
+    <div class="beh-card">
+      <div class="beh-num">04 · 機會</div>
+      <div class="beh-title">你叫誰回答問題？</div>
+      <div class="beh-q">難題給強的學生，簡單題給弱的 → 強者越強，弱者沒機會成長。</div>
+      <div class="beh-tip"><span class="tip-dot">▸</span> 「中等難度題」優先給弱勢學生，並允許思考時間</div>
+    </div>
+  </div>
+
+  <div class="section-title">三、比教法更重要的核心問題</div>
+  <div class="core-box">
+    <div class="core-q">不要問「誰比較聰明？」<br>要問：<span>「我對誰已經放棄了？」</span></div>
+    <div class="myth-item" style="margin-top: 0.75rem; font-size: 14px; color: #534AB7;">真正影響學習的，是老師是否還在「投資這個學生」。</div>
+  </div>
+
+  <div class="section-title">四、可以明天直接用的策略</div>
+  <div class="strat-grid">
+    <div class="strat-card">
+      <div class="strat-num">策略 1</div>
+      <div class="strat-title">標記「被忽略名單」</div>
+      <div class="strat-body">下課後問自己：今天有沒有 3 個學生我幾乎沒有互動？明天優先對他們點名 + 給一句正向回饋。</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">策略 2</div>
+      <div class="strat-title">刻意製造成功經驗</div>
+      <div class="strat-body">對低成就學生，不要等他成功。要「設計他可以成功的題目」，讓他先嘗到成就感。</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">策略 3</div>
+      <div class="strat-title">用語替換</div>
+      <div class="strat-body">把負面語言替換成肯定框架（見下方對照表）。</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">策略 4</div>
+      <div class="strat-title">延遲評價</div>
+      <div class="strat-body">學生答錯時，不要立刻說「錯」。改說：「你這一步我想多聽一下。」</div>
+    </div>
+  </div>
+
+  <div class="section-title">五、用語替換對照表</div>
+  <div class="swap-box">
+    <div class="swap-row">
+      <div class="swap-bad">你怎麼又不會</div>
+      <div class="swap-arrow">→</div>
+      <div class="swap-good">這題很多人會卡，你已經做到一半了</div>
+    </div>
+    <div class="swap-row">
+      <div class="swap-bad">這很簡單耶</div>
+      <div class="swap-arrow">→</div>
+      <div class="swap-good">我想看你怎麼想</div>
+    </div>
+    <div class="swap-row">
+      <div class="swap-bad">錯了（立刻判斷）</div>
+      <div class="swap-arrow">→</div>
+      <div class="swap-good">你這一步我想多聽一下</div>
+    </div>
+  </div>
+
+  <div class="section-title">六、最反直覺的一點</div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; font-size: 14px; color: var(--color-text-secondary); line-height: 1.7;">
+    很多老師以為：先看到學生進步，才會更相信他。<br>
+    但畢馬龍效應告訴我們：<strong style="color: var(--color-text-primary); font-weight: 500;">順序剛好相反。你要先相信，他才會開始進步。</strong>
+  </div>
+
+  <div class="finale">
+    <div class="finale-quote">學生不是被你「教出來」的，是被你「看出來」的。</div>
+  </div>
+
+</div>
