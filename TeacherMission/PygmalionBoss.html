@@ -1,172 +1,239 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<title>畢馬龍效應（教師 vs 主管）</title>
-
 <style>
-body { font-family: Arial; background:#f4f6f8; padding:20px;}
-.container { max-width:900px; margin:auto; background:white; padding:25px; border-radius:12px;}
-h1{text-align:center;}
-.mode-switch { text-align:center; margin-bottom:20px;}
-button { padding:10px 15px; margin:5px; cursor:pointer;}
-.question{ margin-bottom:20px;}
-.feedback{ margin-top:10px; padding:10px; border-radius:8px; display:none;}
-.progress{ height:20px; background:#ddd; border-radius:10px; overflow:hidden;}
-.progress-bar{ height:100%; width:0%; background:#4caf50;}
-.result{ margin-top:20px; padding:15px; background:#eef6ff; border-radius:10px;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.page{padding:2rem 1.5rem;max-width:680px}
+.hero{margin-bottom:2rem}
+.hero-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem}
+.hero-title{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1.4;margin-bottom:.75rem}
+.hero-insight{background:var(--color-background-secondary);border-left:3px solid #7F77DD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.85rem 1.1rem;font-size:15px;color:var(--color-text-primary);line-height:1.6}
+.section{margin-bottom:2rem}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--color-border-tertiary)}
+.section-num{width:26px;height:26px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#534AB7;flex-shrink:0}
+.section-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.concept-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem}
+.concept-card-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+.concept-card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem}
+.concept-card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.tips-list{display:flex;flex-direction:column;gap:8px}
+.tip-item{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.tip-header{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;cursor:pointer;background:var(--color-background-primary)}
+.tip-header:hover{background:var(--color-background-secondary)}
+.tip-badge{width:22px;height:22px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#0F6E56;flex-shrink:0}
+.tip-title{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
+.tip-chevron{font-size:11px;color:var(--color-text-secondary);transition:transform .2s}
+.tip-chevron.open{transform:rotate(180deg)}
+.tip-body{padding:0 1rem;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .2s}
+.tip-body.open{max-height:400px;padding:.75rem 1rem}
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.bad-box{background:var(--color-background-danger);border:.5px solid var(--color-border-danger);border-radius:var(--border-radius-md);padding:.5rem .75rem}
+.good-box{background:var(--color-background-success);border:.5px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:.5rem .75rem}
+.box-label{font-size:11px;font-weight:500;margin-bottom:.3rem}
+.bad-label{color:var(--color-text-danger)}
+.good-label{color:var(--color-text-success)}
+.box-text{font-size:13px;color:var(--color-text-primary);line-height:1.5}
+.errors-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.error-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem;display:flex;gap:10px;align-items:flex-start}
+.error-icon{width:28px;height:28px;border-radius:var(--border-radius-md);background:#FCEBEB;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.error-icon-inner{width:10px;height:10px;border-radius:50%;background:#E24B4A}
+.error-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.3rem}
+.error-body{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
+.insight-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.insight-card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:.85rem 1rem}
+.insight-card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem}
+.insight-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:100px;margin:2px 2px 2px 0;font-weight:500}
+.tag-blue{background:#E6F1FB;color:#185FA5}
+.tag-teal{background:#E1F5EE;color:#0F6E56}
+.tag-amber{background:#FAEEDA;color:#854F0B}
+.tag-red{background:#FCEBEB;color:#A32D2D}
+.summary-box{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.1rem 1.25rem;text-align:center}
+.summary-text{font-size:15px;font-weight:500;color:var(--color-text-primary);line-height:1.6}
+.cta-section{margin-top:1.5rem}
+.cta-label{font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem}
+.cta-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.cta-btn{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.65rem 1rem;text-align:left;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%}
+.cta-btn:hover{background:var(--color-background-secondary)}
+.cta-btn-num{font-size:11px;font-weight:500;color:var(--color-text-secondary)}
+.cta-btn-text{font-size:13px;color:var(--color-text-primary);flex:1}
+.cta-btn-arrow{font-size:11px;color:var(--color-text-secondary)}
 </style>
+<h2 class="sr-only">畢馬龍效應應用於補教機構主管管理指南</h2>
+<div class="page">
 
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>🔥 畢馬龍效應：角色覺察體驗</h1>
-
-<div class="mode-switch">
-<button onclick="setMode('teacher')">教師模式</button>
-<button onclick="setMode('manager')">主管模式</button>
+<div class="hero">
+  <div class="hero-label">畢馬龍效應 × 補教機構管理</div>
+  <div class="hero-title">主管怎麼看老師，會直接影響老師怎麼教學生</div>
+  <div class="hero-insight">重點不是「相信孩子會變好」，而是更現實的一件事：你的期待，正在塑造整個教學品質。</div>
 </div>
 
-<div class="progress"><div class="progress-bar" id="bar"></div></div>
-
-<form id="quiz"></form>
-
-<button onclick="submitQuiz()">完成分析</button>
-
-<div class="result" id="result"></div>
-
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">一</div>
+    <div class="section-title">核心觀念</div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-card-label">觀念 1</div>
+      <div class="concept-card-title">期待會被行為化</div>
+      <div class="concept-card-body">主管對老師的印象，會不自覺影響班級分配、資源多寡、回饋頻率與信任程度——老師都感覺得到。</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-label">觀念 2</div>
+      <div class="concept-card-title">補教環境放大效應</div>
+      <div class="concept-card-body">高流動、高績效壓力、高可見性三個特點，讓主管期待的影響力遠比一般學校更強。</div>
+    </div>
+  </div>
 </div>
 
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">二</div>
+    <div class="section-title">5 個具體建議（點開查看）</div>
+  </div>
+  <div class="tips-list" id="tips">
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggle(this)">
+        <div class="tip-badge">1</div>
+        <div class="tip-title">不要標籤化老師</div>
+        <div class="tip-chevron">▼</div>
+      </div>
+      <div class="tip-body">
+        <div class="compare-row">
+          <div class="bad-box"><div class="box-label bad-label">避免</div><div class="box-text">「這個老師帶不起來」「穩定型」「新人觀察一下」</div></div>
+          <div class="good-box"><div class="box-label good-label">改用行為描述</div><div class="box-text">「最近三週準時率下降」→ 具體可改善</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggle(this)">
+        <div class="tip-badge">2</div>
+        <div class="tip-title">把高期待變成可見訊號</div>
+        <div class="tip-chevron">▼</div>
+      </div>
+      <div class="tip-body">
+        <div class="box-text" style="margin-bottom:.5rem;color:var(--color-text-secondary);font-size:13px">老師不讀心，他們讀行為。主管可以刻意做：</div>
+        <div class="good-box"><div class="box-label good-label">高期待行為</div><div class="box-text">指派重要班級 · 公開表揚機會 · 會議點名肯定 · 主動詢問意見（不是只給指導）</div></div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggle(this)">
+        <div class="tip-badge">3</div>
+        <div class="tip-title">避免低期待冷處理</div>
+        <div class="tip-chevron">▼</div>
+      </div>
+      <div class="tip-body">
+        <div class="bad-box"><div class="box-label bad-label">危險行為</div><div class="box-text">少回訊息 · 少給回饋 · 只指責不討論 · 不給挑戰性任務</div></div>
+        <div style="margin-top:8px;font-size:13px;color:var(--color-text-secondary)">→ 會讓老師進入「反正主管不看好我」的迴圈，表現持續下降</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggle(this)">
+        <div class="tip-badge">4</div>
+        <div class="tip-title">用成長型回饋取代評價型</div>
+        <div class="tip-chevron">▼</div>
+      </div>
+      <div class="tip-body">
+        <div class="compare-row">
+          <div class="bad-box"><div class="box-label bad-label">評價型</div><div class="box-text">「你這堂課不行」「你教得不好」</div></div>
+          <div class="good-box"><div class="box-label good-label">成長型</div><div class="box-text">「如果加一個例題拆解，學生理解會更穩」</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:13px;color:var(--color-text-secondary)">差別在於：不是判定人，而是引導行為。</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggle(this)">
+        <div class="tip-badge">5</div>
+        <div class="tip-title">設計早期成功經驗</div>
+        <div class="tip-chevron">▼</div>
+      </div>
+      <div class="tip-body">
+        <div class="good-box"><div class="box-label good-label">主管可刻意安排</div><div class="box-text">讓新老師先帶穩定班級 · 提供教案模板降低失敗率 · 讓他先體驗一次「教得很好」</div></div>
+        <div style="margin-top:8px;font-size:13px;color:var(--color-text-secondary)">→ 成功會強化自我認同，形成正向循環。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">三</div>
+    <div class="section-title">最常犯的 3 個錯誤</div>
+  </div>
+  <div class="errors-grid">
+    <div class="error-card">
+      <div class="error-icon"><div class="error-icon-inner"></div></div>
+      <div><div class="error-title">用過去表現定義未來</div><div class="error-body">「他上次帶不好，所以這次也不行」→ 鎖死老師的成長空間</div></div>
+    </div>
+    <div class="error-card">
+      <div class="error-icon"><div class="error-icon-inner"></div></div>
+      <div><div class="error-title">只盯問題，不放大進步</div><div class="error-body">主管自然注意錯誤，卻忽略改善 → 老師只感覺「一直被否定」</div></div>
+    </div>
+    <div class="error-card">
+      <div class="error-icon"><div class="error-icon-inner"></div></div>
+      <div><div class="error-title">把期待藏起來</div><div class="error-body">不說期待，只在心裡想 → 畢馬龍效應不會發生在「沒被感受到的期待」</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">四</div>
+    <div class="section-title">進階觀點</div>
+  </div>
+  <div class="insight-row">
+    <div class="insight-card">
+      <div class="insight-card-title">期待是資源分配工具</div>
+      <div style="margin-top:.5rem">
+        <span class="insight-tag tag-blue">好班</span>
+        <span class="insight-tag tag-blue">好時段</span>
+        <span class="insight-tag tag-blue">好學生</span>
+        <span class="insight-tag tag-blue">好曝光</span>
+      </div>
+      <div style="margin-top:.6rem;font-size:13px;color:var(--color-text-secondary)">你給誰這些，就是在傳遞期待。</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-title">團隊文化受平均期待影響</div>
+      <div style="margin-top:.5rem">
+        <div style="margin-bottom:4px"><span class="insight-tag tag-teal">高信任 + 高支持</span><span style="font-size:12px;color:var(--color-text-secondary)"> → 敢嘗試</span></div>
+        <div><span class="insight-tag tag-red">低信任 + 高監控</span><span style="font-size:12px;color:var(--color-text-secondary)"> → 保守複製</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="summary-box" style="margin-bottom:1.5rem">
+  <div class="summary-text">你以為你在管理老師，<br>其實你是在用期待塑造整個教學品質。</div>
+</div>
+
+<div class="cta-section">
+  <div class="cta-label">需要進一步工具？</div>
+  <div class="cta-grid">
+    <button class="cta-btn" onclick="sendPrompt('請幫我製作「補教主管畢馬龍溝通話術模板」')">
+      <div class="cta-btn-num">01</div>
+      <div class="cta-btn-text">畢馬龍溝通話術模板</div>
+      <div class="cta-btn-arrow">↗</div>
+    </button>
+    <button class="cta-btn" onclick="sendPrompt('請幫我製作「主管自我檢核量表（避免負向期待）」')">
+      <div class="cta-btn-num">02</div>
+      <div class="cta-btn-text">主管自我檢核量表</div>
+      <div class="cta-btn-arrow">↗</div>
+    </button>
+    <button class="cta-btn" onclick="sendPrompt('請幫我製作「老師績效改善 + 畢馬龍介入流程圖」')">
+      <div class="cta-btn-num">03</div>
+      <div class="cta-btn-text">績效改善 × 介入流程圖</div>
+      <div class="cta-btn-arrow">↗</div>
+    </button>
+  </div>
+</div>
+
+</div>
 <script>
-
-let mode = "teacher";
-
-const data = {
-teacher:[
-"當某位學生表現普通時，你會？",
-"重要回答機會你給誰？",
-"當學生答錯時？",
-"你對不同學生的語氣？",
-"長期沒進步的學生？"
-],
-manager:[
-"當某位員工表現普通時，你會？",
-"重要任務你給誰？",
-"當員工出錯時？",
-"你對不同員工的語氣？",
-"長期沒成長的員工？"
-]
-};
-
-const options = [
-["維持基本資源","觀察等待","減少互動","刻意多關心"],
-["穩定的人","反應快的人","潛力高的人","隨機分配"],
-["直接給答案","指出錯誤","鼓勵再試","拆解思路"],
-["覺得應該會","鼓勵嘗試","再教一次","視人調整"],
-["接受現狀","降低標準","減少投入","改變策略"]
-];
-
-const feedback = [
-[
-"⚠️ 期待未提升（Input低）",
-"⚠️ 可能是低期待包裝",
-"❗ 互動下降＝負向效應",
-"✅ 高期待投入"
-],
-[
-"⚠️ 機會偏差",
-"⚠️ 速度≠潛力",
-"⚠️ 預測成功者",
-"✅ 打破偏差"
-],
-[
-"⚠️ 抑制學習",
-"⚠️ 只是糾錯",
-"🟡 基本支持",
-"✅ 高品質回饋"
-],
-[
-"⚠️ 隱性壓力",
-"🟡 普通鼓勵",
-"🟡 支持但低期待",
-"❗ 差別對待"
-],
-[
-"❗ 固化能力",
-"❗ 降低期待",
-"❗ 撤資",
-"✅ 主動改變"
-]
-];
-
-function setMode(m){
-    mode = m;
-    render();
+function toggle(header){
+  var chevron=header.querySelector('.tip-chevron');
+  var body=header.nextElementSibling;
+  var isOpen=body.classList.contains('open');
+  document.querySelectorAll('.tip-body.open').forEach(function(b){b.classList.remove('open')});
+  document.querySelectorAll('.tip-chevron.open').forEach(function(c){c.classList.remove('open')});
+  if(!isOpen){body.classList.add('open');chevron.classList.add('open')}
 }
-
-function render(){
-    const form = document.getElementById("quiz");
-    form.innerHTML = "";
-
-    data[mode].forEach((q, i)=>{
-        let html = `<div class="question">
-        <p>${i+1}. ${q}</p>`;
-
-        options[i].forEach((opt,j)=>{
-            html += `<label>
-            <input type="radio" name="q${i}" value="${j+1}" onclick="showFeedback(${i},${j})">
-            ${opt}</label><br>`;
-        });
-
-        html += `<div class="feedback" id="f${i}"></div></div>`;
-        form.innerHTML += html;
-    });
-}
-
-function showFeedback(q, opt){
-    const box = document.getElementById("f"+q);
-    box.style.display="block";
-    box.innerHTML = feedback[q][opt];
-
-    updateProgress();
-}
-
-function updateProgress(){
-    let answered=0;
-    for(let i=0;i<5;i++){
-        if(document.querySelector(`input[name="q${i}"]:checked`)) answered++;
-    }
-    document.getElementById("bar").style.width = (answered/5)*100+"%";
-}
-
-function submitQuiz(){
-    let score=0;
-    for(let i=0;i<5;i++){
-        let val = document.querySelector(`input[name="q${i}"]:checked`);
-        if(val) score += parseInt(val.value);
-    }
-
-    let result="";
-    if(score<=10){
-        result="🔴 高風險：你可能正在強化負向畢馬龍效應";
-    }else if(score<=15){
-        result="🟡 中間狀態：維持現況";
-    }else{
-        result="🟢 高期待引導者";
-    }
-
-    document.getElementById("result").innerHTML =
-    `<h3>分析結果</h3>
-     <p>${result}</p>
-     <p>👉 重點：你不是在評估能力，而是在塑造能力</p>`;
-}
-
-render();
-
 </script>
-
-</body>
-</html>
