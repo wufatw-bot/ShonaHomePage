@@ -1,0 +1,219 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary);}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:60px 40px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,200,50,0.08);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-40px;left:-60px;width:200px;height:200px;border-radius:50%;background:rgba(100,160,255,0.07);pointer-events:none;}
+.hero-badge{display:inline-block;background:rgba(255,200,50,0.15);border:1px solid rgba(255,200,50,0.4);color:#ffc832;font-size:12px;padding:4px 14px;border-radius:20px;letter-spacing:1px;margin-bottom:20px;}
+.hero h1{font-family:'Noto Serif TC',serif;font-size:36px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:12px;}
+.hero h1 span{color:#ffc832;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:480px;margin:0 auto 32px;}
+.hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{background:#ffc832;color:#1a1a2e;font-size:14px;font-weight:700;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.btn-secondary{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:8px;border:1px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.stars-row{display:flex;justify-content:center;gap:6px;margin-top:32px;}
+.star-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,200,50,0.5);}
+.star-dot.active{background:#ffc832;width:24px;border-radius:4px;}
+
+.section{padding:40px 24px;}
+.section-title{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:6px;}
+.section-sub{font-size:13px;color:var(--color-text-secondary);text-align:center;margin-bottom:28px;}
+.accent{color:#f4820a;}
+
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.what-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:18px;position:relative;overflow:hidden;}
+.what-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:3px 0 0 3px;}
+.what-card.c1::before{background:#ffc832;}
+.what-card.c2::before{background:#4A90D9;}
+.what-card.c3::before{background:#5BA85C;}
+.what-card.c4::before{background:#E2703A;}
+.what-icon{font-size:24px;margin-bottom:8px;}
+.what-card h3{font-size:14px;font-weight:500;margin-bottom:6px;}
+.what-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.7;}
+
+.nav-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:0;}
+.nav-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color 0.2s;}
+.nav-card:hover{border-color:var(--color-border-secondary);}
+.nav-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.nav-icon-wrap.gold{background:rgba(255,200,50,0.12);}
+.nav-icon-wrap.blue{background:rgba(74,144,217,0.12);}
+.nav-icon-wrap.green{background:rgba(91,168,92,0.12);}
+.nav-icon-wrap.orange{background:rgba(226,112,58,0.12);}
+.nav-icon-wrap.purple{background:rgba(150,90,200,0.12);}
+.nav-card h4{font-size:14px;font-weight:500;margin-bottom:2px;}
+.nav-card p{font-size:11px;color:var(--color-text-secondary);}
+
+.quote-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:16px;padding:28px 24px;text-align:center;margin:0 24px;}
+.quote-text{font-family:'Noto Serif TC',serif;font-size:16px;color:#fff;line-height:1.9;margin-bottom:12px;}
+.quote-author{font-size:12px;color:rgba(255,200,50,0.8);}
+
+.steps-wrap{padding:0 24px 40px;}
+.step-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:20px;}
+.step-num{width:36px;height:36px;border-radius:50%;background:#ffc832;color:#1a1a2e;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-body h4{font-size:14px;font-weight:500;margin-bottom:4px;}
+.step-body p{font-size:12px;color:var(--color-text-secondary);line-height:1.7;}
+.step-connector{width:2px;height:16px;background:rgba(255,200,50,0.25);margin-left:17px;margin-bottom:4px;}
+
+.footer-section{background:var(--color-background-secondary);border-top:0.5px solid var(--color-border-tertiary);padding:28px 24px;text-align:center;}
+.footer-title{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.footer-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:20px;}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.footer-link{font-size:12px;color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);padding:6px 14px;border-radius:20px;cursor:pointer;background:var(--color-background-primary);}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:0 24px;}
+</style>
+
+<div class="hero">
+  <div class="hero-badge">皮格馬利翁效應 × 國小補習教育</div>
+  <h1>老師的<span>期望</span>，<br>成就孩子的未來</h1>
+  <p class="hero-sub">探索皮格馬利翁效應如何在補習班中轉化為具體教學策略，讓每位老師成為孩子潛能的雕刻師</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="sendPrompt('請介紹皮格馬利翁效應在補習班的核心應用方法')">開始探索 →</button>
+    <button class="btn-secondary" onclick="sendPrompt('皮格馬利翁效應的研究背景與教育實證')">查看研究背景</button>
+  </div>
+  <div class="stars-row">
+    <div class="star-dot active"></div>
+    <div class="star-dot"></div>
+    <div class="star-dot"></div>
+    <div class="star-dot"></div>
+    <div class="star-dot"></div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-sub">核心概念</p>
+  <h2 class="section-title">什麼是<span class="accent">皮格馬利翁效應</span>？</h2>
+  <p style="font-size:13px;color:var(--color-text-secondary);text-align:center;line-height:1.8;margin-bottom:20px;padding:0 4px;">1968年，羅森塔爾與賈各布森的實驗證明：老師對學生的<strong>高期望</strong>，真的能讓學生表現更好。</p>
+  <div class="what-grid">
+    <div class="what-card c1">
+      <div class="what-icon">🔬</div>
+      <h3>自我實現預言</h3>
+      <p>老師的期望透過行為傳遞給學生，學生內化後表現出相應成就。</p>
+    </div>
+    <div class="what-card c2">
+      <div class="what-icon">💬</div>
+      <h3>氛圍與回饋</h3>
+      <p>高期望學生獲得更溫暖的情感氛圍、更多肯定與具體回饋。</p>
+    </div>
+    <div class="what-card c3">
+      <div class="what-icon">📚</div>
+      <h3>機會與挑戰</h3>
+      <p>老師給予更多學習機會、更高難度任務，拓展學生能力邊界。</p>
+    </div>
+    <div class="what-card c4">
+      <div class="what-icon">🎯</div>
+      <h3>補習班的優勢</h3>
+      <p>小班制讓老師更容易建立個人化高期望，效果比大班更顯著。</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <p class="section-sub">教學資源導覽</p>
+  <h2 class="section-title">探索各項<span class="accent">應用模組</span></h2>
+  <div class="nav-links">
+    <div class="nav-card" onclick="sendPrompt('請帶我進入皮格馬利翁課堂實驗頁面，說明如何在補習班實際操作')">
+      <div class="nav-icon-wrap blue">🧪</div>
+      <div>
+        <h4>課堂實驗</h4>
+        <p>實際操作流程</p>
+      </div>
+    </div>
+    <div class="nav-card" onclick="sendPrompt('請說明皮格馬利翁效應在補習班老師角色上的應用策略')">
+      <div class="nav-icon-wrap gold">👩‍🏫</div>
+      <div>
+        <h4>老師角色</h4>
+        <p>期望傳遞技巧</p>
+      </div>
+    </div>
+    <div class="nav-card" onclick="sendPrompt('皮格馬利翁效應對學生信心與動機的影響，以及補習班如何設計課程')">
+      <div class="nav-icon-wrap green">🌱</div>
+      <div>
+        <h4>學生成長</h4>
+        <p>動機與自信培養</p>
+      </div>
+    </div>
+    <div class="nav-card" onclick="sendPrompt('皮格馬利翁效應如何影響補習班的職場氛圍與老師期望管理')">
+      <div class="nav-icon-wrap orange">🏫</div>
+      <div>
+        <h4>職場應用</h4>
+        <p>班級氛圍設計</p>
+      </div>
+    </div>
+    <div class="nav-card" onclick="sendPrompt('設計一份皮格馬利翁效應問卷，用來評估補習班老師的期望行為')">
+      <div class="nav-icon-wrap purple">📋</div>
+      <div>
+        <h4>評估問卷</h4>
+        <p>老師行為自評</p>
+      </div>
+    </div>
+    <div class="nav-card" onclick="sendPrompt('皮格馬利翁效應的負面影響：標籤效應與低期望陷阱如何避免')">
+      <div class="nav-icon-wrap blue">⚠️</div>
+      <div>
+        <h4>注意事項</h4>
+        <p>避免負面標籤</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:0 0 32px;">
+  <div class="quote-box">
+    <p class="quote-text">「每一個孩子都是一塊未經雕琢的大理石，<br>老師的期望就是那把雕刻刀。」</p>
+    <p class="quote-author">— 皮格馬利翁效應在教育的啟示</p>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0;">
+  <p class="section-sub">實踐步驟</p>
+  <h2 class="section-title" style="margin-bottom:24px;">補習班<span class="accent">落實方法</span></h2>
+</div>
+<div class="steps-wrap" style="padding-top:0;">
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h4>建立每位學生的能力檔案</h4>
+      <p>入班後進行學習風格評估，找出每個孩子的強項，而非只關注弱點，奠定高期望基礎。</p>
+    </div>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h4>具體表達期望與信任</h4>
+      <p>用具體語言告訴學生「你能做到」，設計略高於現有程度的任務，製造成功經驗。</p>
+    </div>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h4>提供差異化的豐富回饋</h4>
+      <p>針對進步過程給予細緻讚美，而非只對結果反應，讓學生感受到老師真正在「看見」他們。</p>
+    </div>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h4>定期反思與調整期望</h4>
+      <p>老師每月自評是否對所有學生維持同等高期望，防止不自覺的偏見影響教學行為。</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer-section">
+  <p class="footer-title">🔗 快速連結</p>
+  <p class="footer-sub">點選下方標籤，深入探索各主題內容</p>
+  <div class="footer-links">
+    <span class="footer-link" onclick="sendPrompt('皮格馬利翁效應研究文獻整理')">研究文獻</span>
+    <span class="footer-link" onclick="sendPrompt('補習班老師皮格馬利翁期望行為觀察量表')">觀察量表</span>
+    <span class="footer-link" onclick="sendPrompt('設計皮格馬利翁效應補習班教案範例')">教案範例</span>
+    <span class="footer-link" onclick="sendPrompt('皮格馬利翁效應的家長溝通策略')">家長溝通</span>
+    <span class="footer-link" onclick="sendPrompt('比較皮格馬利翁效應與戈雷姆效應的差異')">戈雷姆效應</span>
+    <span class="footer-link" onclick="sendPrompt('皮格馬利翁效應適合什麼年齡層的學生最有效？')">適用年齡</span>
+  </div>
+</div>
