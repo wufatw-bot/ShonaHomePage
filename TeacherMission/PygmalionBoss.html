@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>畢馬龍效應（教師 vs 主管）</title>
 
+<style>
+body { font-family: Arial; background:#f4f6f8; padding:20px;}
+.container { max-width:900px; margin:auto; background:white; padding:25px; border-radius:12px;}
+h1{text-align:center;}
+.mode-switch { text-align:center; margin-bottom:20px;}
+button { padding:10px 15px; margin:5px; cursor:pointer;}
+.question{ margin-bottom:20px;}
+.feedback{ margin-top:10px; padding:10px; border-radius:8px; display:none;}
+.progress{ height:20px; background:#ddd; border-radius:10px; overflow:hidden;}
+.progress-bar{ height:100%; width:0%; background:#4caf50;}
+.result{ margin-top:20px; padding:15px; background:#eef6ff; border-radius:10px;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔥 畢馬龍效應：角色覺察體驗</h1>
+
+<div class="mode-switch">
+<button onclick="setMode('teacher')">教師模式</button>
+<button onclick="setMode('manager')">主管模式</button>
+</div>
+
+<div class="progress"><div class="progress-bar" id="bar"></div></div>
+
+<form id="quiz"></form>
+
+<button onclick="submitQuiz()">完成分析</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+let mode = "teacher";
+
+const data = {
+teacher:[
+"當某位學生表現普通時，你會？",
+"重要回答機會你給誰？",
+"當學生答錯時？",
+"你對不同學生的語氣？",
+"長期沒進步的學生？"
+],
+manager:[
+"當某位員工表現普通時，你會？",
+"重要任務你給誰？",
+"當員工出錯時？",
+"你對不同員工的語氣？",
+"長期沒成長的員工？"
+]
+};
+
+const options = [
+["維持基本資源","觀察等待","減少互動","刻意多關心"],
+["穩定的人","反應快的人","潛力高的人","隨機分配"],
+["直接給答案","指出錯誤","鼓勵再試","拆解思路"],
+["覺得應該會","鼓勵嘗試","再教一次","視人調整"],
+["接受現狀","降低標準","減少投入","改變策略"]
+];
+
+const feedback = [
+[
+"⚠️ 期待未提升（Input低）",
+"⚠️ 可能是低期待包裝",
+"❗ 互動下降＝負向效應",
+"✅ 高期待投入"
+],
+[
+"⚠️ 機會偏差",
+"⚠️ 速度≠潛力",
+"⚠️ 預測成功者",
+"✅ 打破偏差"
+],
+[
+"⚠️ 抑制學習",
+"⚠️ 只是糾錯",
+"🟡 基本支持",
+"✅ 高品質回饋"
+],
+[
+"⚠️ 隱性壓力",
+"🟡 普通鼓勵",
+"🟡 支持但低期待",
+"❗ 差別對待"
+],
+[
+"❗ 固化能力",
+"❗ 降低期待",
+"❗ 撤資",
+"✅ 主動改變"
+]
+];
+
+function setMode(m){
+    mode = m;
+    render();
+}
+
+function render(){
+    const form = document.getElementById("quiz");
+    form.innerHTML = "";
+
+    data[mode].forEach((q, i)=>{
+        let html = `<div class="question">
+        <p>${i+1}. ${q}</p>`;
+
+        options[i].forEach((opt,j)=>{
+            html += `<label>
+            <input type="radio" name="q${i}" value="${j+1}" onclick="showFeedback(${i},${j})">
+            ${opt}</label><br>`;
+        });
+
+        html += `<div class="feedback" id="f${i}"></div></div>`;
+        form.innerHTML += html;
+    });
+}
+
+function showFeedback(q, opt){
+    const box = document.getElementById("f"+q);
+    box.style.display="block";
+    box.innerHTML = feedback[q][opt];
+
+    updateProgress();
+}
+
+function updateProgress(){
+    let answered=0;
+    for(let i=0;i<5;i++){
+        if(document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+    }
+    document.getElementById("bar").style.width = (answered/5)*100+"%";
+}
+
+function submitQuiz(){
+    let score=0;
+    for(let i=0;i<5;i++){
+        let val = document.querySelector(`input[name="q${i}"]:checked`);
+        if(val) score += parseInt(val.value);
+    }
+
+    let result="";
+    if(score<=10){
+        result="🔴 高風險：你可能正在強化負向畢馬龍效應";
+    }else if(score<=15){
+        result="🟡 中間狀態：維持現況";
+    }else{
+        result="🟢 高期待引導者";
+    }
+
+    document.getElementById("result").innerHTML =
+    `<h3>分析結果</h3>
+     <p>${result}</p>
+     <p>👉 重點：你不是在評估能力，而是在塑造能力</p>`;
+}
+
+render();
+
+</script>
+
+</body>
+</html>
