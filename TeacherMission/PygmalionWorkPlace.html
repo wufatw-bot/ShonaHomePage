@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>畢馬龍效應 × 職場健康</title>
 
+<style>
+body { font-family: Arial; background:#f4f6f8; padding:20px;}
+.container { max-width:900px; margin:auto; background:white; padding:25px; border-radius:12px;}
+h1{text-align:center;}
+button { padding:10px 15px; margin:5px;}
+.question{ margin-bottom:20px;}
+.feedback{ margin-top:10px; padding:10px; border-radius:8px; display:none;}
+.low{background:#ffe5e5;}
+.mid{background:#fff5cc;}
+.high{background:#e6f7ff;}
+.progress{ height:20px; background:#ddd; border-radius:10px;}
+.bar{ height:100%; width:0%; background:#4caf50;}
+.result{ margin-top:20px; padding:15px; background:#eef6ff; border-radius:10px;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔥 畢馬龍效應 × 壓力 × 睡眠</h1>
+
+<div>
+<button onclick="setMode('teacher')">教師模式</button>
+<button onclick="setMode('manager')">主管模式</button>
+</div>
+
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<form id="quiz"></form>
+
+<button onclick="submitQuiz()">分析結果</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+let mode="manager";
+
+const questions={
+teacher:[
+"當學生表現不佳時，你的內在想法？",
+"你是否會避免讓某些學生承擔壓力？",
+"學生失敗時你的反應？",
+"你是否擔心學生壓力過大？",
+"你是否給所有學生相同挑戰？"
+],
+manager:[
+"當員工表現不佳時，你的內在判斷？",
+"你是否會避免讓某些員工承擔高壓任務？",
+"員工出錯時你的反應？",
+"你是否擔心員工壓力過大？",
+"你是否給所有員工相同挑戰？"
+]
+};
+
+const options=[
+["能力不夠","暫時狀態","需要支持","有成長潛力"],
+["會，避免壓力","偶爾","視情況","仍給挑戰"],
+["批評或修正","指出問題","鼓勵","支持＋拆解"],
+["是，會降低要求","有時","觀察","調整支持而非降低期待"],
+["不會","部分","大致","刻意設計挑戰"]
+];
+
+function setMode(m){
+mode=m;
+render();
+}
+
+function render(){
+let html="";
+questions[mode].forEach((q,i)=>{
+html+=`<div class="question">
+<p>${i+1}. ${q}</p>`;
+options[i].forEach((opt,j)=>{
+html+=`<label>
+<input type="radio" name="q${i}" value="${j+1}" onclick="feedback(${i},${j})">
+${opt}</label><br>`;
+});
+html+=`<div class="feedback" id="f${i}"></div></div>`;
+});
+document.getElementById("quiz").innerHTML=html;
+}
+
+function feedback(q,opt){
+let box=document.getElementById("f"+q);
+box.style.display="block";
+
+let text="";
+let cls="";
+
+if(opt==0){
+text="⚠️ 高風險：可能造成長期壓力與無力感 → 失眠風險↑";
+cls="low";
+}
+else if(opt==1){
+text="🟡 中等風險：壓力存在但未轉化為成長";
+cls="mid";
+}
+else if(opt==2){
+text="🟡 保護傾向：降低壓力但可能限制成長";
+cls="mid";
+}
+else{
+text="✅ 健康型期待：壓力可控 → 成長與睡眠較穩定";
+cls="high";
+}
+
+box.className="feedback "+cls;
+box.innerHTML=text;
+
+updateBar();
+}
+
+function updateBar(){
+let total=5,ans=0;
+for(let i=0;i<5;i++){
+if(document.querySelector(`input[name="q${i}"]:checked`)) ans++;
+}
+document.getElementById("bar").style.width=(ans/total)*100+"%";
+}
+
+function submitQuiz(){
+let score=0;
+for(let i=0;i<5;i++){
+let v=document.querySelector(`input[name="q${i}"]:checked`);
+if(v) score+=parseInt(v.value);
+}
+
+let result="";
+
+if(score<=10){
+result="🔴 高壓風險型：可能導致員工/學生壓力過高、失眠、倦怠";
+}
+else if(score<=15){
+result="🟡 保守型：壓力較低，但可能壓抑成長";
+}
+else{
+result="🟢 健康促進型：能平衡期待、壓力與睡眠";
+}
+
+document.getElementById("result").innerHTML=
+`<h3>健康分析</h3>
+<p>${result}</p>
+<p><b>關鍵洞察：</b><br>
+👉 你給的不是任務，是「壓力型態」<br>
+👉 壓力型態，會決定睡眠與長期健康</p>`;
+}
+
+render();
+
+</script>
+
+</body>
+</html>
