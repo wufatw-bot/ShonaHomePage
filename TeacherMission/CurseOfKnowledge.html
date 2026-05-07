@@ -1,1 +1,641 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>知識的詛咒：補教現場最常見的教學盲點</title>
+
+<style>
+    *{
+        box-sizing:border-box;
+    }
+
+    body{
+        margin:0;
+        padding:0;
+        background:#f4f7fb;
+        font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+        color:#222;
+        line-height:1.9;
+    }
+
+    .container{
+        width:90%;
+        max-width:950px;
+        margin:40px auto;
+        background:#ffffff;
+        padding:50px;
+        border-radius:24px;
+        box-shadow:0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    .hero{
+        background:linear-gradient(135deg,#5b7cfa,#7f53ff);
+        color:white;
+        padding:60px 40px;
+        border-radius:24px;
+        margin-bottom:40px;
+    }
+
+    .hero h1{
+        margin:0;
+        font-size:2.8rem;
+        line-height:1.4;
+    }
+
+    .hero p{
+        margin-top:20px;
+        font-size:1.15rem;
+        opacity:0.95;
+    }
+
+    h2{
+        margin-top:50px;
+        color:#2f4fdb;
+        border-left:8px solid #2f4fdb;
+        padding-left:15px;
+        font-size:2rem;
+    }
+
+    h3{
+        margin-top:40px;
+        color:#5b3cc4;
+        font-size:1.5rem;
+    }
+
+    p{
+        margin:18px 0;
+        font-size:1.08rem;
+    }
+
+    .quote{
+        background:#eef3ff;
+        border-left:6px solid #5b7cfa;
+        padding:22px;
+        margin:30px 0;
+        border-radius:12px;
+        font-size:1.1rem;
+        color:#223;
+    }
+
+    .example-box{
+        background:#fafbff;
+        border:2px solid #dfe7ff;
+        border-radius:18px;
+        padding:30px;
+        margin:35px 0;
+    }
+
+    .example-title{
+        font-size:1.3rem;
+        font-weight:bold;
+        color:#3046c9;
+        margin-bottom:20px;
+    }
+
+    .math-box{
+        background:#272822;
+        color:#f8f8f2;
+        padding:18px;
+        border-radius:12px;
+        font-family:Consolas, monospace;
+        overflow:auto;
+        margin:20px 0;
+    }
+
+    ul{
+        padding-left:25px;
+    }
+
+    li{
+        margin:12px 0;
+    }
+
+    .highlight{
+        background:linear-gradient(transparent 60%, #fff3a3 60%);
+        font-weight:bold;
+    }
+
+    .warning{
+        background:#fff2f2;
+        border-left:6px solid #ff5f5f;
+        padding:22px;
+        border-radius:12px;
+        margin:30px 0;
+    }
+
+    .final-box{
+        background:linear-gradient(135deg,#4f46e5,#7c3aed);
+        color:white;
+        padding:40px;
+        border-radius:22px;
+        margin-top:60px;
+    }
+
+    .final-box h2{
+        color:white;
+        border-left:6px solid rgba(255,255,255,0.8);
+    }
+
+    .footer{
+        margin-top:50px;
+        text-align:center;
+        color:#777;
+        font-size:0.95rem;
+    }
+
+    @media(max-width:768px){
+
+        .container{
+            width:95%;
+            padding:25px;
+        }
+
+        .hero{
+            padding:40px 25px;
+        }
+
+        .hero h1{
+            font-size:2rem;
+        }
+
+        h2{
+            font-size:1.6rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <section class="hero">
+        <h1>
+            當老師忘了「第一次學的人」<br>
+            補教現場最常見的「知識的詛咒」
+        </h1>
+
+        <p>
+            為什麼有些補習班老師明明很強，
+            學生卻越學越挫折？
+            問題可能不是學生不努力，
+            而是老師陷入了「知識的詛咒」。
+        </p>
+    </section>
+
+    <p>
+        你有沒有遇過這種老師？
+    </p>
+
+    <div class="quote">
+        「這個很簡單吧？」<br>
+        「我剛剛不是講過了嗎？」<br>
+        「這國中就學過了啊。」<br>
+        「這種題目看到就要有感覺。」
+    </div>
+
+    <p>
+        台下學生一片安靜。
+    </p>
+
+    <ul>
+        <li>有人低頭。</li>
+        <li>有人假裝懂。</li>
+        <li>有人開始懷疑自己是不是很笨。</li>
+    </ul>
+
+    <p>
+        但很多時候，
+        問題不一定在學生。
+    </p>
+
+    <p>
+        而是老師中了心理學上一個非常常見的現象：
+    </p>
+
+    <h2>什麼是「知識的詛咒」？</h2>
+
+    <p>
+        在心理學與教育學中，
+        「知識的詛咒（Curse of Knowledge）」指的是：
+    </p>
+
+    <div class="quote">
+        一旦一個人已經非常熟悉某件事，
+        就會很難想像「不知道的人」
+        到底是怎麼思考的。
+    </div>
+
+    <p>
+        簡單來說：
+    </p>
+
+    <div class="warning">
+        老師知道太久了。<br>
+        久到忘了「第一次接觸的人」其實根本看不懂。
+    </div>
+
+    <p>
+        這種現象在補教業尤其明顯。
+    </p>
+
+    <ul>
+        <li>解題速度快</li>
+        <li>熟練度高</li>
+        <li>長期面對高分學生</li>
+        <li>形成自動化思考</li>
+    </ul>
+
+    <p>
+        久而久之，
+        大腦會誤以為：
+    </p>
+
+    <div class="quote">
+        「這應該很直覺吧。」
+    </div>
+
+    <p>
+        但其實完全不是。
+    </p>
+
+    <h2>補習班最常見的知識詛咒現場</h2>
+
+    <div class="example-box">
+
+        <div class="example-title">
+            案例一：數學老師的「跳步神解題」
+        </div>
+
+        <p>
+            阿凱是一位國三學生。
+        </p>
+
+        <p>
+            數學老師在台上寫：
+        </p>
+
+        <div class="math-box">
+            設 x+y=5<br>
+            xy=6<br>
+            求 x²+y²
+        </div>
+
+        <p>
+            老師只花了15秒：
+        </p>
+
+        <div class="math-box">
+            (x+y)²-2xy<br>
+            25-12<br>
+            13
+        </div>
+
+        <p>
+            然後轉頭說：
+        </p>
+
+        <div class="quote">
+            「這種題目一定要秒殺。」
+        </div>
+
+        <p>
+            全班沉默。
+        </p>
+
+        <p>
+            因為很多學生其實根本不知道：
+        </p>
+
+        <ul>
+            <li>為什麼突然平方？</li>
+            <li>為什麼冒出 -2xy？</li>
+            <li>公式從哪裡來？</li>
+            <li>為什麼可以這樣變形？</li>
+        </ul>
+
+        <p>
+            但老師已經熟到：
+            看到題目，
+            大腦直接自動播放公式。
+        </p>
+
+    </div>
+
+    <h3>專家腦與新手腦的差異</h3>
+
+    <p>
+        教育心理學發現：
+    </p>
+
+    <p>
+        <span class="highlight">專家會把大量知識壓縮成「模組」。</span>
+    </p>
+
+    <p>
+        老師看到：
+    </p>
+
+    <div class="math-box">
+        x²+y²
+    </div>
+
+    <p>
+        會立刻聯想到：
+    </p>
+
+    <div class="math-box">
+        (x+y)²-2xy
+    </div>
+
+    <p>
+        但學生不是。
+    </p>
+
+    <p>
+        學生的大腦還停留在：
+    </p>
+
+    <ul>
+        <li>辨識符號</li>
+        <li>理解公式</li>
+        <li>整理題意</li>
+        <li>建立概念</li>
+    </ul>
+
+    <div class="warning">
+        老師覺得只差一步，<br>
+        學生實際感受卻是：<br><br>
+        「你中間跳了十步。」
+    </div>
+
+    <div class="example-box">
+
+        <div class="example-title">
+            案例二：英文老師的「語感世界」
+        </div>
+
+        <p>
+            英文老師說：
+        </p>
+
+        <div class="quote">
+            「這裡當然用現在完成式啊。」
+        </div>
+
+        <p>
+            學生問：
+        </p>
+
+        <div class="quote">
+            「為什麼？」
+        </div>
+
+        <p>
+            老師回答：
+        </p>
+
+        <div class="quote">
+            「語感啊。」
+        </div>
+
+        <p>
+            但問題是，
+            很多學生根本沒有語感。
+        </p>
+
+        <p>
+            因為語感其實是：
+        </p>
+
+        <ul>
+            <li>大量閱讀</li>
+            <li>長期接觸</li>
+            <li>反覆輸入</li>
+            <li>自動化累積</li>
+        </ul>
+
+        <p>
+            老師已經忘記，
+            自己當年也是從文法規則慢慢學起。
+        </p>
+
+    </div>
+
+    <h3>老師常把「結果」誤認成「能力」</h3>
+
+    <p>
+        很多高手不知道：
+    </p>
+
+    <div class="quote">
+        自己現在的直覺，
+        其實是多年訓練後的結果。
+    </div>
+
+    <p>
+        真正好的教學，
+        是把「隱性的直覺」拆解成：
+    </p>
+
+    <div class="warning">
+        學生可以一步一步學會的過程。
+    </div>
+
+    <div class="example-box">
+
+        <div class="example-title">
+            案例三：理化老師的「這不是常識嗎？」
+        </div>
+
+        <p>
+            理化課上。
+        </p>
+
+        <p>
+            老師問：
+        </p>
+
+        <div class="quote">
+            「電流方向不是都這樣跑嗎？」
+        </div>
+
+        <p>
+            學生愣住。
+        </p>
+
+        <p>
+            因為學生其實搞不懂：
+        </p>
+
+        <ul>
+            <li>電子流</li>
+            <li>傳統電流</li>
+            <li>正負極</li>
+            <li>電位差</li>
+        </ul>
+
+        <p>
+            但老師已經熟悉到：
+        </p>
+
+        <div class="quote">
+            「這不是常識嗎？」
+        </div>
+
+    </div>
+
+    <h2>補教業為什麼特別容易發生？</h2>
+
+    <h3>1. 過度追求速度</h3>
+
+    <p>
+        補習班很常強調：
+    </p>
+
+    <ul>
+        <li>秒殺</li>
+        <li>快解</li>
+        <li>技巧</li>
+        <li>速算</li>
+    </ul>
+
+    <p>
+        於是：
+        「理解過程」被壓縮了。
+    </p>
+
+    <p>
+        但真正弱的學生，
+        需要的是慢。
+    </p>
+
+    <h3>2. 長期接觸高分學生</h3>
+
+    <p>
+        很多名師每天面對：
+    </p>
+
+    <ul>
+        <li>資優班</li>
+        <li>前段學生</li>
+        <li>解題快的人</li>
+    </ul>
+
+    <p>
+        久而久之，
+        容易產生錯覺：
+    </p>
+
+    <div class="quote">
+        「一般人也應該會。」
+    </div>
+
+    <h3>3. 神化老師文化</h3>
+
+    <p>
+        有些補習班喜歡塑造：
+    </p>
+
+    <ul>
+        <li>天才型老師</li>
+        <li>秒解老師</li>
+        <li>超神技巧</li>
+    </ul>
+
+    <p>
+        學生只看到：
+    </p>
+
+    <div class="quote">
+        「老師好強。」
+    </div>
+
+    <p>
+        卻不知道：
+    </p>
+
+    <div class="quote">
+        「我該怎麼學會。」
+    </div>
+
+    <h2>真正厲害的老師是什麼？</h2>
+
+    <p>
+        真正強的老師，
+        不是懂很多而已。
+    </p>
+
+    <p>
+        而是：
+    </p>
+
+    <div class="warning">
+        能理解「不懂的人卡在哪裡」。
+    </div>
+
+    <ul>
+        <li>知道學生哪一步開始混亂</li>
+        <li>知道哪個詞太抽象</li>
+        <li>知道哪個公式第一次看一定會怕</li>
+        <li>願意慢慢拆解</li>
+    </ul>
+
+    <p>
+        因為教學不是展示自己會。
+    </p>
+
+    <p>
+        而是：
+    </p>
+
+    <div class="quote">
+        幫助別人從不會到會。
+    </div>
+
+    <div class="final-box">
+
+        <h2>最後想說</h2>
+
+        <p>
+            很多學生討厭學習，
+            不是因為知識太難。
+        </p>
+
+        <p>
+            而是因為：
+        </p>
+
+        <div class="quote" style="background:rgba(255,255,255,0.15); color:white;">
+            沒有人真正站在他們的起點講話。
+        </div>
+
+        <p>
+            真正好的老師，
+            不是讓學生覺得：
+        </p>
+
+        <div class="quote" style="background:rgba(255,255,255,0.15); color:white;">
+            「老師好厲害。」
+        </div>
+
+        <p>
+            而是讓學生覺得：
+        </p>
+
+        <div class="quote" style="background:rgba(255,255,255,0.15); color:white;">
+            「原來我也做得到。」
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 教育心理學 × 補教現場觀察｜知識的詛咒專題文章
+    </div>
+
+</div>
+
+</body>
+</html>
