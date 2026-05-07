@@ -28,19 +28,28 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--color-background-ter
 .what-icon{font-size:24px;margin-bottom:8px;}
 .what-card h3{font-size:14px;font-weight:500;margin-bottom:6px;}
 .what-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.7;}
-.nav-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:0;}
-.nav-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color 0.2s;text-decoration:none;color:inherit;}
+
+.section-label{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-text-secondary);text-align:center;margin-bottom:6px;}
+.group-title{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;color:var(--color-text-secondary);margin:24px 0 10px;padding-left:4px;border-left:3px solid #ffc832;padding-left:10px;}
+
+.nav-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.nav-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:border-color 0.2s;text-decoration:none;color:inherit;}
 .nav-card:hover{border-color:var(--color-border-secondary);}
-.nav-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.nav-icon-wrap{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .nav-icon-wrap.gold{background:rgba(255,200,50,0.12);}
 .nav-icon-wrap.blue{background:rgba(74,144,217,0.12);}
 .nav-icon-wrap.green{background:rgba(91,168,92,0.12);}
 .nav-icon-wrap.orange{background:rgba(226,112,58,0.12);}
 .nav-icon-wrap.purple{background:rgba(150,90,200,0.12);}
 .nav-icon-wrap.red{background:rgba(220,60,60,0.12);}
-.nav-card h4{font-size:14px;font-weight:500;margin-bottom:2px;}
+.nav-icon-wrap.teal{background:rgba(20,160,140,0.12);}
+.nav-icon-wrap.pink{background:rgba(220,80,150,0.12);}
+.nav-icon-wrap.indigo{background:rgba(80,100,200,0.12);}
+.nav-card h4{font-size:13px;font-weight:500;margin-bottom:2px;}
 .nav-card p{font-size:11px;color:var(--color-text-secondary);}
 .nav-badge{font-size:9px;background:rgba(255,200,50,0.15);color:#b8860b;padding:2px 6px;border-radius:4px;margin-left:4px;border:0.5px solid rgba(255,200,50,0.3);}
+.new-badge{font-size:9px;background:rgba(74,144,217,0.15);color:#2060a8;padding:2px 6px;border-radius:4px;margin-left:4px;border:0.5px solid rgba(74,144,217,0.3);}
+
 .quote-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:16px;padding:28px 24px;text-align:center;margin:0 24px;}
 .quote-text{font-family:'Noto Serif TC',serif;font-size:16px;color:#fff;line-height:1.9;margin-bottom:12px;}
 .quote-author{font-size:12px;color:rgba(255,200,50,0.8);}
@@ -68,11 +77,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--color-background-ter
     <button class="btn-secondary" onclick="sendPrompt('皮格馬利翁效應的研究背景與教育實證')">查看研究背景</button>
   </div>
   <div class="stars-row">
-    <div class="star-dot active"></div>
-    <div class="star-dot"></div>
-    <div class="star-dot"></div>
-    <div class="star-dot"></div>
-    <div class="star-dot"></div>
+    <div class="star-dot active"></div><div class="star-dot"></div><div class="star-dot"></div><div class="star-dot"></div><div class="star-dot"></div>
   </div>
 </div>
 
@@ -110,56 +115,76 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--color-background-ter
   <p class="section-sub">教學資源導覽</p>
   <h2 class="section-title">探索各項<span class="accent">應用模組</span></h2>
   <p class="link-hint">↗ 點選卡片前往對應頁面</p>
-  <br>
+
+  <div class="group-title">⭐ 核心效應系列</div>
   <div class="nav-links">
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmalionExperiment.html" target="_blank">
       <div class="nav-icon-wrap blue">🧪</div>
-      <div>
-        <h4>課堂實驗 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmalionExperiment</p>
-      </div>
+      <div><h4>課堂實驗 <span class="nav-badge">↗</span></h4><p>PygmalionExperiment</p></div>
     </a>
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmalionBoss.html" target="_blank">
       <div class="nav-icon-wrap gold">👩‍🏫</div>
-      <div>
-        <h4>老師角色 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmalionBoss</p>
-      </div>
+      <div><h4>老師角色 <span class="nav-badge">↗</span></h4><p>PygmalionBoss</p></div>
     </a>
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmalionClass.html" target="_blank">
       <div class="nav-icon-wrap green">🌱</div>
-      <div>
-        <h4>學生成長 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmalionClass</p>
-      </div>
+      <div><h4>學生成長 <span class="nav-badge">↗</span></h4><p>PygmalionClass</p></div>
     </a>
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmalionWorkPlace.html" target="_blank">
       <div class="nav-icon-wrap orange">🏫</div>
-      <div>
-        <h4>職場應用 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmalionWorkPlace</p>
-      </div>
+      <div><h4>職場應用 <span class="nav-badge">↗</span></h4><p>PygmalionWorkPlace</p></div>
     </a>
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmaliuonQuestionaire.html" target="_blank">
       <div class="nav-icon-wrap purple">📋</div>
-      <div>
-        <h4>評估問卷 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmaliuonQuestionaire</p>
-      </div>
+      <div><h4>評估問卷 <span class="nav-badge">↗</span></h4><p>PygmaliuonQuestionaire</p></div>
     </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/GolemEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap red">⚠️</div>
+      <div><h4>戈雷姆效應 <span class="nav-badge">↗</span></h4><p>GolemEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/GolemEffectBoss.html" target="_blank">
+      <div class="nav-icon-wrap red">👔</div>
+      <div><h4>戈雷姆×主管 <span class="nav-badge">↗</span></h4><p>GolemEffectBoss</p></div>
+    </a>
+  </div>
+
+  <div class="group-title">🆕 認知偏誤系列</div>
+  <div class="nav-links">
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/HaloEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap gold">✨</div>
+      <div><h4>月暈效應 <span class="new-badge">NEW</span></h4><p>HaloEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/AnchorEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap blue">⚓</div>
+      <div><h4>錨定效應 <span class="new-badge">NEW</span></h4><p>AnchorEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/BiasBlindSpotEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap indigo">🔍</div>
+      <div><h4>偏見盲點 <span class="new-badge">NEW</span></h4><p>BiasBlindSpotEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/ImplicitBiasEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap teal">🧠</div>
+      <div><h4>隱性偏見 <span class="new-badge">NEW</span></h4><p>ImplicitBiasEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/HawthornEffectTeacher.html" target="_blank">
+      <div class="nav-icon-wrap green">👁️</div>
+      <div><h4>霍桑效應 <span class="new-badge">NEW</span></h4><p>HawthornEffectTeacher</p></div>
+    </a>
+    <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/CurseOfKnowledge.html" target="_blank">
+      <div class="nav-icon-wrap pink">📖</div>
+      <div><h4>知識詛咒 <span class="new-badge">NEW</span></h4><p>CurseOfKnowledge</p></div>
+    </a>
+  </div>
+
+  <div class="group-title">💼 主管應用系列</div>
+  <div class="nav-links">
     <a class="nav-card" href="https://wufatw-bot.github.io/ShonaHomePage/TeacherMission/PygmalionBoss.html" target="_blank">
-      <div class="nav-icon-wrap red">💼</div>
-      <div>
-        <h4>主管的機會 <span class="nav-badge">↗ HTML</span></h4>
-        <p>PygmalionBoss</p>
-      </div>
+      <div class="nav-icon-wrap gold">💼</div>
+      <div><h4>主管的機會 <span class="nav-badge">↗</span></h4><p>PygmalionBoss</p></div>
     </a>
     <div class="nav-card" onclick="sendPrompt('皮格馬利翁效應的負面影響：標籤效應與低期望陷阱如何避免')">
       <div class="nav-icon-wrap blue">⚠️</div>
-      <div>
-        <h4>注意事項</h4>
-        <p>避免負面標籤</p>
-      </div>
+      <div><h4>注意事項</h4><p>避免負面標籤</p></div>
     </div>
   </div>
 </div>
@@ -218,6 +243,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--color-background-ter
     <span class="footer-link" onclick="sendPrompt('設計皮格馬利翁效應補習班教案範例')">教案範例</span>
     <span class="footer-link" onclick="sendPrompt('皮格馬利翁效應的家長溝通策略')">家長溝通</span>
     <span class="footer-link" onclick="sendPrompt('比較皮格馬利翁效應與戈雷姆效應的差異')">戈雷姆效應</span>
+    <span class="footer-link" onclick="sendPrompt('月暈效應如何影響老師對學生的評分？')">月暈效應</span>
+    <span class="footer-link" onclick="sendPrompt('知識詛咒在教學中的具體案例與對策')">知識詛咒</span>
     <span class="footer-link" onclick="sendPrompt('皮格馬利翁效應適合什麼年齡層的學生最有效？')">適用年齡</span>
   </div>
 </div>
