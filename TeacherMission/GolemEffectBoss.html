@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理反思：別讓歌連效應扼殺老師潛力</title>
+    <style>
+        :root {
+            --dark-blue: #1a2a3a;
+            --gray-text: #555;
+            --accent-red: #c0392b; /* 代表警戒與警示 */
+            --bg-soft-gray: #f4f7f6;
+            --border-color: #dcdde1;
+        }
 
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-soft-gray);
+            line-height: 1.8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .article-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 4px;
+        }
+
+        .category-tag {
+            color: var(--accent-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: var(--dark-blue);
+            font-size: 2.2rem;
+            margin-top: 10px;
+            line-height: 1.3;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            border-left: 4px solid var(--border-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        h2 {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 10px 20px;
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-top: 40px;
+        }
+
+        .case-study {
+            background: #fffafa;
+            border: 1px solid #f5e1e1;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .case-title {
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .case-item {
+            margin-bottom: 10px;
+        }
+
+        .case-item strong {
+            color: #2c3e50;
+        }
+
+        .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .solution-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .solution-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .footer-tags {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .article-wrapper { padding: 20px; margin: 10px; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<article class="article-wrapper">
+    <span class="category-tag">經營管理｜Leadership</span>
+    <h1>別讓「歌連效應」成為補習班的隱形殺手：<br>談主管對老師的期望管理</h1>
+
+    <p class="intro-text">
+        你對老師的評價，是否正在悄悄摧毀他們的專業表現？心理學中的「歌連效應」告訴我們：當主管抱持低期望時，下屬表現會真的隨之變差。
+    </p>
+
+    <h2>常見的管理盲點：歌連效應案例</h2>
+
+    <!-- 案例一 -->
+    <div class="case-study">
+        <span class="case-title">案例一：對「菜鳥老師」的預設偏見</span>
+        <div class="case-item"><strong>主管行為：</strong> 只要有家長抱怨，主管不分青紅皂白直接介入，剝奪老師處理問題的機會。</div>
+        <div class="case-item"><strong>後果：</strong> 老師感到專業不被尊重，產生依賴心理。最後真的變得無法獨立作業。</div>
+    </div>
+
+    <!-- 案例二 -->
+    <div class="case-study">
+        <span class="case-title">案例二：對「風格活潑」老師的冷處理</span>
+        <div class="case-item"><strong>主管行為：</strong> 認定這類老師「只會玩」，開會時忽視其創意，並將最難帶的班級分配給他且不給支持。</div>
+        <div class="case-item"><strong>後果：</strong> 老師熱情熄滅，教學火花消失，最終導致該班級成績真的下滑。</div>
+    </div>
+
+    <!-- 案例三 -->
+    <div class="case-study">
+        <span class="case-title">案例三：對「兼職/屆退」老師的邊緣化</span>
+        <div class="case-item"><strong>主管行為：</strong> 資訊傳達不完整、不邀請參與教學研討，將其視為「外人」。</div>
+        <div class="case-item"><strong>後果：</strong> 老師停止專業付出，僅做最低限度的「準點下課」，對班務不再投入。</div>
+    </div>
+
+    <h2>如何逆轉負面循環？</h2>
+    <ul class="solution-list">
+        <li><strong>覺察標籤：</strong> 定期反省是否對特定老師存有偏見，試著發掘其隱藏優點。</li>
+        <li><strong>標準化回饋：</strong> 使用數據與明確指標（留班率、教案完成度）評估，減少主觀臆測。</li>
+        <li><strong>高品質挑戰：</strong> 分派具有挑戰性的任務，並給予「教練式支持」而非「干預式替代」。</li>
+        <li><strong>建立成長文化：</strong> 強調能力可訓練，將主管角色從「裁判」轉向「導師」。</li>
+    </ul>
+
+    <p style="margin-top: 40px; font-weight: bold; text-align: center;">
+        「當我們用尊重看向老師，我們看見的將是畢馬龍式的華麗轉身。」
+    </p>
+
+    <div class="footer-tags">
+        #補教管理 #團隊領導 #歌連效應 #教師成長 #補習班經營
+    </div>
+</article>
+
+</body>
+</html>
