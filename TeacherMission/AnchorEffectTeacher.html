@@ -1,1 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>錨定效應在補教現場</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f9f5ee;
+    --paper-warm: #f2ead8;
+    --accent-blue: #1a4a8a;
+    --accent-gold: #b8860b;
+    --accent-red: #8b1a1a;
+    --accent-green: #1a5c35;
+    --accent-purple: #4a1a7a;
+    --muted: #6b5e4a;
+    --rule: #c8b89a;
+    --highlight-blue: #daeaf7;
+    --highlight-gold: #fdf3d0;
+    --highlight-red: #fde8e8;
+    --highlight-green: #e2f5eb;
+    --highlight-purple: #f0eafd;
+    --highlight-gray: #f0ece4;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 17px;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── HEADER ─────────────────────────────────── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 48px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .masthead::after {
+    content: '⚓';
+    position: absolute;
+    right: -30px;
+    bottom: -60px;
+    font-size: 280px;
+    opacity: 0.05;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .tag-line {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 4px 12px;
+    margin-bottom: 28px;
+  }
+
+  .masthead h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(28px, 5vw, 50px);
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent-gold);
+  }
+
+  .masthead .subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #c8b89a;
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(200,184,154,0.3);
+    padding-top: 18px;
+    margin-top: 18px;
+  }
+
+  /* ── DECORATIVE RULE ────────────────────────── */
+  .hr-ornament {
+    text-align: center;
+    margin: 52px 0;
+    color: var(--rule);
+    font-size: 20px;
+    letter-spacing: 1em;
+  }
+
+  .hr-ornament::before, .hr-ornament::after {
+    content: '';
+    display: inline-block;
+    width: 80px;
+    height: 1px;
+    background: var(--rule);
+    vertical-align: middle;
+    margin: 0 16px;
+  }
+
+  /* ── ARTICLE BODY ───────────────────────────── */
+  .article-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+
+  /* Animated entrance */
+  .article-body > * {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* stagger children */
+  .article-body > *:nth-child(1)  { animation-delay: 0.05s; }
+  .article-body > *:nth-child(2)  { animation-delay: 0.10s; }
+  .article-body > *:nth-child(3)  { animation-delay: 0.15s; }
+  .article-body > *:nth-child(4)  { animation-delay: 0.20s; }
+  .article-body > *:nth-child(5)  { animation-delay: 0.25s; }
+  .article-body > *:nth-child(6)  { animation-delay: 0.30s; }
+  .article-body > *:nth-child(7)  { animation-delay: 0.35s; }
+  .article-body > *:nth-child(8)  { animation-delay: 0.40s; }
+  .article-body > *:nth-child(9)  { animation-delay: 0.45s; }
+  .article-body > *:nth-child(10) { animation-delay: 0.50s; }
+
+  /* Opening quote */
+  .opening-quotes {
+    border-left: 3px solid var(--accent-gold);
+    padding: 20px 28px;
+    margin-bottom: 40px;
+    background: var(--highlight-gold);
+  }
+
+  .opening-quotes p {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #5a440a;
+    line-height: 2;
+    margin: 0;
+  }
+
+  .opening-quotes p + p { margin-top: 6px; }
+
+  p {
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-size: 17px;
+    line-height: 1.95;
+  }
+
+  /* ── SECTION HEADINGS ───────────────────────── */
+  .section-heading {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--ink);
+    margin: 56px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+  }
+
+  .section-heading .emoji {
+    font-style: normal;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .sub-heading {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 40px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sub-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── CALLOUT BLOCKS ─────────────────────────── */
+  .callout {
+    padding: 20px 24px;
+    margin: 28px 0;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.85;
+    position: relative;
+    border-left-width: 4px;
+    border-left-style: solid;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .callout:hover {
+    transform: translateX(3px);
+    box-shadow: -3px 0 0 currentColor;
+  }
+
+  .callout.blue   { background: var(--highlight-blue);   border-color: var(--accent-blue);   color: #0d2d55; }
+  .callout.gold   { background: var(--highlight-gold);   border-color: var(--accent-gold);   color: #5a440a; }
+  .callout.red    { background: var(--highlight-red);    border-color: var(--accent-red);    color: #5a0a0a; }
+  .callout.green  { background: var(--highlight-green);  border-color: var(--accent-green);  color: #0a3a1e; }
+  .callout.purple { background: var(--highlight-purple); border-color: var(--accent-purple); color: #2e0a55; }
+  .callout.gray   { background: var(--highlight-gray);   border-color: #888;                 color: #3a3228; }
+
+  .callout .speaker {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 8px;
+  }
+
+  /* ── SCENARIO CARDS ─────────────────────────── */
+  .scenario {
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: 36px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .scenario-number {
+    position: absolute;
+    top: -16px;
+    left: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    padding: 4px 14px;
+  }
+
+  .scenario h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .scenario p { font-size: 16px; }
+
+  /* ── TRANSFORMATION BLOCK ───────────────────── */
+  .transform-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .transform-before, .transform-after {
+    padding: 24px 20px;
+  }
+
+  .transform-before { background: var(--highlight-red); }
+  .transform-after  { background: var(--highlight-green); }
+
+  .transform-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 20px;
+  }
+
+  .transform-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+
+  .transform-item {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 2;
+    color: var(--ink);
+  }
+
+  /* ── INSIGHT LIST ───────────────────────────── */
+  .insight-list {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  .insight-list li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 16px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .insight-list li:last-child { border-bottom: none; }
+
+  .insight-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-weight: 700;
+  }
+
+  /* ── ANCHOR METAPHOR VISUAL ─────────────────── */
+  .anchor-metaphor {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px;
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .anchor-metaphor::before {
+    content: '⚓';
+    position: absolute;
+    font-size: 160px;
+    opacity: 0.06;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+
+  .anchor-metaphor p {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    color: var(--paper);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    line-height: 2;
+  }
+
+  .anchor-metaphor .anchor-big {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 16px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ── PRICE ANCHORING DEMO ───────────────────── */
+  .price-demo {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 28px 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .price-original {
+    background: #eee;
+    padding: 28px 32px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .price-original .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .price-original .amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .price-arrow {
+    width: 48px;
+    background: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    align-self: stretch;
+  }
+
+  .price-new {
+    background: var(--highlight-green);
+    padding: 28px 32px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .price-new .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .price-new .amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--accent-green);
+  }
+
+  .price-new .tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-green);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* ── EFFECT MATRIX ──────────────────────────── */
+  .effect-matrix {
+    margin: 28px 0;
+  }
+
+  .effect-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    transition: transform 0.15s ease;
+  }
+
+  .effect-row:hover { transform: scale(1.01); }
+
+  .effect-cause {
+    background: var(--highlight-red);
+    padding: 12px 18px;
+    font-size: 14px;
+    font-family: 'Noto Serif TC', serif;
+    color: #5a0a0a;
+    text-align: right;
+  }
+
+  .effect-mid {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 14px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .effect-result {
+    background: var(--highlight-green);
+    padding: 12px 18px;
+    font-size: 14px;
+    font-family: 'Noto Serif TC', serif;
+    color: #0a3a1e;
+  }
+
+  /* ── CLOSING BLOCK ──────────────────────────── */
+  .closing-block {
+    background: var(--highlight-green);
+    border: 2px solid var(--accent-green);
+    padding: 36px 40px;
+    margin: 48px 0 20px;
+    text-align: center;
+  }
+
+  .closing-block p {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a3a1e;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  /* ── REFLECTION BLOCK ───────────────────────── */
+  .reflection {
+    border-top: 2px solid var(--ink);
+    padding-top: 36px;
+    margin-top: 48px;
+  }
+
+  .reflection h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reflection ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .reflection ul li {
+    padding: 14px 0;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 1px dotted var(--rule);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .reflection ul li::before {
+    content: '◆';
+    color: var(--accent-gold);
+    font-size: 10px;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 640px) {
+    .masthead-inner { padding: 48px 24px 40px; }
+    .article-body { padding: 40px 20px 60px; }
+    .scenario { padding: 28px 20px; }
+    .transform-grid { grid-template-columns: 1fr; }
+    .transform-arrow { display: none; }
+    .price-demo { flex-direction: column; }
+    .price-arrow { width: 100%; height: 40px; transform: rotate(90deg); }
+    .effect-row { grid-template-columns: 1fr; }
+    .effect-cause { text-align: left; }
+    .effect-mid { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── MASTHEAD ──────────────────────────────── -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <span class="tag-line">教育心理學 × 補教現場</span>
+    <h1>當第一句話，<br>就決定了<em>學生的未來</em>？</h1>
+    <p class="subtitle">淺談「錨定效應（Anchoring Effect）」在補教現場的影響</p>
+  </div>
+</header>
+
+<!-- ── ARTICLE ───────────────────────────────── -->
+<main class="article-body">
+
+  <!-- Opening quotes -->
+  <div class="opening-quotes">
+    <p>「你其實很聰明，只是以前沒有人教對方法。」</p>
+    <p>「這一班程度很強，你們是今年最有機會考上的學生。」</p>
+    <p>「這題其實很簡單，去年國中生都會寫。」</p>
+  </div>
+
+  <p>你有沒有發現，補習班老師的一句話，常常會悄悄改變學生的情緒、信心，甚至影響後續整學期的學習表現？這背後，其實藏著一個心理學上非常有名的概念——</p>
+
+  <!-- What is anchoring -->
+  <h2 class="section-heading">
+    <span class="emoji">🧠</span>什麼是「錨定效應（Anchoring Effect）」？
+  </h2>
+
+  <p>錨定效應，是指人們在做判斷時，會不自覺受到「最先出現的資訊」影響，之後的思考與決策，也會圍繞著這個初始印象進行調整。</p>
+
+  <div class="anchor-metaphor">
+    <span class="anchor-big">⚓</span>
+    <p>就像船下錨後，即使海流改變，<br>船仍然會圍繞著那個位置漂動。</p>
+  </div>
+
+  <div class="callout gray">
+    第一個數字、第一個評價、第一句話，<br>常常比我們以為的更有力量。
+  </div>
+
+  <p>而在補教現場，老師其實每天都在「下錨」。</p>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Scenario 1 -->
+  <div class="scenario">
+    <span class="scenario-number">情境一</span>
+    <h3>📚 一句「你很有天分」，學生開始相信自己</h3>
+    <p>阿哲原本數學成績一直在40分上下。他其實不笨，只是每次寫錯題目後，就開始慌亂。第一次進補習班時，他很緊張地坐在最後一排。</p>
+    <p>老師改完考卷後，沒有先責備，而是說：</p>
+    <div class="callout blue">
+      <span class="speaker">老師的話</span>
+      「你其實觀念不差，錯的是粗心。這種學生通常進步最快。」
+    </div>
+    <p>這句話，成了阿哲新的「心理錨點」。之後每次考不好時，他不再認為自己是「數學白癡」，而是重新看待自己——</p>
+    <ul class="insight-list">
+      <li>我只是粗心</li>
+      <li>我其實有能力</li>
+      <li>我還可以再進步</li>
+    </ul>
+    <p style="margin-top:16px; font-weight:500; color: var(--accent-green);">半年後，他從 40 分進步到 78 分。</p>
+  </div>
+
+  <p class="sub-heading"><span>🔍</span> 詳細解析</p>
+
+  <p>老師當下做的，不只是鼓勵，而是重新替學生建立自我認知、能力定位，以及對未來的期待。學生開始用「我是有潛力的人」來看待自己。這種現象，也與教育心理學中的「畢馬龍效應（Pygmalion Effect）」有關：</p>
+
+  <div class="callout gold">
+    <span class="speaker">畢馬龍效應</span>
+    當老師真心相信學生會進步時，<br>學生往往真的比較容易進步。
+  </div>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Scenario 2 -->
+  <div class="scenario">
+    <span class="scenario-number">情境二</span>
+    <h3>📚 一句「這很簡單」，反而讓學生崩潰</h3>
+    <p>另一位學生小芸，英文底子較弱。某次老師在台上說：</p>
+    <div class="callout red">
+      <span class="speaker">老師的話</span>
+      「這題很簡單，國二程度而已。」
+    </div>
+    <p>結果小芸完全不會。那一瞬間，她心中產生的不是「我要努力」，而是：</p>
+    <ul class="insight-list">
+      <li>別人都會，只有我不會</li>
+      <li>我是不是太笨？</li>
+      <li>我不適合念英文</li>
+    </ul>
+    <p style="margin-top:16px;">接下來整堂課，她幾乎沒再專心。</p>
+  </div>
+
+  <p class="sub-heading"><span>🔍</span> 詳細解析</p>
+
+  <p>很多老師以為「說簡單」是為了降低學生焦慮，但對基礎弱的學生而言，這句話可能形成另一種錨定：</p>
+
+  <div class="callout gray">
+    「不會這題的人，就是差。」
+  </div>
+
+  <p>學生之後的學習，就會開始被羞愧感綁架。這也是為什麼有些學生不是不努力，而是從一開始，就被貼上「自己不夠好」的標籤。</p>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Scenario 3 -->
+  <div class="scenario">
+    <span class="scenario-number">情境三</span>
+    <h3>📚 價格與課程包裝的錨定</h3>
+    <p>補習班其實也很常利用錨定效應做行銷：</p>
+    <div class="price-demo">
+      <div class="price-original">
+        <div class="label">原價</div>
+        <div class="amount">$120,000</div>
+      </div>
+      <div class="price-arrow">→</div>
+      <div class="price-new">
+        <div class="label">限時優惠</div>
+        <div class="amount">$48,000</div>
+        <div class="tag">省下 $72,000</div>
+      </div>
+    </div>
+    <p>即使學生家長原本根本沒想過「12萬」這個價格，但當「12萬」先出現後，4萬8 看起來就「合理」很多。</p>
+  </div>
+
+  <p class="sub-heading"><span>🔍</span> 詳細解析</p>
+
+  <p>這是經典的「價格錨定」。人腦不太擅長真正判斷價值，反而常透過「比較」來感覺便宜或昂貴。</p>
+
+  <div class="effect-matrix">
+    <div class="effect-row">
+      <div class="effect-cause">先看到高價</div>
+      <div class="effect-mid">→</div>
+      <div class="effect-result">中價感覺划算</div>
+    </div>
+    <div class="effect-row">
+      <div class="effect-cause">先看到難題</div>
+      <div class="effect-mid">→</div>
+      <div class="effect-result">普通題感覺容易</div>
+    </div>
+    <div class="effect-row">
+      <div class="effect-cause">先被稱讚</div>
+      <div class="effect-mid">→</div>
+      <div class="effect-result">挫折較能承受</div>
+    </div>
+    <div class="effect-row">
+      <div class="effect-cause">先被否定</div>
+      <div class="effect-mid">→</div>
+      <div class="effect-result">後面很難建立信心</div>
+    </div>
+  </div>
+
+  <p style="font-weight:600; color: var(--accent-blue);">教育，其實也是心理學。</p>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Scenario 4 -->
+  <div class="scenario">
+    <span class="scenario-number">情境四</span>
+    <h3>📚 排名公布的心理影響</h3>
+    <p>有些補習班很喜歡在牆上貼榜單：第一名、台大醫科、滿級分學生……這其實也是一種錨定。</p>
+    <div class="callout purple">
+      新生一進門，就會產生：<br>「這裡是高手聚集的地方。」
+    </div>
+    <p>這種環境有時能激勵學生，但也可能讓部分孩子產生巨大壓力，尤其是中後段學生，容易覺得自己不屬於這裡，或永遠追不上。</p>
+  </div>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Scenario 5 -->
+  <div class="scenario">
+    <span class="scenario-number">情境五</span>
+    <h3>📚 老師對班級的「第一印象」</h3>
+    <div class="callout blue">
+      <span class="speaker">正向錨定</span>
+      「你們這屆看起來很認真。」<br>
+      <small style="opacity:0.7">→ 學生會開始更傾向表現認真</small>
+    </div>
+    <div class="callout red">
+      <span class="speaker">負向錨定</span>
+      「這班感覺很難帶。」<br>
+      <small style="opacity:0.7">→ 學生也可能慢慢朝那個方向發展</small>
+    </div>
+    <p>因為學生會不自覺符合老師給的「角色設定」。</p>
+    <div class="callout gray">
+      老師的期待，<br>常常會變成學生的現實。
+    </div>
+  </div>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Why tutoring -->
+  <h2 class="section-heading">
+    <span class="emoji">🧠</span>為什麼補教現場特別容易出現錨定效應？
+  </h2>
+
+  <p>因為補習班通常具有幾個特性，形成了錨定效應的溫床：</p>
+
+  <ul class="insight-list">
+    <li>高壓競爭環境</li>
+    <li>快速評價與分類</li>
+    <li>大量考試排名</li>
+    <li>強調成果與分數</li>
+    <li>學生對老師高度信任</li>
+  </ul>
+
+  <p>在這種環境下，老師的一句話，可能比家長講一百句還有影響力。</p>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Great teachers -->
+  <h2 class="section-heading">
+    <span class="emoji">🌱</span>真正厲害的老師，不只是會教題目
+  </h2>
+
+  <p>有些老師最厲害的地方，不是解題速度，而是：他能替學生重新定義自己。</p>
+
+  <div class="transform-grid">
+    <div class="transform-before">
+      <div class="transform-label">舊的自我認知</div>
+      <div class="transform-item">「我不行」</div>
+      <div class="transform-item">「我很笨」</div>
+      <div class="transform-item">「我永遠追不上」</div>
+    </div>
+    <div class="transform-arrow">→</div>
+    <div class="transform-after">
+      <div class="transform-label">新的錨點</div>
+      <div class="transform-item">「我還沒學會」</div>
+      <div class="transform-item">「我只是缺方法」</div>
+      <div class="transform-item">「我還有機會」</div>
+    </div>
+  </div>
+
+  <p>而這些轉變，往往都始於一句話。</p>
+
+  <div class="hr-ornament">✦</div>
+
+  <!-- Conclusion -->
+  <h2 class="section-heading">
+    <span class="emoji">📌</span>結語
+  </h2>
+
+  <p>錨定效應告訴我們：人不是完全理性的。很多時候，我們會被最早聽到的評價、數字、標籤，深深影響。</p>
+
+  <p>在補教現場裡，老師不只是知識傳遞者，也可能是學生「自我認知」的塑造者。</p>
+
+  <p>所以有時候：一句話，可以讓學生開始努力；一句話，也可能讓學生默默放棄。</p>
+
+  <p>教育真正重要的，從來不只是教會學生答案，而是讓學生開始相信——</p>
+
+  <div class="closing-block">
+    <p>「自己有能力變得更好。」</p>
+  </div>
+
+  <!-- Reflection -->
+  <div class="reflection">
+    <h2><span>📖</span> 延伸思考</h2>
+    <p>你是否曾經因為某位老師的一句話……</p>
+    <ul>
+      <li>從此變得更有自信，開始願意嘗試原本害怕的事？</li>
+      <li>或是開始懷疑自己，覺得自己天生就不適合某件事？</li>
+    </ul>
+    <p style="margin-top:28px; font-size:15px; color:var(--muted); font-style:italic; font-family:'Noto Serif TC', serif;">
+      很多人多年後忘了公式，<br>
+      卻永遠記得：<br>
+      當年老師曾怎麼看待自己。
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <p>錨定效應 × 補教現場 × 教育心理學 &nbsp;|&nbsp; Anchoring Effect in Education</p>
+</footer>
+
+</body>
+</html>
