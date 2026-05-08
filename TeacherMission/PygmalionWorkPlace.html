@@ -2,6 +2,987 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>畢馬龍效應自我診斷問卷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #16130E;
+  --ink-2: #3D3830;
+  --ink-3: #6B6560;
+  --ink-4: #A09990;
+  --paper: #FAF8F4;
+  --paper-2: #F1EDE4;
+  --paper-3: #E6E0D4;
+  --accent: #B5451B;
+  --accent-light: #F0DDD6;
+  --gold: #9C7A2A;
+  --gold-light: #F5EDD6;
+  --teal: #1A6B5A;
+  --teal-light: #D4EDE8;
+  --border: rgba(22,19,14,.12);
+  --border-strong: rgba(22,19,14,.22);
+  --r: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Background ── */
+.bg-canvas {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+.bg-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(181,69,27,.07);
+}
+.bg-ring:nth-child(1) { width: 600px; height: 600px; top: -200px; left: -200px; animation: spin 80s linear infinite; }
+.bg-ring:nth-child(2) { width: 900px; height: 900px; top: -350px; left: -350px; animation: spin 120s linear infinite reverse; border-color: rgba(156,122,42,.06); }
+.bg-ring:nth-child(3) { width: 400px; height: 400px; bottom: -150px; right: -100px; animation: spin 60s linear infinite; border-color: rgba(26,107,90,.07); }
+.bg-ring:nth-child(4) { width: 700px; height: 700px; bottom: -300px; right: -250px; animation: spin 100s linear infinite reverse; border-color: rgba(181,69,27,.05); }
+.bg-dot {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--accent); opacity: .15;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* grid dots */
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(22,19,14,.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Layout ── */
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 700px; margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+/* ── Header ── */
+.header { text-align: center; margin-bottom: 3rem; }
+.header-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.header-eyebrow::before, .header-eyebrow::after {
+  content: ''; display: block; width: 28px; height: 1px; background: var(--accent); opacity: .5;
+}
+.header h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 28px; font-weight: 700; line-height: 1.35;
+  color: var(--ink); margin-bottom: .75rem;
+}
+.header-sub {
+  font-size: 14px; color: var(--ink-3); line-height: 1.7; max-width: 480px; margin: 0 auto 1.5rem;
+}
+.header-meta {
+  display: inline-flex; gap: 20px;
+  background: var(--paper-2); border: 1px solid var(--border-strong);
+  border-radius: 100px; padding: 6px 20px;
+}
+.meta-item { font-size: 12px; color: var(--ink-3); display: flex; align-items: center; gap: 5px; }
+.meta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: .6; }
+
+/* ── Intro box ── */
+.intro-box {
+  background: var(--paper-2); border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 1.1rem 1.35rem; margin-bottom: 2.5rem;
+}
+.intro-box p { font-size: 13.5px; color: var(--ink-2); line-height: 1.75; }
+.intro-box p + p { margin-top: .6rem; }
+
+/* ── Progress ── */
+.progress-wrap { margin-bottom: 2rem; }
+.progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.progress-label { font-size: 12px; font-weight: 500; color: var(--ink-3); letter-spacing: .04em; }
+.progress-count { font-size: 12px; color: var(--ink-4); }
+.progress-track {
+  height: 4px; background: var(--paper-3); border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%; background: var(--accent);
+  border-radius: 100px; transition: width .4s ease;
+}
+
+/* ── Question cards ── */
+.q-card {
+  background: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.q-card:hover { box-shadow: 0 2px 16px rgba(22,19,14,.07); }
+.q-card.answered { border-color: rgba(181,69,27,.3); }
+
+.q-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 1.1rem 1.25rem .9rem;
+  border-bottom: 1px solid var(--border);
+}
+.q-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; color: var(--accent); flex-shrink: 0;
+}
+.q-text-wrap { flex: 1; }
+.q-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.5; margin-bottom: .3rem; }
+.q-hint { font-size: 12px; color: var(--ink-4); line-height: 1.5; }
+
+.q-options { padding: .75rem 1.25rem 1rem; display: flex; flex-direction: column; gap: 6px; }
+
+.opt-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: .6rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  position: relative;
+}
+.opt-label:hover { background: var(--paper-2); border-color: var(--border-strong); }
+.opt-label input[type=radio] { display: none; }
+.opt-label input[type=radio]:checked ~ .opt-indicator { background: var(--accent); border-color: var(--accent); }
+.opt-label input[type=radio]:checked ~ .opt-indicator::after { opacity: 1; }
+.opt-label:has(input:checked) { background: var(--accent-light); border-color: rgba(181,69,27,.35); }
+
+.opt-indicator {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  flex-shrink: 0; margin-top: 2px;
+  transition: background .15s, border-color .15s;
+  position: relative;
+}
+.opt-indicator::after {
+  content: ''; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #fff; opacity: 0; transition: opacity .15s;
+}
+
+.opt-content { flex: 1; }
+.opt-main { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.opt-sub { font-size: 12px; color: var(--ink-4); line-height: 1.4; margin-top: 2px; }
+
+.opt-score {
+  font-size: 11px; font-weight: 500; color: var(--ink-4);
+  background: var(--paper-2); border-radius: 4px;
+  padding: 2px 6px; align-self: center; flex-shrink: 0;
+}
+
+/* ── Submit ── */
+.submit-wrap { text-align: center; margin-top: 2rem; }
+.submit-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink); color: var(--paper);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px; font-weight: 500;
+  padding: 13px 36px; border-radius: 100px;
+  border: none; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.submit-btn:hover { background: var(--accent); transform: translateY(-1px); }
+.submit-btn:active { transform: translateY(0); }
+.submit-btn:disabled { background: var(--paper-3); color: var(--ink-4); cursor: not-allowed; transform: none; }
+.submit-note { font-size: 12px; color: var(--ink-4); margin-top: .75rem; }
+
+/* ── Result ── */
+.result-wrap {
+  display: none;
+  animation: fadeUp .5s ease forwards;
+}
+.result-wrap.visible { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-hero {
+  text-align: center; padding: 2rem 1.5rem 1.5rem;
+  background: #fff; border: 1px solid var(--border-strong);
+  border-radius: var(--r); margin-bottom: 1.25rem;
+}
+.result-score-ring {
+  width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 1rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 3px solid;
+}
+.result-score-num { font-family: 'Noto Serif TC', serif; font-size: 26px; font-weight: 700; line-height: 1; }
+.result-score-max { font-size: 11px; color: var(--ink-4); margin-top: 2px; }
+
+.result-type-tag {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 12px; border-radius: 4px; margin-bottom: .6rem;
+}
+.result-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: .5rem;
+}
+.result-desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.75; max-width: 480px; margin: 0 auto; }
+
+.result-breakdown {
+  background: #fff; border: 1px solid var(--border-strong);
+  border-radius: var(--r); padding: 1.25rem 1.35rem; margin-bottom: 1.25rem;
+}
+.breakdown-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 1rem; }
+.breakdown-row {
+  display: flex; align-items: center; gap: 12px; margin-bottom: .75rem;
+}
+.breakdown-row:last-child { margin-bottom: 0; }
+.breakdown-label { font-size: 12px; color: var(--ink-3); width: 100px; flex-shrink: 0; }
+.breakdown-bar-wrap { flex: 1; height: 6px; background: var(--paper-3); border-radius: 100px; overflow: hidden; }
+.breakdown-bar { height: 100%; border-radius: 100px; transition: width 1s ease .3s; }
+.breakdown-val { font-size: 12px; font-weight: 500; color: var(--ink-2); width: 28px; text-align: right; flex-shrink: 0; }
+
+.result-advice {
+  background: #fff; border: 1px solid var(--border-strong);
+  border-radius: var(--r); overflow: hidden; margin-bottom: 1.25rem;
+}
+.advice-header {
+  padding: .85rem 1.25rem; background: var(--paper-2);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 500; color: var(--ink);
+}
+.advice-list { padding: .75rem 1.25rem; }
+.advice-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: .7rem 0; border-bottom: 1px solid var(--border);
+}
+.advice-item:last-child { border-bottom: none; }
+.advice-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0; margin-top: 1px;
+}
+.advice-text { flex: 1; }
+.advice-main { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: .2rem; }
+.advice-sub { font-size: 12px; color: var(--ink-3); line-height: 1.55; }
+
+.result-scale {
+  background: #fff; border: 1px solid var(--border-strong);
+  border-radius: var(--r); padding: 1.1rem 1.35rem; margin-bottom: 1.25rem;
+}
+.scale-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 1rem; }
+.scale-row { display: flex; gap: 0; border-radius: 6px; overflow: hidden; margin-bottom: .6rem; }
+.scale-seg {
+  flex: 1; height: 8px;
+}
+.scale-labels { display: flex; justify-content: space-between; }
+.scale-lbl { font-size: 11px; color: var(--ink-4); }
+.scale-marker-wrap { position: relative; height: 24px; margin-top: 4px; }
+.scale-marker {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-size: 11px; font-weight: 500; color: var(--accent);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.scale-marker::before {
+  content: '▼'; font-size: 10px;
+}
+
+.retry-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--paper-2); color: var(--ink-2);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px; padding: 10px 24px;
+  border-radius: 100px; border: 1px solid var(--border-strong);
+  cursor: pointer; margin-top: 1.5rem;
+  transition: background .15s;
+}
+.retry-btn:hover { background: var(--paper-3); }
+
+/* dark hint box */
+.hint-box {
+  background: var(--ink); color: var(--paper);
+  border-radius: var(--r); padding: 1.1rem 1.35rem; margin-bottom: 1.25rem;
+}
+.hint-box-title { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-4); margin-bottom: .5rem; }
+.hint-box p { font-size: 13.5px; color: #E8E4DC; line-height: 1.75; }
+
+@media (max-width: 520px) {
+  .header h1 { font-size: 22px; }
+  .header-meta { gap: 12px; }
+  .q-options { padding: .5rem .85rem .75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-canvas">
+  <div class="bg-grid"></div>
+  <div class="bg-ring"></div>
+  <div class="bg-ring"></div>
+  <div class="bg-ring"></div>
+  <div class="bg-ring"></div>
+</div>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">Pygmalion Effect</div>
+    <h1>你正在塑造還是限制他人？<br>畢馬龍效應自我診斷</h1>
+    <p class="header-sub">這份問卷透過反直覺情境，測出你的隱性期待模式——適用於教師、主管、訓練者。</p>
+    <div class="header-meta">
+      <div class="meta-item"><div class="meta-dot"></div>8 題情境選擇</div>
+      <div class="meta-item"><div class="meta-dot"></div>約 3 分鐘</div>
+      <div class="meta-item"><div class="meta-dot"></div>即時分析</div>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-box">
+    <p>畢馬龍效應（Pygmalion Effect）由 Rosenthal & Jacobson 於 1968 年提出：老師對學生的期待，會透過行為傳遞，真實影響學生的 IQ 表現。這個機制在補教、企業、醫療環境中同樣運作。</p>
+    <p>關鍵在於：<strong>期待不是態度，而是行為。</strong> 你分配資源的方式、給回饋的語氣、選擇誰承擔重要任務——這些都是期待的具體顯現。以下 8 個情境，沒有「標準答案」，只有你真實的反應。</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label">作答進度</span>
+      <span class="progress-count" id="progressCount">0 / 8</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Form -->
+  <form id="quizForm">
+
+    <!-- Q1 -->
+    <div class="q-card" data-q="1">
+      <div class="q-head">
+        <div class="q-num">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">某位老師連續兩個月表現普通，家長滿意度不高。你最可能的第一個行動是？</div>
+          <div class="q-hint">反直覺測試：你的「第一反應」比你的「理想答案」更能揭示期待模式。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q1" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">換班或減少班數，先觀察</div>
+            <div class="opt-sub">降低風險，等下一次評估週期</div>
+          </div>
+          <div class="opt-score">低期待</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q1" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">約談了解原因，保持現狀</div>
+            <div class="opt-sub">確保溝通，但不主動調整支持</div>
+          </div>
+          <div class="opt-score">中期待</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q1" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">分析是教法、班型還是個人狀態，制定具體改善計畫</div>
+            <div class="opt-sub">把問題當可解決的行為，而非能力判定</div>
+          </div>
+          <div class="opt-score">高期待</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q1" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">給他一個「挑戰性任務」測試潛力</div>
+            <div class="opt-sub">相信壓力會激發轉變</div>
+          </div>
+          <div class="opt-score">高期待（高風險）</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" data-q="2">
+      <div class="q-head">
+        <div class="q-num">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">下學期有一個家長強、學生優的「好班」，你會分配給誰？</div>
+          <div class="q-hint">資源分配是期待最直接的行為化。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q2" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">表現最好、最穩定的老師</div>
+            <div class="opt-sub">把好班給最能發揮的人是合理的</div>
+          </div>
+          <div class="opt-score">績效導向</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q2" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">一位有潛力但還未充分發揮的老師，作為成長機會</div>
+            <div class="opt-sub">把好班當作信任訊號，刻意傳遞高期待</div>
+          </div>
+          <div class="opt-score">發展導向</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q2" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">輪替制度，避免資源固化</div>
+            <div class="opt-sub">公平但可能失去期待傳遞的效果</div>
+          </div>
+          <div class="opt-score">公平導向</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q2" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">視當下哪位老師最需要信心補充</div>
+            <div class="opt-sub">把好班當心理介入工具</div>
+          </div>
+          <div class="opt-score">情境導向</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" data-q="3">
+      <div class="q-head">
+        <div class="q-num">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">你給回饋時，最常說的是哪類語句？</div>
+          <div class="q-hint">語句結構直接反映你的期待框架。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q3" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「你這樣做不太對，要改。」</div>
+            <div class="opt-sub">指出錯誤，但未給成長方向</div>
+          </div>
+          <div class="opt-score">評價型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q3" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「如果在第三段加一個例子，學生會更清楚。」</div>
+            <div class="opt-sub">針對行為，傳遞「可以更好」的信念</div>
+          </div>
+          <div class="opt-score">成長型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q3" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「還好，繼續加油。」</div>
+            <div class="opt-sub">中性但無具體期待訊號</div>
+          </div>
+          <div class="opt-score">中性型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q3" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「這個方向有潛力，下次我想看你試試 ___。」</div>
+            <div class="opt-sub">明確傳遞下一步期待，建立進步路徑</div>
+          </div>
+          <div class="opt-score">高期待型</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" data-q="4">
+      <div class="q-head">
+        <div class="q-num">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">新進老師第一週表現很普通，你心裡的第一個念頭是？</div>
+          <div class="q-hint">這是最難誠實的一題。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q4" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「這個人可能不適合。」</div>
+            <div class="opt-sub">以第一週定義長期潛力</div>
+          </div>
+          <div class="opt-score">封閉型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q4" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「要繼續觀察，現在下結論太早。」</div>
+            <div class="opt-sub">中性保留，但未主動介入</div>
+          </div>
+          <div class="opt-score">觀望型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q4" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「他需要什麼支援，才能在第三週有明顯改善？」</div>
+            <div class="opt-sub">把低表現轉化為介入設計問題</div>
+          </div>
+          <div class="opt-score">高期待型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q4" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「我當初面試是看到什麼讓我錄取他的？」</div>
+            <div class="opt-sub">重啟對這個人的正向框架</div>
+          </div>
+          <div class="opt-score">重構型</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" data-q="5">
+      <div class="q-head">
+        <div class="q-num">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">一位老師在會議上提出想法，你覺得不太可行，你會？</div>
+          <div class="q-hint">你的回應方式傳遞了你對他能力的評估。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q5" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">直接說明為什麼不行</div>
+            <div class="opt-sub">清楚但可能關閉了他繼續嘗試的意願</div>
+          </div>
+          <div class="opt-score">直接否定</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q5" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">「這個想法有意思，執行上有幾個卡點，你怎麼看？」</div>
+            <div class="opt-sub">保留他的主動性，讓他自己解題</div>
+          </div>
+          <div class="opt-score">成長引導</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q5" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">點頭說好，會後不了了之</div>
+            <div class="opt-sub">避免衝突，但傳遞「你的想法不重要」的訊號</div>
+          </div>
+          <div class="opt-score">冷處理</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q5" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">請他做小規模測試，看數據再決定</div>
+            <div class="opt-sub">給真實機會，結果說話</div>
+          </div>
+          <div class="opt-score">實驗導向</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" data-q="6">
+      <div class="q-head">
+        <div class="q-num">6</div>
+        <div class="q-text-wrap">
+          <div class="q-text">你的某位老師已經半年沒有明顯進步，你最真實的心態是？</div>
+          <div class="q-hint">長期低表現是最考驗期待韌性的情境。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q6" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">接受這是這個人的「天花板」</div>
+            <div class="opt-sub">降低期待以避免失望</div>
+          </div>
+          <div class="opt-score">放棄型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q6" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">我的方法可能出了問題，需要換策略</div>
+            <div class="opt-sub">把停滯歸因為介入失敗，而非人的問題</div>
+          </div>
+          <div class="opt-score">自省型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q6" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">找他談談有什麼個人因素影響了這段時間</div>
+            <div class="opt-sub">從系統外部找解釋，保持關係</div>
+          </div>
+          <div class="opt-score">關係型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q6" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">設一個「90 天突破計畫」，明確目標與支持</div>
+            <div class="opt-sub">期待具體化，轉化為可追蹤的承諾</div>
+          </div>
+          <div class="opt-score">高期待行動</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" data-q="7">
+      <div class="q-head">
+        <div class="q-num">7</div>
+        <div class="q-text-wrap">
+          <div class="q-text">你在心裡是否對不同老師有「這個人頂多到這裡」的隱性評估？</div>
+          <div class="q-hint">這是最核心的自我覺察題。請盡量誠實。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q7" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">有，而且我通常是對的</div>
+            <div class="opt-sub">這個確信感本身就是負向畢馬龍的根源</div>
+          </div>
+          <div class="opt-score">高風險</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q7" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">有，但我會刻意提醒自己不要讓它影響行為</div>
+            <div class="opt-sub">有覺察，但執行上仍可能漏出</div>
+          </div>
+          <div class="opt-score">中等覺察</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q7" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">有時有，我不確定它有多大影響</div>
+            <div class="opt-sub">模糊地帶——最需要結構性覺察工具</div>
+          </div>
+          <div class="opt-score">待強化</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q7" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">我盡量不設定上限，但會設定最低標準</div>
+            <div class="opt-sub">期待有底線但無天花板——健康的管理心態</div>
+          </div>
+          <div class="opt-score">健康型</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" data-q="8">
+      <div class="q-head">
+        <div class="q-num">8</div>
+        <div class="q-text-wrap">
+          <div class="q-text">你最近一次「刻意」傳遞對某人高期待的訊號，是什麼時候？</div>
+          <div class="q-hint">期待必須被感受到才能產生效果——沉默的信任不算。</div>
+        </div>
+      </div>
+      <div class="q-options">
+        <label class="opt-label">
+          <input type="radio" name="q8" value="1">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">我不記得，也不覺得需要特別說</div>
+            <div class="opt-sub">期待可能停留在你的腦海，但沒有被傳遞</div>
+          </div>
+          <div class="opt-score">沉默型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q8" value="2">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">上個月吧，我說了一次「你做得不錯」</div>
+            <div class="opt-sub">有做，但頻率和具體度可能不夠</div>
+          </div>
+          <div class="opt-score">偶爾型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q8" value="3">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">這週，我把重要展示機會給了那位一直很努力的老師</div>
+            <div class="opt-sub">用行動而非語言傳遞期待</div>
+          </div>
+          <div class="opt-score">行動型</div>
+        </label>
+        <label class="opt-label">
+          <input type="radio" name="q8" value="4">
+          <div class="opt-indicator"></div>
+          <div class="opt-content">
+            <div class="opt-main">我有系統地讓每位老師都在某件事上感受到「我認為你可以」</div>
+            <div class="opt-sub">期待被設計進日常管理結構中</div>
+          </div>
+          <div class="opt-score">系統型</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="button" id="submitBtn" onclick="calculateScore()" disabled>
+        查看診斷結果 →
+      </button>
+      <div class="submit-note">請回答全部 8 題後提交</div>
+    </div>
+
+  </form>
+
+  <!-- Result -->
+  <div class="result-wrap" id="resultWrap">
+
+    <div class="result-hero" id="resultHero">
+      <div class="result-score-ring" id="scoreRing">
+        <div class="result-score-num" id="scoreNum">--</div>
+        <div class="result-score-max">/ 32</div>
+      </div>
+      <div class="result-type-tag" id="typeTag">--</div>
+      <div class="result-title" id="resultTitle">--</div>
+      <div class="result-desc" id="resultDesc">--</div>
+    </div>
+
+    <div class="result-scale">
+      <div class="scale-title">你在光譜上的位置</div>
+      <div class="scale-row">
+        <div class="scale-seg" style="background:#F7C1C1"></div>
+        <div class="scale-seg" style="background:#FAC775"></div>
+        <div class="scale-seg" style="background:#EAF3DE"></div>
+        <div class="scale-seg" style="background:#9FE1CB"></div>
+      </div>
+      <div class="scale-labels">
+        <div class="scale-lbl">8 負向塑造</div>
+        <div class="scale-lbl">20 中性觀望</div>
+        <div class="scale-lbl">32 主動塑造</div>
+      </div>
+      <div class="scale-marker-wrap">
+        <div class="scale-marker" id="scaleMarker" style="left: 50%">你</div>
+      </div>
+    </div>
+
+    <div class="result-breakdown">
+      <div class="breakdown-title">各題作答傾向分佈</div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">資源分配</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar1" style="background:#B5D4F4; width:0%"></div></div>
+        <div class="breakdown-val" id="bv1">--</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">回饋品質</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar2" style="background:#9FE1CB; width:0%"></div></div>
+        <div class="breakdown-val" id="bv2">--</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">期待傳遞</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar3" style="background:#FAC775; width:0%"></div></div>
+        <div class="breakdown-val" id="bv3">--</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">自我覺察</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar4" style="background:#CECBF6; width:0%"></div></div>
+        <div class="breakdown-val" id="bv4">--</div>
+      </div>
+    </div>
+
+    <div class="result-advice" id="resultAdvice">
+      <div class="advice-header">針對你的模式，建議優先做這幾件事</div>
+      <div class="advice-list" id="adviceList"></div>
+    </div>
+
+    <div class="hint-box">
+      <div class="hint-box-title">畢馬龍效應的核心提醒</div>
+      <p>期待不是「你在心裡相信他」，而是「他感受到你相信他」。兩者之間的距離，就是你需要刻意設計的管理行為。研究顯示，被感受到的高期待，能讓表現提升 15–30%——而這個效果，完全來自你的行為，不是能力。</p>
+    </div>
+
+    <div style="text-align:center">
+      <button class="retry-btn" onclick="resetQuiz()">↺ 重新作答</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const TOTAL = 8;
+let answers = {};
+
+// Track answers and update progress
+document.getElementById('quizForm').addEventListener('change', function(e) {
+  if (e.target.type === 'radio') {
+    const q = e.target.name;
+    answers[q] = parseInt(e.target.value);
+    const card = e.target.closest('.q-card');
+    if (card) card.classList.add('answered');
+
+    const count = Object.keys(answers).length;
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+    document.getElementById('progressCount').textContent = count + ' / ' + TOTAL;
+    document.getElementById('submitBtn').disabled = count < TOTAL;
+  }
+});
+
+function calculateScore() {
+  let total = 0;
+  for (let i = 1; i <= TOTAL; i++) {
+    total += answers['q' + i] || 0;
+  }
+
+  // Scale marker position (score 8–32 maps to 0–100%)
+  const pct = ((total - 8) / 24 * 100).toFixed(1);
+  document.getElementById('scaleMarker').style.left = Math.max(5, Math.min(95, pct)) + '%';
+
+  // Score ring
+  document.getElementById('scoreNum').textContent = total;
+
+  // Breakdown (questions grouped)
+  // Q1,Q2 = resource allocation; Q3,Q4 = feedback; Q5,Q8 = expectation signal; Q6,Q7 = self-awareness
+  const dims = [
+    [answers.q1, answers.q2],
+    [answers.q3, answers.q4],
+    [answers.q5, answers.q8],
+    [answers.q6, answers.q7]
+  ];
+  const ids = ['bar1','bar2','bar3','bar4'];
+  const vals = ['bv1','bv2','bv3','bv4'];
+  dims.forEach((d, i) => {
+    const s = (d[0] || 0) + (d[1] || 0);
+    const pct = (s / 8 * 100).toFixed(0);
+    setTimeout(() => {
+      document.getElementById(ids[i]).style.width = pct + '%';
+      document.getElementById(vals[i]).textContent = s + '/8';
+    }, 200 + i * 100);
+  });
+
+  // Result type
+  let type, title, desc, ringBorder, tagBg, tagColor;
+  if (total <= 14) {
+    type = '負向塑造模式';
+    title = '你的期待正在無意間設下天花板';
+    desc = '你傾向以過去表現預測未來，資源分配偏向已驗證的人，回饋偏評價型。這些行為在老師身上製造了「反正沒用」的迴圈。好消息是：這完全可以改變，而且改變的成本很低。';
+    ringBorder = '#E24B4A'; tagBg = '#FCEBEB'; tagColor = '#791F1F';
+  } else if (total <= 21) {
+    type = '中性觀望模式';
+    title = '你沒有傷害，但也沒有充分塑造';
+    desc = '你對老師保持公平，不標籤化，但期待大多停留在你的內心，沒有被轉化為老師感受得到的具體行為。畢馬龍效應需要「被感受到的期待」才能發生——你距離發揮全部影響力只差幾個習慣調整。';
+    ringBorder = '#BA7517'; tagBg = '#FAEEDA'; tagColor = '#633806';
+  } else if (total <= 27) {
+    type = '主動期待模式';
+    title = '你已經在用期待塑造團隊文化';
+    desc = '你有意識地把期待轉化為資源分配、回饋語言與發展機會，老師在你的管理下能感受到「被信任」。進一步可以做的是：讓這些行為更系統化，讓每一位老師都在某件事上被看見。';
+    ringBorder = '#1D9E75'; tagBg = '#E1F5EE'; tagColor = '#085041';
+  } else {
+    type = '高效塑造模式';
+    title = '你是一位真正的畢馬龍型主管';
+    desc = '你不只相信每個人的潛力，更把這個信念設計進了日常管理行為。期待有底線但無天花板，回饋具體且成長導向，資源分配是刻意的信任傳遞工具。這樣的管理環境，會讓老師敢冒險、願意突破。';
+    ringBorder = '#0F6E56'; tagBg = '#E1F5EE'; tagColor = '#04342C';
+  }
+
+  document.getElementById('scoreRing').style.borderColor = ringBorder;
+  document.getElementById('scoreNum').style.color = ringBorder;
+  const tag = document.getElementById('typeTag');
+  tag.textContent = type;
+  tag.style.background = tagBg;
+  tag.style.color = tagColor;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultDesc').textContent = desc;
+
+  // Advice
+  const allAdvice = [
+    { icon: '↗', bg: '#E6F1FB', color: '#042C53', main: '把資源分配當期待工具', sub: '下次分配重要班級前，問自己：這個決定傳遞了什麼期待訊號？試著讓一位「潛力型」老師承擔一個稍微超出他的任務。' },
+    { icon: '◎', bg: '#EAF3DE', color: '#173404', main: '把回饋句型從評價型換成引導型', sub: '把「你做不好」換成「如果你試試 ___，結果會怎樣？」這一句話的改變，直接重塑老師對自己能力的認知。' },
+    { icon: '◈', bg: '#FAEEDA', color: '#412402', main: '每週設計一個「可見的期待時刻」', sub: '在會議上公開肯定一個進步，給一個機會，說一句「我認為你可以試試這個」——讓期待從你的心裡走出來，成為他能聽到的話。' },
+    { icon: '⊕', bg: '#EEEDFE', color: '#26215C', main: '建立「早期成功設計」的思維', sub: '新老師的第一個班要讓他能成功，先體驗「我可以做到」，再給挑戰。成功的早期經驗是後續高期待的基礎。' },
+    { icon: '✦', bg: '#D4EDE8', color: '#04342C', main: '把半年無進步當成介入設計失敗，而非人的失敗', sub: '問自己：「我用對方法了嗎？」而不是「這個人有沒有潛力？」這個歸因的轉換，是長期高期待的核心心智模型。' },
+    { icon: '◇', bg: '#F5EDD6', color: '#412402', main: '每季做一次期待覺察自檢', sub: '問自己：「我對哪些老師的互動頻率明顯下降？是否有人正在被我無意間冷處理？」用數據（回覆數、會議點名次數）照出你的隱性期待分布。' }
+  ];
+
+  // Select advice based on score
+  let picks;
+  if (total <= 14) picks = [0, 1, 2, 3];
+  else if (total <= 21) picks = [1, 2, 4, 5];
+  else if (total <= 27) picks = [2, 3, 5];
+  else picks = [2, 5];
+
+  const list = document.getElementById('adviceList');
+  list.innerHTML = '';
+  picks.forEach(i => {
+    const a = allAdvice[i];
+    list.innerHTML += `
+      <div class="advice-item">
+        <div class="advice-icon" style="background:${a.bg};color:${a.color};font-size:14px">${a.icon}</div>
+        <div class="advice-text">
+          <div class="advice-main">${a.main}</div>
+          <div class="advice-sub">${a.sub}</div>
+        </div>
+      </div>`;
+  });
+
+  // Show result
+  document.getElementById('quizForm').style.display = 'none';
+  const rw = document.getElementById('resultWrap');
+  rw.classList.add('visible');
+  rw.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  answers = {};
+  document.getElementById('quizForm').reset();
+  document.getElementById('quizForm').style.display = 'block';
+  document.getElementById('resultWrap').classList.remove('visible');
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressCount').textContent = '0 / 8';
+  document.getElementById('submitBtn').disabled = true;
+  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
 <title>畢馬龍效應 × 職場健康</title>
 
 <style>
