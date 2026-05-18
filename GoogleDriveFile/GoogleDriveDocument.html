@@ -1,0 +1,209 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.header{display:flex;align-items:center;gap:10px;padding:1.25rem 0 1rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.25rem}
+.gdrive-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px}
+.header-text h1{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.header-text p{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;margin-top:1.25rem}
+.file-list{display:flex;flex-direction:column;gap:8px}
+.file-row{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s}
+.file-row:hover{border-color:var(--color-border-primary)}
+.file-row.active{border-color:#1a73e8;border-width:1.5px}
+.file-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.doc-icon{background:#e8f0fe}
+.slide-icon{background:#fce8e6}
+.file-info{flex:1;min-width:0}
+.file-name{font-size:13px;font-weight:500;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-badge{display:inline-flex;align-items:center;font-size:10px;padding:2px 7px;border-radius:20px;margin-top:3px}
+.badge-doc{background:#e8f0fe;color:#1a73e8}
+.badge-slide{background:#fce8e6;color:#d93025}
+.file-btns{display:flex;gap:6px;flex-shrink:0}
+.btn{background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;color:var(--color-text-secondary);display:flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap}
+.btn:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.btn-edit:hover{color:#1a73e8;border-color:#1a73e8}
+.btn-copy:hover{color:#188038;border-color:#188038}
+.btn-print:hover{color:#e37400;border-color:#e37400}
+.preview-area{margin-top:1.25rem;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.preview-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)}
+.preview-title{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.preview-close{background:transparent;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:16px;line-height:1;padding:0 4px}
+.preview-close:hover{color:var(--color-text-primary)}
+.preview-frame{width:100%;border:none;display:block;background:#fff}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--color-text-primary);color:var(--color-background-primary);border-radius:var(--border-radius-md);padding:8px 16px;font-size:12px;display:none;z-index:999;white-space:nowrap}
+</style>
+
+<h2 class="sr-only">Google Drive 檔案首頁 — 文件與簡報列表，支援編輯、複製與列印</h2>
+
+<div class="header">
+  <svg class="gdrive-icon" viewBox="0 0 24 24">
+    <path d="M2.5 13l4-7h4l-4 7z" fill="#0F9D58"/>
+    <path d="M10.5 6h4l4 7h-4z" fill="#4285F4"/>
+    <path d="M6.5 20l4-7h8l-4 7z" fill="#FBBC04"/>
+  </svg>
+  <div class="header-text">
+    <h1>我的雲端硬碟</h1>
+    <p>5 個檔案 · Google 文件 & 簡報</p>
+  </div>
+</div>
+
+<div class="section-label">Google 文件</div>
+<div class="file-list" id="fileList"></div>
+
+<div id="previewArea" style="display:none" class="preview-area">
+  <div class="preview-bar">
+    <span class="preview-title" id="previewTitle">預覽</span>
+    <button class="preview-close" onclick="closePreview()">✕</button>
+  </div>
+  <iframe class="preview-frame" id="previewFrame" src="" height="480"></iframe>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const files = [
+  {
+    name: "文件一",
+    type: "doc",
+    embedUrl: "https://docs.google.com/document/d/e/2PACX-1vTUDp16jw4dPxo5hZ0HxVqtZ7IzpvIlklEQYkvWwiw1mdi3BdOrC0HKPnPIO6ambg/pub?embedded=true",
+    pubUrl:   "https://docs.google.com/document/d/e/2PACX-1vTUDp16jw4dPxo5hZ0HxVqtZ7IzpvIlklEQYkvWwiw1mdi3BdOrC0HKPnPIO6ambg/pub",
+    editHint: "https://docs.google.com/document/d/e/2PACX-1vTUDp16jw4dPxo5hZ0HxVqtZ7IzpvIlklEQYkvWwiw1mdi3BdOrC0HKPnPIO6ambg/pub",
+  },
+  {
+    name: "文件二",
+    type: "doc",
+    embedUrl: "https://docs.google.com/document/d/e/2PACX-1vTRFX7w1YMdKndXUFSpjoSYV9Vg0tOnJL0QMeenlRsUPCTXmx8rPrUzH3CkHSCmQQ/pub?embedded=true",
+    pubUrl:   "https://docs.google.com/document/d/e/2PACX-1vTRFX7w1YMdKndXUFSpjoSYV9Vg0tOnJL0QMeenlRsUPCTXmx8rPrUzH3CkHSCmQQ/pub",
+    editHint: "https://docs.google.com/document/d/e/2PACX-1vTRFX7w1YMdKndXUFSpjoSYV9Vg0tOnJL0QMeenlRsUPCTXmx8rPrUzH3CkHSCmQQ/pub",
+  },
+  {
+    name: "文件三",
+    type: "doc",
+    embedUrl: "https://docs.google.com/document/d/e/2PACX-1vTRyRVIR8k0tvcK-t-lWqOCj1-y7V-4ay2-b9ODcDqs9OpISFz3c_4diZBIIGVrSg/pub?embedded=true",
+    pubUrl:   "https://docs.google.com/document/d/e/2PACX-1vTRyRVIR8k0tvcK-t-lWqOCj1-y7V-4ay2-b9ODcDqs9OpISFz3c_4diZBIIGVrSg/pub",
+    editHint: "https://docs.google.com/document/d/e/2PACX-1vTRyRVIR8k0tvcK-t-lWqOCj1-y7V-4ay2-b9ODcDqs9OpISFz3c_4diZBIIGVrSg/pub",
+  },
+  {
+    name: "文件四",
+    type: "doc",
+    embedUrl: "https://docs.google.com/document/d/e/2PACX-1vTxrBDVvBVVGFsYp5TC6x8wKk5lOqxqehOcj7nVmeLw2oR11H2rnDNFDh7FsHPtAw/pub?embedded=true",
+    pubUrl:   "https://docs.google.com/document/d/e/2PACX-1vTxrBDVvBVVGFsYp5TC6x8wKk5lOqxqehOcj7nVmeLw2oR11H2rnDNFDh7FsHPtAw/pub",
+    editHint: "https://docs.google.com/document/d/e/2PACX-1vTxrBDVvBVVGFsYp5TC6x8wKk5lOqxqehOcj7nVmeLw2oR11H2rnDNFDh7FsHPtAw/pub",
+  },
+  {
+    name: "簡報一",
+    type: "slide",
+    embedUrl: "https://docs.google.com/presentation/d/e/2PACX-1vTcIU9jOWbHnM-Wvf3_y9ZJRvyq0ien4yMX3sf2t2AAdejU7jSNRxuMl5IKO02avw/pubembed?start=true&loop=true&delayms=3000",
+    pubUrl:   "https://docs.google.com/presentation/d/e/2PACX-1vTcIU9jOWbHnM-Wvf3_y9ZJRvyq0ien4yMX3sf2t2AAdejU7jSNRxuMl5IKO02avw/pub",
+    editHint: "https://docs.google.com/presentation/d/e/2PACX-1vTcIU9jOWbHnM-Wvf3_y9ZJRvyq0ien4yMX3sf2t2AAdejU7jSNRxuMl5IKO02avw/pub",
+  }
+];
+
+let activeIdx = null;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2500);
+}
+
+function previewFile(idx) {
+  const f = files[idx];
+  activeIdx = idx;
+  document.querySelectorAll('.file-row').forEach((r,i) => r.classList.toggle('active', i===idx));
+  document.getElementById('previewTitle').textContent = '預覽：' + f.name;
+  document.getElementById('previewFrame').src = f.embedUrl;
+  document.getElementById('previewFrame').height = f.type === 'slide' ? '480' : '520';
+  document.getElementById('previewArea').style.display = 'block';
+  document.getElementById('previewArea').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function closePreview() {
+  document.getElementById('previewArea').style.display = 'none';
+  document.getElementById('previewFrame').src = '';
+  document.querySelectorAll('.file-row').forEach(r => r.classList.remove('active'));
+  activeIdx = null;
+}
+
+function editFile(idx, e) {
+  e.stopPropagation();
+  openLink(files[idx].pubUrl);
+  showToast('在 Google 開啟編輯...');
+}
+
+function copyFile(idx, e) {
+  e.stopPropagation();
+  const url = files[idx].pubUrl;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('已複製「' + files[idx].name + '」連結'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = url; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('已複製「' + files[idx].name + '」連結');
+  }
+}
+
+function printFile(idx, e) {
+  e.stopPropagation();
+  const f = files[idx];
+  const printUrl = f.type === 'doc'
+    ? f.pubUrl.replace('/pub', '/export?format=pdf')
+    : f.pubUrl + '/export/pptx';
+  openLink(printUrl);
+  showToast('準備列印「' + f.name + '」...');
+}
+
+function renderList() {
+  const list = document.getElementById('fileList');
+  let docSection = '', slideSection = '', hasSlide = false;
+  files.forEach((f, i) => {
+    const isSlide = f.type === 'slide';
+    if (isSlide) hasSlide = true;
+    const iconBg = isSlide ? 'slide-icon' : 'doc-icon';
+    const icon = isSlide ? '📑' : '📄';
+    const badgeCls = isSlide ? 'badge-slide' : 'badge-doc';
+    const badgeLabel = isSlide ? 'Google 簡報' : 'Google 文件';
+    const row = `
+      <div class="file-row" onclick="previewFile(${i})">
+        <div class="file-icon ${iconBg}">${icon}</div>
+        <div class="file-info">
+          <div class="file-name">${f.name}</div>
+          <span class="file-badge ${badgeCls}">${badgeLabel}</span>
+        </div>
+        <div class="file-btns">
+          <button class="btn btn-edit" onclick="editFile(${i},event)">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            編輯
+          </button>
+          <button class="btn btn-copy" onclick="copyFile(${i},event)">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            複製
+          </button>
+          <button class="btn btn-print" onclick="printFile(${i},event)">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            列印
+          </button>
+        </div>
+      </div>`;
+    if (isSlide) slideSection += row;
+    else docSection += row;
+  });
+  list.innerHTML = docSection;
+  if (hasSlide) {
+    const label = document.createElement('div');
+    label.className = 'section-label';
+    label.style.marginTop = '1.25rem';
+    label.textContent = 'Google 簡報';
+    list.after(label);
+    const slideList = document.createElement('div');
+    slideList.className = 'file-list';
+    slideList.innerHTML = slideSection;
+    label.after(slideList);
+  }
+}
+
+renderList();
+</script>
