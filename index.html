@@ -15,6 +15,7 @@
       --c-red: #d63060;
       --c-teal: #00897b;
       --c-xmas: #c0392b;
+      --c-indigo: #3949ab;
       --bg: #f2f6f2;
       --white: #ffffff;
       --text: #2c2c2c;
@@ -401,15 +402,97 @@
     .pa-enter-btn:active { transform: translateY(0); }
     .pa-error { display: none; color: #ef9a9a; font-size: 0.8rem; margin-top: 10px; }
 
-    /* ── Footer ── */
-    .zh-footer {
-      text-align: center;
-      padding: 18px;
-      background: var(--white);
-      font-size: 0.82rem;
-      color: #999;
-      border-top: 1px solid var(--border);
+    /* ── Common Forms Section ── */
+    .common-forms-bar {
+      background: linear-gradient(135deg, #f3f0ff 0%, #ede8ff 50%, #f0f4ff 100%);
+      border-top: 3px solid var(--c-indigo);
+      padding: 36px 0 30px;
     }
+    .common-forms-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .common-forms-title {
+      text-align: center;
+      margin: 0 0 6px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--c-indigo);
+      letter-spacing: 0.04em;
+    }
+    .common-forms-subtitle {
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin: 0 0 26px;
+    }
+    .common-forms-card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #c5cae9;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 12px rgba(57,73,171,0.09);
+      transition: box-shadow 0.2s, transform 0.18s;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .common-forms-card:hover {
+      box-shadow: 0 6px 22px rgba(57,73,171,0.16);
+      transform: translateY(-2px);
+    }
+    .common-forms-card-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .common-forms-icon {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(57,73,171,0.3);
+    }
+    .common-forms-text h3 {
+      margin: 0 0 5px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--c-indigo);
+    }
+    .common-forms-text p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .common-forms-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-indigo);
+      color: #fff;
+      padding: 11px 26px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+      box-shadow: 0 2px 8px rgba(57,73,171,0.35);
+    }
+    .common-forms-btn:hover {
+      background: #283593;
+      box-shadow: 0 4px 16px rgba(57,73,171,0.45);
+      transform: translateY(-1px);
+    }
+    .common-forms-btn:active { transform: translateY(0); }
 
     /* ── YouTube Presentation Modal ── */
     .yt-modal-overlay {
@@ -711,6 +794,8 @@
       .health-dir-grid { grid-template-columns: repeat(2, 1fr); }
       .pa-form { flex-direction: column; align-items: center; }
       .pa-field input { width: 200px; }
+      .common-forms-card { flex-direction: column; text-align: center; }
+      .common-forms-card-left { flex-direction: column; }
     }
   </style>
 </head>
@@ -880,6 +965,7 @@
         <li><a href="#games">● 互動遊戲與抽獎</a></li>
         <li><a href="#articles">● 專業文章目錄</a></li>
         <li><a href="#health-knowledge">● 健康保健常識目錄</a></li>
+        <li><a href="#common-forms">● 常用的公事表單</a></li>
         <li><a href="#">● 保健食品商城 🛒</a></li>
         <li><a href="#">● 關於吉的堡機構</a></li>
       </ul>
@@ -943,6 +1029,26 @@
     📘 大立昇吉的堡英文學習綱
   </a>
 </div>
+
+<!-- ══ Common Forms ══ -->
+<section class="common-forms-bar" id="common-forms">
+  <div class="common-forms-inner">
+    <h2 class="common-forms-title">📋 常用的公事表單</h2>
+    <p class="common-forms-subtitle">快速存取日常行政與教學所需的各類表單文件</p>
+    <div class="common-forms-card">
+      <div class="common-forms-card-left">
+        <div class="common-forms-icon">📄</div>
+        <div class="common-forms-text">
+          <h3>公事表單文件總覽</h3>
+          <p>彙整常用行政、教學與活動申請等各類表單，<br>一站式查閱，提升工作效率。</p>
+        </div>
+      </div>
+      <a href="GoogleDriveFile/GoogleDriveDocument.html" class="common-forms-btn">
+        📂 開啟表單目錄
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ══ Public Affairs ══ -->
 <div class="public-affairs-bar" id="public-affairs">
