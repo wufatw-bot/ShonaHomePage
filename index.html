@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>芝芝愛健康 | 守護家庭與教育的成長夥伴</title>
+  <title>休娜的工作大事紀 | 守護家庭與教育的成長夥伴</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -521,7 +521,6 @@
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* topbar */
     .yt-topbar {
       display: flex;
       align-items: center;
@@ -560,10 +559,8 @@
     .yt-topbar-btns button.yt-close-btn { color: #e87a7a; border-color: rgba(232,120,120,0.3); }
     .yt-topbar-btns button.yt-close-btn:hover { background: rgba(232,120,120,0.12); border-color: #e87a7a; }
 
-    /* main area */
     .yt-main { display: flex; flex: 1; overflow: hidden; }
 
-    /* sidebar thumbnails */
     .yt-sidebar {
       width: 190px;
       flex-shrink: 0;
@@ -592,7 +589,6 @@
     .yt-thumb-title { font-size: 11px; color: #ddd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .yt-thumb-icon { margin-top: 5px; width: 100%; aspect-ratio: 16/9; border-radius: 3px; background: #0a0a0f; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 
-    /* canvas */
     .yt-canvas {
       flex: 1;
       display: flex;
@@ -662,7 +658,6 @@
     .yt-subtitle { font-size: clamp(13px,1.4vw,16px); color: #888; line-height: 1.6; max-width: 500px; }
     .yt-slide-num { position: absolute; top: 1rem; right: 1.2rem; font-family: monospace; font-size: 11px; color: #555; z-index: 3; }
 
-    /* side-video layout */
     .yt-slide-video { flex-direction: row !important; }
     .yt-video-left { width: 58%; background: #000; position: relative; flex-shrink: 0; }
     .yt-video-left iframe { position: absolute; top:0;left:0;width:100%;height:100%;border:none; }
@@ -671,26 +666,22 @@
     .yt-video-right p { font-size:12px;color:#888;line-height:1.7;margin-bottom:0.8rem; }
     .yt-video-tag { display:inline-block;background:rgba(232,201,109,0.1);color:#e8c96d;font-size:11px;font-family:monospace;padding:3px 9px;border-radius:3px; }
 
-    /* full-video layout */
     .yt-slide-fullvideo .yt-slide-inner { padding: 0; position: relative; }
     .yt-slide-fullvideo iframe { position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:10px; }
     .yt-video-caption { position:absolute;bottom:0;left:0;right:0;padding:0.8rem 1.2rem;background:linear-gradient(transparent,rgba(0,0,0,0.82));z-index:3;border-radius:0 0 10px 10px; }
     .yt-video-caption h3 { font-size:14px;color:#fff;margin-bottom:3px; }
     .yt-video-caption p { font-size:11px;color:rgba(255,255,255,0.55);margin:0; }
 
-    /* points */
     .yt-points { list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:9px; }
     .yt-points li { display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#888;line-height:1.5; }
     .yt-points li::before { content:'';width:5px;height:5px;border-radius:50%;background:#e8c96d;flex-shrink:0;margin-top:7px; }
 
-    /* grid */
     .yt-grid2 { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.2rem;flex:1; }
     .yt-gcard { background:#1a1a26;border:1px solid rgba(232,201,109,0.12);border-radius:7px;padding:1rem;display:flex;flex-direction:column;gap:5px; }
     .yt-gcard-icon { font-size:18px; }
     .yt-gcard h4 { font-size:13px;font-weight:600;color:#f0ede8;margin:0; }
     .yt-gcard p { font-size:11px;color:#666;line-height:1.5;margin:0; }
 
-    /* bottom nav */
     .yt-bottombar {
       display: flex;
       align-items: center;
@@ -721,7 +712,6 @@
     .yt-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(232,201,109,0.2); cursor: pointer; transition: all 0.18s; }
     .yt-dot.active { background: #e8c96d; transform: scale(1.35); }
 
-    /* add-video panel */
     .yt-add-panel {
       display: none;
       position: absolute;
@@ -767,7 +757,6 @@
     .yt-panel-actions button.primary { background: #e8c96d; color: #0a0a0f; border-color: #e8c96d; font-weight: 700; }
     .yt-panel-actions button.primary:hover { opacity: 0.85; }
 
-    /* Trigger button in page */
     .yt-open-btn {
       display: inline-flex;
       align-items: center;
@@ -786,7 +775,6 @@
     }
     .yt-open-btn:hover { background: #1a1a26; border-color: #e8c96d; box-shadow: 0 4px 16px rgba(232,201,109,0.18); }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       .zh-body { flex-direction: column; padding: 14px; gap: 14px; }
       .zh-sidebar { position: static; }
@@ -803,7 +791,7 @@
 
 <!-- ══ Header ══ -->
 <header class="zh-header">
-  <div class="zh-logo">🌿 芝芝愛健康</div>
+  <div class="zh-logo">📋 休娜的工作大事紀</div>
   <div class="zh-header-right">
     <div class="zh-partner">吉的堡教育機構 合作夥伴</div>
     <div class="visitor-badge">
@@ -854,7 +842,7 @@
       </div>
     </div>
 
-    <!-- Teacher Mission (NEW) -->
+    <!-- Teacher Mission -->
     <div class="zh-section" id="teacher-mission">
       <h2 class="zh-h2" style="border-left-color:var(--c-teal);color:var(--c-teal);">🍎 老師的使命與志業</h2>
       <div class="zh-banner" style="background:linear-gradient(135deg,#e0f7f4 0%,#f0fffe 100%);border:1px solid #b2dfdb;">
@@ -1057,26 +1045,24 @@
       🏛️ 大立昇吉的堡公共事務頁
       <span>內部入口</span>
     </p>
-<div class="pa-form">
-  <div class="pa-field">
-    <label>使用者名稱</label>
-    <input type="text" id="pa-username" value="Shona" autocomplete="username" />
-  </div>
-  <div class="pa-field">
-    <label>密碼</label>
-    <input type="password" id="pa-password" value="Shona" autocomplete="current-password" />
-  </div>
-</div>
-<p class="pa-error" id="pa-error">⚠️ 使用者名稱或密碼錯誤，請重新輸入。</p>
-<button class="pa-enter-btn" onclick="paLogin()">🔐 進入公共事務頁</button>
+    <div class="pa-form">
+      <div class="pa-field">
+        <label>使用者名稱</label>
+        <input type="text" id="pa-username" value="Shona" autocomplete="username" />
       </div>
+      <div class="pa-field">
+        <label>密碼</label>
+        <input type="password" id="pa-password" value="Shona" autocomplete="current-password" />
+      </div>
+    </div>
+    <p class="pa-error" id="pa-error">⚠️ 使用者名稱或密碼錯誤，請重新輸入。</p>
+    <button class="pa-enter-btn" onclick="paLogin()">🔐 進入公共事務頁</button>
+  </div>
 </div>
 
 <!-- ══ YouTube Presentation Modal ══ -->
 <div class="yt-modal-overlay" id="yt-modal-overlay" onclick="overlayClose(event)">
   <div class="yt-modal" id="yt-modal">
-
-    <!-- Top bar -->
     <div class="yt-topbar">
       <div class="yt-logo">▶ Slide Studio</div>
       <div class="yt-counter" id="yt-counter">1 / 5</div>
@@ -1087,16 +1073,9 @@
         <button class="yt-close-btn" onclick="closeYtModal()">✕ 關閉</button>
       </div>
     </div>
-
-    <!-- Main -->
     <div class="yt-main">
-      <!-- Sidebar -->
       <div class="yt-sidebar" id="yt-sidebar"></div>
-
-      <!-- Canvas -->
       <div class="yt-canvas" id="yt-canvas">
-
-        <!-- Slide 1: Cover -->
         <div class="yt-slide active" data-title="封面">
           <div class="yt-slide-inner" style="justify-content:center;">
             <div class="yt-tag">Presentation 2026</div>
@@ -1105,8 +1084,6 @@
           </div>
           <div class="yt-slide-num">01</div>
         </div>
-
-        <!-- Slide 2: Side video -->
         <div class="yt-slide" data-title="側邊影片">
           <div class="yt-slide-inner yt-slide-video" style="padding:0;">
             <div class="yt-video-left">
@@ -1123,8 +1100,6 @@
           </div>
           <div class="yt-slide-num">02</div>
         </div>
-
-        <!-- Slide 3: Full video -->
         <div class="yt-slide yt-slide-fullvideo" data-title="全螢幕影片">
           <div class="yt-slide-inner">
             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=10&rel=0&modestbranding=1"
@@ -1136,8 +1111,6 @@
           </div>
           <div class="yt-slide-num" style="color:#fff;z-index:4">03</div>
         </div>
-
-        <!-- Slide 4: Points -->
         <div class="yt-slide" data-title="內容要點">
           <div class="yt-slide-inner">
             <div class="yt-tag">Key Points</div>
@@ -1152,8 +1125,6 @@
           </div>
           <div class="yt-slide-num">04</div>
         </div>
-
-        <!-- Slide 5: Grid -->
         <div class="yt-slide" data-title="功能總覽">
           <div class="yt-slide-inner">
             <div class="yt-tag">Features</div>
@@ -1167,18 +1138,13 @@
           </div>
           <div class="yt-slide-num">05</div>
         </div>
-
-      </div><!-- end canvas -->
-    </div><!-- end main -->
-
-    <!-- Bottom nav -->
+      </div>
+    </div>
     <div class="yt-bottombar">
       <button class="yt-nav-btn" id="yt-prev" disabled onclick="ytGo(ytCurrent-1)">&#8592;</button>
       <div class="yt-dots" id="yt-dots"></div>
       <button class="yt-nav-btn" id="yt-next" onclick="ytGo(ytCurrent+1)">&#8594;</button>
     </div>
-
-    <!-- Add video panel (inside modal) -->
     <div class="yt-add-panel" id="yt-add-panel">
       <h3>加入 YouTube 影片</h3>
       <p>貼上 YouTube 連結，系統將自動擷取影片 ID 並加入新投影片。</p>
@@ -1192,12 +1158,10 @@
         <button class="primary" onclick="ytBuildVideoSlides()">✓ 套用到簡報</button>
       </div>
     </div>
-
-  </div><!-- end modal -->
+  </div>
 </div>
 
 <!-- ══ Footer ══ -->
-  <!-- ══ 吉 快捷卡片 ══ -->
 <a href="https://d8600010-gmail.github.io/DRJimmyHealthExaminationMedicalEducation/index.html"
    target="_blank" rel="noopener" title="吉 - 健康衛教"
    style="
@@ -1221,10 +1185,9 @@
    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.25)'">
   <span style="font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:13px;font-weight:700;color:#fff;line-height:1;">吉</span>
 </a>
-<footer class="zh-footer">© 2026 芝芝愛健康 ｜ 客服信箱：service@zhizhihealth.com</footer>
+<footer style="text-align:center;padding:16px;font-size:0.8rem;color:#999;background:#fff;border-top:1px solid #e0e8e0;">© 2026 休娜的工作大事紀 ｜ 客服信箱：service@zhizhihealth.com</footer>
 
 <script>
-  // ── YouTube Presentation ──
   let ytCurrent = 0;
   let ytSidebarOpen = true;
   let ytVideos = [{ id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up (Sample)' }];
@@ -1358,7 +1321,6 @@
     document.getElementById('yt-next').disabled = ytCurrent === ytSlides().length - 1;
   }
 
-  // Keyboard nav (only when modal open)
   document.addEventListener('keydown', function(e) {
     if (!document.getElementById('yt-modal-overlay').classList.contains('open')) return;
     if (document.getElementById('yt-add-panel').classList.contains('open')) return;
@@ -1381,7 +1343,6 @@
     document.getElementById('total-count').textContent = (data['__total__'] || 1).toLocaleString();
   })();
 
-  // Public affairs login
   function paLogin() {
     var user = document.getElementById('pa-username').value.trim();
     var pass = document.getElementById('pa-password').value.trim();
