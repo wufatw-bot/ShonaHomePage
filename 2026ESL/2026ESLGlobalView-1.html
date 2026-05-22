@@ -1,196 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 ESL 暑期活動</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:var(--font-sans);color:var(--color-text-primary)}
-  .app{min-height:600px}
-  .tab-bar{display:flex;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);position:sticky;top:0;z-index:10;overflow-x:auto}
-  .tab-btn{padding:11px 16px;font-size:13px;font-weight:500;border:none;background:none;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
-  .tab-btn.active{color:var(--color-text-primary);border-bottom-color:#2c3e50}
-  .tab-btn:hover:not(.active){background:var(--color-background-secondary)}
-  .panel{display:none;padding:18px}
-  .panel.active{display:block}
-  .section-title{font-size:15px;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--color-text-primary)}
-  .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;margin-bottom:14px}
-  .divider{border:0;border-top:0.5px solid var(--color-border-tertiary);margin:14px 0}
-  .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-  .badge-amber{background:#faeeda;color:#633806}
-  .btn-primary{background:#2c3e50;color:white;border:none;padding:9px 16px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s}
-  .btn-primary:hover{opacity:.85}
-  .btn-sm{background:none;color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);padding:5px 9px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px}
-  .btn-sm:hover{background:var(--color-background-secondary)}
-  .btn-danger{background:none;color:#e74c3c;border:0.5px solid #e74c3c44;padding:5px 9px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px}
-  .btn-danger:hover{background:#e74c3c11}
-  .btn-icon{background:none;border:none;cursor:pointer;color:var(--color-text-tertiary);padding:4px;border-radius:4px;display:inline-flex;transition:all .15s}
-  .btn-icon:hover{color:var(--color-text-primary);background:var(--color-background-secondary)}
-  .form-group{margin-bottom:12px}
-  .form-group label{display:block;font-size:12px;color:var(--color-text-secondary);margin-bottom:5px}
-  .form-group input[type="text"],.form-group textarea,.form-group select{width:100%;padding:7px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;font-family:var(--font-sans)}
-  .form-group input[type="text"]:focus,.form-group textarea:focus{outline:none;border-color:#3498db}
-  .form-group textarea{min-height:75px;resize:vertical}
-  .upload-zone{border:1.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:22px;text-align:center;cursor:pointer;transition:all .15s;background:var(--color-background-secondary);position:relative}
-  .upload-zone.drag-over{border-color:#3498db;background:#e6f1fb22}
-  .upload-zone:hover{border-color:#3498db}
-  .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-  .uz-icon{font-size:26px;color:var(--color-text-tertiary);margin-bottom:6px}
-  .upload-zone p{font-size:13px;color:var(--color-text-secondary)}
-  .uz-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:3px}
-  .file-list{margin-top:10px}
-  .file-item{display:flex;align-items:flex-start;gap:9px;padding:10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:8px;background:var(--color-background-primary)}
-  .fi-icon{font-size:18px;color:var(--color-text-secondary);flex-shrink:0}
-  .fi-info{flex:1;min-width:0}
-  .fi-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .fi-meta{font-size:11px;color:var(--color-text-tertiary);margin-top:1px}
-  .fi-caption{width:100%;padding:3px 6px;border:0.5px solid var(--color-border-tertiary);border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-primary);font-size:11px;margin-top:4px;font-family:var(--font-sans)}
-  .fi-caption:focus{outline:none;border-color:#3498db}
-  .fi-actions{display:flex;gap:4px;flex-shrink:0}
-
-  /* Upload image preview — full picture, no crop */
-  .fi-img-preview{width:100%;border-radius:var(--border-radius-md);display:block;object-fit:contain;margin-bottom:8px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);cursor:pointer}
-  .file-item-img{flex-direction:column;align-items:stretch}
-
-  .alert{border-radius:var(--border-radius-md);padding:9px 14px;font-size:13px;margin-bottom:12px;display:none;align-items:center;gap:7px}
-  .alert.show{display:flex}
-  .alert-success{background:#eaf3de;color:#27500a;border:0.5px solid #c0dd97}
-  .alert-error{background:#fcebeb;color:#791f1f;border:0.5px solid #f09595}
-  .preview-hero{background:linear-gradient(135deg,#1a73c8 0%,#2c3e50 60%,#1a252f 100%);color:white;padding:36px 24px 32px;border-radius:var(--border-radius-lg);text-align:center;margin-bottom:16px;position:relative;overflow:hidden}
-  .preview-hero h1{font-size:26px;font-weight:500;margin-bottom:6px}
-  .preview-hero p{font-size:13px;opacity:.8}
-  .preview-hero .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:0.5px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px;font-size:11px;margin-bottom:14px}
-  .visitor-bar{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-  .vb-left{display:flex;align-items:center;gap:20px}
-  .vb-divider{width:0.5px;height:28px;background:var(--color-border-tertiary)}
-  .vb-item .vb-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:2px}
-  .vb-item .vb-num{font-size:20px;font-weight:500}
-  .vb-today{color:#27ae60}
-  .vb-total{color:#3498db}
-  .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
-  .content-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:3px solid #e67e22;border-radius:var(--border-radius-lg);padding:16px;transition:box-shadow .15s}
-  .content-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
-  .content-card h3{font-size:13px;font-weight:500;color:#e67e22;margin-bottom:8px;padding-bottom:8px;border-bottom:0.5px solid var(--color-border-tertiary)}
-  .content-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
-
-  /* Gallery — full image, no crop, no height limit */
-  .img-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
-  .img-thumb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;cursor:pointer;transition:all .2s}
-  .img-thumb:hover{border-color:#3498db;transform:translateY(-2px);box-shadow:0 4px 12px rgba(52,152,219,.15)}
-  .img-thumb img{width:100%;height:auto;display:block;object-fit:unset}
-  .it-cap{font-size:12px;padding:8px 10px;color:var(--color-text-secondary);text-align:center;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)}
-
-  .attach-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:6px;font-size:13px;cursor:pointer;transition:background .15s;text-decoration:none;color:var(--color-text-primary)}
-  .attach-item:hover{background:var(--color-background-secondary)}
-  .ai-icon{font-size:18px;color:#3498db;flex-shrink:0}
-  .ai-name{flex:1;font-weight:500;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .ai-size{font-size:11px;color:var(--color-text-tertiary);flex-shrink:0}
-  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-  .stat-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center}
-  .stat-box .sb-num{font-size:22px;font-weight:500}
-  .stat-box .sb-lbl{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
-  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
-  .lightbox.open{display:flex}
-  .lb-inner{position:relative;max-width:92vw;max-height:92vh;text-align:center}
-  .lb-inner img{max-width:100%;max-height:85vh;border-radius:8px;object-fit:contain;display:block}
-  .lb-cap{color:rgba(255,255,255,.75);font-size:13px;margin-top:10px}
-  .lb-close{position:absolute;top:-12px;right:-12px;background:#fff;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:1}
-  .loading-bar{height:3px;background:#e6f1fb;border-radius:2px;overflow:hidden;margin-bottom:12px}
-  .loading-bar-inner{height:100%;background:#3498db;border-radius:2px;animation:loadpulse 1.5s ease-in-out infinite}
-  @keyframes loadpulse{0%,100%{width:20%}50%{width:80%}}
-  .empty-state{text-align:center;padding:28px 16px;color:var(--color-text-tertiary);font-size:13px}
-  .empty-state i{font-size:32px;display:block;margin-bottom:8px}
-  .iframe-wrap{border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
-  .iframe-wrap iframe{border:none;width:100%;height:520px;display:block}
-  .card-editor{border:0.5px solid var(--color-border-tertiary);border-left:3px solid #e67e22;border-radius:var(--border-radius-lg);padding:14px;margin-bottom:12px;background:var(--color-background-primary)}
-  .card-editor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-  .card-editor-actions{display:flex;gap:4px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#f5f5f0}
+.app{min-height:100vh;max-width:900px;margin:0 auto;background:#fff}
+.tab-bar{display:flex;border-bottom:1px solid #e5e5e5;background:#fff;position:sticky;top:0;z-index:10;overflow-x:auto}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:500;border:none;background:none;cursor:pointer;color:#666;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab-btn.active{color:#1a1a1a;border-bottom-color:#2c3e50}
+.tab-btn:hover:not(.active){background:#f9f9f7}
+.panel{display:none;padding:20px}
+.panel.active{display:block}
+.section-title{font-size:15px;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;margin-bottom:14px}
+.badge-amber{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;background:#faeeda;color:#633806}
+.btn-primary{background:#2c3e50;color:#fff;border:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-sm{background:none;color:#555;border:1px solid #ddd;padding:5px 10px;border-radius:8px;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+.btn-sm:hover{background:#f5f5f0}
+.btn-danger{background:none;color:#e74c3c;border:1px solid #f5b5b5;padding:5px 10px;border-radius:8px;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.btn-danger:hover{background:#fef2f2}
+.btn-icon{background:none;border:none;cursor:pointer;color:#999;padding:4px;border-radius:4px;display:inline-flex;transition:all .15s}
+.btn-icon:hover{color:#1a1a1a;background:#f5f5f0}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:12px;color:#666;margin-bottom:5px}
+.form-group input[type="text"],.form-group textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;font-size:13px;font-family:inherit}
+.form-group input[type="text"]:focus,.form-group textarea:focus{outline:none;border-color:#3498db}
+.form-group textarea{min-height:75px;resize:vertical}
+.upload-zone{border:2px dashed #ddd;border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;background:#f9f9f7;position:relative}
+.upload-zone:hover,.upload-zone.drag-over{border-color:#3498db;background:#eff7ff}
+.upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-zone .uz-icon{font-size:28px;color:#aaa;margin-bottom:6px}
+.upload-zone p{font-size:13px;color:#666}
+.upload-zone .uz-sub{font-size:11px;color:#aaa;margin-top:3px}
+.file-list{margin-top:10px}
+.file-item{display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid #eee;border-radius:8px;margin-bottom:7px;background:#fff}
+.fi-img-preview{width:100%;border-radius:8px;display:block;object-fit:contain;margin-bottom:8px;border:1px solid #eee;background:#f9f9f7;cursor:pointer}
+.file-item-img{flex-direction:column;align-items:stretch}
+.fi-info{flex:1;min-width:0}
+.fi-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fi-meta{font-size:11px;color:#aaa;margin-top:1px}
+.fi-caption{width:100%;padding:3px 6px;border:1px solid #eee;border-radius:4px;background:#f9f9f7;color:#1a1a1a;font-size:11px;margin-top:4px;font-family:inherit}
+.fi-caption:focus{outline:none;border-color:#3498db}
+.fi-actions{display:flex;gap:4px;flex-shrink:0}
+.alert{border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:12px;display:none;align-items:center;gap:7px}
+.alert.show{display:flex}
+.alert-success{background:#eaf3de;color:#27500a;border:1px solid #c0dd97}
+.alert-error{background:#fef2f2;color:#7f1d1d;border:1px solid #fca5a5}
+.preview-hero{background:linear-gradient(135deg,#1a73c8 0%,#2c3e50 60%,#1a252f 100%);color:#fff;padding:36px 24px 32px;border-radius:12px;text-align:center;margin-bottom:16px}
+.preview-hero .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px;font-size:11px;margin-bottom:14px}
+.preview-hero h1{font-size:26px;font-weight:500;margin-bottom:6px}
+.preview-hero p{font-size:13px;opacity:.8}
+.visitor-bar{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.vb-left{display:flex;align-items:center;gap:20px}
+.vb-divider{width:1px;height:28px;background:#e5e5e5}
+.vb-item .vb-label{font-size:11px;color:#aaa;margin-bottom:2px}
+.vb-item .vb-num{font-size:20px;font-weight:500}
+.content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.content-card{background:#fff;border:1px solid #e5e5e5;border-top:3px solid #e67e22;border-radius:12px;padding:16px;transition:box-shadow .15s}
+.content-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.content-card h3{font-size:13px;font-weight:500;color:#e67e22;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee}
+.content-card p{font-size:12px;color:#666;line-height:1.7}
+.img-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
+.img-thumb{background:#f5f5f0;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s}
+.img-thumb:hover{border-color:#3498db;transform:translateY(-2px);box-shadow:0 4px 12px rgba(52,152,219,.15)}
+.img-thumb img{width:100%;height:auto;display:block}
+.it-cap{font-size:12px;padding:8px 10px;color:#666;text-align:center;border-top:1px solid #eee;background:#fff}
+.attach-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #eee;border-radius:8px;margin-bottom:6px;font-size:13px;cursor:pointer;transition:background .15s;text-decoration:none;color:#1a1a1a}
+.attach-item:hover{background:#f9f9f7}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-box{background:#f9f9f7;border-radius:8px;padding:12px;text-align:center}
+.stat-box .sb-num{font-size:22px;font-weight:500}
+.stat-box .sb-lbl{font-size:11px;color:#aaa;margin-top:2px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lb-inner{position:relative;max-width:92vw;max-height:92vh;text-align:center}
+.lb-inner img{max-width:100%;max-height:85vh;border-radius:8px;object-fit:contain;display:block}
+.lb-cap{color:rgba(255,255,255,.75);font-size:13px;margin-top:10px}
+.lb-close{position:absolute;top:-12px;right:-12px;background:#fff;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:1}
+.loading{text-align:center;padding:40px;color:#aaa;font-size:14px}
+.empty-state{text-align:center;padding:28px 16px;color:#aaa;font-size:13px}
+.iframe-wrap{border-radius:8px;overflow:hidden;border:1px solid #e5e5e5}
+.iframe-wrap iframe{border:none;width:100%;height:520px;display:block}
+.card-editor{border:1px solid #e5e5e5;border-left:3px solid #e67e22;border-radius:12px;padding:14px;margin-bottom:12px;background:#fff}
+.card-editor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.divider{border:0;border-top:1px solid #e5e5e5;margin:14px 0}
+.saving-indicator{display:none;font-size:12px;color:#3498db;align-items:center;gap:4px}
+.saving-indicator.show{display:inline-flex}
 </style>
-
+</head>
+<body>
 <div class="app">
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('frontend')" id="tab-frontend"><i class="ti ti-eye" aria-hidden="true"></i> 前台預覽</button>
-    <button class="tab-btn" onclick="switchTab('admin')" id="tab-admin"><i class="ti ti-settings" aria-hidden="true"></i> 後台管理</button>
-    <button class="tab-btn" onclick="switchTab('upload')" id="tab-upload"><i class="ti ti-upload" aria-hidden="true"></i> 上傳檔案</button>
-    <button class="tab-btn" onclick="switchTab('stats')" id="tab-stats"><i class="ti ti-chart-bar" aria-hidden="true"></i> 訪客統計</button>
+    <button class="tab-btn active" onclick="switchTab('frontend')" id="tab-frontend"><i class="ti ti-eye"></i> 前台預覽</button>
+    <button class="tab-btn" onclick="switchTab('admin')" id="tab-admin"><i class="ti ti-settings"></i> 後台管理</button>
+    <button class="tab-btn" onclick="switchTab('upload')" id="tab-upload"><i class="ti ti-upload"></i> 上傳檔案</button>
+    <button class="tab-btn" onclick="switchTab('stats')" id="tab-stats"><i class="ti ti-chart-bar"></i> 訪客統計</button>
   </div>
 
+  <!-- FRONTEND -->
   <div class="panel active" id="panel-frontend">
-    <div class="preview-hero">
-      <div class="hero-badge"><i class="ti ti-sun" aria-hidden="true"></i> 2026 暑期活動</div>
-      <h1 id="preview-title">2026 ESL 暑期活動</h1>
-      <p id="preview-subtitle">2026 ESL Summer Activity — 與外師一起探索世界</p>
-    </div>
-    <div class="visitor-bar">
-      <div class="vb-left">
-        <div class="vb-item"><div class="vb-label"><i class="ti ti-users" aria-hidden="true"></i> 今日到訪</div><div class="vb-num vb-today" id="fe-today">—</div></div>
-        <div class="vb-divider"></div>
-        <div class="vb-item"><div class="vb-label">累計人次</div><div class="vb-num vb-total" id="fe-total">—</div></div>
+    <div id="fe-loading" class="loading"><i class="ti ti-loader"></i> 載入中...</div>
+    <div id="fe-body" style="display:none">
+      <div class="preview-hero">
+        <div class="hero-badge"><i class="ti ti-sun"></i> 2026 暑期活動</div>
+        <h1 id="preview-title">2026 ESL 暑期活動</h1>
+        <p id="preview-subtitle">2026 ESL Summer Activity — 與外師一起探索世界</p>
       </div>
-      <button class="btn-sm" onclick="refreshFrontend()"><i class="ti ti-refresh" aria-hidden="true"></i> 重新整理</button>
-    </div>
-    <div id="fe-content-cards" class="content-grid"></div>
-    <div id="fe-images-section" style="display:none;margin-top:4px">
-      <div class="card" style="border-top:3px solid #3498db">
-        <div class="section-title" style="font-size:14px;color:#3498db"><i class="ti ti-photo" aria-hidden="true"></i> 活動圖片</div>
-        <div class="img-gallery" id="fe-img-gallery"></div>
+      <div class="visitor-bar">
+        <div class="vb-left">
+          <div class="vb-item"><div class="vb-label"><i class="ti ti-users"></i> 今日到訪</div><div class="vb-num" id="fe-today" style="color:#27ae60">—</div></div>
+          <div class="vb-divider"></div>
+          <div class="vb-item"><div class="vb-label">累計人次</div><div class="vb-num" id="fe-total" style="color:#3498db">—</div></div>
+        </div>
+        <button class="btn-sm" onclick="refreshFrontend()"><i class="ti ti-refresh"></i> 重新整理</button>
       </div>
-    </div>
-    <div id="fe-sheet-section" style="display:none;margin-top:4px">
-      <div class="card" style="border-top:3px solid #27ae60">
-        <div class="section-title" style="font-size:14px;color:#27ae60"><i class="ti ti-table" aria-hidden="true"></i> 詳細行程表</div>
-        <div class="iframe-wrap"><iframe id="fe-sheet-iframe" src="" allowfullscreen></iframe></div>
+      <div id="fe-content-cards" class="content-grid"></div>
+      <div id="fe-images-section" style="display:none;margin-top:4px">
+        <div class="card" style="border-top:3px solid #3498db">
+          <div class="section-title" style="color:#3498db"><i class="ti ti-photo"></i> 活動圖片</div>
+          <div class="img-gallery" id="fe-img-gallery"></div>
+        </div>
       </div>
-    </div>
-    <div id="fe-files-section" style="display:none;margin-top:4px">
-      <div class="card" style="border-top:3px solid #e67e22">
-        <div class="section-title" style="font-size:14px;color:#e67e22"><i class="ti ti-file" aria-hidden="true"></i> 相關文件下載</div>
-        <div class="attach-list" id="fe-file-list"></div>
+      <div id="fe-sheet-section" style="display:none;margin-top:4px">
+        <div class="card" style="border-top:3px solid #27ae60">
+          <div class="section-title" style="color:#27ae60"><i class="ti ti-table"></i> 詳細行程表</div>
+          <div class="iframe-wrap"><iframe id="fe-sheet-iframe" src="" allowfullscreen></iframe></div>
+        </div>
+      </div>
+      <div id="fe-files-section" style="display:none;margin-top:4px">
+        <div class="card" style="border-top:3px solid #e67e22">
+          <div class="section-title" style="color:#e67e22"><i class="ti ti-file"></i> 相關文件下載</div>
+          <div id="fe-file-list"></div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- ADMIN -->
   <div class="panel" id="panel-admin">
-    <div class="alert alert-success" id="admin-alert"><i class="ti ti-check" aria-hidden="true"></i> 儲存成功！</div>
-    <div class="section-title"><i class="ti ti-edit" aria-hidden="true"></i> 頁面基本設定</div>
+    <div class="alert alert-success" id="admin-alert"></div>
+    <div class="section-title"><i class="ti ti-edit"></i> 頁面基本設定</div>
     <div class="card">
       <div class="form-group"><label>頁面主標題</label><input type="text" id="cfg-title" placeholder="輸入頁面標題"></div>
       <div class="form-group"><label>副標題</label><input type="text" id="cfg-subtitle" placeholder="輸入副標題"></div>
       <div class="form-group">
         <label>Google Sheets 嵌入網址（選填）</label>
         <input type="text" id="cfg-sheet" placeholder="https://docs.google.com/spreadsheets/d/e/...pubhtml...">
-        <p style="font-size:11px;color:var(--color-text-tertiary);margin-top:4px">貼上 Google Sheets「發布到網路」的網址，前台將自動嵌入行程表</p>
+        <p style="font-size:11px;color:#aaa;margin-top:4px">貼上 Google Sheets「發布到網路」的網址</p>
       </div>
     </div>
-    <div class="section-title" style="margin-top:4px"><i class="ti ti-layout-cards" aria-hidden="true"></i> 內容卡片管理</div>
+    <div class="section-title" style="margin-top:4px"><i class="ti ti-layout-cards"></i> 內容卡片管理</div>
     <div id="cards-container"></div>
-    <button class="btn-sm" onclick="addCard()" style="margin-bottom:14px"><i class="ti ti-plus" aria-hidden="true"></i> 新增卡片</button>
+    <button class="btn-sm" onclick="addCard()" style="margin-bottom:14px"><i class="ti ti-plus"></i> 新增卡片</button>
     <hr class="divider">
-    <button class="btn-primary" onclick="saveConfig()"><i class="ti ti-device-floppy" aria-hidden="true"></i> 儲存所有設定</button>
+    <button class="btn-primary" onclick="saveConfig()"><i class="ti ti-device-floppy"></i> 儲存所有設定</button>
   </div>
 
+  <!-- UPLOAD -->
   <div class="panel" id="panel-upload">
-    <div class="alert alert-success" id="upload-alert"><i class="ti ti-check" aria-hidden="true"></i> 上傳成功！</div>
-    <div class="section-title"><i class="ti ti-photo" aria-hidden="true"></i> 上傳圖片</div>
+    <div class="alert alert-success" id="upload-alert"></div>
+    <div class="section-title"><i class="ti ti-photo"></i> 上傳圖片</div>
     <div class="card">
       <div class="upload-zone" id="img-zone" ondragover="onDragOver(event,'img-zone')" ondragleave="onDragLeave('img-zone')" ondrop="onDrop(event,'image')">
         <input type="file" id="img-input" accept="image/*" multiple onchange="handleImageUpload(event)">
-        <div class="uz-icon"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="uz-icon"><i class="ti ti-photo"></i></div>
         <p>點擊或拖曳圖片到這裡</p>
-        <p class="uz-sub">支援 JPG、PNG、GIF、WebP，上傳後完整顯示並可編輯說明文字</p>
+        <p class="uz-sub">支援 JPG、PNG、GIF、WebP</p>
       </div>
       <div class="file-list" id="img-list"></div>
     </div>
-    <div class="section-title" style="margin-top:4px"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i> 上傳 Excel 檔案</div>
+    <div class="section-title" style="margin-top:4px"><i class="ti ti-file-spreadsheet"></i> 上傳 Excel 檔案</div>
     <div class="card">
       <div class="upload-zone" id="excel-zone" ondragover="onDragOver(event,'excel-zone')" ondragleave="onDragLeave('excel-zone')" ondrop="onDrop(event,'excel')">
         <input type="file" id="excel-input" accept=".xlsx,.xls,.csv" multiple onchange="handleFileUpload(event,'excel')">
-        <div class="uz-icon"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i></div>
+        <div class="uz-icon"><i class="ti ti-file-spreadsheet"></i></div>
         <p>點擊或拖曳 Excel 到這裡</p>
         <p class="uz-sub">支援 .xlsx、.xls、.csv</p>
       </div>
       <div class="file-list" id="excel-list"></div>
     </div>
-    <div class="section-title" style="margin-top:4px"><i class="ti ti-file-text" aria-hidden="true"></i> 上傳 Word 文件</div>
+    <div class="section-title" style="margin-top:4px"><i class="ti ti-file-text"></i> 上傳 Word 文件</div>
     <div class="card">
       <div class="upload-zone" id="doc-zone" ondragover="onDragOver(event,'doc-zone')" ondragleave="onDragLeave('doc-zone')" ondrop="onDrop(event,'doc')">
         <input type="file" id="doc-input" accept=".doc,.docx" multiple onchange="handleFileUpload(event,'doc')">
-        <div class="uz-icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+        <div class="uz-icon"><i class="ti ti-file-text"></i></div>
         <p>點擊或拖曳 Word 文件到這裡</p>
         <p class="uz-sub">支援 .doc、.docx</p>
       </div>
@@ -198,43 +197,94 @@
     </div>
   </div>
 
+  <!-- STATS -->
   <div class="panel" id="panel-stats">
-    <div class="section-title"><i class="ti ti-chart-bar" aria-hidden="true"></i> 訪客統計（跨裝置）</div>
-    <div id="stats-loading" style="display:none">
-      <div class="loading-bar"><div class="loading-bar-inner"></div></div>
-    </div>
+    <div class="section-title"><i class="ti ti-chart-bar"></i> 訪客統計（跨裝置）</div>
     <div class="stats-row">
       <div class="stat-box"><div class="sb-num" id="st-today" style="color:#27ae60">—</div><div class="sb-lbl">今日到訪</div></div>
       <div class="stat-box"><div class="sb-num" id="st-week">—</div><div class="sb-lbl">本週到訪</div></div>
       <div class="stat-box"><div class="sb-num" id="st-total" style="color:#3498db">—</div><div class="sb-lbl">累計人次</div></div>
     </div>
     <div class="card">
-      <div class="section-title" style="font-size:14px;margin-bottom:12px"><i class="ti ti-calendar" aria-hidden="true"></i> 近 7 日每日到訪</div>
-      <div id="chart-area" style="padding:4px 0"></div>
+      <div class="section-title" style="font-size:14px;margin-bottom:12px"><i class="ti ti-calendar"></i> 近 7 日每日到訪</div>
+      <div id="chart-area"></div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
-      <p style="font-size:11px;color:var(--color-text-tertiary)">* 跨裝置共用同一份數據</p>
-      <button class="btn-primary" onclick="loadStats()"><i class="ti ti-refresh" aria-hidden="true"></i> 重新載入</button>
+      <p style="font-size:11px;color:#aaa">* 跨裝置共用同一份數據</p>
+      <button class="btn-primary" onclick="loadStats()"><i class="ti ti-refresh"></i> 重新載入</button>
     </div>
   </div>
 </div>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <div class="lb-inner">
-    <button class="lb-close" onclick="closeLightbox(null,true)"><i class="ti ti-x" aria-hidden="true"></i></button>
+    <button class="lb-close" onclick="closeLightbox(null,true)"><i class="ti ti-x"></i></button>
     <img id="lb-img" src="" alt="">
     <div class="lb-cap" id="lb-cap"></div>
   </div>
 </div>
 
-<script>
-const SK={config:'esl_cms_config2',images:'esl_cms_images2',files:'esl_cms_files2',visits:'esl_cms_visits2'};
-let S={
-  config:{title:'2026 ESL 暑期活動',subtitle:'2026 ESL Summer Activity — 與外師一起探索世界',sheetUrl:'',cards:[]},
-  images:[],files:[],visits:{}
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB4ekpvwv3jkAZZ9HIHpz0gdqxlKEm_w1g",
+  authDomain: "upload-5a32e.firebaseapp.com",
+  projectId: "upload-5a32e",
+  storageBucket: "upload-5a32e.firebasestorage.app",
+  messagingSenderId: "675467629936",
+  appId: "1:675467629936:web:0b22cd8369916a4017abb5"
 };
 
-function switchTab(n){
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── helpers ──────────────────────────────────────────────
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fmtBytes(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
+function today(){return new Date().toISOString().slice(0,10);}
+function fileIcon(t){return t==='excel'?'ti-file-spreadsheet':t==='doc'?'ti-file-text':'ti-file';}
+
+function showAlert(id,msg,type='success'){
+  const el=document.getElementById(id);
+  el.className='alert alert-'+type+' show';
+  el.innerHTML='<i class="ti ti-'+(type==='success'?'check':'alert-circle')+'"></i> '+msg;
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+// ── Firestore read/write ──────────────────────────────────
+async function fbGet(docId){
+  try{const snap=await getDoc(doc(db,'esl_cms',docId));return snap.exists()?snap.data():null;}
+  catch(e){console.error(e);return null;}
+}
+async function fbSet(docId,data){
+  try{await setDoc(doc(db,'esl_cms',docId),data,{merge:true});}
+  catch(e){console.error(e);}
+}
+
+// ── State ─────────────────────────────────────────────────
+let S={
+  config:{title:'2026 ESL 暑期活動',subtitle:'2026 ESL Summer Activity — 與外師一起探索世界',sheetUrl:'',cards:[]},
+  images:[],
+  files:[],
+  visits:{}
+};
+
+async function loadAll(){
+  const [cfg,imgs,files,visits]=await Promise.all([
+    fbGet('config'),fbGet('images'),fbGet('files'),fbGet('visits')
+  ]);
+  if(cfg)S.config=cfg;
+  if(imgs&&imgs.list)S.images=imgs.list;
+  if(files&&files.list)S.files=files.list;
+  if(visits)S.visits=visits;
+}
+
+// ── Tab switching ─────────────────────────────────────────
+window.switchTab=function(n){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+n).classList.add('active');
@@ -242,134 +292,106 @@ function switchTab(n){
   if(n==='frontend') renderFrontend();
   if(n==='stats') loadStats();
   if(n==='upload') renderFileLists();
-  if(n==='admin') renderAdminCards();
-}
+  if(n==='admin') renderAdmin();
+};
 
-async function loadData(){
-  try{
-    const [c,i,f,v]=await Promise.all([
-      window.storage.get(SK.config,true).catch(()=>null),
-      window.storage.get(SK.images,true).catch(()=>null),
-      window.storage.get(SK.files,true).catch(()=>null),
-      window.storage.get(SK.visits,true).catch(()=>null)
-    ]);
-    if(c)S.config=JSON.parse(c.value);
-    if(i)S.images=JSON.parse(i.value);
-    if(f)S.files=JSON.parse(f.value);
-    if(v)S.visits=JSON.parse(v.value);
-  }catch(e){}
-}
-
-async function saveData(key,data){
-  try{await window.storage.set(key,JSON.stringify(data),true);}catch(e){}
-}
-
-function today(){return new Date().toISOString().slice(0,10);}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmtBytes(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
-function fileIcon(t){if(t==='excel')return'ti-file-spreadsheet';if(t==='doc')return'ti-file-text';return'ti-file';}
-
-function showAlert(id,msg,type='success'){
-  const el=document.getElementById(id);
-  el.className='alert alert-'+(type==='success'?'success':'error')+' show';
-  if(msg)el.innerHTML='<i class="ti ti-'+(type==='success'?'check':'alert-circle')+'" aria-hidden="true"></i> '+msg;
-  setTimeout(()=>el.classList.remove('show'),2800);
-}
-
+// ── Visitor tracking ──────────────────────────────────────
 async function recordVisit(){
   const t=today();
   S.visits[t]=(S.visits[t]||0)+1;
   S.visits.__total__=(S.visits.__total__||0)+1;
-  await saveData(SK.visits,S.visits);
-  updateVisitorDisplay();
+  await fbSet('visits',S.visits);
 }
 
 function updateVisitorDisplay(){
   const t=today();
-  document.getElementById('fe-today').textContent=(S.visits[t]||0).toLocaleString()+' 人';
+  document.getElementById('fe-today').textContent=(S.visits[t]||0)+' 人';
   document.getElementById('fe-total').textContent=(S.visits.__total__||0).toLocaleString();
 }
 
-async function refreshFrontend(){
-  await loadData();
+// ── Frontend render ───────────────────────────────────────
+window.refreshFrontend=async function(){
+  await loadAll();
   renderFrontend();
-}
+};
 
 function renderFrontend(){
+  document.getElementById('fe-loading').style.display='none';
+  document.getElementById('fe-body').style.display='';
   const cfg=S.config;
-  document.getElementById('preview-title').textContent=cfg.title||'2026 ESL 暑期活動';
+  document.getElementById('preview-title').textContent=cfg.title||'';
   document.getElementById('preview-subtitle').textContent=cfg.subtitle||'';
+
   const cardsEl=document.getElementById('fe-content-cards');
-  if(cfg.cards&&cfg.cards.length>0){
-    cardsEl.innerHTML=cfg.cards.map(c=>`<div class="content-card"><h3>${c.icon||''} ${esc(c.title)}</h3><p>${esc(c.body).replace(/\n/g,'<br>')}</p></div>`).join('');
-  }else{
-    cardsEl.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><i class="ti ti-layout-cards" aria-hidden="true"></i>尚無內容卡片<br>請至後台管理新增</div>`;
-  }
-  const imgs=S.images;
+  cardsEl.innerHTML=(cfg.cards&&cfg.cards.length)
+    ?cfg.cards.map(c=>`<div class="content-card"><h3>${c.icon||''} ${esc(c.title)}</h3><p>${esc(c.body).replace(/\n/g,'<br>')}</p></div>`).join('')
+    :`<div class="empty-state" style="grid-column:1/-1"><i class="ti ti-layout-cards" style="font-size:32px;display:block;margin-bottom:8px"></i>尚無內容卡片</div>`;
+
   const imgSec=document.getElementById('fe-images-section');
-  if(imgs.length>0){
+  if(S.images.length){
     imgSec.style.display='';
-    document.getElementById('fe-img-gallery').innerHTML=imgs.map((img,i)=>`
+    document.getElementById('fe-img-gallery').innerHTML=S.images.map((img,i)=>`
       <div class="img-thumb" onclick="openLightbox(${i})">
         <img src="${img.dataUrl}" alt="${esc(img.caption||img.name)}" loading="lazy">
         <div class="it-cap">${esc(img.caption||img.name)}</div>
       </div>`).join('');
   }else{imgSec.style.display='none';}
+
   const sheetSec=document.getElementById('fe-sheet-section');
   if(cfg.sheetUrl&&cfg.sheetUrl.trim()){
     sheetSec.style.display='';
     document.getElementById('fe-sheet-iframe').src=cfg.sheetUrl.trim();
   }else{sheetSec.style.display='none';}
-  const files=S.files;
+
   const fileSec=document.getElementById('fe-files-section');
-  if(files.length>0){
+  if(S.files.length){
     fileSec.style.display='';
-    document.getElementById('fe-file-list').innerHTML=files.map(f=>`
-      <a class="attach-item" href="${f.dataUrl}" download="${esc(f.name)}" title="下載 ${esc(f.name)}">
-        <i class="ti ${fileIcon(f.type)} ai-icon" aria-hidden="true"></i>
-        <span class="ai-name">${esc(f.name)}</span>
-        <span class="ai-size">${f.size}</span>
-        <i class="ti ti-download" style="font-size:13px;color:var(--color-text-tertiary)" aria-hidden="true"></i>
+    document.getElementById('fe-file-list').innerHTML=S.files.map(f=>`
+      <a class="attach-item" href="${f.dataUrl}" download="${esc(f.name)}">
+        <i class="ti ${fileIcon(f.type)}" style="font-size:18px;color:#3498db"></i>
+        <span style="flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(f.name)}</span>
+        <span style="font-size:11px;color:#aaa">${f.size}</span>
+        <i class="ti ti-download" style="font-size:13px;color:#aaa"></i>
       </a>`).join('');
   }else{fileSec.style.display='none';}
+
   updateVisitorDisplay();
 }
 
-function openLightbox(i){
-  const img=S.images[i];
-  if(!img)return;
+// ── Lightbox ──────────────────────────────────────────────
+window.openLightbox=function(i){
+  const img=S.images[i];if(!img)return;
   document.getElementById('lb-img').src=img.dataUrl;
   document.getElementById('lb-cap').textContent=img.caption||img.name||'';
   document.getElementById('lightbox').classList.add('open');
-}
-function closeLightbox(e,force){
-  if(force||!e||e.target===document.getElementById('lightbox')){
+};
+window.closeLightbox=function(e,force){
+  if(force||!e||e.target===document.getElementById('lightbox'))
     document.getElementById('lightbox').classList.remove('open');
-  }
-}
+};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox(null,true);});
 
-function renderAdminCards(){
+// ── Admin ─────────────────────────────────────────────────
+function renderAdmin(){
   document.getElementById('cfg-title').value=S.config.title||'';
   document.getElementById('cfg-subtitle').value=S.config.subtitle||'';
   document.getElementById('cfg-sheet').value=S.config.sheetUrl||'';
   const cards=S.config.cards||[];
-  const container=document.getElementById('cards-container');
-  container.innerHTML=cards.map((c,i)=>`
-    <div class="card-editor" id="card-${i}">
+  document.getElementById('cards-container').innerHTML=cards.map((c,i)=>`
+    <div class="card-editor">
       <div class="card-editor-header">
-        <span class="badge badge-amber">卡片 ${i+1}</span>
-        <div class="card-editor-actions">
-          <button class="btn-icon" onclick="moveCard(${i},-1)" ${i===0?'style="opacity:.3"':''} aria-label="上移"><i class="ti ti-arrow-up" aria-hidden="true"></i></button>
-          <button class="btn-icon" onclick="moveCard(${i},1)" ${i===cards.length-1?'style="opacity:.3"':''} aria-label="下移"><i class="ti ti-arrow-down" aria-hidden="true"></i></button>
-          <button class="btn-danger" onclick="removeCard(${i})"><i class="ti ti-trash" aria-hidden="true"></i> 刪除</button>
+        <span class="badge-amber">卡片 ${i+1}</span>
+        <div style="display:flex;gap:4px">
+          <button class="btn-icon" onclick="moveCard(${i},-1)" ${i===0?'style="opacity:.3"':''}><i class="ti ti-arrow-up"></i></button>
+          <button class="btn-icon" onclick="moveCard(${i},1)" ${i===cards.length-1?'style="opacity:.3"':''}><i class="ti ti-arrow-down"></i></button>
+          <button class="btn-danger" onclick="removeCard(${i})"><i class="ti ti-trash"></i> 刪除</button>
         </div>
       </div>
       <div style="display:flex;gap:8px">
         <div class="form-group" style="width:70px;flex-shrink:0"><label>圖示</label><input type="text" id="ci-${i}" value="${esc(c.icon||'')}" placeholder="📝"></div>
         <div class="form-group" style="flex:1"><label>標題</label><input type="text" id="ct-${i}" value="${esc(c.title)}" placeholder="卡片標題"></div>
       </div>
-      <div class="form-group"><label>內容</label><textarea id="cb-${i}" placeholder="卡片內容（可多行）">${esc(c.body)}</textarea></div>
+      <div class="form-group"><label>內容</label><textarea id="cb-${i}">${esc(c.body)}</textarea></div>
     </div>`).join('');
 }
 
@@ -381,45 +403,40 @@ function collectCards(){
   });
 }
 
-function addCard(){
+window.addCard=function(){
   collectCards();
   S.config.cards=S.config.cards||[];
   S.config.cards.push({icon:'📌',title:'新卡片標題',body:'在這裡輸入內容...'});
-  renderAdminCards();
-}
-function removeCard(i){collectCards();S.config.cards.splice(i,1);renderAdminCards();}
-function moveCard(i,dir){
+  renderAdmin();
+};
+window.removeCard=function(i){collectCards();S.config.cards.splice(i,1);renderAdmin();};
+window.moveCard=function(i,dir){
   collectCards();
   const cards=S.config.cards;
-  const j=i+dir;
-  if(j<0||j>=cards.length)return;
-  [cards[i],cards[j]]=[cards[j],cards[i]];
-  renderAdminCards();
-}
-async function saveConfig(){
+  const j=i+dir;if(j<0||j>=cards.length)return;
+  [cards[i],cards[j]]=[cards[j],cards[i]];renderAdmin();
+};
+window.saveConfig=async function(){
   collectCards();
   S.config.title=document.getElementById('cfg-title').value;
   S.config.subtitle=document.getElementById('cfg-subtitle').value;
   S.config.sheetUrl=document.getElementById('cfg-sheet').value;
-  await saveData(SK.config,S.config);
+  await fbSet('config',S.config);
   showAlert('admin-alert','設定已儲存！');
-}
+};
 
-function onDragOver(e,id){e.preventDefault();document.getElementById(id).classList.add('drag-over');}
-function onDragLeave(id){document.getElementById(id).classList.remove('drag-over');}
-function onDrop(e,type){
+// ── Upload ────────────────────────────────────────────────
+window.onDragOver=function(e,id){e.preventDefault();document.getElementById(id).classList.add('drag-over');};
+window.onDragLeave=function(id){document.getElementById(id).classList.remove('drag-over');};
+window.onDrop=function(e,type){
   e.preventDefault();
-  const id=type==='image'?'img-zone':type+'-zone';
-  document.getElementById(id).classList.remove('drag-over');
+  document.getElementById(type==='image'?'img-zone':type+'-zone').classList.remove('drag-over');
   const files=Array.from(e.dataTransfer.files);
-  if(type==='image') processImages(files);
-  else processFiles(files,type);
-}
+  if(type==='image')processImages(files);else processFiles(files,type);
+};
 
-async function handleImageUpload(e){
-  await processImages(Array.from(e.target.files));
-  e.target.value='';
-}
+window.handleImageUpload=async function(e){await processImages(Array.from(e.target.files));e.target.value='';};
+window.handleFileUpload=async function(e,type){await processFiles(Array.from(e.target.files),type);e.target.value='';};
 
 async function processImages(files){
   const valid=files.filter(f=>f.type.startsWith('image/'));
@@ -428,14 +445,9 @@ async function processImages(files){
     const dataUrl=await readAsDataUrl(f);
     S.images.push({name:f.name,caption:f.name.replace(/\.[^.]+$/,''),dataUrl,size:fmtBytes(f.size),date:today()});
   }
-  await saveData(SK.images,S.images);
+  await fbSet('images',{list:S.images});
   renderFileLists();
   showAlert('upload-alert',`已上傳 ${valid.length} 張圖片`);
-}
-
-async function handleFileUpload(e,type){
-  await processFiles(Array.from(e.target.files),type);
-  e.target.value='';
 }
 
 async function processFiles(files,type){
@@ -444,38 +456,35 @@ async function processFiles(files,type){
     const dataUrl=await readAsDataUrl(f);
     S.files.push({name:f.name,type,dataUrl,size:fmtBytes(f.size),date:today()});
   }
-  await saveData(SK.files,S.files);
+  await fbSet('files',{list:S.files});
   renderFileLists();
-  showAlert('upload-alert',`已上傳 ${files.length} 個${type==='excel'?'試算表':'文件'}`);
+  showAlert('upload-alert',`已上傳 ${files.length} 個檔案`);
 }
 
 function readAsDataUrl(file){
   return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file);});
 }
 
-async function updateCaption(i,val){
+window.updateCaption=async function(i,val){
   S.images[i].caption=val;
-  await saveData(SK.images,S.images);
-}
-
-async function removeImage(i){
+  await fbSet('images',{list:S.images});
+};
+window.removeImage=async function(i){
   S.images.splice(i,1);
-  await saveData(SK.images,S.images);
+  await fbSet('images',{list:S.images});
   renderFileLists();
-}
-
-async function removeFile(i){
+};
+window.removeFile=async function(i){
   S.files.splice(i,1);
-  await saveData(SK.files,S.files);
+  await fbSet('files',{list:S.files});
   renderFileLists();
-}
+};
 
 function renderFileLists(){
   const imgList=document.getElementById('img-list');
-  if(!S.images.length){
-    imgList.innerHTML='<p style="font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:8px">尚無圖片</p>';
-  }else{
-    imgList.innerHTML=S.images.map((img,i)=>`
+  imgList.innerHTML=!S.images.length
+    ?'<p style="font-size:12px;color:#aaa;text-align:center;padding:8px">尚無圖片</p>'
+    :S.images.map((img,i)=>`
       <div class="file-item file-item-img">
         <img src="${img.dataUrl}" class="fi-img-preview" alt="${esc(img.caption||img.name)}" onclick="openLightbox(${i})" title="點擊放大">
         <div style="display:flex;align-items:flex-start;gap:8px">
@@ -484,55 +493,37 @@ function renderFileLists(){
             <div class="fi-meta">${img.size} · ${img.date}</div>
             <input class="fi-caption" value="${esc(img.caption||'')}" placeholder="說明文字（前台顯示）" onchange="updateCaption(${i},this.value)">
           </div>
-          <div class="fi-actions" style="flex-shrink:0;padding-top:2px">
-            <button class="btn-danger" onclick="removeImage(${i})" aria-label="刪除"><i class="ti ti-trash" aria-hidden="true"></i></button>
+          <div class="fi-actions"><button class="btn-danger" onclick="removeImage(${i})"><i class="ti ti-trash"></i></button></div>
+        </div>
+      </div>`).join('');
+
+  ['excel','doc'].forEach(type=>{
+    const list=S.files.filter(f=>f.type===type);
+    document.getElementById(type+'-list').innerHTML=!list.length
+      ?`<p style="font-size:12px;color:#aaa;text-align:center;padding:8px">尚無${type==='excel'?'Excel':'Word'}檔案</p>`
+      :list.map(f=>`
+        <div class="file-item">
+          <i class="ti ${fileIcon(f.type)}" style="font-size:18px;color:#666"></i>
+          <div class="fi-info"><div class="fi-name">${esc(f.name)}</div><div class="fi-meta">${f.size} · ${f.date}</div></div>
+          <div class="fi-actions">
+            <a class="btn-sm" href="${f.dataUrl}" download="${esc(f.name)}"><i class="ti ti-download"></i></a>
+            <button class="btn-danger" onclick="removeFile(${S.files.indexOf(f)})"><i class="ti ti-trash"></i></button>
           </div>
-        </div>
-      </div>`).join('');
-  }
-
-  const excelFiles=S.files.filter(f=>f.type==='excel');
-  const docFiles=S.files.filter(f=>f.type==='doc');
-
-  document.getElementById('excel-list').innerHTML=!excelFiles.length
-    ?'<p style="font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:8px">尚無 Excel 檔案</p>'
-    :excelFiles.map(f=>`
-      <div class="file-item">
-        <i class="ti ti-file-spreadsheet fi-icon" aria-hidden="true"></i>
-        <div class="fi-info"><div class="fi-name">${esc(f.name)}</div><div class="fi-meta">${f.size} · ${f.date}</div></div>
-        <div class="fi-actions">
-          <a class="btn-sm" href="${f.dataUrl}" download="${esc(f.name)}" title="下載"><i class="ti ti-download" aria-hidden="true"></i></a>
-          <button class="btn-danger" onclick="removeFile(${S.files.indexOf(f)})" aria-label="刪除"><i class="ti ti-trash" aria-hidden="true"></i></button>
-        </div>
-      </div>`).join('');
-
-  document.getElementById('doc-list').innerHTML=!docFiles.length
-    ?'<p style="font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:8px">尚無 Word 文件</p>'
-    :docFiles.map(f=>`
-      <div class="file-item">
-        <i class="ti ti-file-text fi-icon" aria-hidden="true"></i>
-        <div class="fi-info"><div class="fi-name">${esc(f.name)}</div><div class="fi-meta">${f.size} · ${f.date}</div></div>
-        <div class="fi-actions">
-          <a class="btn-sm" href="${f.dataUrl}" download="${esc(f.name)}" title="下載"><i class="ti ti-download" aria-hidden="true"></i></a>
-          <button class="btn-danger" onclick="removeFile(${S.files.indexOf(f)})" aria-label="刪除"><i class="ti ti-trash" aria-hidden="true"></i></button>
-        </div>
-      </div>`).join('');
+        </div>`).join('');
+  });
 }
 
-async function loadStats(){
-  document.getElementById('stats-loading').style.display='';
-  await loadData();
-  document.getElementById('stats-loading').style.display='none';
+// ── Stats ─────────────────────────────────────────────────
+window.loadStats=async function(){
+  await loadAll();
   const t=today();
-  const todayN=S.visits[t]||0;
-  const total=S.visits.__total__||0;
   let week=0;
   for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);week+=S.visits[d.toISOString().slice(0,10)]||0;}
-  document.getElementById('st-today').textContent=todayN.toLocaleString();
+  document.getElementById('st-today').textContent=(S.visits[t]||0).toLocaleString();
   document.getElementById('st-week').textContent=week.toLocaleString();
-  document.getElementById('st-total').textContent=total.toLocaleString();
+  document.getElementById('st-total').textContent=(S.visits.__total__||0).toLocaleString();
   renderChart();
-}
+};
 
 function renderChart(){
   const area=document.getElementById('chart-area');
@@ -540,29 +531,31 @@ function renderChart(){
   for(let i=6;i>=0;i--){
     const d=new Date();d.setDate(d.getDate()-i);
     const key=d.toISOString().slice(0,10);
-    const label=(d.getMonth()+1)+'/'+(d.getDate());
-    days.push({label,count:S.visits[key]||0,isToday:i===0});
+    days.push({label:(d.getMonth()+1)+'/'+(d.getDate()),count:S.visits[key]||0,isToday:i===0});
   }
   const max=Math.max(...days.map(d=>d.count),1);
   area.innerHTML=days.map(d=>{
     const pct=Math.round((d.count/max)*100);
     const color=d.isToday?'#27ae60':pct>60?'#3498db':'#85b7eb';
     return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
-      <div style="width:40px;font-size:11px;color:var(--color-text-tertiary);text-align:right;flex-shrink:0;font-weight:${d.isToday?'500':'400'}">${d.label}</div>
-      <div style="flex:1;background:var(--color-background-secondary);border-radius:4px;height:18px;overflow:hidden">
+      <div style="width:40px;font-size:11px;color:#aaa;text-align:right;flex-shrink:0">${d.label}</div>
+      <div style="flex:1;background:#f5f5f0;border-radius:4px;height:18px;overflow:hidden">
         <div style="height:100%;width:${pct}%;background:${color};border-radius:4px;transition:width .5s ease"></div>
       </div>
-      <div style="width:26px;font-size:12px;font-weight:500;color:var(--color-text-primary);flex-shrink:0;text-align:right">${d.count}</div>
+      <div style="width:26px;font-size:12px;font-weight:500;flex-shrink:0;text-align:right">${d.count}</div>
     </div>`;
   }).join('');
 }
 
+// ── Init ──────────────────────────────────────────────────
 async function init(){
-  await loadData();
-  renderAdminCards();
+  await loadAll();
+  renderAdmin();
   renderFileLists();
   renderFrontend();
   await recordVisit();
 }
 init();
 </script>
+</body>
+</html>
