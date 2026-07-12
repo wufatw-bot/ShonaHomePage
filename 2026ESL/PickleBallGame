@@ -1,680 +1,484 @@
-以下是一個專門針對國立體育大學（National Sports University）大學生設計的教學簡報架構。
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
 
-設計原則結合：
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-* Breaking the Curse of Knowledge（破解知識的詛咒）
-    * 從學生已知開始
-    * 多用生活經驗
-    * 少用醫學術語
-    * 每個概念只介紹一件事情
-    * 不斷確認學生是否理解
-* Facilitation（引導式教學）
-    * 不直接告訴答案
-    * 透過提問建立知識
-    * 小組討論
-    * Prediction（預測）
-    * Reflection（反思）
+<title>ESL 匹克球活動</title>
 
-建議約 45–60分鐘。
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-⸻
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-PPT Title
+<style>
 
-主動脈剝離
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Noto Sans TC',sans-serif;
+}
 
-一條血管，如何在幾分鐘內奪走生命？
+body{
 
-副標題
+background:linear-gradient(135deg,#5B5FEF,#9440FF);
 
-從解剖、生理、病理到臨床判斷
+padding:40px;
 
-⸻
+display:flex;
+justify-content:center;
 
-Slide 1
+}
 
-開場投票
+.container{
 
-如果一位25歲運動員突然胸痛
+max-width:960px;
+width:100%;
 
-你第一個想到的是？
+background:#fff;
 
-A 心肌梗塞
+border-radius:28px;
 
-B 肌肉拉傷
+overflow:hidden;
 
-C 胃食道逆流
+box-shadow:0 20px 60px rgba(0,0,0,.2);
 
-D 主動脈剝離
+}
 
-⸻
+.header{
 
-Facilitation
+background:linear-gradient(135deg,#4F46E5,#8B5CF6);
 
-請大家先投票
+color:white;
 
-不要查手機
+padding:60px;
 
-⸻
+text-align:center;
 
-Slide 2
+}
 
-今天不急著背
+.header h1{
 
-今天我們只想回答五個問題
+font-size:40px;
 
-① 主動脈到底在哪？
+margin-bottom:10px;
 
-② 為什麼它會裂開？
+}
 
-③ 為什麼裂開後這麼危險？
+.header p{
 
-④ 如何第一時間想到？
+font-size:20px;
 
-⑤ 如何避免錯失診斷？
+opacity:.9;
 
-⸻
+}
 
-Slide 3
+section{
 
-先從大家熟悉的開始
+padding:35px 50px;
 
-人體最大的血管是哪一條？
+}
 
-(圖片：人體血管)
+.section-title{
 
-引導學生回答
+display:flex;
 
-最後公布
+align-items:center;
 
-主動脈
+gap:12px;
 
-⸻
+font-size:28px;
 
-Slide 4
+font-weight:bold;
 
-想像它是一條消防水管
+color:#4F46E5;
 
-🫀 心臟
+margin-bottom:25px;
 
-↓
+}
 
-高壓幫浦
+.card{
 
-↓
+background:#F8FAFF;
 
-主動脈
+padding:25px;
 
-↓
+border-radius:18px;
 
-把血送到全身
+margin-bottom:25px;
 
-⸻
+box-shadow:0 5px 18px rgba(0,0,0,.05);
 
-一句話
+}
 
-心臟負責打水
+.info{
 
-主動脈負責送水
+display:grid;
 
-⸻
+grid-template-columns:180px auto;
 
-Slide 5
+padding:15px 0;
 
-活動
+border-bottom:1px solid #E8E8E8;
 
-請大家用手比出
+}
 
-拳頭＝心臟
+.info:last-child{
 
-手臂＝主動脈
+border:none;
 
-如果心臟每分鐘跳70下
+}
 
-一天打幾次？
+.label{
 
-約10萬次
+font-weight:600;
 
-一年
+color:#555;
 
-3600萬次
+}
 
-⸻
+.value{
 
-提問
+color:#333;
 
-每天承受這麼大的壓力
+}
 
-你覺得最容易壞的是哪裡？
+.group-grid{
 
-⸻
+display:grid;
 
-Slide 6
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 
-解剖 Anatomy
+gap:18px;
 
-主動脈分成
+}
 
-升主動脈
+.group{
 
-主動脈弓
+background:linear-gradient(135deg,#6366F1,#EC4899);
 
-胸主動脈
+color:white;
 
-腹主動脈
+border-radius:18px;
 
-（配圖）
+padding:25px;
 
-⸻
+text-align:center;
 
-Slide 7
+transition:.3s;
 
-Facilitation
+}
 
-如果升主動脈阻塞
+.group:hover{
 
-哪裡會缺血？
+transform:translateY(-5px);
 
-請討論30秒
+}
 
-⸻
+.group h3{
 
-公布
+font-size:26px;
 
-心臟
+margin-bottom:8px;
 
-腦部
+}
 
-冠狀動脈
+.notice{
 
-⸻
+background:#FFF8D6;
 
-Slide 8
+border-left:6px solid #F59E0B;
 
-血管不是一層
+padding:20px;
 
-而是三層
+border-radius:15px;
 
-內膜
+}
 
-中膜
+.warning{
 
-外膜
+background:#FFE6E6;
 
-（蛋糕三層圖）
+border-left:6px solid #EF4444;
 
-⸻
+padding:20px;
 
-不要直接放組織切片
+border-radius:15px;
 
-先放蛋糕
+}
 
-最後再放真正組織
+ul{
 
-⸻
+padding-left:22px;
 
-Slide 9
+line-height:2;
 
-Curse of Knowledge
+}
 
-不要直接背
+.footer{
 
-Tunica Intima
+background:#F3F4F6;
 
-Tunica Media
+padding:25px;
 
-Tunica Adventitia
+text-align:center;
 
-先問
+color:#666;
 
-如果紙箱有三層
+}
 
-哪一層最重要？
+@media(max-width:700px){
 
-⸻
+.header{
 
-學生回答
+padding:40px;
 
-再介紹
+}
 
-中膜
+.header h1{
 
-⸻
+font-size:30px;
 
-Slide 10
+}
 
-生理
+section{
 
-為什麼主動脈要有彈性？
+padding:25px;
 
-請想像
+}
 
-消防水管
+.info{
 
-如果沒有彈性
+grid-template-columns:1fr;
 
-會怎樣？
+gap:6px;
 
-⸻
+}
 
-討論
+}
 
-公布答案
+</style>
 
-容易爆裂
+</head>
 
-⸻
+<body>
 
-Slide 11
+<div class="container">
 
-Windkessel Effect
+<div class="header">
 
-不要先介紹英文
+<h1>🏓 ESL 匹克球活動</h1>
 
-先問
+<p>分組與活動公告</p>
 
-如果每一下心跳都直接撞出去
+</div>
 
-血流會如何？
+<section>
 
-⸻
+<div class="section-title">
 
-公布
+<i class="fa-solid fa-calendar-days"></i>
 
-主動脈像避震器
+活動基本資訊
 
-⸻
+</div>
 
-Slide 12
+<div class="card">
 
-Pathology
+<div class="info">
+<div class="label">📅 日期</div>
+<div class="value">2026 年 7 月 13 日（星期一）</div>
+</div>
 
-真正的問題開始了
+<div class="info">
+<div class="label">🕤 時間</div>
+<div class="value">09:30－11:30</div>
+</div>
 
-如果內膜破掉
+<div class="info">
+<div class="label">📍 地點</div>
+<div class="value">莊敬路運動中心</div>
+</div>
 
-會怎樣？
+</div>
 
-⸻
+</section>
 
-Slide 13
+<section>
 
-動畫
+<div class="section-title">
 
-血液
+<i class="fa-solid fa-bus"></i>
 
-↓
+交通安排
 
-跑進中膜
+</div>
 
-↓
+<div class="card">
 
-開始往前撕裂
+<div class="info">
+<div class="label">集合地點</div>
+<div class="value">依照班級及分組集合</div>
+</div>
 
-↓
+<div class="info">
+<div class="label">前往方式</div>
+<div class="value">步行前往活動中心</div>
+</div>
 
-形成假腔
+</div>
 
-⸻
+</section>
 
-比喻
+<section>
 
-像壁紙開始剝落
+<div class="section-title">
 
-⸻
+<i class="fa-solid fa-users"></i>
 
-Slide 14
+分組安排（共九組）
 
-Facilitation
+</div>
 
-如果裂縫一直延伸
+<div class="group-grid">
 
-你猜
+<div class="group"><h3>第1組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第2組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第3組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第4組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第5組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第6組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第7組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第8組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第9組</h3><p>老師／學生</p></div>
 
-可能造成哪些問題？
+</div>
 
-⸻
+</section>
 
-小組回答
+<section>
 
-⸻
+<div class="section-title">
 
-Slide 15
+<i class="fa-solid fa-list-check"></i>
 
-公布
+活動流程
 
-心肌梗塞
+</div>
 
-中風
+<div class="card">
 
-腸缺血
+<ul>
 
-下肢缺血
+<li>依分組輪流進行各站活動。</li>
 
-休克
+<li>A 組（新手）：學生自主練習。</li>
 
-死亡
+<li>B 組（進階）：由教練帶領練習。</li>
 
-⸻
+<li>每 20 分鐘輪替一次。</li>
 
-Slide 16
+</ul>
 
-為什麼這麼痛？
+</div>
 
-因為
+</section>
 
-主動脈外膜神經非常多
+<section>
 
-所以
+<div class="section-title">
 
-疼痛突然
+<i class="fa-solid fa-table-tennis-paddle-ball"></i>
 
-劇烈
+器材配置
 
-撕裂感
+</div>
 
-⸻
+<div class="card">
 
-Slide 17
+<ul>
 
-臨床案例
+<li>球場：4 面</li>
 
-26歲
+<li>球網：4 組</li>
 
-男性
+<li>球拍：依人數配置</li>
 
-重量訓練
+<li>匹克球：充足供應</li>
 
-深蹲後
+</ul>
 
-突然胸痛
+</div>
 
-你第一個想到？
+</section>
 
-⸻
+<section>
 
-討論
+<div class="section-title">
 
-⸻
+<i class="fa-solid fa-triangle-exclamation"></i>
 
-Slide 18
+重要提醒
 
-公布
+</div>
 
-主動脈剝離
+<div class="notice">
 
-雖然年輕
+<ul>
 
-仍可能發生
+<li>請穿著適合運動的服裝。</li>
 
-⸻
+<li>請穿著運動鞋。</li>
 
-Slide 19
+<li>請自備水壺。</li>
 
-危險因子
+<li>活動期間請遵守老師及教練指示。</li>
 
-高血壓
+</ul>
 
-Marfan syndrome
+</div>
 
-雙葉主動脈瓣
+</section>
 
-舉重
+<section>
 
-可卡因
+<div class="section-title">
 
-主動脈瘤
+<i class="fa-solid fa-shield-heart"></i>
 
-⸻
+學生安全提醒
 
-Slide 20
+</div>
 
-Stanford Classification
+<div class="warning">
 
-不要直接介紹
+<ul>
 
-A型
+<li>活動前請完成暖身。</li>
 
-B型
+<li>請勿嬉戲追逐。</li>
 
-⸻
+<li>身體不適請立即告知老師。</li>
 
-先問
+<li>保持安全距離，避免碰撞。</li>
 
-如果裂在靠近心臟
+<li>遵守教練指示進行活動。</li>
 
-危險嗎？
+</ul>
 
-⸻
+</div>
 
-學生回答
+</section>
 
-很危險
+<div class="footer">
 
-⸻
+ESL 匹克球活動公告 © 2026
 
-公布
+</div>
 
-Type A
+</div>
 
-立即開刀
-
-⸻
-
-Slide 21
-
-Type B
-
-通常先控制血壓
-
-⸻
-
-Slide 22
-
-症狀
-
-Chest pain
-
-Back pain
-
-Syncope
-
-Stroke
-
-Shock
-
-Pulse deficit
-
-⸻
-
-改成圖片猜症狀
-
-⸻
-
-Slide 23
-
-真正容易誤診
-
-肌肉拉傷
-
-GERD
-
-心肌梗塞
-
-焦慮症
-
-⸻
-
-請學生討論
-
-為什麼？
-
-⸻
-
-Slide 24
-
-診斷
-
-CTA
-
-TEE
-
-MRI
-
-⸻
-
-提問
-
-急診第一個選？
-
-CTA
-
-⸻
-
-Slide 25
-
-治療
-
-控制血壓
-
-β-blocker
-
-止痛
-
-緊急手術
-
-⸻
-
-Slide 26
-
-與運動的關係
-
-重量訓練
-
-Valsalva maneuver
-
-血壓可超過300 mmHg
-
-⸻
-
-提問
-
-為什麼健力選手風險增加？
-
-⸻
-
-Slide 27
-
-Case Discussion
-
-如果你是防護員
-
-比賽中
-
-有人突然胸痛
-
-你會怎麼做？
-
-⸻
-
-小組討論
-
-⸻
-
-Slide 28
-
-錯誤示範
-
-再休息一下
-
-按摩
-
-喝水
-
-繼續比賽
-
-⸻
-
-哪裡錯？
-
-⸻
-
-Slide 29
-
-正確流程
-
-停止運動
-
-評估生命徵象
-
-119
-
-送急診
-
-CTA
-
-⸻
-
-Slide 30
-
-今天最重要的一件事
-
-不是背分類
-
-而是想到它
-
-⸻
-
-Slide 31
-
-Reflection
-
-今天最讓你意外的是？
-
-請寫一句話
-
-⸻
-
-Slide 32
-
-Take Home Message
-
-✅ 主動脈是人體最大的高壓血管
-
-✅ 剝離就是血液跑進血管壁
-
-✅ A型立即開刀
-
-✅ 年輕運動員也可能發生
-
-✅ 突然劇烈胸痛，一定要想到主動脈剝離
-
-⸻
-
-Slide 33
-
-最後挑戰
-
-如果朋友健身後突然說
-
-「我胸口像被撕開。」
-
-你第一個想到什麼？
-
-（請學生回答）
-
-⸻
-
-教學特色（符合破解知識詛咒）
-
-整份簡報遵循以下節奏：
-
-一般醫學課	本課程設計
-直接介紹主動脈	從消防水管開始
-一開始背三層血管	先用蛋糕、紙箱比喻
-一開始介紹 Stanford A/B	先讓學生判斷哪裡比較危險
-一開始介紹 Windkessel Effect	先問「沒有彈性會怎樣？」
-一開始講 CTA	先讓學生猜急診會選哪種檢查
-老師一直講	每 3–5 張投影片安排一次提問、討論或預測
-
-這種設計能降低「知識的詛咒」，讓學生透過生活經驗建立概念，再逐步連結到解剖、生理、病理、臨床診斷與運動情境中的實際應用。
+</body>
+</html>
