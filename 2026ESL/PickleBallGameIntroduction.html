@@ -1,349 +1,209 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>ESL 匹克球活動</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Noto Sans TC',sans-serif;
 }
-
 body{
-
 background:linear-gradient(135deg,#5B5FEF,#9440FF);
-
 padding:40px;
-
 display:flex;
 justify-content:center;
-
 }
-
 .container{
-
 max-width:960px;
 width:100%;
-
 background:#fff;
-
 border-radius:28px;
-
 overflow:hidden;
-
 box-shadow:0 20px 60px rgba(0,0,0,.2);
-
 }
-
 .header{
-
 background:linear-gradient(135deg,#4F46E5,#8B5CF6);
-
 color:white;
-
 padding:60px;
-
 text-align:center;
-
 }
-
 .header h1{
-
 font-size:40px;
-
 margin-bottom:10px;
-
 }
-
 .header p{
-
 font-size:20px;
-
 opacity:.9;
-
 }
-
-section{
-
-padding:35px 50px;
-
+.hero-photo{
+width:100%;
+display:block;
 }
-
-.section-title{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-font-size:28px;
-
-font-weight:bold;
-
-color:#4F46E5;
-
-margin-bottom:25px;
-
+.hero-photo img{
+width:100%;
+height:auto;
+display:block;
 }
-
-.card{
-
-background:#F8FAFF;
-
-padding:25px;
-
-border-radius:18px;
-
-margin-bottom:25px;
-
-box-shadow:0 5px 18px rgba(0,0,0,.05);
-
-}
-
-.info{
-
-display:grid;
-
-grid-template-columns:180px auto;
-
-padding:15px 0;
-
-border-bottom:1px solid #E8E8E8;
-
-}
-
-.info:last-child{
-
-border:none;
-
-}
-
-.label{
-
-font-weight:600;
-
-color:#555;
-
-}
-
-.value{
-
-color:#333;
-
-}
-
-.group-grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-
-gap:18px;
-
-}
-
-.group{
-
-background:linear-gradient(135deg,#6366F1,#EC4899);
-
-color:white;
-
-border-radius:18px;
-
-padding:25px;
-
+.photo-caption{
 text-align:center;
-
-transition:.3s;
-
-}
-
-.group:hover{
-
-transform:translateY(-5px);
-
-}
-
-.group h3{
-
-font-size:26px;
-
-margin-bottom:8px;
-
-}
-
-.notice{
-
-background:#FFF8D6;
-
-border-left:6px solid #F59E0B;
-
-padding:20px;
-
-border-radius:15px;
-
-}
-
-.warning{
-
-background:#FFE6E6;
-
-border-left:6px solid #EF4444;
-
-padding:20px;
-
-border-radius:15px;
-
-}
-
-ul{
-
-padding-left:22px;
-
-line-height:2;
-
-}
-
-.footer{
-
-background:#F3F4F6;
-
-padding:25px;
-
-text-align:center;
-
+padding:14px 20px;
 color:#666;
-
+font-size:14px;
+background:#F8FAFF;
 }
-
-@media(max-width:700px){
-
-.header{
-
-padding:40px;
-
-}
-
-.header h1{
-
-font-size:30px;
-
-}
-
 section{
-
+padding:35px 50px;
+}
+.section-title{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:28px;
+font-weight:bold;
+color:#4F46E5;
+margin-bottom:25px;
+}
+.card{
+background:#F8FAFF;
 padding:25px;
-
+border-radius:18px;
+margin-bottom:25px;
+box-shadow:0 5px 18px rgba(0,0,0,.05);
 }
-
 .info{
-
+display:grid;
+grid-template-columns:180px auto;
+padding:15px 0;
+border-bottom:1px solid #E8E8E8;
+}
+.info:last-child{
+border:none;
+}
+.label{
+font-weight:600;
+color:#555;
+}
+.value{
+color:#333;
+}
+.group-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+}
+.group{
+background:linear-gradient(135deg,#6366F1,#EC4899);
+color:white;
+border-radius:18px;
+padding:25px;
+text-align:center;
+transition:.3s;
+}
+.group:hover{
+transform:translateY(-5px);
+}
+.group h3{
+font-size:26px;
+margin-bottom:8px;
+}
+.notice{
+background:#FFF8D6;
+border-left:6px solid #F59E0B;
+padding:20px;
+border-radius:15px;
+}
+.warning{
+background:#FFE6E6;
+border-left:6px solid #EF4444;
+padding:20px;
+border-radius:15px;
+}
+ul{
+padding-left:22px;
+line-height:2;
+}
+.footer{
+background:#F3F4F6;
+padding:25px;
+text-align:center;
+color:#666;
+}
+@media(max-width:700px){
+.header{
+padding:40px;
+}
+.header h1{
+font-size:30px;
+}
+section{
+padding:25px;
+}
+.info{
 grid-template-columns:1fr;
-
 gap:6px;
-
 }
-
 }
-
 </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
 <div class="header">
-
 <h1>🏓 ESL 匹克球活動</h1>
-
 <p>分組與活動公告</p>
-
 </div>
-
+<div class="hero-photo">
+<img src="ESL_PickleGame.png" alt="桃園市 ESL 匹克球活動現場照片">
+</div>
+<div class="photo-caption">桃園市 ESL 匹克球活動 － 2026 年 7 月 12 日（日）快樂運動！</div>
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-calendar-days"></i>
-
 活動基本資訊
-
 </div>
-
 <div class="card">
-
 <div class="info">
 <div class="label">📅 日期</div>
 <div class="value">2026 年 7 月 13 日（星期一）</div>
 </div>
-
 <div class="info">
 <div class="label">🕤 時間</div>
 <div class="value">09:30－11:30</div>
 </div>
-
 <div class="info">
 <div class="label">📍 地點</div>
 <div class="value">莊敬路運動中心</div>
 </div>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-bus"></i>
-
 交通安排
-
 </div>
-
 <div class="card">
-
 <div class="info">
 <div class="label">集合地點</div>
 <div class="value">依照班級及分組集合</div>
 </div>
-
 <div class="info">
 <div class="label">前往方式</div>
 <div class="value">步行前往活動中心</div>
 </div>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-users"></i>
-
 分組安排（共九組）
-
 </div>
-
 <div class="group-grid">
-
 <div class="group"><h3>第1組</h3><p>老師／學生</p></div>
 <div class="group"><h3>第2組</h3><p>老師／學生</p></div>
 <div class="group"><h3>第3組</h3><p>老師／學生</p></div>
@@ -353,132 +213,68 @@ gap:6px;
 <div class="group"><h3>第7組</h3><p>老師／學生</p></div>
 <div class="group"><h3>第8組</h3><p>老師／學生</p></div>
 <div class="group"><h3>第9組</h3><p>老師／學生</p></div>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-list-check"></i>
-
 活動流程
-
 </div>
-
 <div class="card">
-
 <ul>
-
 <li>依分組輪流進行各站活動。</li>
-
 <li>A 組（新手）：學生自主練習。</li>
-
 <li>B 組（進階）：由教練帶領練習。</li>
-
 <li>每 20 分鐘輪替一次。</li>
-
 </ul>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-table-tennis-paddle-ball"></i>
-
 器材配置
-
 </div>
-
 <div class="card">
-
 <ul>
-
 <li>球場：4 面</li>
-
 <li>球網：4 組</li>
-
 <li>球拍：依人數配置</li>
-
 <li>匹克球：充足供應</li>
-
 </ul>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-triangle-exclamation"></i>
-
 重要提醒
-
 </div>
-
 <div class="notice">
-
 <ul>
-
 <li>請穿著適合運動的服裝。</li>
-
 <li>請穿著運動鞋。</li>
-
 <li>請自備水壺。</li>
-
 <li>活動期間請遵守老師及教練指示。</li>
-
 </ul>
-
 </div>
-
 </section>
-
 <section>
-
 <div class="section-title">
-
 <i class="fa-solid fa-shield-heart"></i>
-
 學生安全提醒
-
 </div>
-
 <div class="warning">
-
 <ul>
-
 <li>活動前請完成暖身。</li>
-
 <li>請勿嬉戲追逐。</li>
-
 <li>身體不適請立即告知老師。</li>
-
 <li>保持安全距離，避免碰撞。</li>
-
 <li>遵守教練指示進行活動。</li>
-
 </ul>
-
 </div>
-
 </section>
-
 <div class="footer">
-
 ESL 匹克球活動公告 © 2026
-
 </div>
-
 </div>
-
 </body>
 </html>
