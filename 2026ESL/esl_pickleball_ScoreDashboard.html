@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESL 匹克球活動｜分組與流程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --court-blue:#0F4C5C;
+    --court-blue-deep:#0A3540;
+    --line-white:#F7F5EC;
+    --ball-lime:#D7E24C;
+    --coral:#FF6B4D;
+    --zj-purple:#6C4FD6;
+    --zj-purple-2:#8E6BF0;
+    --ga-pink:#E84393;
+    --ga-pink-2:#FF7FB0;
+    --paper:#FAF7EE;
+    --ink:#12262B;
+    --ink-soft:#3E5459;
+    --safety-red:#E14A3E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Space Grotesk','Noto Sans TC',sans-serif; font-weight:700;}
+  .shout{font-family:'Archivo Black','Noto Sans TC',sans-serif; font-weight:400;}
+
+  .wrap{max-width:900px; margin:0 auto; padding:0 20px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      repeating-linear-gradient(90deg, rgba(247,245,236,0.06) 0 2px, transparent 2px 64px),
+      radial-gradient(circle at 18% 20%, rgba(215,226,76,0.18), transparent 45%),
+      linear-gradient(160deg, var(--court-blue) 0%, var(--court-blue-deep) 100%);
+    color:var(--line-white);
+    overflow:hidden;
+    padding:64px 20px 56px;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:50%; top:-40%;
+    width:640px; height:640px;
+    border:2px solid rgba(247,245,236,0.14);
+    border-radius:50%;
+    transform:translateX(-50%);
+  }
+  .hero-inner{position:relative; z-index:2; max-width:760px; margin:0 auto; text-align:center;}
+  .kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Space Grotesk',sans-serif; font-size:12px; letter-spacing:.24em;
+    text-transform:uppercase; color:var(--ball-lime);
+    border:1px solid rgba(215,226,76,0.4);
+    padding:6px 14px; border-radius:100px;
+    margin-bottom:22px;
+  }
+  .kicker::before{content:"●"; font-size:8px;}
+  h1.title{
+    font-size:clamp(34px,7vw,58px);
+    line-height:1.08;
+    letter-spacing:-.01em;
+    margin-bottom:10px;
+  }
+  .title .accent{color:var(--ball-lime);}
+  .subtitle{font-size:16px; color:rgba(247,245,236,0.72); margin-bottom:34px; font-weight:500;}
+  .info-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
+  }
+  .info-chip{
+    background:rgba(247,245,236,0.08);
+    border:1px solid rgba(247,245,236,0.16);
+    backdrop-filter:blur(4px);
+    padding:14px 20px;
+    border-radius:14px;
+    min-width:150px;
+    text-align:left;
+  }
+  .info-chip .ic-label{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(215,226,76,0.85); font-weight:600; margin-bottom:4px;}
+  .info-chip .ic-value{font-size:15px; font-weight:700; color:var(--line-white);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:56px 0;}
+  .section-head{margin-bottom:28px; text-align:center;}
+  .eyebrow{
+    display:block; font-family:'Space Grotesk',sans-serif; font-size:12px;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--coral); font-weight:600; margin-bottom:8px;
+  }
+  .section-head h2{font-size:clamp(24px,4vw,32px); font-weight:900; color:var(--ink);}
+  .section-head p{color:var(--ink-soft); margin-top:8px; font-size:14.5px;}
+
+  /* ---------- TRANSPORT ---------- */
+  .transport-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .t-card{
+    background:#fff; border-radius:16px; padding:20px;
+    border:1px solid rgba(15,76,92,0.1);
+    box-shadow:0 4px 14px rgba(15,76,92,0.05);
+  }
+  .t-card .t-school{
+    display:flex; align-items:center; gap:8px; font-weight:700; font-size:15px; margin-bottom:6px;
+  }
+  .t-card .dot{width:10px; height:10px; border-radius:50%;}
+  .t-card.zj .dot{background:var(--zj-purple);}
+  .t-card.ga .dot{background:var(--ga-pink);}
+  .t-card p{font-size:13.5px; color:var(--ink-soft);}
+
+  /* ---------- COURT / TEAM ROSTER ---------- */
+  .court{
+    background:linear-gradient(160deg, var(--court-blue) 0%, var(--court-blue-deep) 100%);
+    border-radius:24px;
+    padding:36px 24px 44px;
+    position:relative;
+    overflow:hidden;
+  }
+  .court::before{
+    content:"";
+    position:absolute; inset:14px;
+    border:2px solid rgba(247,245,236,0.22);
+    border-radius:14px;
+    pointer-events:none;
+  }
+  .court::after{
+    content:"";
+    position:absolute; left:50%; top:14px; bottom:14px; width:2px;
+    background:rgba(247,245,236,0.22);
+    transform:translateX(-50%);
+  }
+  .court-caption{
+    text-align:center; color:var(--line-white); font-family:'Space Grotesk',sans-serif;
+    font-size:13px; letter-spacing:.1em; margin-bottom:26px; position:relative; z-index:2;
+    opacity:.85;
+  }
+  .court-caption b{color:var(--ball-lime);}
+  .campus-cols{display:grid; grid-template-columns:1fr 1fr; gap:20px; position:relative; z-index:2;}
+  .campus-col h3{
+    text-align:center; color:var(--line-white); font-size:14px; font-weight:700;
+    margin-bottom:14px; letter-spacing:.04em;
+  }
+  .campus-col h3 span{display:block; font-size:11px; font-weight:400; opacity:.65; margin-top:2px;}
+  .team-list{display:flex; flex-direction:column; gap:10px;}
+  .team-card{
+    border-radius:12px;
+    padding:12px 14px;
+    color:#fff;
+    display:flex; align-items:center; justify-content:space-between;
+    box-shadow:0 6px 16px rgba(0,0,0,0.18);
+  }
+  .team-card .tc-num{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px;
+  }
+  .team-card .tc-tag{font-size:11px; opacity:.85;}
+  .zj-fill{background:linear-gradient(135deg, var(--zj-purple), var(--zj-purple-2));}
+  .ga-fill{background:linear-gradient(135deg, var(--ga-pink), var(--ga-pink-2));}
+  .team-count{
+    text-align:center; margin-top:26px; position:relative; z-index:2;
+    color:var(--line-white); font-size:13px; opacity:.75;
+  }
+  .team-count b{color:var(--ball-lime); font-size:15px;}
+
+  /* ---------- SCOREBOARD ---------- */
+  .score-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  }
+  .score-card{
+    background:#fff; border-radius:16px; padding:18px 16px;
+    border:1px solid rgba(15,76,92,0.1);
+    box-shadow:0 4px 14px rgba(15,76,92,0.05);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    position:relative;
+  }
+  .score-card .sc-top{
+    display:flex; align-items:center; justify-content:space-between; width:100%;
+  }
+  .score-card .sc-team{font-weight:700; font-size:14px;}
+  .score-card .sc-badge{
+    font-size:10px; font-weight:700; color:#fff; padding:2px 8px; border-radius:100px;
+    letter-spacing:.02em;
+  }
+  .score-card.zj .sc-badge{background:var(--zj-purple);}
+  .score-card.ga .sc-badge{background:var(--ga-pink);}
+  .score-card .sc-value{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px; color:var(--court-blue);
+    line-height:1;
+  }
+  .score-card .sc-controls{display:flex; align-items:center; gap:10px;}
+  .score-btn{
+    width:34px; height:34px; border-radius:10px; border:1px solid rgba(15,76,92,0.15);
+    background:var(--paper); font-size:18px; font-weight:700; cursor:pointer; color:var(--court-blue);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .08s ease, background .15s ease;
+  }
+  .score-btn:hover{background:#EDEADD;}
+  .score-btn:active{transform:scale(0.92);}
+  .score-btn.reset{
+    font-size:11px; width:auto; padding:0 10px; color:var(--ink-soft);
+  }
+  .leader-tag{
+    position:absolute; top:-10px; right:12px;
+    background:var(--ball-lime); color:var(--court-blue-deep);
+    font-size:10px; font-weight:700; padding:3px 9px; border-radius:100px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.12);
+    display:none;
+  }
+  .score-card.leading .leader-tag{display:inline-block;}
+
+  .chart-panel{
+    margin-top:24px; background:#fff; border-radius:18px; padding:24px 22px;
+    border:1px solid rgba(15,76,92,0.1);
+    box-shadow:0 4px 14px rgba(15,76,92,0.05);
+  }
+  .chart-panel h4{font-size:14px; font-weight:700; margin-bottom:16px; color:var(--ink-soft); letter-spacing:.02em;}
+  .bar-row{display:flex; align-items:center; gap:12px; margin-bottom:10px;}
+  .bar-row .bar-label{width:58px; font-size:12.5px; font-weight:700; flex-shrink:0;}
+  .bar-track{flex:1; background:#F1EEE1; border-radius:100px; height:14px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:100px; width:0%; transition:width .35s ease;}
+  .bar-fill.zj-fill2{background:linear-gradient(90deg, var(--zj-purple), var(--zj-purple-2));}
+  .bar-fill.ga-fill2{background:linear-gradient(90deg, var(--ga-pink), var(--ga-pink-2));}
+  .bar-row .bar-num{width:26px; text-align:right; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; flex-shrink:0;}
+
+  /* ---------- FLOW / PROCESS ---------- */
+  .flow-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:0;
+    background:#fff; border-radius:20px; overflow:hidden;
+    border:1px solid rgba(15,76,92,0.1);
+    box-shadow:0 8px 28px rgba(15,76,92,0.08);
+  }
+  .flow-half{padding:28px 24px; position:relative;}
+  .flow-half.a{background:linear-gradient(180deg, rgba(255,107,77,0.07), transparent);}
+  .flow-half.b{background:linear-gradient(180deg, rgba(15,76,92,0.06), transparent);}
+  .flow-half + .flow-half{border-left:1px dashed rgba(15,76,92,0.18);}
+  .flow-tag{
+    display:inline-block; font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:12px; letter-spacing:.08em; padding:5px 12px; border-radius:100px; margin-bottom:12px;
+  }
+  .flow-half.a .flow-tag{background:rgba(255,107,77,0.15); color:var(--coral);}
+  .flow-half.b .flow-tag{background:rgba(15,76,92,0.12); color:var(--court-blue);}
+  .flow-half h4{font-size:19px; font-weight:900; margin-bottom:8px;}
+  .flow-half p{font-size:14px; color:var(--ink-soft);}
+  .swap-badge{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    background:var(--court-blue); color:var(--ball-lime);
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px;
+    padding:12px; margin:0; letter-spacing:.04em;
+  }
+  .swap-arrow{display:inline-block; animation:swap 1.8s ease-in-out infinite;}
+  @keyframes swap{0%,100%{transform:translateX(0);} 50%{transform:translateX(6px);}}
+
+  .rotate-note{
+    background:#FFF6D8; border:1px solid #F0DE8A; border-radius:14px;
+    padding:18px 20px; margin-top:18px; font-size:13.5px; color:#6B5A16;
+  }
+  .rotate-note b{color:#5C4A0A;}
+
+  /* ---------- EQUIPMENT ---------- */
+  .equip-strip{
+    display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+  }
+  .equip-pill{
+    background:#fff; border:1px solid rgba(15,76,92,0.12); border-radius:100px;
+    padding:12px 22px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px;
+    box-shadow:0 4px 12px rgba(15,76,92,0.05);
+  }
+  .equip-pill .n{color:var(--coral); font-family:'Space Grotesk',sans-serif; font-size:16px;}
+
+  /* ---------- REMINDERS ---------- */
+  .rem-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .rem-item{
+    background:#fff; border-radius:12px; padding:14px 16px; font-size:14px;
+    display:flex; gap:10px; align-items:flex-start;
+    border:1px solid rgba(15,76,92,0.08);
+  }
+  .rem-item .check{color:var(--court-blue); font-weight:700;}
+
+  /* ---------- SAFETY ---------- */
+  .safety-card{
+    background:linear-gradient(160deg,#FDEAE7,#FCE0DC);
+    border:1px solid #F4B8AF;
+    border-radius:20px;
+    padding:28px 26px;
+  }
+  .safety-head{
+    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .safety-head .badge{
+    background:var(--safety-red); color:#fff; font-weight:700; font-size:13px;
+    padding:5px 14px; border-radius:100px; font-family:'Space Grotesk',sans-serif; letter-spacing:.04em;
+  }
+  .safety-list{display:flex; flex-direction:column; gap:10px;}
+  .safety-list li{list-style:none; font-size:14px; display:flex; gap:10px; color:#7A2A20;}
+  .safety-list li::before{content:"‼"; color:var(--safety-red); font-weight:700;}
+
+  footer{
+    text-align:center; padding:40px 20px 60px; color:var(--ink-soft); font-size:12.5px;
+  }
+
+  @media (max-width:640px){
+    .transport-grid, .rem-grid{grid-template-columns:1fr;}
+    .campus-cols{grid-template-columns:1fr;}
+    .court::after{display:none;}
+    .flow-wrap{grid-template-columns:1fr;}
+    .flow-half + .flow-half{border-left:none; border-top:1px dashed rgba(15,76,92,0.18);}
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="kicker">分組與時程公告</span>
+      <h1 class="title shout">ESL <span class="accent">匹克球</span>活動</h1>
+      <p class="subtitle">全員 9 組・雙校聯合・輪替對打與外師指導</p>
+      <div class="info-row">
+        <div class="info-chip">
+          <div class="ic-label">日期</div>
+          <div class="ic-value">2026/07/13（一）</div>
+        </div>
+        <div class="info-chip">
+          <div class="ic-label">時間</div>
+          <div class="ic-value">上午 9:30–11:30</div>
+        </div>
+        <div class="info-chip">
+          <div class="ic-label">地點</div>
+          <div class="ic-value">莊敬瑞慶里活動中心</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- TRANSPORT -->
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Transport</span>
+        <h2>交通安排</h2>
+      </div>
+      <div class="transport-grid">
+        <div class="t-card zj">
+          <div class="t-school"><span class="dot"></span>莊敬分校</div>
+          <p>請步行前往活動中心。</p>
+        </div>
+        <div class="t-card ga">
+          <div class="t-school"><span class="dot"></span>岡安分校</div>
+          <p>搭乘遊覽車分兩次前往，請配合集合時間。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM ROSTER / COURT -->
+    <section id="teams">
+      <div class="section-head">
+        <span class="eyebrow">Team Roster</span>
+        <h2>分組安排・共 9 組</h2>
+        <p>依校區分色標示，賽場左右兩側對應各校學生組</p>
+      </div>
+
+      <div class="court">
+        <div class="court-caption">球場配置示意 ｜ <b>COURT LAYOUT</b></div>
+        <div class="campus-cols">
+          <div class="campus-col">
+            <h3>莊敬分校<span>3 組・第 1–3 組</span></h3>
+            <div class="team-list">
+              <div class="team-card zj-fill"><span class="tc-num">第 1 組</span><span class="tc-tag">莊敬分校 學生組</span></div>
+              <div class="team-card zj-fill"><span class="tc-num">第 2 組</span><span class="tc-tag">莊敬分校 學生組</span></div>
+              <div class="team-card zj-fill"><span class="tc-num">第 3 組</span><span class="tc-tag">莊敬分校 學生組</span></div>
+            </div>
+          </div>
+          <div class="campus-col">
+            <h3>岡安分校<span>6 組・第 4–9 組</span></h3>
+            <div class="team-list">
+              <div class="team-card ga-fill"><span class="tc-num">第 4 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+              <div class="team-card ga-fill"><span class="tc-num">第 5 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+              <div class="team-card ga-fill"><span class="tc-num">第 6 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+              <div class="team-card ga-fill"><span class="tc-num">第 7 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+              <div class="team-card ga-fill"><span class="tc-num">第 8 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+              <div class="team-card ga-fill"><span class="tc-num">第 9 組</span><span class="tc-tag">岡安分校 學生組</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="team-count">共計 <b>9</b> 組・每組配備球拍 4 支・球 4 顆</div>
+      </div>
+    </section>
+
+    <!-- SCOREBOARD -->
+    <section id="scoreboard">
+      <div class="section-head">
+        <span class="eyebrow">Live Score</span>
+        <h2>各組計分板</h2>
+        <p>點擊 + / − 即時記錄各組得分，最高分組會標示「領先」</p>
+      </div>
+
+      <div class="score-grid" id="scoreGrid">
+        <!-- generated by JS -->
+      </div>
+
+      <div class="chart-panel">
+        <h4>分數比較</h4>
+        <div id="barChart"></div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section id="flow">
+      <div class="section-head">
+        <span class="eyebrow">Activity Flow</span>
+        <h2>活動流程</h2>
+        <p>每組學生分為兩部分，輪流進行以下活動</p>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow-half a">
+          <span class="flow-tag">A 組・前半</span>
+          <h4>自行對打練習</h4>
+          <p>學生依分組自行對打，熟悉球感與基本規則。</p>
+        </div>
+        <div class="flow-half b">
+          <span class="flow-tag">B 組・後半</span>
+          <h4>外師授課指導</h4>
+          <p>由外師帶領進行技巧指導與正式教學。</p>
+        </div>
+      </div>
+      <div class="swap-badge" style="border-radius:0 0 20px 20px; margin-top:-2px;">
+        每組約 20 分鐘換場一次 <span class="swap-arrow">⇄</span> A、B 互換
+      </div>
+
+      <div class="rotate-note">
+        <b>換場提醒：</b>考量學生體力及人數因素，每組約 20 分鐘換場一次；排隊請自行安排，並確保學生準時交換位置。
+      </div>
+    </section>
+
+    <!-- EQUIPMENT -->
+    <section id="equip">
+      <div class="section-head">
+        <span class="eyebrow">Equipment</span>
+        <h2>器材配置</h2>
+        <p>每組配備</p>
+      </div>
+      <div class="equip-strip">
+        <div class="equip-pill">🏓 球拍 <span class="n">×4</span></div>
+        <div class="equip-pill">🎾 球 <span class="n">×4</span></div>
+      </div>
+    </section>
+
+    <!-- REMINDERS -->
+    <section id="reminders">
+      <div class="section-head">
+        <span class="eyebrow">Reminders</span>
+        <h2>重要提醒</h2>
+      </div>
+      <div class="rem-grid">
+        <div class="rem-item"><span class="check">✓</span>請穿著運動服裝和運動鞋參加</div>
+        <div class="rem-item"><span class="check">✓</span>請帶足夠的飲用水</div>
+        <div class="rem-item"><span class="check">✓</span>請準時到達集合地點</div>
+        <div class="rem-item"><span class="check">✓</span>遵守教練及老師的指示</div>
+      </div>
+    </section>
+
+    <!-- SAFETY -->
+    <section id="safety">
+      <div class="safety-card">
+        <div class="safety-head">
+          <span class="badge">安全第一</span>
+          <h2 style="font-size:19px; font-weight:900; color:#7A2A20;">學生安全提醒</h2>
+        </div>
+        <ul class="safety-list">
+          <li>活動前進行充分的熱身運動</li>
+          <li>遵守場地安全規則，避免危險動作</li>
+          <li>如感到不適或受傷，立即通知隨隊老師</li>
+          <li>保持場地清潔，避免絆倒</li>
+          <li>球拍和球要妥善放置，避免他人踩踏</li>
+          <li>在隨隊老師指導下進行所有活動</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>ESL 匹克球活動 ｜ 分組與時程公告 ｜ 2026年7月13日</footer>
+
+<script>
+  const teams = [
+    {n:1, campus:'zj', label:'莊敬分校'},
+    {n:2, campus:'zj', label:'莊敬分校'},
+    {n:3, campus:'zj', label:'莊敬分校'},
+    {n:4, campus:'ga', label:'岡安分校'},
+    {n:5, campus:'ga', label:'岡安分校'},
+    {n:6, campus:'ga', label:'岡安分校'},
+    {n:7, campus:'ga', label:'岡安分校'},
+    {n:8, campus:'ga', label:'岡安分校'},
+    {n:9, campus:'ga', label:'岡安分校'},
+  ];
+  const scores = {}; // in-memory only, resets on reload
+  teams.forEach(t => scores[t.n] = 0);
+
+  const scoreGrid = document.getElementById('scoreGrid');
+  const barChart = document.getElementById('barChart');
+
+  function buildCards(){
+    scoreGrid.innerHTML = teams.map(t => `
+      <div class="score-card ${t.campus}" id="card-${t.n}">
+        <span class="leader-tag">領先</span>
+        <div class="sc-top">
+          <span class="sc-team">第 ${t.n} 組</span>
+          <span class="sc-badge">${t.label}</span>
+        </div>
+        <div class="sc-value" id="val-${t.n}">0</div>
+        <div class="sc-controls">
+          <button class="score-btn" onclick="changeScore(${t.n}, -1)" aria-label="第${t.n}組減一分">−</button>
+          <button class="score-btn" onclick="changeScore(${t.n}, 1)" aria-label="第${t.n}組加一分">＋</button>
+          <button class="score-btn reset" onclick="changeScore(${t.n}, 0, true)" aria-label="第${t.n}組重設">重設</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function buildBars(){
+    barChart.innerHTML = teams.map(t => `
+      <div class="bar-row">
+        <span class="bar-label">第 ${t.n} 組</span>
+        <div class="bar-track"><div class="bar-fill ${t.campus === 'zj' ? 'zj-fill2' : 'ga-fill2'}" id="bar-${t.n}"></div></div>
+        <span class="bar-num" id="barnum-${t.n}">0</span>
+      </div>
+    `).join('');
+  }
+
+  function changeScore(n, delta, reset){
+    scores[n] = reset ? 0 : Math.max(0, scores[n] + delta);
+    render();
+  }
+
+  function render(){
+    const maxScore = Math.max(1, ...Object.values(scores));
+    const leaders = Object.values(scores).filter(v => v > 0).length
+      ? Math.max(...Object.values(scores)) : -1;
+
+    teams.forEach(t => {
+      const s = scores[t.n];
+      document.getElementById(`val-${t.n}`).textContent = s;
+      document.getElementById(`bar-${t.n}`).style.width = (s / maxScore * 100) + '%';
+      document.getElementById(`barnum-${t.n}`).textContent = s;
+      const card = document.getElementById(`card-${t.n}`);
+      card.classList.toggle('leading', s === leaders && leaders > 0);
+    });
+  }
+
+  buildCards();
+  buildBars();
+  render();
+</script>
+
+</body>
+</html>
