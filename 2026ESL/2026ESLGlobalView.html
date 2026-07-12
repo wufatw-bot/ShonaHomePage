@@ -1,219 +1,289 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026 ESL 暑期活動首頁</title>
-  <style>
-    :root {
-      --primary-color: #2c3e50;
-      --accent-color: #e67e22;
-      --bg-color: #f4f7f6;
-      --card-bg: #ffffff;
-      --success-color: #27ae60;
-      --c-green: #4CAF50;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: "Microsoft JhengHei", Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--primary-color);
-      margin: 0; padding: 0; line-height: 1.6;
-    }
-    .site-header {
-      background: #fff; border-bottom: 1px solid #ddd;
-      padding: 10px 24px; display: flex;
-      justify-content: space-between; align-items: center;
-      position: sticky; top: 0; z-index: 100;
-    }
-    .site-header-left { display: flex; align-items: center; gap: 16px; }
-    .back-links { display: flex; gap: 10px; }
-    .back-links a {
-      text-decoration: none; font-size: 0.82rem; color: #555;
-      background: #f4f4f4; padding: 5px 10px; border-radius: 6px;
-      border: 1px solid #ddd; transition: background 0.2s;
-    }
-    .back-links a:hover { background: #e8e8e8; }
-    .visitor-badge {
-      display: flex; flex-direction: column; align-items: center;
-      background: #f0faf0; border: 1px solid #c8e6c9;
-      border-radius: 8px; padding: 5px 14px; line-height: 1.4;
-    }
-    .vb-label { font-size: 0.68rem; color: #777; }
-    .vb-count { font-size: 1.05rem; font-weight: 500; color: var(--c-green); letter-spacing: 0.04em; }
-    .vb-sub { font-size: 0.65rem; color: #aaa; }
-    .page-wrap {
-      display: flex; gap: 24px; max-width: 1100px;
-      margin: 24px auto; padding: 0 20px;
-    }
-    .main-content { flex: 3; min-width: 0; }
-    .sidebar { flex: 1; min-width: 180px; position: sticky; top: 62px; height: fit-content; }
-    .sidebar-menu { background: #fff; padding: 16px; border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
-    .sidebar-menu h3 { margin: 0 0 10px; font-size: 1rem; font-weight: 500; border-bottom: 2px solid var(--c-green); padding-bottom: 8px; color: var(--primary-color); }
-    .sidebar-menu ul { list-style: none; padding: 0; margin: 0 0 12px; }
-    .sidebar-menu li { margin-bottom: 10px; }
-    .sidebar-menu a { text-decoration: none; color: #555; font-size: 0.85rem; display: block; padding: 3px 0; transition: padding-left 0.2s; }
-    .sidebar-menu a:hover { color: var(--c-green); padding-left: 4px; }
-    .sb-divider { border: 0; border-top: 1px solid #eee; margin: 10px 0; }
-    .sb-notice { font-size: 0.8rem; color: #666; }
-    .cta-button { display: block; background: var(--accent-color); color: white; text-align: center; padding: 8px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; margin-top: 8px; }
-    .hero { text-align: center; padding: 40px 24px; background: linear-gradient(135deg, #3498db, #2c3e50); color: white; border-radius: 14px; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    .hero h1 { margin: 0 0 8px; font-size: 2.2em; }
-    .hero .subtitle { font-size: 1.1em; opacity: 0.9; margin: 0; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 20px; }
-    .card { background: var(--card-bg); padding: 22px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-top: 4px solid var(--accent-color); margin-bottom: 0; }
-    .card h2 { margin-top: 0; color: var(--accent-color); border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.05rem; }
-    ul { padding-left: 20px; } li { margin-bottom: 8px; }
-    .fee-highlight { font-size: 1.1em; font-weight: bold; color: #c0392b; }
-    .image-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 16px 0 0; }
-    .image-item { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
-    .image-item img { max-width: 100%; height: auto; border-radius: 6px; display: block; }
-    .image-caption { margin-top: 8px; font-weight: 500; color: var(--primary-color); font-size: 0.88rem; }
-    .update-badge { display: inline-block; margin-left: 10px; background: #e8f5e9; color: #2e7d32; font-size: 0.6rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; vertical-align: middle; border: 1px solid #a5d6a7; letter-spacing: 0.02em; }
-    .iframe-container { background: var(--card-bg); padding: 14px; border-radius: 10px; overflow: hidden; margin-top: 0; }
-    iframe { border: none; width: 100%; height: 580px; }
-    footer { text-align: center; padding: 24px; background: #fff; border-radius: 12px; font-size: 0.9em; margin-top: 20px; }
-    .contact-info { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 12px; font-weight: bold; }
-    @media (max-width: 700px) {
-      .page-wrap { flex-direction: column; }
-      .sidebar { position: static; order: -1; }
-      .hero h1 { font-size: 1.6em; }
-      iframe { height: 440px; }
-      .image-gallery { grid-template-columns: 1fr; }
-      .back-links a span { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESL 匹克球活動</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Noto Sans TC',sans-serif;
+}
+body{
+background:linear-gradient(135deg,#5B5FEF,#9440FF);
+padding:40px;
+display:flex;
+justify-content:center;
+}
+.container{
+max-width:960px;
+width:100%;
+background:#fff;
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+.header{
+background:linear-gradient(135deg,#4F46E5,#8B5CF6);
+color:white;
+padding:60px;
+text-align:center;
+}
+.header h1{
+font-size:40px;
+margin-bottom:10px;
+}
+.header p{
+font-size:20px;
+opacity:.9;
+}
+.hero-photo{
+width:100%;
+display:block;
+}
+.hero-photo img{
+width:100%;
+height:auto;
+display:block;
+}
+.photo-caption{
+text-align:center;
+padding:14px 20px;
+color:#666;
+font-size:14px;
+background:#F8FAFF;
+}
+section{
+padding:35px 50px;
+}
+.section-title{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:28px;
+font-weight:bold;
+color:#4F46E5;
+margin-bottom:25px;
+}
+.card{
+background:#F8FAFF;
+padding:25px;
+border-radius:18px;
+margin-bottom:25px;
+box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+.info{
+display:grid;
+grid-template-columns:180px auto;
+padding:15px 0;
+border-bottom:1px solid #E8E8E8;
+}
+.info:last-child{
+border:none;
+}
+.label{
+font-weight:600;
+color:#555;
+}
+.value{
+color:#333;
+}
+.group-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+}
+.group{
+background:linear-gradient(135deg,#6366F1,#EC4899);
+color:white;
+border-radius:18px;
+padding:25px;
+text-align:center;
+transition:.3s;
+}
+.group:hover{
+transform:translateY(-5px);
+}
+.group h3{
+font-size:26px;
+margin-bottom:8px;
+}
+.notice{
+background:#FFF8D6;
+border-left:6px solid #F59E0B;
+padding:20px;
+border-radius:15px;
+}
+.warning{
+background:#FFE6E6;
+border-left:6px solid #EF4444;
+padding:20px;
+border-radius:15px;
+}
+ul{
+padding-left:22px;
+line-height:2;
+}
+.footer{
+background:#F3F4F6;
+padding:25px;
+text-align:center;
+color:#666;
+}
+@media(max-width:700px){
+.header{
+padding:40px;
+}
+.header h1{
+font-size:30px;
+}
+section{
+padding:25px;
+}
+.info{
+grid-template-columns:1fr;
+gap:6px;
+}
+}
+</style>
 </head>
 <body>
-<header class="site-header">
-  <div class="site-header-left">
-    <div class="back-links">
-      <a href="../index.html">🏠 <span>回到首頁</span></a>
-      <a href="javascript:history.back()">⬅️ <span>上一頁</span></a>
-    </div>
-  </div>
-  <div class="visitor-badge">
-    <span class="vb-label">👥 今日到訪</span>
-    <span class="vb-count" id="today-count">—</span>
-    <span class="vb-sub">累計 <span id="total-count">—</span> 人次</span>
-  </div>
-</header>
-<div class="page-wrap">
-  <main class="main-content">
-    <div class="hero">
-      <h1>2026 ESL 暑期活動</h1>
-      <p class="subtitle">2026 ESL Summer Activity — 與外師一起探索世界</p>
-    </div>
-    <div class="grid">
-      <div class="card" id="activity-info">
-        <h2>📝 活動說明</h2>
-        <ul>
-          <li>本活動由美語團隊策劃執行</li>
-          <li>由<b>外籍老師</b>親自帶隊</li>
-          <li>安排六個小組隊輔陪伴參與</li>
-          <li>主旨：讓學生在課本以外與外師探索戶外世界</li>
-        </ul>
-      </div>
-      <div class="card" id="fee-info">
-        <h2>💰 收費與優惠</h2>
-        <p>學費：<span class="fee-highlight">5,500 元</span></p>
-        <p>材料費：1,350 元（含參加禮）</p>
-        <p>單次活動：每場 1,000 元｜材料費 300 元/次</p>
-        <p style="background:#fff3e0;padding:10px;border-radius:6px;margin-bottom:0;">
-          🌟 <b>參加暑假班者：</b>贈 500 元學費抵扣券
-        </p>
-      </div>
-      <div class="card" id="gift-info">
-        <h2>🎁 參加禮（三選一）</h2>
-        <ol>
-          <li>三麗鷗多功能頸枕</li>
-          <li>Minecraft 造型背包（男）/ Care Bears 斜跨包（女）</li>
-          <li>胖老爹炸物飲料組</li>
-        </ol>
-      </div>
-      <div class="card" id="pickleball-info" style="border-top-color:#4CAF50;">
-        <h2 style="color:#2e7d32;">🏓 匹克球活動</h2>
-        <ul>
-          <li>結合英語學習與匹克球運動，讓學生邊學邊玩、動靜皆宜</li>
-          <li>由外師與隊輔帶隊分組，進行友誼對抗賽</li>
-          <li>比賽成績即時同步至線上計分板，隨時掌握戰況</li>
-        </ul>
-        <a href="esl_pickleball_ScoreDashboard.html" class="cta-button" style="background:#4CAF50;">🏆 查看即時計分板</a>
-      </div>
-      <div class="card" id="pickleball-intro" style="border-top-color:#4CAF50;">
-        <h2 style="color:#2e7d32;">📖 匹克球遊戲介紹</h2>
-        <ul>
-          <li>認識匹克球的基本規則與玩法</li>
-          <li>了解場地、器材與比賽方式</li>
-          <li>幫助學生在活動前先掌握遊戲重點</li>
-        </ul>
-        <a href="PickleBallGameIntroduction.html" class="cta-button" style="background:#4CAF50;">📖 查看遊戲介紹</a>
-      </div>
-    </div>
-    <div class="card" style="border-top-color:#3498db;margin-bottom:20px;" id="poster">
-      <h2 style="color:#3498db;">
-        🖼️ 活動海報與行程預覽
-        <span class="update-badge">🔄 更新 2026/05/22</span>
-      </h2>
-      <div class="image-gallery">
-        <div class="image-item">
-          <img src="2026ESLPicture0522.jpeg" alt="2026 ESL 暑期活動海報">
-          <div class="image-caption">2026 ESL 暑期活動海報</div>
-        </div>
-        <div class="image-item">
-          <img src="2026ESLPicture0522-2.jpeg" alt="2026 ESL 暑期活動行程表">
-          <div class="image-caption">2026 ESL 暑期活動行程表</div>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <h3>📞 聯絡我們</h3>
-      <div class="contact-info">
-        <span>同安校：03-3580770（同德十一街 5 號）</span>
-        <span>莊敬校：03-3011058（莊一街 118 號）</span>
-      </div>
-      <p style="margin-top:16px;color:#7f8c8d;">請沿虛線撕下回條並繳回，期待您的參與！</p>
-    </footer>
-  </main>
-  <aside class="sidebar">
-    <div class="sidebar-menu">
-      <h3>快速瀏覽目錄</h3>
-      <ul>
-        <li><a href="../index.html">🏠 回到首頁</a></li>
-        <li><a href="javascript:history.back()">⬅️ 回到上一頁</a></li>
-      </ul>
-      <hr class="sb-divider">
-      <ul>
-        <li><a href="#activity-info">● 活動說明</a></li>
-        <li><a href="#fee-info">● 收費與優惠</a></li>
-        <li><a href="#gift-info">● 參加禮項目</a></li>
-        <li><a href="#pickleball-info">● 匹克球活動</a></li>
-        <li><a href="#pickleball-intro">● 匹克球遊戲介紹</a></li>
-        <li><a href="#poster">● 活動海報</a></li>
-      </ul>
-      <hr class="sb-divider">
-      <div class="sb-notice">
-        <p style="margin:0 0 8px;"><b>最新活動：</b><br>2026/05/22 海報更新！</p>
-      </div>
-    </div>
-  </aside>
+<div class="container">
+<div class="header">
+<h1>🏓 ESL 匹克球活動</h1>
+<p>分組與活動公告</p>
 </div>
-<script>
-  (function () {
-    var today = new Date().toISOString().slice(0, 10);
-    var data = {};
-    try { data = JSON.parse(localStorage.getItem('esl2026_visits') || '{}'); } catch (e) {}
-    if (!sessionStorage.getItem('esl2026_visited')) {
-      sessionStorage.setItem('esl2026_visited', '1');
-      data[today] = (data[today] || 0) + 1;
-      data['__total__'] = (data['__total__'] || 0) + 1;
-      try { localStorage.setItem('esl2026_visits', JSON.stringify(data)); } catch (e) {}
-    }
-    var todayCount = data[today] || 1;
-    var totalCount = data['__total__'] || 1;
-    document.getElementById('today-count').textContent = todayCount.toLocaleString() + ' 人';
-    document.getElementById('total-count').textContent = totalCount.toLocaleString();
-  })();
-</script>
+<div class="hero-photo">
+<img src="ESL_PickleGame.png" alt="桃園市 ESL 匹克球活動現場照片">
+</div>
+<div class="photo-caption">桃園市 ESL 匹克球活動 － 2026 年 7 月 12 日（日）快樂運動！</div>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-calendar-days"></i>
+活動基本資訊
+</div>
+<div class="card">
+<div class="info">
+<div class="label">📅 日期</div>
+<div class="value">2026 年 7 月 13 日（星期一）</div>
+</div>
+<div class="info">
+<div class="label">🕤 時間</div>
+<div class="value">09:30－11:30</div>
+</div>
+<div class="info">
+<div class="label">📍 地點</div>
+<div class="value">莊敬路運動中心</div>
+</div>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-bus"></i>
+交通安排
+</div>
+<div class="card">
+<div class="info">
+<div class="label">集合地點</div>
+<div class="value">依照班級及分組集合</div>
+</div>
+<div class="info">
+<div class="label">前往方式</div>
+<div class="value">步行前往活動中心</div>
+</div>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-users"></i>
+分組安排（共九組）
+</div>
+<div class="group-grid">
+<div class="group"><h3>第1組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第2組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第3組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第4組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第5組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第6組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第7組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第8組</h3><p>老師／學生</p></div>
+<div class="group"><h3>第9組</h3><p>老師／學生</p></div>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-list-check"></i>
+活動流程
+</div>
+<div class="card">
+<ul>
+<li>依分組輪流進行各站活動。</li>
+<li>A 組（新手）：學生自主練習。</li>
+<li>B 組（進階）：由教練帶領練習。</li>
+<li>每 20 分鐘輪替一次。</li>
+</ul>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-table-tennis-paddle-ball"></i>
+器材配置
+</div>
+<div class="card">
+<ul>
+<li>球場：4 面</li>
+<li>球網：4 組</li>
+<li>球拍：依人數配置</li>
+<li>匹克球：充足供應</li>
+</ul>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-triangle-exclamation"></i>
+重要提醒
+</div>
+<div class="notice">
+<ul>
+<li>請穿著適合運動的服裝。</li>
+<li>請穿著運動鞋。</li>
+<li>請自備水壺。</li>
+<li>活動期間請遵守老師及教練指示。</li>
+</ul>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-shield-heart"></i>
+學生安全提醒
+</div>
+<div class="warning">
+<ul>
+<li>活動前請完成暖身。</li>
+<li>請勿嬉戲追逐。</li>
+<li>身體不適請立即告知老師。</li>
+<li>保持安全距離，避免碰撞。</li>
+<li>遵守教練指示進行活動。</li>
+</ul>
+</div>
+</section>
+<section>
+<div class="section-title">
+<i class="fa-solid fa-image"></i>
+活動公告海報
+</div>
+<div class="card">
+<img src="2026ESL/PickleBallRule.png" alt="ESL 匹克球活動分組與活動公告海報" style="width:100%;height:auto;border-radius:12px;display:block;">
+</div>
+</section>
+<div class="footer">
+ESL 匹克球活動公告 © 2026
+</div>
+</div>
 </body>
 </html>
