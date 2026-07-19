@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新老師招募的問答集 | Kidcastle 吉的堡</title>
+<meta name="description" content="吉的堡 Kidcastle 新老師招募常見問答集，涵蓋應徵資格、面試流程、薪資福利、教學支援與工作環境等問題。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-green: #3a9b4f;
+    --c-green-light: #e8f5ea;
+    --c-amber: #b8860b;
+    --c-amber-light: #fff8e6;
+    --bg: #f2f6f2;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --text-muted: #666;
+    --border: #e0e8e0;
+    --radius: 10px;
+    --shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  a { color: inherit; }
+  /* Header / Hero */
+  .top-nav {
+    background: var(--white);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .top-nav a.back {
+    text-decoration: none;
+    color: var(--c-green);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--c-amber-light) 0%, #fffdf5 60%, var(--c-green-light) 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    border-bottom: 3px solid var(--c-amber);
+  }
+  .hero-icon { font-size: 2.4rem; margin-bottom: 10px; }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--c-amber);
+    letter-spacing: 0.02em;
+  }
+  .hero p {
+    margin: 0 auto;
+    max-width: 560px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  /* Layout */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 60px; }
+  .search-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+  }
+  .search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 0.92rem;
+    font-family: inherit;
+    background: transparent;
+    color: var(--text);
+  }
+  .search-box span { color: var(--c-amber); font-size: 1.1rem; }
+  /* Category tabs */
+  .cat-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .cat-tab {
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: inherit;
+  }
+  .cat-tab:hover { border-color: var(--c-amber); color: var(--c-amber); }
+  .cat-tab.active { background: var(--c-amber); border-color: var(--c-amber); color: #fff; }
+  /* Category groups */
+  .cat-group { margin-bottom: 30px; }
+  .cat-group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--c-amber);
+    border-left: 4px solid var(--c-amber);
+    padding-left: 12px;
+    margin: 0 0 14px;
+  }
+  /* Accordion */
+  .qa-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .qa-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.94rem;
+    color: var(--text);
+  }
+  .qa-q:hover { color: var(--c-amber); }
+  .qa-q .qa-mark {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--c-amber-light);
+    color: var(--c-amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: transform 0.22s;
+  }
+  .qa-item.open .qa-mark { transform: rotate(45deg); }
+  .qa-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease, padding 0.28s ease;
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    padding: 0 18px;
+  }
+  .qa-item.open .qa-a {
+    max-height: 400px;
+    padding: 0 18px 18px;
+  }
+  .qa-a ul { margin: 6px 0 0; padding-left: 18px; }
+  .qa-a li { margin-bottom: 4px; }
+  /* CTA */
+  .cta-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 24px;
+    text-align: center;
+    margin-top: 34px;
+  }
+  .cta-box h3 { margin: 0 0 8px; color: var(--c-amber); font-size: 1.05rem; }
+  .cta-box p { margin: 0 0 16px; font-size: 0.86rem; color: var(--text-muted); }
+  .cta-btn {
+    display: inline-block;
+    background: var(--c-amber);
+    color: #fff;
+    padding: 11px 28px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.18s, transform 0.12s;
+  }
+  .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .no-result { display:none; text-align:center; color:var(--text-muted); font-size:0.88rem; padding: 20px 0; }
+  footer {
+    text-align: center;
+    padding: 18px;
+    font-size: 0.78rem;
+    color: #999;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a class="back" href="index.html">← 返回休娜的工作大事紀</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-icon">🧑‍🏫</div>
+  <h1>新老師招募的問答集</h1>
+  <p>關於加入吉的堡教育團隊，你想知道的都在這裡。從應徵資格、面試流程到薪資福利與教學支援，一次為你整理清楚。</p>
+</section>
+
+<div class="wrap">
+
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="qa-search" placeholder="輸入關鍵字搜尋問題，例如：面試、薪資、證照…" oninput="filterQA()">
+  </div>
+
+  <div class="cat-tabs" id="cat-tabs">
+    <button class="cat-tab active" data-cat="all" onclick="setCat('all', this)">全部</button>
+    <button class="cat-tab" data-cat="qualify" onclick="setCat('qualify', this)">應徵資格</button>
+    <button class="cat-tab" data-cat="interview" onclick="setCat('interview', this)">面試流程</button>
+    <button class="cat-tab" data-cat="salary" onclick="setCat('salary', this)">薪資福利</button>
+    <button class="cat-tab" data-cat="support" onclick="setCat('support', this)">教學支援</button>
+    <button class="cat-tab" data-cat="work" onclick="setCat('work', this)">工作環境</button>
+  </div>
+
+  <p class="no-result" id="no-result">找不到符合的問題，換個關鍵字試試看吧！</p>
+
+  <!-- 應徵資格 -->
+  <div class="cat-group" data-cat="qualify">
+    <h2 class="cat-group-title">📋 應徵資格</h2>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">應徵吉的堡老師需要什麼學歷或科系背景？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>一般需具備大專以上學歷，不限科系；若應徵美語教學相關職缺，具備英語相關科系、留學背景或多益、雅思等英語檢定成績會是加分項目，但非絕對必要條件，教學熱忱與親和力同樣重要。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">沒有教學經驗可以應徵嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>可以。吉的堡提供完整的職前培訓與帶班輔導機制，許多新老師都是從零開始，透過系統化的教學訓練逐步上手，重點是願意學習與具備服務兒童教育的熱忱。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">是否需要相關證照，例如教師證或幼教證？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>不強制要求教師證，但持有教師證、幼保相關證照、TESOL / TEFL 等教學證照者，於甄選及敘薪上會有優勢。實際需求依應徵職缺（美語老師、全科老師、行政職等）而有所不同，建議於投遞履歷時註明現有證照。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">外籍老師的簽證與工作許可要自己處理嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>不需要。吉的堡人資團隊會協助外籍老師申請及辦理工作簽證、居留證等相關文件，並提供必要的行政協助，讓老師可以專心準備教學工作。</p></div>
+    </div>
+  </div>
+
+  <!-- 面試流程 -->
+  <div class="cat-group" data-cat="interview">
+    <h2 class="cat-group-title">🗂️ 面試與甄選流程</h2>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">應徵流程大致是怎麼進行的？<span class="qa-mark">+</span></div>
+      <div class="qa-a">
+        <p>一般流程如下：</p>
+        <ul>
+          <li>線上／紙本履歷投遞</li>
+          <li>初步電話或視訊聯繫確認基本資料</li>
+          <li>到校面談，含簡短教學演示或情境問答</li>
+          <li>錄取通知與到職安排</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">面試需要準備教學演示嗎？大概多長時間？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>部分職缺會安排 5 到 10 分鐘的簡短教學演示，內容可自選一個生活化的主題或指定教材片段，主要觀察臨場反應、班級經營概念與孩子互動的方式，不需要過度準備華麗的教具。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">從面試到收到錄取通知大約要多久？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>通常在面談後一週內會有結果通知，實際時間依各分校招募進度與職缺急迫性略有不同，若超過兩週未收到通知，歡迎主動與招募窗口聯繫確認進度。</p></div>
+    </div>
+  </div>
+
+  <!-- 薪資福利 -->
+  <div class="cat-group" data-cat="salary">
+    <h2 class="cat-group-title">💰 薪資與福利</h2>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">薪資結構是怎麼計算的？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>薪資採底薪加獎金制，會依學經歷、證照、教學經驗與職缺類型（全科老師、美語老師、行政助理等）核定，並於面試錄取時明確告知，另有全勤獎金、教學績效獎金與年節獎金等制度。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">有提供勞健保與相關福利嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a">
+        <ul>
+          <li>依法投保勞保、健保及提撥勞退</li>
+          <li>員工子女／親屬學費優惠</li>
+          <li>教師節、生日禮金及年節福利金</li>
+          <li>員工旅遊與部門聚餐補助</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">試用期是多久？試用期薪資會不同嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>試用期一般為 1 到 3 個月，期間薪資與正職相同，主要用於雙方確認職務適配度；試用期滿後由主管進行考核，考核通過即轉為正式教職員。</p></div>
+    </div>
+  </div>
+
+  <!-- 教學支援 -->
+  <div class="cat-group" data-cat="support">
+    <h2 class="cat-group-title">📚 教學支援與培訓</h2>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">新老師到職後有職前訓練嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>有的，新進老師會參加職前訓練課程，內容包含教材教法、班級經營、兒童發展知識與吉的堡教學系統操作，並安排資深老師擔任教學夥伴，陪伴新老師度過適應期。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">教材與課程是老師自己準備的嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>吉的堡提供完整的分級教材與課程規劃，老師主要依循既有課程架構授課並依班級狀況彈性調整教學活動，不需要從零開始編寫教材，大幅減輕備課壓力。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">之後有機會參加進修或教學研習嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>吉的堡定期舉辦內部教學研習、教案分享會與跨校觀摩活動，也鼓勵老師參與外部教育相關研習，部分課程費用可申請補助，協助老師持續精進教學專業。</p></div>
+    </div>
+  </div>
+
+  <!-- 工作環境 -->
+  <div class="cat-group" data-cat="work">
+    <h2 class="cat-group-title">🏫 工作環境與其他</h2>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">每週工作時數與排班方式為何？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>依各職缺與班級型態（安親、才藝、美語補習班）略有不同，一般為週一至週五排班，寒暑假可能配合營隊活動調整班表，實際班表會於面試時提供並溝通確認。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">班級人數大約多少？教學負擔會很重嗎？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>各分校班級人數依教室規模而定，通常控制在合理師生比範圍內，並有教學助理或協同老師協助班級經營，讓老師能專注在教學品質而非行政瑣事上。</p></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggleQA(this)">如果想應徵，該如何投遞履歷或聯繫窗口？<span class="qa-mark">+</span></div>
+      <div class="qa-a"><p>歡迎透過分校公告的招募管道投遞履歷，或於「常用的公事表單」專區查詢人資聯絡資訊，投遞時建議附上簡短自我介紹、教學或相關經驗說明，我們會盡快與你聯繫安排面談。</p></div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>還有其他問題嗎？</h3>
+    <p>歡迎回到大事紀首頁，透過「常用的公事表單」或公共事務頁與我們聯繫，我們期待優秀的你加入吉的堡教育大家庭！</p>
+    <a class="cta-btn" href="index.html">← 返回首頁</a>
+  </div>
+
+</div>
+
+<footer>© 2026 休娜的工作大事紀 ｜ 新老師招募問答集 ｜ 客服信箱：service@zhizhihealth.com</footer>
+
+<script>
+  function toggleQA(el) {
+    var item = el.closest('.qa-item');
+    var wasOpen = item.classList.contains('open');
+    item.classList.toggle('open', !wasOpen);
+    var mark = item.querySelector('.qa-mark');
+    mark.textContent = item.classList.contains('open') ? '×' : '+';
+  }
+  var currentCat = 'all';
+  function setCat(cat, btn) {
+    currentCat = cat;
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    filterQA();
+  }
+  function filterQA() {
+    var kw = document.getElementById('qa-search').value.trim().toLowerCase();
+    var groups = document.querySelectorAll('.cat-group');
+    var anyVisible = false;
+    groups.forEach(function (g) {
+      var groupCat = g.dataset.cat;
+      var catMatch = currentCat === 'all' || currentCat === groupCat;
+      var groupHasVisible = false;
+      g.querySelectorAll('.qa-item').forEach(function (item) {
+        var text = item.textContent.toLowerCase();
+        var kwMatch = kw === '' || text.indexOf(kw) !== -1;
+        var visible = catMatch && kwMatch;
+        item.style.display = visible ? '' : 'none';
+        if (visible) groupHasVisible = true;
+      });
+      g.style.display = groupHasVisible ? '' : 'none';
+      if (groupHasVisible) anyVisible = true;
+    });
+    document.getElementById('no-result').style.display = anyVisible ? 'none' : 'block';
+  }
+</script>
+</body>
+</html>
