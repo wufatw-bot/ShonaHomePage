@@ -1,4 +1,497 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>低年級安親老師｜面試資訊卡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6E9;
+    --paper-line:#E4D9B8;
+    --board:#2F4B3C;
+    --board-dark:#22392D;
+    --ink:#2C332B;
+    --ink-soft:#6C7268;
+    --coral:#E2703A;
+    --coral-dark:#C6572A;
+    --yellow:#F0BB4B;
+    --card:#FFFFFF;
+    --shadow: 0 2px 0 rgba(44,51,43,0.06), 0 10px 24px -14px rgba(44,51,43,0.25);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    padding: 28px 16px 80px;
+  }
+  .wrap{max-width: 880px; margin: 0 auto;}
+
+  /* ---- Header (blackboard) ---- */
+  .board{
+    background: radial-gradient(circle at 20% 20%, #345441 0%, var(--board) 45%, var(--board-dark) 100%);
+    border-radius: var(--radius);
+    padding: 34px 28px 30px;
+    color: #F4EFDD;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .board::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 6px 6px;
+    opacity:0.4;
+    pointer-events:none;
+  }
+  .board .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:2px;
+    color:var(--yellow);
+    border:1px dashed rgba(240,187,75,0.6);
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .board h1{
+    font-family:'ZCOOL KuaiLe','Noto Sans TC',sans-serif;
+    font-size: clamp(26px, 5vw, 38px);
+    margin:0 0 8px;
+    line-height:1.3;
+  }
+  .board p.sub{
+    margin:0;
+    color:#CFE0D3;
+    font-size:14.5px;
+    line-height:1.7;
+  }
+
+  /* ---- Section titles ---- */
+  .section{ margin-top: 34px; }
+  .section-head{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:14px;
+  }
+  .section-head .tag{
+    font-family:'ZCOOL KuaiLe','Noto Sans TC',sans-serif;
+    background: var(--coral);
+    color:#fff;
+    font-size:14px;
+    padding: 3px 12px 4px;
+    border-radius: 8px 8px 8px 0;
+    transform: rotate(-1.2deg);
+    box-shadow: 0 3px 0 var(--coral-dark);
+  }
+  .section-head h2{
+    font-size:16px; margin:0; color:var(--ink-soft); font-weight:700;
+  }
+
+  /* ---- Q&A cards ---- */
+  .qa-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 12px;
+  }
+  .qa-card{
+    background:var(--card);
+    border:1px solid var(--paper-line);
+    border-radius: var(--radius);
+    padding: 16px 16px 14px;
+    box-shadow: var(--shadow);
+    position:relative;
+  }
+  .qa-card.wide{ grid-column: 1 / -1; }
+  .qa-q{
+    font-size:12.5px; font-weight:700; color:var(--coral-dark);
+    margin:0 0 6px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .qa-q::before{ content:"Q"; font-family:'ZCOOL KuaiLe'; background:var(--yellow); color:#4A3610; width:18px; height:18px; border-radius:5px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; }
+  .qa-a{
+    font-size:14.5px; line-height:1.75; margin:0; color:var(--ink); white-space:pre-line;
+  }
+  .copy-btn{
+    position:absolute; top:12px; right:12px;
+    background:var(--paper);
+    border:1px solid var(--paper-line);
+    color:var(--ink-soft);
+    font-size:12px;
+    padding:5px 9px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex; align-items:center; gap:4px;
+    transition: all .15s ease;
+  }
+  .copy-btn:hover{ background:var(--coral); color:#fff; border-color:var(--coral-dark);}
+  .copy-btn svg{ width:13px; height:13px; }
+
+  /* ---- Location picker ---- */
+  .loc-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:12px; }
+  .loc-card{
+    background:var(--card); border:2px solid var(--paper-line); border-radius: var(--radius);
+    padding:16px; cursor:pointer; box-shadow: var(--shadow); position:relative; transition: border-color .15s ease, transform .1s ease;
+  }
+  .loc-card:hover{ transform: translateY(-1px); }
+  .loc-card.selected{ border-color: var(--coral); background: #FFF6EF; }
+  .loc-card .loc-name{ font-family:'ZCOOL KuaiLe'; font-size:17px; color:var(--board); margin-bottom:4px; }
+  .loc-card .loc-addr{ font-size:13.5px; color:var(--ink-soft); }
+  .loc-card .check{ position:absolute; top:12px; right:12px; width:20px; height:20px; border-radius:50%; border:2px solid var(--paper-line); }
+  .loc-card.selected .check{ background:var(--coral); border-color:var(--coral); }
+  .loc-card.selected .check::after{ content:"✓"; color:#fff; font-size:12px; display:flex; align-items:center; justify-content:center; height:100%; }
+
+  /* ---- Calendar + time ---- */
+  .schedule-panel{
+    background:var(--card); border:1px solid var(--paper-line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding:20px; display:grid; grid-template-columns: 1fr 1fr; gap:24px;
+  }
+  @media (max-width:640px){ .schedule-panel{ grid-template-columns:1fr; } }
+
+  .cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .cal-head .month-label{ font-family:'ZCOOL KuaiLe'; font-size:17px; color:var(--board); }
+  .cal-nav{ display:flex; gap:6px; }
+  .cal-nav button{
+    background:var(--paper); border:1px solid var(--paper-line); border-radius:7px; width:28px; height:28px;
+    cursor:pointer; color:var(--ink); font-size:14px;
+  }
+  .cal-nav button:hover{ background:var(--coral); color:#fff; }
+  .cal-grid{ display:grid; grid-template-columns: repeat(7,1fr); gap:4px; text-align:center; }
+  .cal-grid .dow{ font-size:11.5px; color:var(--ink-soft); font-weight:700; padding-bottom:4px; }
+  .cal-grid .day{
+    font-size:13px; padding:7px 0; border-radius:8px; cursor:pointer; color:var(--ink);
+  }
+  .cal-grid .day.blank{ cursor:default; }
+  .cal-grid .day:not(.blank):hover{ background:#FDEFE4; }
+  .cal-grid .day.today{ border:1px solid var(--coral); }
+  .cal-grid .day.selected{ background:var(--coral); color:#fff; font-weight:700; }
+  .cal-grid .day.past{ color:#D2CBB6; cursor:default; }
+
+  .time-block h3, .cal-block h3{ font-size:13px; color:var(--ink-soft); margin:0 0 10px; font-weight:700; }
+  select#timeSelect{
+    width:100%; padding:11px 12px; border-radius:10px; border:1px solid var(--paper-line);
+    background:var(--paper); font-size:14.5px; color:var(--ink); font-family:'Noto Sans TC';
+    appearance:none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C7268' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat; background-position: right 12px center; background-size:16px;
+  }
+  .quick-times{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .quick-times button{
+    font-size:12.5px; padding:6px 10px; border-radius:999px; border:1px solid var(--paper-line);
+    background:var(--paper); cursor:pointer; color:var(--ink-soft);
+  }
+  .quick-times button.active, .quick-times button:hover{ background:var(--board); color:#F4EFDD; border-color:var(--board); }
+
+  /* ---- Summary ---- */
+  .summary{
+    margin-top:18px; background: repeating-linear-gradient(180deg, transparent, transparent 26px, var(--paper-line) 26px, var(--paper-line) 27px), #fff;
+    border:1px dashed var(--coral); border-radius: var(--radius); padding:18px 18px 16px; position:relative;
+    box-shadow: var(--shadow);
+  }
+  .summary .stamp{
+    position:absolute; top:-12px; left:18px; background:var(--yellow); color:#4A3610; font-size:12px;
+    font-family:'ZCOOL KuaiLe'; padding:3px 12px; border-radius:999px; transform:rotate(-2deg); box-shadow:0 2px 0 #C6952B;
+  }
+  .summary pre{
+    font-family:'Noto Sans TC'; font-size:14.5px; line-height:1.9; white-space:pre-wrap; margin: 10px 0 14px; color:var(--ink);
+  }
+  .summary .placeholder{ color:#B8AF95; font-size:14px; }
+  .big-copy{
+    background:var(--coral); color:#fff; border:none; padding:11px 20px; border-radius:10px; font-size:14.5px;
+    font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow: 0 3px 0 var(--coral-dark);
+    transition: transform .1s ease;
+  }
+  .big-copy:disabled{ background:#D8CDB0; box-shadow:none; cursor:not-allowed; }
+  .big-copy:not(:disabled):active{ transform: translateY(2px); box-shadow:none; }
+
+  /* ---- toast ---- */
+  #toast{
+    position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px);
+    background:var(--board); color:#F4EFDD; padding:10px 18px; border-radius:999px; font-size:13.5px;
+    opacity:0; pointer-events:none; transition: all .25s ease; box-shadow: var(--shadow); z-index:99;
+  }
+  #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  footer{ text-align:center; color:var(--ink-soft); font-size:12px; margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="board">
+    <span class="eyebrow">面試邀約 · 資訊卡</span>
+    <h1>低年級安親老師｜面試資訊</h1>
+    <p class="sub">課業陪伴 · 親師溝通 · 安全接送 —— 點一下就能複製每一項資訊，右側選好面試日期與時間即可產出完整通知文字。</p>
+  </div>
+
+  <!-- 面試地點 -->
+  <div class="section">
+    <div class="section-head"><span class="tag">面試地點</span><h2>請選擇面試校區</h2></div>
+    <div class="loc-grid">
+      <div class="loc-card" data-name="莊敬校" data-addr="莊一街118號">
+        <div class="check"></div>
+        <div class="loc-name">莊敬校</div>
+        <div class="loc-addr">莊一街118號</div>
+      </div>
+      <div class="loc-card" data-name="同安校" data-addr="同德十一街3號">
+        <div class="check"></div>
+        <div class="loc-name">同安校</div>
+        <div class="loc-addr">同德十一街3號</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 面試時間安排 -->
+  <div class="section">
+    <div class="section-head"><span class="tag">面試時間</span><h2>選擇日期與開始時間</h2></div>
+    <div class="schedule-panel">
+      <div class="cal-block">
+        <div class="cal-head">
+          <button class="cal-nav" style="display:flex" id="prevMonth">◀</button>
+          <span class="month-label" id="monthLabel"></span>
+          <button id="nextMonth">▶</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <div class="time-block">
+        <h3>面試開始時間</h3>
+        <select id="timeSelect"></select>
+        <div class="quick-times" id="quickTimes"></div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <span class="stamp">面試通知預覽</span>
+      <pre id="summaryText"><span class="placeholder">請先選擇面試地點、日期與時間，這裡會自動產生完整的面試通知文字。</span></pre>
+      <button class="big-copy" id="copyAllBtn" disabled>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        複製完整面試通知
+      </button>
+    </div>
+  </div>
+
+  <!-- 工作內容 -->
+  <div class="section">
+    <div class="section-head"><span class="tag">職務說明</span><h2>低年級安親老師 · 主要工作內容</h2></div>
+    <div class="qa-grid">
+      <div class="qa-card wide">
+        <p class="qa-q">主要工作內容是什麼？</p>
+        <p class="qa-a" data-copy>1. 課業管理：協助低年級孩子完成學校作業、訂正錯字，並針對觀念進行趣味引導與複習。
+2. 親師溝通：觀察並記錄孩子的學習與生活點滴，用專業、現代化的思維與家長建立信任感。
+3. 安全維持：負責安全的接送與櫃檯親切互動，維持班系常規。
+4. 團隊合作：協助班系舉辦活動與招生活動。
+5. 希望成為教育工作者，有熱情希望能在孩子身上得到成就感。</p>
+        <button class="copy-btn">複製</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 職缺基本資訊 -->
+  <div class="section">
+    <div class="section-head"><span class="tag">職缺條件</span><h2>工作待遇與性質</h2></div>
+    <div class="qa-grid">
+      <div class="qa-card"><p class="qa-q">職務類別？</p><p class="qa-a" data-copy>安親班老師、幼教班老師、語文補習班老師</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">工作待遇？</p><p class="qa-a" data-copy>月薪 35,000～42,000 元</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">工作性質？</p><p class="qa-a" data-copy>全職</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">上班地點？</p><p class="qa-a" data-copy>桃園市桃園區莊一街118號</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">管理責任？</p><p class="qa-a" data-copy>不需負擔管理責任</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">出差外派？</p><p class="qa-a" data-copy>無需出差外派</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">上班時段？</p><p class="qa-a" data-copy>日班</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">休假制度？</p><p class="qa-a" data-copy>週休二日</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">可上班日？</p><p class="qa-a" data-copy>兩週內</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">需求人數？</p><p class="qa-a" data-copy>1人</p><button class="copy-btn">複製</button></div>
+    </div>
+  </div>
+
+  <!-- 條件要求 -->
+  <div class="section">
+    <div class="section-head"><span class="tag">應徵條件</span><h2>條件要求</h2></div>
+    <div class="qa-grid">
+      <div class="qa-card"><p class="qa-q">工作經歷？</p><p class="qa-a" data-copy>不拘</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">學歷要求？</p><p class="qa-a" data-copy>專科、大學、碩士</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">科系要求？</p><p class="qa-a" data-copy>不拘</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">語文條件？</p><p class="qa-a" data-copy>不拘</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card"><p class="qa-q">擅長工具？</p><p class="qa-a" data-copy>Excel、PowerPoint、Word</p><button class="copy-btn">複製</button></div>
+      <div class="qa-card wide"><p class="qa-q">其他條件？</p><p class="qa-a" data-copy>歡迎所有求職者，包含應屆畢業生、日間就讀中、研發替代役、二度就業、中高齡、中壯齡等，皆可投遞履歷。</p><button class="copy-btn">複製</button></div>
+    </div>
+  </div>
+
+  <footer>點擊各卡片右上角「複製」即可將該項內容複製到剪貼簿</footer>
+</div>
+
+<div id="toast">已複製到剪貼簿</div>
+
+<script>
+  // ---- toast ----
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg || '已複製到剪貼簿';
+    t.classList.add('show');
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(()=> t.classList.remove('show'), 1800);
+  }
+  function copyText(text){
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(()=>showToast()).catch(()=>fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); showToast(); }catch(e){ showToast('複製失敗，請手動選取'); }
+    document.body.removeChild(ta);
+  }
+
+  // ---- individual copy buttons ----
+  document.querySelectorAll('.qa-card').forEach(card=>{
+    const btn = card.querySelector('.copy-btn');
+    const text = card.querySelector('[data-copy]').innerText;
+    btn.addEventListener('click', ()=> copyText(text));
+  });
+
+  // ---- location picker ----
+  let selectedLoc = null;
+  document.querySelectorAll('.loc-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      document.querySelectorAll('.loc-card').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedLoc = { name: card.dataset.name, addr: card.dataset.addr };
+      updateSummary();
+    });
+  });
+
+  // ---- calendar ----
+  const dowNames = ['日','一','二','三','四','五','六'];
+  let viewDate = new Date();
+  viewDate.setDate(1);
+  let selectedDate = null;
+
+  function renderCalendar(){
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    dowNames.forEach(d=>{
+      const el = document.createElement('div');
+      el.className = 'dow'; el.textContent = d;
+      grid.appendChild(el);
+    });
+    document.getElementById('monthLabel').textContent = `${viewDate.getFullYear()}年 ${viewDate.getMonth()+1}月`;
+
+    const firstDow = viewDate.getDay();
+    const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth()+1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    for(let i=0;i<firstDow;i++){
+      const blank = document.createElement('div');
+      blank.className = 'day blank';
+      grid.appendChild(blank);
+    }
+    for(let d=1; d<=daysInMonth; d++){
+      const cell = document.createElement('div');
+      cell.className = 'day';
+      cell.textContent = d;
+      const thisDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), d);
+      thisDate.setHours(0,0,0,0);
+
+      if(thisDate.getTime() === today.getTime()) cell.classList.add('today');
+      if(thisDate < today){
+        cell.classList.add('past');
+      } else {
+        cell.addEventListener('click', ()=>{
+          selectedDate = thisDate;
+          renderCalendar();
+          updateSummary();
+        });
+      }
+      if(selectedDate && thisDate.getTime() === selectedDate.getTime()) cell.classList.add('selected');
+      grid.appendChild(cell);
+    }
+  }
+  document.getElementById('prevMonth').addEventListener('click', ()=>{
+    viewDate.setMonth(viewDate.getMonth()-1); renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', ()=>{
+    viewDate.setMonth(viewDate.getMonth()+1); renderCalendar();
+  });
+  renderCalendar();
+
+  // ---- time select ----
+  const timeSelect = document.getElementById('timeSelect');
+  const quickTimesEl = document.getElementById('quickTimes');
+  const quickPresets = ['09:30','10:30','14:00','15:30'];
+
+  function fmtTimeLabel(h,m){
+    const period = h < 12 ? '上午' : '下午';
+    const hh = String(h).padStart(2,'0');
+    const mm = String(m).padStart(2,'0');
+    return `${period} ${hh}:${mm}`;
+  }
+  for(let h=9; h<=18; h++){
+    for(let m=0; m<60; m+=30){
+      if(h===18 && m>0) continue;
+      const val = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+      const opt = document.createElement('option');
+      opt.value = val;
+      opt.textContent = fmtTimeLabel(h,m);
+      timeSelect.appendChild(opt);
+    }
+  }
+  timeSelect.value = '09:30';
+  quickPresets.forEach(t=>{
+    const b = document.createElement('button');
+    b.textContent = fmtTimeLabel(...t.split(':').map(Number));
+    b.dataset.val = t;
+    if(t==='09:30') b.classList.add('active');
+    b.addEventListener('click', ()=>{
+      timeSelect.value = t;
+      document.querySelectorAll('.quick-times button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      updateSummary();
+    });
+    quickTimesEl.appendChild(b);
+  });
+  timeSelect.addEventListener('change', ()=>{
+    document.querySelectorAll('.quick-times button').forEach(x=>x.classList.toggle('active', x.dataset.val === timeSelect.value));
+    updateSummary();
+  });
+
+  // ---- summary ----
+  function updateSummary(){
+    const pre = document.getElementById('summaryText');
+    const btn = document.getElementById('copyAllBtn');
+    if(!selectedLoc || !selectedDate){
+      pre.innerHTML = '<span class="placeholder">請先選擇面試地點、日期與時間，這裡會自動產生完整的面試通知文字。</span>';
+      btn.disabled = true;
+      return;
+    }
+    const dateStr = `${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日（星期${dowNames[selectedDate.getDay()]}）`;
+    const timeVal = timeSelect.value;
+    const [h,m] = timeVal.split(':').map(Number);
+    const timeLabel = fmtTimeLabel(h,m);
+    const text =
+`面試通知
+應徵職務：低年級安親老師
+面試地點：${selectedLoc.name}（${selectedLoc.addr}）
+面試日期：${dateStr}
+面試時間：${timeLabel}
+
+請準時到達，若時間需要異動，請提前與我們聯繫，謝謝！`;
+    pre.textContent = text;
+    btn.disabled = false;
+    btn.onclick = ()=> copyText(text);
+  }
+</script>
+</body>
+</html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
