@@ -9,18 +9,15 @@
   <meta name="author" content="Shona / 休娜">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="">
-
   <!-- Open Graph (社群分享預覽) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="休娜的工作大事紀 | Shona's Work Chronicle">
   <meta property="og:description" content="記錄 Shona 在吉的堡 Kidcastle 的教育工作歷程、活動大事紀與成長故事。#Shona #休娜 #大事紀 #工作 #Kidcastle">
   <meta property="og:locale" content="zh_TW">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="休娜的工作大事紀 | Shona's Work Chronicle">
   <meta name="twitter:description" content="記錄 Shona 在吉的堡 Kidcastle 的教育工作歷程、活動大事紀與成長故事。#Shona #休娜 #大事紀 #工作 #Kidcastle">
-
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -50,6 +47,7 @@
       --c-teal: #00897b;
       --c-xmas: #c0392b;
       --c-indigo: #3949ab;
+      --c-amber: #b8860b;
       --bg: #f2f6f2;
       --white: #ffffff;
       --text: #2c2c2c;
@@ -67,7 +65,6 @@
       background: var(--bg);
       line-height: 1.6;
     }
-
     /* ── Header ── */
     .zh-header {
       background: var(--white);
@@ -106,7 +103,6 @@
     .vb-label { font-size: 0.68rem; color: #777; }
     .vb-count { font-size: 1.05rem; font-weight: 700; color: var(--c-green); letter-spacing: 0.04em; }
     .vb-sub { font-size: 0.63rem; color: #aaa; }
-
     /* ── Layout ── */
     .zh-body {
       display: flex;
@@ -122,7 +118,6 @@
       top: 70px;
       height: fit-content;
     }
-
     /* ── Section cards ── */
     .zh-section {
       background: var(--white);
@@ -138,7 +133,6 @@
       font-size: 1.05rem;
       font-weight: 600;
     }
-
     /* ── Banners ── */
     .zh-banner {
       padding: 16px 18px;
@@ -169,7 +163,6 @@
       transition: opacity 0.18s, transform 0.12s;
     }
     .zh-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-
     /* ── 衛教 grid ── */
     .zh-grid {
       display: grid;
@@ -185,7 +178,6 @@
     }
     .zh-card h3 { margin: 0 0 6px; font-size: 0.9rem; font-weight: 600; color: var(--c-green); }
     .zh-card p { margin: 0; font-size: 0.8rem; color: var(--text-muted); }
-
     /* ── Gallery ── */
     .zh-gallery {
       display: flex;
@@ -217,19 +209,16 @@
       font-weight: 500;
     }
     .zh-gitem p { margin: 8px 6px 10px; color: var(--text-muted); }
-
     /* ── Game cards ── */
     .zh-game-card { border-top: 3px solid; text-align: center; }
     .zh-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
     .zh-game-card h4 { margin: 6px 0 4px; font-size: 0.9rem; font-weight: 600; }
     .zh-game-card p { font-size: 0.78rem; color: var(--text-muted); margin: 0 0 12px; }
-
     /* ── Table ── */
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th, td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; }
     th { background: var(--c-green); color: white; font-weight: 600; }
     tr:nth-child(even) td { background: #f7faf7; }
-
     /* ── Sidebar ── */
     .sb-box {
       background: var(--white);
@@ -260,6 +249,7 @@
     .sb-box a.hl-blue { color: var(--c-blue); font-weight: 600; }
     .sb-box a.hl-xmas { color: var(--c-xmas); font-weight: 600; }
     .sb-box a.hl-teal { color: var(--c-teal); font-weight: 600; }
+    .sb-box a.hl-amber { color: var(--c-amber); font-weight: 600; }
     .sb-divider { border: 0; border-top: 1px solid var(--border); margin: 10px 0; }
     .sb-notice { font-size: 0.8rem; color: var(--text-muted); }
     .sb-notice b { color: var(--text); }
@@ -277,7 +267,6 @@
       transition: opacity 0.18s;
     }
     .sb-cta:hover { opacity: 0.88; }
-
     /* ── Health Directory ── */
     .health-dir-section {
       background: linear-gradient(135deg, #e4f5e6 0%, #f0f9f0 50%, #e0f7f4 100%);
@@ -339,7 +328,6 @@
       box-shadow: 0 2px 8px rgba(0,137,123,0.25);
     }
     .health-dir-cta:hover { background: #00695c; box-shadow: 0 4px 14px rgba(0,137,123,0.35); }
-
     /* ── English learn bar ── */
     .english-learn-bar {
       background: var(--white);
@@ -364,7 +352,6 @@
       color: #fff;
       box-shadow: 0 4px 14px rgba(58,155,79,0.25);
     }
-
     /* ── Public Affairs ── */
     .public-affairs-bar {
       background: #1a237e;
@@ -435,7 +422,6 @@
     .pa-enter-btn:hover { background: #5c6bc0; box-shadow: 0 4px 14px rgba(57,73,171,0.5); transform: translateY(-1px); }
     .pa-enter-btn:active { transform: translateY(0); }
     .pa-error { display: none; color: #ef9a9a; font-size: 0.8rem; margin-top: 10px; }
-
     /* ── Common Forms Section ── */
     .common-forms-bar {
       background: linear-gradient(135deg, #f3f0ff 0%, #ede8ff 50%, #f0f4ff 100%);
@@ -527,7 +513,6 @@
       transform: translateY(-1px);
     }
     .common-forms-btn:active { transform: translateY(0); }
-
     /* ── YouTube Presentation Modal ── */
     .yt-modal-overlay {
       display: none;
@@ -554,7 +539,6 @@
       from { opacity: 0; transform: scale(0.97) translateY(16px); }
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     .yt-topbar {
       display: flex;
       align-items: center;
@@ -592,9 +576,7 @@
     .yt-topbar-btns button:hover { border-color: #e8c96d; color: #e8c96d; background: rgba(232,201,109,0.06); }
     .yt-topbar-btns button.yt-close-btn { color: #e87a7a; border-color: rgba(232,120,120,0.3); }
     .yt-topbar-btns button.yt-close-btn:hover { background: rgba(232,120,120,0.12); border-color: #e87a7a; }
-
     .yt-main { display: flex; flex: 1; overflow: hidden; }
-
     .yt-sidebar {
       width: 190px;
       flex-shrink: 0;
@@ -622,7 +604,6 @@
     .yt-thumb-num { font-family: monospace; font-size: 10px; color: #666; margin-bottom: 3px; }
     .yt-thumb-title { font-size: 11px; color: #ddd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .yt-thumb-icon { margin-top: 5px; width: 100%; aspect-ratio: 16/9; border-radius: 3px; background: #0a0a0f; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-
     .yt-canvas {
       flex: 1;
       display: flex;
@@ -691,7 +672,6 @@
     .yt-h2 { font-size: clamp(18px,2.5vw,30px); font-weight: 700; color: #f0ede8; margin-bottom: 0.6rem; line-height: 1.18; }
     .yt-subtitle { font-size: clamp(13px,1.4vw,16px); color: #888; line-height: 1.6; max-width: 500px; }
     .yt-slide-num { position: absolute; top: 1rem; right: 1.2rem; font-family: monospace; font-size: 11px; color: #555; z-index: 3; }
-
     .yt-slide-video { flex-direction: row !important; }
     .yt-video-left { width: 58%; background: #000; position: relative; flex-shrink: 0; }
     .yt-video-left iframe { position: absolute; top:0;left:0;width:100%;height:100%;border:none; }
@@ -699,23 +679,19 @@
     .yt-video-right h2 { font-size:18px;font-weight:700;color:#f0ede8;margin-bottom:0.6rem;line-height:1.3; }
     .yt-video-right p { font-size:12px;color:#888;line-height:1.7;margin-bottom:0.8rem; }
     .yt-video-tag { display:inline-block;background:rgba(232,201,109,0.1);color:#e8c96d;font-size:11px;font-family:monospace;padding:3px 9px;border-radius:3px; }
-
     .yt-slide-fullvideo .yt-slide-inner { padding: 0; position: relative; }
     .yt-slide-fullvideo iframe { position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:10px; }
     .yt-video-caption { position:absolute;bottom:0;left:0;right:0;padding:0.8rem 1.2rem;background:linear-gradient(transparent,rgba(0,0,0,0.82));z-index:3;border-radius:0 0 10px 10px; }
     .yt-video-caption h3 { font-size:14px;color:#fff;margin-bottom:3px; }
     .yt-video-caption p { font-size:11px;color:rgba(255,255,255,0.55);margin:0; }
-
     .yt-points { list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:9px; }
     .yt-points li { display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#888;line-height:1.5; }
     .yt-points li::before { content:'';width:5px;height:5px;border-radius:50%;background:#e8c96d;flex-shrink:0;margin-top:7px; }
-
     .yt-grid2 { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.2rem;flex:1; }
     .yt-gcard { background:#1a1a26;border:1px solid rgba(232,201,109,0.12);border-radius:7px;padding:1rem;display:flex;flex-direction:column;gap:5px; }
     .yt-gcard-icon { font-size:18px; }
     .yt-gcard h4 { font-size:13px;font-weight:600;color:#f0ede8;margin:0; }
     .yt-gcard p { font-size:11px;color:#666;line-height:1.5;margin:0; }
-
     .yt-bottombar {
       display: flex;
       align-items: center;
@@ -745,7 +721,6 @@
     .yt-dots { display: flex; gap: 5px; align-items: center; }
     .yt-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(232,201,109,0.2); cursor: pointer; transition: all 0.18s; }
     .yt-dot.active { background: #e8c96d; transform: scale(1.35); }
-
     .yt-add-panel {
       display: none;
       position: absolute;
@@ -790,7 +765,6 @@
     .yt-panel-actions button:hover { border-color: #7b6ff0; color: #7b6ff0; }
     .yt-panel-actions button.primary { background: #e8c96d; color: #0a0a0f; border-color: #e8c96d; font-weight: 700; }
     .yt-panel-actions button.primary:hover { opacity: 0.85; }
-
     .yt-open-btn {
       display: inline-flex;
       align-items: center;
@@ -808,7 +782,6 @@
       transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
     }
     .yt-open-btn:hover { background: #1a1a26; border-color: #e8c96d; box-shadow: 0 4px 16px rgba(232,201,109,0.18); }
-
     @media (max-width: 768px) {
       .zh-body { flex-direction: column; padding: 14px; gap: 14px; }
       .zh-sidebar { position: static; }
@@ -822,7 +795,6 @@
   </style>
 </head>
 <body>
-
 <!-- ══ Header ══ -->
 <header class="zh-header">
   <div class="zh-logo">📋 休娜的工作大事紀</div>
@@ -835,11 +807,9 @@
     </div>
   </div>
 </header>
-
 <!-- ══ Body ══ -->
 <div class="zh-body">
   <main class="zh-main">
-
     <!-- ESL Summer -->
     <div class="zh-section" id="esl-summer">
       <h2 class="zh-h2">📅 2026 ESL 暑期活動特輯</h2>
@@ -862,7 +832,6 @@
         <a href="2026ESL/2026ESLGlobalView-1.html" class="zh-btn" style="background:var(--c-red);">進入活動首頁</a>
       </div>
     </div>
-
     <!-- Elite Scholar -->
     <div class="zh-section" id="elite-scholar">
       <h2 class="zh-h2">🎓 私中專班招生訊息</h2>
@@ -874,7 +843,6 @@
         <a href="EliteScholar/EliteScholarGlobalView.html" class="zh-btn" style="background:var(--c-blue);">查看招生簡章</a>
       </div>
     </div>
-
     <!-- 2024 Christmas Party -->
     <div class="zh-section" id="christmas-party-2024">
       <h2 class="zh-h2" style="border-left-color:var(--c-xmas);color:var(--c-xmas);">🎄 2024 年聖誕節晚會</h2>
@@ -886,7 +854,6 @@
         <a href="2024ChristmasParty.html" class="zh-btn" style="background:var(--c-xmas);">查看晚會專頁</a>
       </div>
     </div>
-
     <!-- Teacher Mission -->
     <div class="zh-section" id="teacher-mission">
       <h2 class="zh-h2" style="border-left-color:var(--c-teal);color:var(--c-teal);">🍎 老師的使命與志業</h2>
@@ -898,7 +865,6 @@
         <a href="TeacherMission/PygmalionClassHomepage.html" class="zh-btn" style="background:var(--c-teal);">進入專頁</a>
       </div>
     </div>
-
     <!-- Health Education -->
     <div class="zh-section" id="health-edu">
       <h2 class="zh-h2">🥦 衛教與教養專區</h2>
@@ -914,7 +880,6 @@
         </div>
       </div>
     </div>
-
     <!-- Activity Highlights -->
     <div class="zh-section" id="highlights">
       <h2 class="zh-h2">📸 吉的堡活動集錦</h2>
@@ -933,7 +898,6 @@
         </div>
       </div>
     </div>
-
     <!-- Games -->
     <div class="zh-section" id="games">
       <h2 class="zh-h2">🎮 互動樂園：小遊戲集合</h2>
@@ -958,14 +922,12 @@
         </div>
       </div>
     </div>
-
     <!-- YouTube Presentation -->
     <div class="zh-section" id="yt-presentation">
       <h2 class="zh-h2">▶ 影片簡報展示</h2>
       <p style="margin:0 0 14px;font-size:0.87rem;color:var(--text-muted);">嵌入 YouTube 影片的互動式簡報，可自訂影片連結並全螢幕播放。</p>
       <button class="yt-open-btn" onclick="openYtModal()">▶ 開啟影片簡報</button>
     </div>
-
     <!-- Articles -->
     <div class="zh-section" id="articles">
       <h2 class="zh-h2">📚 推薦文章</h2>
@@ -977,9 +939,18 @@
         </tbody>
       </table>
     </div>
-
+    <!-- New Teacher Recruitment -->
+    <div class="zh-section" id="new-teacher-recruitment">
+      <h2 class="zh-h2" style="border-left-color:var(--c-amber);color:var(--c-amber);">🧑‍🏫 關於新老師招募</h2>
+      <div class="zh-banner" style="background:linear-gradient(135deg,#fff8e6 0%,#fffdf5 100%);border:1px solid #f0dca0;">
+        <div>
+          <h4 style="color:var(--c-amber);">誠摯邀請優秀教育夥伴加入</h4>
+          <p>了解應徵資格、面試流程、薪資福利與教學支援，常見問題一次看懂。</p>
+        </div>
+        <a href="新老師招募的問答集.html" class="zh-btn" style="background:var(--c-amber);">查看問答集</a>
+      </div>
+    </div>
   </main>
-
   <!-- Sidebar -->
   <aside class="zh-sidebar">
     <div class="sb-box">
@@ -989,6 +960,7 @@
         <li><a href="EliteScholar/EliteScholarGlobalView.html" class="hl-blue">🎓 私中班招生訊息</a></li>
         <li><a href="2024ChristmasParty.html" class="hl-xmas">🎄 2024 年聖誕節晚會</a></li>
         <li><a href="#teacher-mission" class="hl-teal">🍎 老師的使命與志業</a></li>
+        <li><a href="#new-teacher-recruitment" class="hl-amber">🧑‍🏫 關於新老師招募</a></li>
       </ul>
       <hr class="sb-divider">
       <ul>
@@ -1010,7 +982,6 @@
     </div>
   </aside>
 </div>
-
 <!-- ══ Health Knowledge Directory ══ -->
 <section class="health-dir-section" id="health-knowledge">
   <div class="health-dir-inner">
@@ -1055,14 +1026,12 @@
     </div>
   </div>
 </section>
-
 <!-- ══ English Learn Bar ══ -->
 <div class="english-learn-bar">
   <a class="english-learn-link" href="https://d8600010-crypto.github.io/ShonaEnglishLearn/" target="_blank" rel="noopener">
     📘 大立昇吉的堡英文學習綱
   </a>
 </div>
-
 <!-- ══ Common Forms ══ -->
 <section class="common-forms-bar" id="common-forms">
   <div class="common-forms-inner">
@@ -1082,7 +1051,6 @@
     </div>
   </div>
 </section>
-
 <!-- ══ Public Affairs ══ -->
 <div class="public-affairs-bar" id="public-affairs">
   <div class="public-affairs-inner">
@@ -1104,7 +1072,6 @@
     <button class="pa-enter-btn" onclick="paLogin()">🔐 進入公共事務頁</button>
   </div>
 </div>
-
 <!-- ══ YouTube Presentation Modal ══ -->
 <div class="yt-modal-overlay" id="yt-modal-overlay" onclick="overlayClose(event)">
   <div class="yt-modal" id="yt-modal">
@@ -1205,7 +1172,6 @@
     </div>
   </div>
 </div>
-
 <!-- ══ Footer ══ -->
 <a href="https://d8600010-gmail.github.io/DRJimmyHealthExaminationMedicalEducation/index.html"
    target="_blank" rel="noopener" title="吉 - 健康衛教"
@@ -1231,12 +1197,10 @@
   <span style="font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:13px;font-weight:700;color:#fff;line-height:1;">吉</span>
 </a>
 <footer style="text-align:center;padding:16px;font-size:0.8rem;color:#999;background:#fff;border-top:1px solid #e0e8e0;">© 2026 休娜的工作大事紀 ｜ 客服信箱：service@zhizhihealth.com</footer>
-
 <script>
   let ytCurrent = 0;
   let ytSidebarOpen = true;
   let ytVideos = [{ id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up (Sample)' }];
-
   function openYtModal() {
     document.getElementById('yt-modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1259,9 +1223,7 @@
     ytSidebarOpen = !ytSidebarOpen;
     document.getElementById('yt-sidebar').classList.toggle('collapsed', !ytSidebarOpen);
   }
-
   function ytSlides() { return document.querySelectorAll('#yt-canvas .yt-slide'); }
-
   function ytGo(n) {
     var all = ytSlides();
     all[ytCurrent].classList.remove('active');
@@ -1273,7 +1235,6 @@
     document.querySelectorAll('.yt-dot').forEach((d, i) => d.classList.toggle('active', i === ytCurrent));
     document.querySelectorAll('.yt-thumb').forEach((t, i) => t.classList.toggle('active', i === ytCurrent));
   }
-
   function ytBuildDots() {
     var d = document.getElementById('yt-dots');
     d.innerHTML = '';
@@ -1284,7 +1245,6 @@
       d.appendChild(dot);
     });
   }
-
   function ytBuildSidebar() {
     var sb = document.getElementById('yt-sidebar');
     sb.innerHTML = '';
@@ -1298,7 +1258,6 @@
       sb.appendChild(t);
     });
   }
-
   function ytInit() {
     ytCurrent = 0;
     ytSlides().forEach((s, i) => s.classList.toggle('active', i === 0));
@@ -1308,16 +1267,13 @@
     ytBuildDots();
     ytBuildSidebar();
   }
-
   function ytOpenAddPanel() { document.getElementById('yt-add-panel').classList.add('open'); ytRenderPlaylist(); }
   function ytCloseAddPanel() { document.getElementById('yt-add-panel').classList.remove('open'); }
-
   function ytExtractId(url) {
     var patterns = [/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/, /^([a-zA-Z0-9_-]{11})$/];
     for (var p of patterns) { var m = url.match(p); if (m) return m[1]; }
     return null;
   }
-
   function ytAddVideo() {
     var input = document.getElementById('yt-url-input');
     var id = ytExtractId(input.value.trim());
@@ -1327,7 +1283,6 @@
     input.value = '';
     ytRenderPlaylist();
   }
-
   function ytRenderPlaylist() {
     var list = document.getElementById('yt-playlist');
     list.innerHTML = '';
@@ -1340,9 +1295,7 @@
       list.appendChild(el);
     });
   }
-
   function ytRemoveVideo(i) { ytVideos.splice(i, 1); ytRenderPlaylist(); }
-
   function ytBuildVideoSlides() {
     document.querySelectorAll('#yt-canvas .yt-slide[data-dynamic]').forEach(s => s.remove());
     var canvas = document.getElementById('yt-canvas');
@@ -1365,7 +1318,6 @@
     document.getElementById('yt-counter').textContent = (ytCurrent+1) + ' / ' + ytSlides().length;
     document.getElementById('yt-next').disabled = ytCurrent === ytSlides().length - 1;
   }
-
   document.addEventListener('keydown', function(e) {
     if (!document.getElementById('yt-modal-overlay').classList.contains('open')) return;
     if (document.getElementById('yt-add-panel').classList.contains('open')) return;
@@ -1373,7 +1325,6 @@
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   ytGo(ytCurrent - 1);
     if (e.key === 'Escape') closeYtModal();
   });
-
   (function () {
     var today = new Date().toISOString().slice(0, 10);
     var data = {};
@@ -1387,7 +1338,6 @@
     document.getElementById('today-count').textContent = (data[today] || 1).toLocaleString() + ' 人';
     document.getElementById('total-count').textContent = (data['__total__'] || 1).toLocaleString();
   })();
-
   function paLogin() {
     var user = document.getElementById('pa-username').value.trim();
     var pass = document.getElementById('pa-password').value.trim();
@@ -1399,7 +1349,6 @@
       errEl.style.display = 'block';
     }
   }
-
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       var active = document.activeElement;
