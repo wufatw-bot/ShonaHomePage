@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mission Control Playbook</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --panel: #14171f;
+    --accent: #5ec8ff;
+    --text: #e8ecf3;
+    --muted: #8a93a6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(11,13,18,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  header h1 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  header .sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  nav button {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  nav button:hover { border-color: var(--accent); color: var(--accent); }
+
+  main {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+  .slide {
+    background: var(--panel);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    scroll-margin-top: 90px;
+  }
+  .slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .slide .label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .slide .label span.num {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 20;
+    transition: width 0.1s linear;
+  }
+
+  .toc {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header>
+  <div>
+    <h1>Mission Control Playbook</h1>
+    <div class="sub">19 slides · converted from PowerPoint</div>
+  </div>
+  <nav>
+    <button onclick="scrollToSlide(1)">First</button>
+    <span id="current-indicator">Slide 1 / 19</span>
+    <button onclick="scrollToSlide(19)">Last</button>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- slides injected below -->
+</main>
+
+<script>
+  const slides = [
+    { n: 1,  file: "slides/slide-01.png" },
+    { n: 2,  file: "slides/slide-02.png" },
+    { n: 3,  file: "slides/slide-03.png" },
+    { n: 4,  file: "slides/slide-04.png" },
+    { n: 5,  file: "slides/slide-05.png" },
+    { n: 6,  file: "slides/slide-06.png" },
+    { n: 7,  file: "slides/slide-07.png" },
+    { n: 8,  file: "slides/slide-08.png" },
+    { n: 9,  file: "slides/slide-09.png" },
+    { n: 10, file: "slides/slide-10.png" },
+    { n: 11, file: "slides/slide-11.jpeg" },
+    { n: 12, file: "slides/slide-12.jpg" },
+    { n: 13, file: "slides/slide-13.jpg" },
+    { n: 14, file: "slides/slide-14.jpg" },
+    { n: 15, file: "slides/slide-15.png" },
+    { n: 16, file: "slides/slide-16.png" },
+    { n: 17, file: "slides/slide-17.png" },
+    { n: 18, file: "slides/slide-18.png" },
+    { n: 19, file: "slides/slide-19.png" }
+  ];
+
+  const main = document.getElementById('main');
+  slides.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'slide';
+    div.id = 'slide-' + s.n;
+    div.innerHTML = `
+      <img src="${s.file}" alt="Slide ${s.n}" loading="lazy">
+      <div class="label"><span class="num">Slide ${s.n}</span><span>${slides.length} total</span></div>
+    `;
+    main.appendChild(div);
+  });
+
+  function scrollToSlide(n) {
+    const el = document.getElementById('slide-' + n);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress').style.width = pct + '%';
+
+    let currentSlide = 1;
+    slides.forEach(s => {
+      const el = document.getElementById('slide-' + s.n);
+      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.5) {
+        currentSlide = s.n;
+      }
+    });
+    document.getElementById('current-indicator').textContent = `Slide ${currentSlide} / ${slides.length}`;
+  });
+</script>
+
+</body>
+</html>
