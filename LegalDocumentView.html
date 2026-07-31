@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人事法務文件庫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEE1;
+    --folder:#E8DEC2;
+    --folder-edge:#D8C79E;
+    --ink:#2B241B;
+    --ink-soft:#6B6152;
+    --stamp-red:#A6392B;
+    --stamp-navy:#28435C;
+    --line:#CBBE9E;
+    --card-shadow: 0 1px 0 rgba(43,36,27,0.06), 0 8px 20px -12px rgba(43,36,27,0.25);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(43,36,27,0.035) 1px, transparent 0);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    min-height:100vh;
+  }
+  /* ===== Header ===== */
+  header{
+    padding:56px 24px 28px;
+    max-width:1080px;
+    margin:0 auto;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:1px;background:var(--line);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Noto Serif TC', serif;
+    font-weight:900;
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.15;
+    margin:14px 0 10px;
+    letter-spacing:0.01em;
+  }
+  .lede{
+    max-width:620px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+    line-height:1.7;
+  }
+  .stamp{
+    position:absolute;
+    top:44px;
+    right:24px;
+    width:104px;
+    height:104px;
+    border:3px solid var(--stamp-red);
+    border-radius:50%;
+    color:var(--stamp-red);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transform:rotate(-9deg);
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:15px;
+    line-height:1.3;
+    opacity:0.85;
+    mix-blend-mode:multiply;
+  }
+  @media (max-width:640px){ .stamp{ display:none; } }
+  /* ===== Search ===== */
+  .search-wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px 8px;
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 16px;
+    box-shadow:var(--card-shadow);
+  }
+  .search-box svg{ flex:none; opacity:0.5; }
+  .search-box input{
+    border:none;
+    outline:none;
+    font-size:15px;
+    width:100%;
+    font-family:'Noto Sans TC', sans-serif;
+    background:transparent;
+    color:var(--ink);
+  }
+  .search-count{
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  /* ===== Category tabs ===== */
+  .tabs{
+    max-width:1080px;
+    margin:22px auto 0;
+    padding:0 24px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    font-family:'Roboto Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s ease;
+    user-select:none;
+  }
+  .tab:hover{ border-color:var(--stamp-navy); color:var(--stamp-navy); }
+  .tab.active{
+    background:var(--stamp-navy);
+    border-color:var(--stamp-navy);
+    color:#fff;
+  }
+  /* ===== Content ===== */
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 24px 90px;
+  }
+  .category-block{ margin-bottom:44px; }
+  .category-block.hidden{ display:none; }
+  .category-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--ink);
+  }
+  .category-head .num{
+    font-family:'Roboto Mono', monospace;
+    font-size:13px;
+    color:var(--stamp-red);
+    background:rgba(166,57,43,0.08);
+    border:1px solid rgba(166,57,43,0.25);
+    border-radius:5px;
+    padding:2px 7px;
+  }
+  .category-head h2{
+    font-family:'Noto Serif TC', serif;
+    font-size:21px;
+    font-weight:700;
+    margin:0;
+  }
+  .category-head .count{
+    margin-left:auto;
+    font-family:'Roboto Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .folder{
+    background:var(--folder);
+    border:1px solid var(--folder-edge);
+    border-radius:4px 12px 12px 12px;
+    box-shadow:var(--card-shadow);
+    overflow:hidden;
+  }
+  .doc-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--folder-edge);
+    background:rgba(255,255,255,0.35);
+  }
+  .doc-row:last-child{ border-bottom:none; }
+  .doc-row:hover{ background:rgba(255,255,255,0.65); }
+  .doc-row.hidden{ display:none; }
+  .doc-code{
+    font-family:'Roboto Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    width:52px;
+    flex:none;
+  }
+  .doc-name{
+    flex:1;
+    min-width:0;
+    font-size:15px;
+    font-weight:500;
+    color:var(--ink);
+    overflow-wrap:anywhere;
+  }
+  .doc-actions{
+    display:flex;
+    gap:8px;
+    flex:none;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'Noto Sans TC', sans-serif;
+    font-size:13px;
+    font-weight:500;
+    text-decoration:none;
+    padding:7px 12px;
+    border-radius:7px;
+    border:1px solid transparent;
+    white-space:nowrap;
+    transition:filter .15s ease;
+  }
+  .btn:hover{ filter:brightness(0.94); }
+  .btn-view{
+    background:var(--stamp-navy);
+    border-color:var(--stamp-navy);
+    color:#fff;
+  }
+  footer{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px 60px;
+    color:var(--ink-soft);
+    font-size:12.5px;
+    font-family:'Roboto Mono', monospace;
+  }
+  .no-results{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-family:'Noto Serif TC', serif;
+    font-size:16px;
+  }
+  @media (max-width:640px){
+    .doc-row{ flex-wrap:wrap; }
+    .doc-name{ width:100%; order:1; flex-basis:100%; }
+    .doc-code{ order:0; }
+    .doc-actions{ order:2; width:100%; justify-content:flex-start; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">LEGAL DOCUMENT</div>
+  <h1>人事法務<br>文件庫</h1>
+  <p class="lede">彙整「LegalDocument」資料夾內的人事、勞動與法務文件範本，點擊即可直接開啟頁面。</p>
+  <div class="stamp">已 歸 檔<br>整 理</div>
+</header>
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" type="text" placeholder="搜尋文件名稱或編號，例如「離職」或「17」...">
+    <span class="search-count" id="searchCount"></span>
+  </div>
+</div>
+<div class="tabs" id="tabs"></div>
+<main id="main"></main>
+<footer>資料夾：LegalDocument/ · 共 <span id="totalCount">0</span> 份文件</footer>
+<script>
+const DATA = [
+  { cat:'attendance', no:'01', name:'出勤管理辦法（討論）', file:'01_出勤管理辦法_討論_.html' },
+  { cat:'attendance', no:'02', name:'加班申請單', file:'02_加班申請單.html' },
+  { cat:'attendance', no:'03', name:'請假管理辦法（討論）', file:'03_請假管理辦法_討論_.html' },
+  { cat:'attendance', no:'04', name:'年度請假卡', file:'04_年度請假卡.html' },
+  { cat:'attendance', no:'05', name:'未休假代金領取簽單', file:'05_未休假代金領取簽單.html' },
+  { cat:'attendance', no:'16', name:'調休申請單', file:'16_調休申請單.html' },
+  { cat:'discipline', no:'07', name:'獎懲管理辦法（討論）', file:'07_獎懲管理辦法_討論_.html' },
+  { cat:'discipline', no:'08', name:'人員行為勸導單', file:'08_人員行為勸導單.html' },
+  { cat:'discipline', no:'21', name:'罰款通知單', file:'21_罰款通知單.html' },
+  { cat:'parental', no:'06', name:'全民健康保險被保險人育嬰留職停薪在原投保單位繼續投保及異動申報表', file:'06_全民健康保險被保險人育嬰留職停薪在原投保單位繼續投保及異動申報表.html' },
+  { cat:'parental', no:'17', name:'留職停薪申請書', file:'17_留職停薪申請書.html' },
+  { cat:'parental', no:'18', name:'育嬰留職停薪津貼及續保申請書', file:'18_育嬰留職停薪津貼及續保申請書.html' },
+  { cat:'parental', no:'19', name:'育嬰留職停薪津貼及續保申請書', file:'19_育嬰留職停薪津貼及續保申請書.html' },
+  { cat:'parental', no:'20', name:'育嬰留職停薪津貼及續保申請書範例', file:'20_育嬰留職停薪津貼及續保申請書範例.html' },
+  { cat:'offboarding', no:'09', name:'離職管理辦法（討論）', file:'09_離職管理辦法_討論_.html' },
+  { cat:'offboarding', no:'10', name:'離職申請單', file:'10_離職申請單.html' },
+  { cat:'offboarding', no:'11', name:'離職移交手續會簽單', file:'11_離職移交手續會簽單.html' },
+  { cat:'offboarding', no:'12', name:'服務證明單', file:'12_服務證明單.html' },
+  { cat:'offboarding', no:'13', name:'離職證明單', file:'13_離職證明單.html' },
+  { cat:'offboarding', no:'14', name:'員工資遣通知書', file:'14_員工資遣通知書.html' },
+  { cat:'offboarding', no:'23', name:'資遣證明書', file:'23_資遣證明書.html' },
+  { cat:'offboarding', no:'24', name:'資遣證明書', file:'24_資遣證明書.html' },
+  { cat:'offboarding', no:'25', name:'資遣費簽款單回條', file:'25_資遣費簽款單回條.html' },
+  { cat:'contracts', no:'15', name:'委任契約書－才藝老師', file:'15_委任契約書-才藝老師.html' },
+  { cat:'contracts', no:'22', name:'閱讀簽署單', file:'22_閱讀簽署單.html' },
+  { cat:'contracts', no:'26', name:'勞動契約書－教師（新進）', file:'26_勞動契約書-教師_新進_.html' },
+  { cat:'contracts', no:'27', name:'勞動契約書－教師（在職）', file:'27_勞動契約書-教師_在職_.html' },
+];
+const CATEGORIES = [
+  { key:'attendance',   label:'出勤與假務' },
+  { key:'discipline',   label:'獎懲與行為' },
+  { key:'parental',     label:'留職停薪與育嬰' },
+  { key:'offboarding',  label:'到職與離職' },
+  { key:'contracts',    label:'契約與簽署' },
+];
+function docUrl(file){ return `LegalDocument/${encodeURIComponent(file)}`; }
+function render(filterText){
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let totalVisible = 0;
+  const term = (filterText||'').trim().toLowerCase();
+  CATEGORIES.forEach(cat => {
+    const items = DATA.filter(d => d.cat === cat.key);
+    const block = document.createElement('div');
+    block.className = 'category-block';
+    const head = document.createElement('div');
+    head.className = 'category-head';
+    head.innerHTML = `<span class="num">${String(items.length).padStart(2,'0')}</span><h2>${cat.label}</h2><span class="count">${items.length} 份文件</span>`;
+    block.appendChild(head);
+    const folder = document.createElement('div');
+    folder.className = 'folder';
+    let visibleInCat = 0;
+    items.forEach(doc => {
+      const matches = !term || doc.name.toLowerCase().includes(term) || doc.no.toLowerCase().includes(term);
+      if(matches){ visibleInCat++; totalVisible++; }
+      const row = document.createElement('div');
+      row.className = 'doc-row' + (matches ? '' : ' hidden');
+      row.innerHTML = `
+        <span class="doc-code">No.${doc.no}</span>
+        <span class="doc-name">${doc.name}</span>
+        <span class="doc-actions">
+          <a class="btn btn-view" href="${docUrl(doc.file)}" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            開啟文件
+          </a>
+        </span>
+      `;
+      folder.appendChild(row);
+    });
+    block.appendChild(folder);
+    if(visibleInCat === 0){ block.classList.add('hidden'); }
+    main.appendChild(block);
+  });
+  document.getElementById('searchCount').textContent = term ? `${totalVisible} 筆符合` : '';
+  if(term && totalVisible === 0){
+    main.innerHTML = '<div class="no-results">找不到符合的文件，換個關鍵字試試。</div>';
+  }
+}
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  const all = { key:'all', label:'全部文件' };
+  [all, ...CATEGORIES].forEach((cat, i) => {
+    const el = document.createElement('div');
+    el.className = 'tab' + (i===0 ? ' active' : '');
+    el.textContent = cat.label;
+    el.dataset.key = cat.key;
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('.category-block').forEach(block => {
+        if(cat.key === 'all'){ block.style.display = ''; }
+        else {
+          const label = block.querySelector('h2').textContent;
+          const match = CATEGORIES.find(c => c.key === cat.key).label === label;
+          block.style.display = match ? '' : 'none';
+        }
+      });
+    });
+    tabs.appendChild(el);
+  });
+}
+document.getElementById('totalCount').textContent = DATA.length;
+renderTabs();
+render('');
+document.getElementById('searchInput').addEventListener('input', e => render(e.target.value));
+</script>
+</body>
+</html>
