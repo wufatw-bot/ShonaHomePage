@@ -427,6 +427,13 @@
       color: var(--text-muted);
       margin: 0 0 26px;
     }
+    .common-forms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 18px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
     .common-forms-card {
       background: rgba(255,255,255,0.92);
       border: 1px solid #c5cae9;
@@ -439,8 +446,6 @@
       flex-wrap: wrap;
       box-shadow: 0 2px 12px rgba(57,73,171,0.09);
       transition: box-shadow 0.2s, transform 0.18s;
-      max-width: 780px;
-      margin: 0 auto;
     }
     .common-forms-card:hover {
       box-shadow: 0 6px 22px rgba(57,73,171,0.16);
@@ -1016,17 +1021,31 @@
   <div class="common-forms-inner">
     <h2 class="common-forms-title">📋 常用的公事表單</h2>
     <p class="common-forms-subtitle">快速存取日常行政與教學所需的各類表單文件</p>
-    <div class="common-forms-card">
-      <div class="common-forms-card-left">
-        <div class="common-forms-icon">📄</div>
-        <div class="common-forms-text">
-          <h3>公事表單文件總覽</h3>
-          <p>彙整常用行政、教學與活動申請等各類表單，<br>一站式查閱，提升工作效率。</p>
+    <div class="common-forms-grid">
+      <div class="common-forms-card">
+        <div class="common-forms-card-left">
+          <div class="common-forms-icon">📄</div>
+          <div class="common-forms-text">
+            <h3>公事表單文件總覽</h3>
+            <p>彙整常用行政、教學與活動申請等各類表單，<br>一站式查閱，提升工作效率。</p>
+          </div>
         </div>
+        <a href="GoogleDriveFile/GoogleDriveDocument.html" class="common-forms-btn">
+          📂 開啟表單目錄
+        </a>
       </div>
-      <a href="GoogleDriveFile/GoogleDriveDocument.html" class="common-forms-btn">
-        📂 開啟表單目錄
-      </a>
+      <div class="common-forms-card">
+        <div class="common-forms-card-left">
+          <div class="common-forms-icon">📜</div>
+          <div class="common-forms-text">
+            <h3>法律文件</h3>
+            <p>人事、勞動與法務相關文件範本，<br>線上檢視或下載使用。</p>
+          </div>
+        </div>
+        <a href="LegalDocument.html" class="common-forms-btn">
+          📂 開啟法律文件
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1041,12 +1060,8 @@
         <label>使用者名稱</label>
         <input type="text" id="pa-username" value="Shona" autocomplete="username" />
       </div>
-      <div class="pa-field">
-        <label>密碼</label>
-        <input type="password" id="pa-password" value="Shona" autocomplete="current-password" />
-      </div>
     </div>
-    <p class="pa-error" id="pa-error">⚠️ 使用者名稱或密碼錯誤，請重新輸入。</p>
+    <p class="pa-error" id="pa-error">⚠️ 使用者名稱錯誤，請重新輸入。</p>
     <button class="pa-enter-btn" onclick="paLogin()">🔐 進入公共事務頁</button>
   </div>
 </div>
@@ -1316,9 +1331,8 @@
   })();
   function paLogin() {
     var user = document.getElementById('pa-username').value.trim();
-    var pass = document.getElementById('pa-password').value.trim();
     var errEl = document.getElementById('pa-error');
-    if (user === 'Shona' && pass === 'Shona') {
+    if (user === 'Shona') {
       errEl.style.display = 'none';
       window.open('https://d8600010-crypto.github.io/ShonaEventRecord/', '_blank', 'noopener');
     } else {
@@ -1328,7 +1342,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       var active = document.activeElement;
-      if (active && (active.id === 'pa-username' || active.id === 'pa-password')) {
+      if (active && active.id === 'pa-username') {
         paLogin();
       }
     }
