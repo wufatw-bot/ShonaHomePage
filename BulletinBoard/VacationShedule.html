@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大立昇補習班 特休一覽表</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-light: #eff6ff;
+            --header-bg: #1e293b;
+            --header-text: #ffffff;
+            --border-color: #e2e8f0;
+            --text-color: #334155;
+            --zebra-bg: #f8fafc;
+            --hover-bg: #f1f5f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f1f5f9;
+            color: var(--text-color);
+            padding: 40px 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .date-badge {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 14px 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--header-bg);
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--zebra-bg);
+        }
+
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .seniority {
+            font-weight: 600;
+            color: #0f172a;
+            background-color: #f8fafc;
+        }
+
+        .highlight-span {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #64748b;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h1 class="title">大立昇 補習班 特休一覽表</h1>
+        <span class="date-badge">版本日期：2022.2</span>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>年資</th>
+                    <th>新制（天）</th>
+                    <th>可休天數</th>
+                    <th>暑假休</th>
+                    <th>寒假休</th>
+                    <th>現金補足（天）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="seniority">滿6個月</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td colspan="2" class="highlight-span">1天（寒假或暑假）</td>
+                    <td>2天</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第1年</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>暑假1天</td>
+                    <td>寒假1天</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第2年</td>
+                    <td>10</td>
+                    <td>4</td>
+                    <td>暑假3天</td>
+                    <td>寒假1天</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第3年</td>
+                    <td>14</td>
+                    <td>7</td>
+                    <td>暑假4天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第4年</td>
+                    <td>14</td>
+                    <td>7</td>
+                    <td>暑假4天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第5年</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第6年</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第7年</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第8年</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第9年</td>
+                    <td>15</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第10年</td>
+                    <td>16</td>
+                    <td>8</td>
+                    <td>暑假5天</td>
+                    <td>寒假3天</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第11年</td>
+                    <td>17</td>
+                    <td>9</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第12年</td>
+                    <td>18</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第13年</td>
+                    <td>19</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第14年</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第15年</td>
+                    <td>21</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第16年</td>
+                    <td>22</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第17年</td>
+                    <td>23</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第18年</td>
+                    <td>24</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第19年</td>
+                    <td>25</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td class="seniority">滿第20年</td>
+                    <td>26</td>
+                    <td>10</td>
+                    <td>暑假7天</td>
+                    <td>寒假3天</td>
+                    <td>16</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="footer-note">* 本表天數單位為天，更新日期為 2022.2</div>
+</div>
+
+</body>
+</html>
