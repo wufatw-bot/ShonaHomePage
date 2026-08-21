@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉的堡同安・莊敬美語教務工作分配</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+            background-color: #0b1d3a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .poster {
+            width: 100%;
+            max-width: 800px;
+            background: radial-gradient(circle at center, #0f284e 0%, #081427 100%);
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .subtitle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle-line {
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e2c08d;
+            letter-spacing: 1px;
+        }
+
+        .banner {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 15px;
+            display: inline-block;
+            color: #f3e5ab;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 650px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: #fdfbf7;
+            color: #222;
+            border-radius: 8px;
+            padding: 20px 18px 15px 18px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid #e2c08d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: #0b2545;
+            color: #fff;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .card-header {
+            background-color: #0b2545;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .card-header .name {
+            font-size: 1.15rem;
+            color: #ffffff;
+        }
+
+        .card-header .role {
+            font-weight: normal;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+        }
+
+        .card-content {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .card-content li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .card-content li::before {
+            content: "•";
+            color: #0b2545;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 2px;
+            top: -2px;
+        }
+
+        .highlight {
+            color: #666;
+            font-size: 0.88rem;
+        }
+
+        .footer {
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.4);
+            padding-top: 20px;
+            position: relative;
+        }
+
+        .footer-title {
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .footer-subtitle {
+            color: #d4af37;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster">
+    <header class="header">
+        <h1 class="title">吉的堡同安・莊敬美語教務工作分配</h1>
+        <div class="subtitle-container">
+            <div class="subtitle-line"></div>
+            <div class="subtitle">清楚分工，彼此成就；一起打造更好的學習現場</div>
+            <div class="subtitle-line"></div>
+        </div>
+        <div class="banner">
+            🌿 分校信任每一份專業，也鼓勵每一位夥伴發揮所長 🌿
+        </div>
+    </header>
+
+    <main class="grid-container">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="badge">1</div>
+            <div class="card-header">
+                <span>📅</span>
+                <span><span class="name">Mille</span> <span class="role">| 課務·教材·資料管理</span></span>
+            </div>
+            <ul class="card-content">
+                <li>排定中籍 / 外籍老師班表</li>
+                <li>教材與線上奇趣 Online 複習查驗</li>
+                <li>新書訂購密碼分配</li>
+                <li>美語後台新舊資料建置與整理</li>
+                <li>訂購吉的堡及敦煌書局教材</li>
+            </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="badge">2</div>
+            <div class="card-header">
+                <span>💬</span>
+                <span><span class="name">Shona</span> <span class="role">| 教學品質·外師溝通</span></span>
+            </div>
+            <ul class="card-content">
+                <li>查視各班進度，依總公司教學進度上課</li>
+                <li>外籍老師教學成效溝通與查驗（重要）</li>
+                <li>節慶活動發想與執行（與 Sina）</li>
+                <li>校務會議代表美語部發言（暫定）</li>
+                <li>推動 95% 美語教學與課堂 no Chinese<br><span class="highlight">（與 Aidan）</span></li>
+            </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div class="badge">3</div>
+            <div class="card-header">
+                <span>📋</span>
+                <span><span class="name">Sina</span> <span class="role">| 教務制度·活動·學習支持</span></span>
+            </div>
+            <ul class="card-content">
+                <li>依美語教務手冊建置分校專屬查驗項目</li>
+                <li>主導補課 / 加強 / 英檢（吉的堡、劍橋）</li>
+                <li>每月美語人數增減統計報表</li>
+                <li>同安校美語活動負責人</li>
+                <li>校務會議代表備位</li>
+            </ul>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+            <div class="badge">4</div>
+            <div class="card-header">
+                <span>👥</span>
+                <span><span class="name">校區活動與團隊協作</span></span>
+            </div>
+            <ul class="card-content">
+                <li><strong>芯芯老師</strong> ｜ 莊敬校 1-3 年級成果發表協作</li>
+                <li><strong>Summer</strong> ｜ 莊敬校美語活動負責人</li>
+                <li><strong>Shona + Sina</strong> ｜ 節慶活動發想與執行</li>
+                <li><strong>Shona + Aidan</strong> ｜ 老師 95% 用美語、學生課堂 95% no Chinese</li>
+                <li><strong>Shona + Selena + Jessica</strong> ｜ 美語人事、應聘、每月教學研討會議</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-title">謝謝每位夥伴的投入與專業</div>
+        <div class="footer-subtitle">在信任中合作，在鼓勵中成長，讓每一堂課都更有力量。</div>
+    </footer>
+</div>
+
+</body>
+</html>
