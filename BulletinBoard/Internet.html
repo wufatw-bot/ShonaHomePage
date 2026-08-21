@@ -1,0 +1,326 @@
+# 網站與帳號資料整理表
+
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網站與帳號資料整理表</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+            margin: 0;
+            padding: 30px;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #34495e;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #eef5ff;
+        }
+
+        a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .system {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .account,
+        .password,
+        .school-code {
+            font-family: Consolas, monospace;
+            background: #f1f3f5;
+            padding: 4px 7px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .password {
+            color: #c0392b;
+        }
+
+        .note {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .warning {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            border-radius: 6px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>網站與帳號資料整理表</h1>
+
+    <div class="subtitle">
+        建工職／吉的堡相關系統帳號資料
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>網址</th>
+                    <th>系統／用途</th>
+                    <th>帳號</th>
+                    <th>密碼</th>
+                    <th>學校代號</th>
+                    <th>備註</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- 1 -->
+                <tr>
+                    <td>
+                        <a href="https://smc.kedingdang.com/ConsoleMange/home"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            校務管理中心
+                        </a>
+                    </td>
+
+                    <td class="system">
+                        校務管理中心
+                    </td>
+
+                    <td>
+                        <span class="account">(09)33955646</span>
+                    </td>
+
+                    <td>
+                        <span class="password">955646</span>
+                    </td>
+
+                    <td>
+                        <span class="school-code">SB10039</span>
+                    </td>
+
+                    <td class="note">
+                        ※建工職，老師帳號
+                    </td>
+                </tr>
+
+                <!-- 2 -->
+                <tr>
+                    <td>
+                        <a href="https://teasx.kidcastleapp.tw/Home"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            工作臺教學教務平台
+                        </a>
+                    </td>
+
+                    <td class="system">
+                        工作臺教學教務平台
+                    </td>
+
+                    <td>—</td>
+
+                    <td>—</td>
+
+                    <td>
+                        <span class="school-code">200627066</span>
+                    </td>
+
+                    <td class="note">
+                        ※請老師記得先申請個人帳號
+                    </td>
+                </tr>
+
+                <!-- 3 -->
+                <tr>
+                    <td>
+                        <a href="https://buyerapp.kidcastle.com.tw/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            吉的堡校園內部採購系統
+                        </a>
+                    </td>
+
+                    <td class="system">
+                        吉的堡 校園內部採購系統
+                    </td>
+
+                    <td>
+                        <span class="account">SB10039</span>
+                    </td>
+
+                    <td>
+                        <span class="password">(09)930795696</span>
+                    </td>
+
+                    <td>—</td>
+
+                    <td>—</td>
+                </tr>
+
+                <!-- 4 -->
+                <tr>
+                    <td>
+                        <a href="https://cavesbooks.com.tw/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            cavesbooks.com.tw
+                        </a>
+                    </td>
+
+                    <td class="system">
+                        敦煌書局
+                    </td>
+
+                    <td>
+                        <span class="account">wufatw@gmail.com</span>
+                    </td>
+
+                    <td>
+                        <span class="password">kidcastle301358</span>
+                    </td>
+
+                    <td>—</td>
+
+                    <td>—</td>
+                </tr>
+
+                <!-- 5 -->
+                <tr>
+                    <td>
+                        <a href="https://stuweb.kidcastleapp.tw/ldap?redirect=/login"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            奇趣 plus
+                        </a>
+                    </td>
+
+                    <td class="system">
+                        奇趣 plus
+                    </td>
+
+                    <td>
+                        <span class="account">t09~</span>
+                    </td>
+
+                    <td>
+                        <span class="password">後 6 碼</span>
+                    </td>
+
+                    <td>—</td>
+
+                    <td class="note">
+                        ※請老師記得先申請個人帳號
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ 資料安全提醒：</strong><br>
+        本頁包含帳號與密碼等敏感資訊，建議不要將此 HTML
+        公開上傳至公開網站、GitHub 或其他任何公開空間。
+        若需多人共同使用，建議改用具備權限管理與加密功能的密碼管理工具。
+    </div>
+
+</div>
+
+</body>
+</html>
+```
