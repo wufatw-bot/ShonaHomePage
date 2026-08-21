@@ -110,7 +110,7 @@
       flex: 3;
       min-width: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       align-items: start;
     }
@@ -436,7 +436,7 @@
     }
     .common-forms-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       max-width: 900px;
       margin: 0 auto;
@@ -787,6 +787,10 @@
       .pa-field input { width: 200px; }
       .common-forms-card { flex-direction: column; text-align: center; }
       .common-forms-card-left { flex-direction: column; }
+    }
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .zh-main { grid-template-columns: repeat(2, 1fr); }
+      .common-forms-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
